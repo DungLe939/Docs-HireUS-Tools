@@ -84,3 +84,6 @@ DungLe
 
 # Downloaded copies awaiting comparison
 .agents/scripts/.sync_incoming/
+
+# Personal research
+/docs/Week02/Research/
