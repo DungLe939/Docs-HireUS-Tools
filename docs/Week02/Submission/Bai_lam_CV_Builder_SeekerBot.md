@@ -298,7 +298,7 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 
 Prototype Figma được xây dựng ở mức **low/mid-fidelity**, thể hiện luồng tương tác chứ chưa phải chức năng ứng dụng đã triển khai. Các nút Apply/Add/Save trong prototype có thể chỉ mô phỏng điều hướng.
 
-**File thiết kế:** [HireUS Tools — CV Builder P2](https://www.figma.com/design/GPmHzoDCVfWWrQOB3Da3bv/HireUS-Tools-%E2%80%94-CV-Builder-P2?node-id=5-2).
+**File thiết kế:** [HireUS — CV Builder & SeekerBot](https://www.figma.com/design/bMbUlGzrU298Icu0HoERU3/HireUS?node-id=55-184).
 
 | Frame | Màn hình | Story liên quan |
 | --- | --- | --- |
