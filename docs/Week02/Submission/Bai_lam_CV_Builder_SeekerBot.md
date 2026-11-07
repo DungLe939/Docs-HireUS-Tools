@@ -1,162 +1,155 @@
 # 1. Mô tả kĩ bài toán
 
-Sinh viên IT, đặc biệt là người chuẩn bị ứng tuyển thực tập hoặc vị trí Fresher, thường gặp khó khăn khi xây dựng CV: chưa biết chọn thông tin nào, mô tả dự án ra sao, trình bày thành tựu thế nào và điều chỉnh nội dung cho từng vị trí. Các công cụ tạo CV thông thường hỗ trợ điền biểu mẫu nhưng chưa chắc giúp người mới chuyển kinh nghiệm học tập, đồ án thành nội dung rõ ràng, trung thực và phù hợp.
+Sinh viên IT ứng tuyển Intern/Fresher thường khó chọn và trình bày kinh nghiệm học tập, dự án, thành tựu trong CV, nhất là khi cần điều chỉnh cách diễn đạt cho từng vị trí. **CV Builder & SeekerBot** hỗ trợ tạo, sửa, lưu CV theo mẫu và xem Live Preview. Thông tin cơ bản từ Profile của đúng tài khoản chỉ điền vào ô CV còn trống; dữ liệu đã lưu không bị ghi đè. Tutorial hướng dẫn thao tác và có thể mở lại hoặc bỏ qua.
 
-Phân hệ **CV Builder & SeekerBot** của HireUS Tools hỗ trợ tạo, chỉnh sửa, xem trước và lưu CV theo mẫu. Khi tạo CV hoặc mở CV để tiếp tục chỉnh sửa, hệ thống lấy **thông tin cơ bản từ Profile của chính người dùng** để tự điền các trường tương ứng còn trống, giúp tránh nhập lại; thông tin đã lưu/chỉnh sửa trong CV không bị tự động ghi đè. Với người mới, hệ thống cung cấp **tutorial hướng dẫn sử dụng CV Builder** (có thể mở lại hoặc bỏ qua), không phải một quy trình nhập CV độc lập. SeekerBot hỗ trợ hướng dẫn viết nội dung, cải thiện mô tả theo STAR và gợi ý diễn đạt theo JD. Mọi nội dung AI đề xuất chỉ áp dụng sau khi người dùng xác nhận.
+SeekerBot hướng dẫn viết CV, gợi ý cải thiện theo STAR và điều chỉnh **nội dung đã có** theo JD; người dùng duyệt trước khi áp dụng. Ngân hàng thành tựu giúp dùng lại nội dung; GitHub Import lấy repository công khai làm bản nháp, cần xác nhận đóng góp cá nhân. CV có bản Việt/Anh và **Print Preview** theo trang in để rà soát, quay lại Editor. SCRUM-49 không dùng AI kiểm lỗi; việc in/xuất PDF (SCRUM-16) còn chờ xác nhận.
 
-Để tái sử dụng nội dung, phân hệ quản lý ngân hàng thành tựu cá nhân và hỗ trợ nhập thông tin dự án từ **repository GitHub công khai**. Thông tin GitHub là dữ liệu tham khảo, không tự chứng minh người dùng đã trực tiếp phát triển toàn bộ dự án. Phân hệ cũng hỗ trợ nội dung CV tiếng Việt và tiếng Anh. **Trước khi in**, người dùng được mở chế độ xem trước bố cục CV theo trang in để rà soát và quay lại chỉnh sửa nếu cần. SCRUM-49 **không** sử dụng AI để dò lỗi hay yêu cầu bổ sung nội dung; chức năng xuất PDF/in thật (SCRUM-16) vẫn cần được nhóm xác nhận riêng.
+Phân hệ dự kiến chạy trên trình duyệt và dùng Frontend/Backend HireUS Tools; gợi ý AI được gọi qua phía máy chủ. Chấm điểm CV–JD và Skill Gap thuộc Epic Job Matching, ngoài phạm vi này.
 
-Hệ thống dự kiến hoạt động trên trình duyệt web, với giao diện và xử lý nghiệp vụ qua Frontend/Backend của HireUS Tools. Các chức năng cần dịch hoặc gợi ý nội dung có thể sử dụng dịch vụ AI bên ngoài thông qua phía máy chủ. Phân hệ **không** thực hiện chấm điểm phù hợp CV–JD, phân tích Skill Gap hoặc quyết định khả năng tuyển dụng; các nghiệp vụ đó thuộc Epic Job Matching & Skill Gap.
-
-> **Phạm vi:** 11 Story đã giao: `SCRUM-10`, `14`, `15`, `17`, `18`, `19`, `49`, `50`, `52`, `54`, `55`. Việc xuất PDF (`SCRUM-16`) là điểm cần xác nhận với nhóm/Jira, không mặc định đã thuộc phạm vi.
+> **Phạm vi:** SCRUM-10, 14, 15, 17, 18, 19, 49, 50, 52, 54, 55 (11 Story; subtask gộp vào Story chính). SCRUM-16 chưa được xác nhận trong phạm vi này.
 
 # 2. Các bên liên quan (Stakeholder)
 
 ```mermaid
 flowchart LR
-    U["Sinh viên / người tìm việc<br/>Tạo, chỉnh sửa CV"]
-    DEV["Nhóm phát triển"]
-    GV["Giảng viên hướng dẫn / đánh giá"]
-    EXT["Dịch vụ AI / GitHub API"]
-    PROFILE["Phân hệ Profile/Account<br/>Lưu thông tin cơ bản theo tài khoản"]
+    U["Sinh viên / người tìm việc"]
+    PROFILE["Profile/Account"]
+    AI["Dịch vụ AI"]
+    GH["GitHub API"]
     SYS["Phân hệ CV Builder & SeekerBot"]
 
-    U -->|"Tạo CV, duyệt nội dung và xem trước khi in"| SYS
-    SYS -->|"CV, preview và tutorial"| U
-    DEV ---|"Phát triển, bảo trì"| SYS
-    GV ---|"Góp ý, đánh giá"| SYS
-    SYS <-->|"Gợi ý AI và dữ liệu dự án"| EXT
-    PROFILE -->|"Điền ô CV còn trống của đúng tài khoản"| SYS
+    U -->|"Nội dung CV, thao tác"| SYS
+    SYS -->|"Preview, gợi ý, hướng dẫn"| U
+    PROFILE -->|"Chỉ điền ô CV còn trống"| SYS
+    SYS <-->|"Yêu cầu, gợi ý chưa áp dụng"| AI
+    SYS <-->|"URL, metadata và README công khai"| GH
 ```
 
-![Sơ đồ ngữ cảnh stakeholder của CV Builder & SeekerBot](./images/CV_Builder_Stakeholder_Context.png)
+![Sơ đồ ngữ cảnh vận hành của CV Builder & SeekerBot](./images/CV_Builder_Stakeholder_Context.png)
 
 | Stakeholder | Vai trò |
 | --- | --- |
-| Sinh viên / người tìm việc | Người dùng chính; nhập, chỉnh sửa, lưu CV và xác nhận gợi ý. |
-| Nhóm phát triển | Phân tích, triển khai, kiểm thử và bảo trì phân hệ. |
-| Giảng viên hướng dẫn / đánh giá | Đánh giá tài liệu, nghiệp vụ và prototype của đồ án. |
-| Dịch vụ AI, GitHub API | Hệ thống ngoài cung cấp hỗ trợ gợi ý hoặc dữ liệu dự án, không phải người dùng cuối. |
-| Phân hệ Profile/Account | Cung cấp thông tin cơ bản của đúng tài khoản để điền ô CV còn trống khi tạo hoặc mở lại; không ghi đè giá trị CV đã có. |
+| Sinh viên / người tìm việc | Tạo/sửa/lưu CV; duyệt gợi ý. |
+| Nhóm phát triển | Phát triển, kiểm thử, bảo trì. |
+| Giảng viên hướng dẫn / đánh giá | Đánh giá tài liệu và prototype. |
+| Dịch vụ AI, GitHub API | Cung cấp gợi ý hoặc dữ liệu repository công khai. |
+| Phân hệ Profile/Account | Cấp thông tin đúng tài khoản cho ô CV còn trống; không ghi đè CV. |
 
 # 3. Đặc tả yêu cầu chức năng
 
 ## Quy ước mã
 
-- **FR** (*Functional Requirement*): yêu cầu chức năng; ví dụ `FR-CV-01`.
-- **CV**: phân hệ CV Builder & SeekerBot.
-- **BR** (*Business Rule*): quy tắc nghiệp vụ; ví dụ `BR-CV-01`.
-- **SCRUM-xx**: mã Story trong Jira; các subtask được gộp vào nghiệp vụ của Story chính.
+`FR-CV-xx`: yêu cầu chức năng; `BR-CV-xx`: quy tắc nghiệp vụ; `SCRUM-xx`: Story Jira. Subtask gộp vào Story chính.
 
 ## a. Tạo, chỉnh sửa, xem trước và lưu CV
 
 | Mã | Yêu cầu chức năng | Story |
 | --- | --- | --- |
-| FR-CV-01 | Hệ thống cho phép tạo CV theo các mục thông tin; những trường cơ bản có dữ liệu tương ứng trong Profile được tự điền để người dùng kiểm tra/chỉnh sửa. | SCRUM-10 |
-| FR-CV-02 | Hệ thống cho phép thêm/sửa nội dung từng mục và phản ánh thay đổi trên Live Preview. | SCRUM-10 |
-| FR-CV-03 | Hệ thống kiểm tra trường bắt buộc, định dạng dữ liệu cơ bản và báo lỗi tại vị trí cần sửa. | SCRUM-10 |
-| FR-CV-04 | Hệ thống cho phép lưu CV của người dùng và mở lại để tiếp tục chỉnh sửa. | SCRUM-14 |
-| FR-CV-05 | Hệ thống cho phép chọn mẫu trình bày và xem trước mẫu mà không làm mất nội dung CV. | SCRUM-15 |
+| FR-CV-01 | Tạo CV theo các mục; tự điền ô cơ bản còn trống theo FR-CV-25. | SCRUM-10 |
+| FR-CV-02 | Thêm/sửa từng mục và cập nhật Live Preview. | SCRUM-10 |
+| FR-CV-03 | Kiểm tra trường bắt buộc, định dạng và báo lỗi tại trường. | SCRUM-10 |
+| FR-CV-04 | Lưu CV và mở lại để tiếp tục sửa. | SCRUM-14 |
+| FR-CV-05 | Chọn mẫu, xem Preview mà không mất nội dung CV. | SCRUM-15 |
 
 ## b. SeekerBot và cải thiện nội dung CV
 
 | Mã | Yêu cầu chức năng | Story |
 | --- | --- | --- |
-| FR-CV-06 | Hệ thống cho phép người dùng yêu cầu SeekerBot hướng dẫn viết nội dung trong CV. | SCRUM-17 |
-| FR-CV-07 | Hệ thống cho phép chọn mô tả dự án/kinh nghiệm và yêu cầu đề xuất cải thiện theo cấu trúc STAR. | SCRUM-18 |
-| FR-CV-08 | Hệ thống cho phép cung cấp JD để nhận gợi ý điều chỉnh cách diễn đạt hoặc nhấn mạnh thông tin CV liên quan. | SCRUM-19 |
-| FR-CV-09 | Hệ thống hiển thị gợi ý và nội dung gốc để người dùng xem, chấp nhận hoặc bỏ qua trước khi sửa CV. | SCRUM-17/18/19 |
-| FR-CV-10 | Khi dịch vụ AI không phản hồi, hệ thống thông báo và giữ nguyên nội dung CV hiện có. | SCRUM-17/18/19 |
+| FR-CV-06 | Yêu cầu SeekerBot hướng dẫn viết một mục CV. | SCRUM-17 |
+| FR-CV-07 | Chọn đoạn dự án/kinh nghiệm để gợi ý viết lại theo STAR. | SCRUM-18 |
+| FR-CV-08 | Nhập JD để nhận gợi ý diễn đạt hoặc nhấn mạnh thông tin CV liên quan. | SCRUM-19 |
+| FR-CV-09 | Đặt gợi ý cạnh bản gốc để người dùng duyệt, sửa hoặc bỏ qua trước khi áp dụng. | SCRUM-17/18/19 |
+| FR-CV-10 | AI không phản hồi: báo lỗi và giữ nguyên CV. | SCRUM-17/18/19 |
 
 ## c. Tutorial hướng dẫn người mới sử dụng
 
 | Mã | Yêu cầu chức năng | Story |
 | --- | --- | --- |
-| FR-CV-11 | Hệ thống cung cấp tutorial giới thiệu cách sử dụng CV Builder cho người mới: tạo CV, chọn mẫu, chỉnh sửa, xem trước và lưu CV. | SCRUM-50 |
-| FR-CV-12 | Hệ thống cho phép người dùng mở lại hoặc bỏ qua tutorial và chuyển đến CV Editor mà không cần nhập dữ liệu trong tutorial. | SCRUM-50 |
+| FR-CV-11 | Tutorial giới thiệu tạo/mở CV, chọn mẫu, sửa, xem trước và lưu. | SCRUM-50 |
+| FR-CV-12 | Mở lại hoặc bỏ qua Tutorial để vào Editor; không nhập CV trong Tutorial. | SCRUM-50 |
 
 ## d. Ngân hàng thành tựu và nhập dự án GitHub
 
 | Mã | Yêu cầu chức năng | Story |
 | --- | --- | --- |
-| FR-CV-13 | Hệ thống cho phép người dùng tạo, xem, sửa và xóa các thành tựu cá nhân đã lưu. | SCRUM-52 |
-| FR-CV-14 | Hệ thống cho phép đưa bản sao một thành tựu đã chọn vào CV để người dùng chỉnh sửa riêng. | SCRUM-52 |
-| FR-CV-15 | Hệ thống cho phép nhập đường dẫn repository GitHub công khai và lấy thông tin dự án có thể truy cập. | SCRUM-55 |
-| FR-CV-16 | Hệ thống hiển thị thông tin lấy từ GitHub để người dùng xác nhận vai trò/đóng góp và sửa nội dung trước khi thêm vào CV. | SCRUM-55 |
-| FR-CV-17 | Hệ thống xử lý URL không hợp lệ, repository riêng tư/không tồn tại hoặc lỗi truy xuất bằng thông báo phù hợp. | SCRUM-55 |
+| FR-CV-13 | Tạo, xem, sửa, xóa thành tựu cá nhân đã lưu. | SCRUM-52 |
+| FR-CV-14 | Chép thành tựu đã chọn vào CV để sửa riêng. | SCRUM-52 |
+| FR-CV-15 | Nhập URL repository GitHub công khai và lấy dữ liệu truy cập được. | SCRUM-55 |
+| FR-CV-16 | Xem dữ liệu GitHub, xác nhận đóng góp và sửa trước khi thêm vào CV. | SCRUM-55 |
+| FR-CV-17 | Báo lỗi URL sai, repository riêng tư/không tồn tại hoặc không truy xuất được. | SCRUM-55 |
 
 ## e. Nội dung CV song ngữ Việt – Anh
 
 | Mã | Yêu cầu chức năng | Story |
 | --- | --- | --- |
-| FR-CV-18 | Hệ thống hỗ trợ lưu và chuyển xem nội dung tiếng Việt, tiếng Anh của cùng một CV. | SCRUM-54 |
-| FR-CV-19 | Hệ thống cho phép tạo bản nháp nội dung ngôn ngữ còn lại và yêu cầu người dùng duyệt trước khi thay thế nội dung tương ứng. | SCRUM-54 |
-| FR-CV-20 | Khi nội dung nguồn thay đổi, hệ thống phải giúp nhận biết bản dịch có thể đã cũ để người dùng kiểm tra lại. | SCRUM-54 |
-| FR-CV-21 | Hệ thống giữ cấu trúc mục CV và cập nhật bản xem trước theo ngôn ngữ được chọn. | SCRUM-54 |
+| FR-CV-18 | Lưu và chuyển xem hai bản Việt/Anh của cùng CV. | SCRUM-54 |
+| FR-CV-19 | Tạo bản nháp ngôn ngữ còn lại; chỉ thay nội dung sau khi người dùng duyệt. | SCRUM-54 |
+| FR-CV-20 | Báo bản dịch cần kiểm tra lại khi nội dung nguồn thay đổi. | SCRUM-54 |
+| FR-CV-21 | Giữ cấu trúc mục và cập nhật Preview theo ngôn ngữ chọn. | SCRUM-54 |
 
 ## f. Xem trước CV trước khi in
 
 | Mã | Yêu cầu chức năng | Story |
 | --- | --- | --- |
-| FR-CV-22 | Hệ thống cho phép mở chế độ **Print Preview** để xem toàn bộ CV dưới bố cục trang in trước khi thực hiện thao tác in/xuất ở chức năng liên quan. | SCRUM-49 |
-| FR-CV-23 | Hệ thống thể hiện bố cục, số trang/ngắt trang và nội dung thực tế theo template và ngôn ngữ đang chọn; cho phép người dùng quay lại Editor. | SCRUM-49 |
-| FR-CV-24 | Print Preview dùng lại dữ liệu và bộ dựng CV/Preview, không kiểm tra nội dung bằng AI hoặc tự yêu cầu bổ sung thông tin. | SCRUM-49 |
+| FR-CV-22 | Mở **Print Preview** để xem CV theo trang in trước khi in/xuất ở chức năng liên quan. | SCRUM-49 |
+| FR-CV-23 | Hiển thị nội dung, mẫu, ngôn ngữ và phân trang; cho quay lại Editor. | SCRUM-49 |
+| FR-CV-24 | Print Preview dùng dữ liệu CV hiện có, không AI kiểm lỗi hoặc tự yêu cầu bổ sung. | SCRUM-49 |
 
 ## g. Tự điền thông tin cơ bản từ Profile/Account
 
 | Mã | Yêu cầu chức năng | Story |
 | --- | --- | --- |
-| FR-CV-25 | Khi người dùng bắt đầu tạo CV, hệ thống chỉ lấy các trường cơ bản tương ứng từ Profile thuộc tài khoản đã đăng nhập (ví dụ: họ tên, email, số điện thoại), tự điền vào biểu mẫu để người dùng kiểm tra và sửa. | SCRUM-10 |
-| FR-CV-26 | Khi người dùng mở CV đã lưu để chỉnh sửa, hệ thống giữ giá trị đã lưu/chỉnh sửa trong CV và tự điền các trường thông tin cơ bản còn trống từ Profile; không âm thầm ghi đè giá trị đã có trong CV. | SCRUM-14 |
+| FR-CV-25 | Khi tạo CV, chỉ điền ô cơ bản còn trống từ Profile đúng tài khoản; người dùng kiểm tra và sửa được. | SCRUM-10 |
+| FR-CV-26 | Khi mở CV đã lưu, giữ giá trị CV đã có; Profile chỉ điền ô cơ bản còn trống, không ghi đè. | SCRUM-14 |
 
 ## Các quy tắc nghiệp vụ áp dụng
 
 ### BR-CV-01 — Quyền sở hữu CV và thành tựu
 
-Người dùng chỉ được xem, chỉnh sửa hoặc xóa CV và thành tựu thuộc quyền truy cập của mình; dữ liệu khác không tự động hiển thị.
+Người dùng chỉ được xem, sửa, xóa CV và thành tựu thuộc quyền truy cập của mình.
 
 ### BR-CV-02 — AI chỉ đưa ra gợi ý
 
-Gợi ý SeekerBot/STAR/JD phải được người dùng xem và chủ động áp dụng. Hệ thống không tự bịa dự án, vai trò, số liệu, chứng chỉ hoặc kinh nghiệm làm việc.
+Gợi ý SeekerBot/STAR/JD chỉ áp dụng sau khi người dùng duyệt; không tự tạo dự án, vai trò, số liệu, chứng chỉ hoặc kinh nghiệm.
 
 ### BR-CV-03 — Phạm vi điều chỉnh theo JD
 
-Điều chỉnh CV theo JD nhằm cải thiện **cách trình bày thông tin đã có**, không tính điểm phù hợp, không xác định Skill Gap và không thay thế phân hệ Job Matching.
+Điều chỉnh theo JD chỉ dùng **thông tin CV đã có** để cải thiện cách diễn đạt; không chấm điểm hoặc phân tích Skill Gap.
 
 ### BR-CV-04 — Dữ liệu CV dùng chung
 
-Editor, Template, Preview và chế độ xem trước khi in sử dụng cùng dữ liệu CV. Tutorial chỉ hướng dẫn sử dụng, không tạo hoặc lưu một CV riêng. Đổi template không được xóa nội dung; lưu và mở lại phải giữ nội dung đã lưu.
+Editor, Template, Live Preview và Print Preview dùng cùng dữ liệu CV. Đổi mẫu không xóa nội dung; lưu/mở lại giữ nội dung và mẫu. Tutorial không tạo CV riêng.
 
 ### BR-CV-05 — Tái sử dụng thành tựu
 
-Khi đưa thành tựu vào CV, hệ thống sử dụng một bản sao nội dung tại thời điểm chọn. Việc sửa thành tựu trong thư viện về sau không tự sửa các CV đã có.
+Thành tựu được chép vào CV tại thời điểm chọn; sửa mục trong thư viện sau đó không tự sửa CV đã có.
 
 ### BR-CV-06 — Nhập nội dung GitHub
 
-Chỉ dùng dữ liệu repository công khai theo phạm vi truy cập được cấp. Metadata/README không tự chứng minh đóng góp cá nhân; người dùng phải xem và xác nhận trước khi đưa nội dung vào CV.
+Chỉ lấy dữ liệu repository công khai. Metadata/README không chứng minh đóng góp cá nhân; người dùng xem, sửa và xác nhận trước khi thêm vào CV.
 
 ### BR-CV-07 — Chuyển đổi ngôn ngữ
 
-Nội dung tiếng Việt và tiếng Anh được quản lý tách biệt theo cùng cấu trúc mục. Gợi ý dịch không tự ghi đè nội dung đã được người dùng duyệt; bản dịch cần được kiểm tra lại khi nội dung gốc thay đổi.
+Hai bản Việt/Anh dùng cùng cấu trúc mục nhưng lưu nội dung riêng. Gợi ý dịch không ghi đè bản đã duyệt; bản dịch cần được rà soát khi bản nguồn đổi.
 
 ### BR-CV-08 — Phạm vi Print Preview
 
-SCRUM-49 chỉ cho phép **xem trước CV theo bố cục trang in**, dùng chung nội dung và template của CV Editor. Không có cơ chế AI tự tìm lỗi hoặc yêu cầu người dùng bổ sung nội dung. Việc in thực tế/xuất PDF được xác nhận riêng với SCRUM-16.
+SCRUM-49 chỉ **xem trước bố cục trang in** theo nội dung và mẫu hiện tại; không có AI kiểm lỗi. In/xuất PDF thuộc quyết định riêng về SCRUM-16.
 
 ### BR-CV-09 — Dữ liệu Profile và CV
 
-Thông tin cơ bản được lấy từ **Profile thuộc tài khoản đang đăng nhập** khi tạo hoặc tiếp tục chỉnh sửa CV và chỉ tự điền vào trường tương ứng còn trống. Người dùng có thể chỉnh sửa riêng trên CV. Hệ thống không ghi đè những giá trị đã chỉnh sửa/lưu trong CV bằng thay đổi Profile mà không có xác nhận. Danh sách trường và ánh xạ cụ thể cần đối chiếu với schema Profile trước khi triển khai.
+Chỉ lấy thông tin cơ bản từ **Profile của tài khoản đang đăng nhập** để điền ô CV tương ứng còn trống khi tạo/mở CV. Người dùng sửa được giá trị trên CV; thay đổi Profile không ghi đè CV đã lưu. Ánh xạ trường chờ đối chiếu schema Profile.
 
 # 4. Đặc tả yêu cầu phi chức năng
 
 | Mã | Nhóm | Yêu cầu phi chức năng |
 | --- | --- | --- |
-| NFR-CV-01 | Dễ sử dụng | Người dùng có thể xác định mục đang chỉnh sửa và thấy bản xem trước rõ ràng; thông báo lỗi có hướng dẫn khắc phục. |
-| NFR-CV-02 | Bảo mật | CV và thành tựu được kiểm soát truy cập theo tài khoản; khóa dịch vụ AI/GitHub không được công khai ở Frontend. |
-| NFR-CV-03 | Tin cậy | Nếu AI hoặc GitHub API lỗi, CV đã lưu vẫn giữ nguyên; không tự áp dụng nội dung chưa được người dùng duyệt. |
-| NFR-CV-04 | Nhất quán | Editor, Template, chuyển ngôn ngữ và Print Preview dùng cùng dữ liệu CV; Tutorial không lưu CV; Profile phải thuộc đúng tài khoản. |
-| NFR-CV-05 | Khả năng đọc | Print Preview phải hiển thị bố cục rõ ràng theo trang in, không cắt hoặc làm chồng lấn nội dung quan trọng trong phạm vi template hỗ trợ. |
-| NFR-CV-06 | Khả năng bảo trì | Chức năng gợi ý AI và nhập GitHub được tách khỏi nghiệp vụ lưu/chỉnh sửa CV để xử lý lỗi độc lập. |
+| NFR-CV-01 | Dễ sử dụng | Form chỉ rõ mục đang sửa; Preview dễ đọc; lỗi nêu cách sửa. |
+| NFR-CV-02 | Bảo mật | Chỉ tài khoản có quyền truy cập CV/thành tựu; khóa AI/GitHub giữ ở máy chủ. |
+| NFR-CV-03 | Tin cậy | AI/GitHub lỗi không làm mất CV; gợi ý chưa duyệt không tự áp dụng. |
+| NFR-CV-04 | Nhất quán | Editor, mẫu, ngôn ngữ, Print Preview dùng cùng CV; Tutorial không lưu CV; Profile đúng tài khoản. |
+| NFR-CV-05 | Khả năng đọc | Trang in không cắt hoặc chồng lấn nội dung quan trọng trong mẫu hỗ trợ. |
+| NFR-CV-06 | Khả năng bảo trì | Lỗi AI/GitHub được xử lý riêng, không làm hỏng thao tác lưu/sửa CV. |
 
 # 5. Đặc tả yêu cầu
 
@@ -164,7 +157,7 @@ Thông tin cơ bản được lấy từ **Profile thuộc tài khoản đang đ
 
 ![Sơ đồ Use Case UML của CV Builder & SeekerBot](./images/CV_Builder_Use_Case.png)
 
-Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Sinh viên/người tìm việc** là tác nhân chính; **dịch vụ AI**, **GitHub API** và **phân hệ Profile/Account** là các hệ thống hỗ trợ. Không có Use Case riêng cho subtask hoặc các thao tác giao diện thuần túy.
+Sơ đồ gồm U001–U009 cho 11 Story, không tách subtask. Người tìm việc là tác nhân chính; AI, GitHub API và Profile/Account hỗ trợ.
 
 ## 5.2 Đặc tả Use Case
 
@@ -174,12 +167,12 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U001 |
 | **Tên Use Case** | Tạo, chỉnh sửa và xem trước CV |
-| **Tóm tắt** | Tạo/chỉnh sửa CV, tự điền thông tin cơ bản từ Profile và xem trước nội dung trong Editor. |
+| **Tóm tắt** | Nhập CV, tự điền ô trống từ Profile và xem Live Preview. |
 | **Tác nhân** | Sinh viên/người tìm việc (tác nhân chính); phân hệ Profile/Account (hệ thống hỗ trợ cung cấp thông tin cơ bản để tự điền vào CV). |
 | **Điều kiện tiên quyết** | Người dùng đã đăng nhập. |
-| **Kết quả** | Nội dung CV được cập nhật trong phiên chỉnh sửa và hiển thị ở Preview. |
-| **Kịch bản chính** | 1. Người dùng tạo CV hoặc mở CV có sẵn.<br>2. Hệ thống lấy thông tin cơ bản từ Profile để điền các trường tương ứng còn trống; dữ liệu CV đã lưu được ưu tiên giữ nguyên.<br>3. Người dùng kiểm tra, nhập hoặc chỉnh sửa các mục CV.<br>4. Hệ thống cập nhật Live Preview theo dữ liệu đang chỉnh sửa. |
-| **Kịch bản phụ** | • Profile chưa có thông tin: để trống các trường tương ứng để người dùng nhập.<br>• Thiếu/sai định dạng: báo trường cần sửa.<br>• Người dùng rời trang khi chưa lưu: cảnh báo mất thay đổi nếu phù hợp. |
+| **Kết quả** | Dữ liệu phiên chỉnh sửa hiển thị trên Live Preview. |
+| **Kịch bản chính** | 1. Tạo hoặc mở CV.<br>2. Điền ô cơ bản còn trống từ Profile đúng tài khoản; giữ dữ liệu CV đã lưu.<br>3. Người dùng kiểm tra và sửa các mục.<br>4. Live Preview cập nhật theo dữ liệu hợp lệ. |
+| **Kịch bản phụ** | • Profile thiếu dữ liệu: người dùng nhập tay.<br>• Dữ liệu sai: báo trường cần sửa.<br>• Rời trang khi chưa lưu: cảnh báo mất thay đổi. |
 | **Ràng buộc phi chức năng** | NFR-CV-01, 04, 05. |
 
 ### 5.2.2. Lưu và mở lại CV
@@ -188,12 +181,12 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U002 |
 | **Tên Use Case** | Lưu và mở lại CV |
-| **Tóm tắt** | Lưu nội dung và tiếp tục chỉnh sửa ở lần truy cập sau. |
+| **Tóm tắt** | Lưu và mở lại CV để tiếp tục sửa. |
 | **Tác nhân** | Sinh viên/người tìm việc. |
 | **Điều kiện tiên quyết** | Người dùng đã đăng nhập và có CV cần lưu/mở. |
-| **Kết quả** | CV được lưu vào tài khoản hoặc được tải để chỉnh sửa. |
-| **Kịch bản chính** | 1. Người dùng chọn lưu CV.<br>2. Hệ thống ghi nội dung thuộc tài khoản.<br>3. Người dùng mở danh sách CV và chọn bản đã lưu.<br>4. Hệ thống hiển thị nội dung và Preview tương ứng. |
-| **Kịch bản phụ** | • Lưu thất bại: báo lỗi và cho thử lại, không báo thành công giả.<br>• CV không thuộc quyền truy cập: từ chối mở. |
+| **Kết quả** | CV và mẫu được lưu hoặc mở lại đúng tài khoản. |
+| **Kịch bản chính** | 1. Chọn Lưu CV.<br>2. Hệ thống lưu nội dung và mẫu thuộc tài khoản.<br>3. Người dùng chọn CV đã lưu trên Dashboard.<br>4. Editor hiển thị dữ liệu và Preview tương ứng. |
+| **Kịch bản phụ** | • Lưu lỗi: báo chưa lưu, cho thử lại.<br>• Không có quyền: từ chối mở CV. |
 | **Ràng buộc phi chức năng** | NFR-CV-02, 03. |
 
 ### 5.2.3. Chọn mẫu trình bày CV
@@ -202,12 +195,12 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U003 |
 | **Tên Use Case** | Chọn mẫu trình bày CV |
-| **Tóm tắt** | Chuyển cách trình bày mà giữ nguyên nội dung. |
+| **Tóm tắt** | Chọn mẫu trình bày mà giữ nguyên nội dung CV. |
 | **Tác nhân** | Sinh viên/người tìm việc. |
 | **Điều kiện tiên quyết** | Người dùng đang chỉnh sửa CV. |
 | **Kết quả** | Preview áp dụng mẫu đã chọn. |
-| **Kịch bản chính** | 1. Người dùng mở danh sách template.<br>2. Hệ thống hiển thị mẫu khả dụng.<br>3. Người dùng chọn một mẫu.<br>4. Hệ thống cập nhật Preview tương ứng. |
-| **Kịch bản phụ** | • Mẫu không khả dụng: giữ mẫu hiện tại và thông báo. |
+| **Kịch bản chính** | 1. Mở danh sách mẫu khả dụng.<br>2. Chọn mẫu.<br>3. Preview cập nhật; nội dung CV được giữ. |
+| **Kịch bản phụ** | • Mẫu lỗi: giữ mẫu cũ và thông báo. |
 | **Ràng buộc phi chức năng** | NFR-CV-01, 04. |
 
 ### 5.2.4. Nhận và duyệt gợi ý từ SeekerBot
@@ -216,12 +209,12 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U004 |
 | **Tên Use Case** | Nhận và duyệt gợi ý từ SeekerBot |
-| **Tóm tắt** | Hướng dẫn viết, cải thiện theo STAR hoặc đề xuất diễn đạt theo JD. |
+| **Tóm tắt** | Xem và duyệt gợi ý hướng dẫn, STAR hoặc điều chỉnh theo JD. |
 | **Tác nhân** | Sinh viên/người tìm việc; dịch vụ AI bên ngoài (hỗ trợ). |
-| **Điều kiện tiên quyết** | Người dùng có nội dung CV hoặc thông tin cần được hướng dẫn; với gợi ý theo JD thì đã cung cấp JD. |
-| **Kết quả** | Người dùng xem và tùy chọn áp dụng gợi ý. |
-| **Kịch bản chính** | 1. Người dùng chọn chế độ hướng dẫn/STAR/điều chỉnh theo JD.<br>2. Hệ thống gửi ngữ cảnh cần thiết tới dịch vụ AI.<br>3. Hệ thống hiển thị nội dung gốc và gợi ý.<br>4. Người dùng chấp nhận hoặc bỏ qua.<br>5. Khi được chấp nhận, nội dung liên quan trong CV được cập nhật. |
-| **Kịch bản phụ** | • Thiếu dữ liệu hoặc JD: yêu cầu bổ sung.<br>• AI lỗi: giữ nguyên CV và cho thử lại.<br>• Gợi ý không đúng sự thật: người dùng bỏ qua/sửa trước khi áp dụng. |
+| **Điều kiện tiên quyết** | Có mục CV cần hỗ trợ; chế độ theo JD cần JD. |
+| **Kết quả** | Chỉ gợi ý được duyệt mới cập nhật CV. |
+| **Kịch bản chính** | 1. Chọn Hướng dẫn, STAR hoặc Theo JD.<br>2. Gửi ngữ cảnh cần thiết tới dịch vụ AI.<br>3. Xem nội dung gốc và gợi ý.<br>4. Chấp nhận, sửa hoặc bỏ qua.<br>5. Chỉ đoạn được duyệt mới cập nhật CV. |
+| **Kịch bản phụ** | • Thiếu dữ liệu/JD: yêu cầu bổ sung.<br>• AI lỗi: giữ CV, cho thử lại.<br>• Gợi ý sai thực tế: sửa hoặc bỏ qua. |
 | **Ràng buộc phi chức năng** | NFR-CV-02, 03, 06. |
 
 ### 5.2.5. Xem tutorial hướng dẫn sử dụng CV Builder
@@ -230,12 +223,12 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U005 |
 | **Tên Use Case** | Xem tutorial hướng dẫn sử dụng CV Builder |
-| **Tóm tắt** | Hướng dẫn người mới hiểu các bước sử dụng công cụ, không tạo luồng nhập CV riêng. |
+| **Tóm tắt** | Giới thiệu thao tác CV Builder, không tạo CV riêng. |
 | **Tác nhân** | Sinh viên/người tìm việc. |
 | **Điều kiện tiên quyết** | Người dùng mở CV Builder. |
-| **Kết quả** | Người dùng hiểu cách thao tác và có thể vào Editor tạo/sửa CV. |
-| **Kịch bản chính** | 1. Người dùng lần đầu vào CV Builder hoặc chọn mục Trợ giúp/Tutorial.<br>2. Hệ thống hiển thị các bước minh họa: tạo CV, chọn template, nhập/chỉnh sửa, xem trước và lưu.<br>3. Người dùng xem tiếp hoặc kết thúc hướng dẫn.<br>4. Hệ thống đưa người dùng về Dashboard/Editor. |
-| **Kịch bản phụ** | • Người dùng chọn Skip/Đóng: thoát tutorial mà không làm mất dữ liệu CV.<br>• Muốn xem lại: có thể mở tutorial từ mục trợ giúp. |
+| **Kết quả** | Người dùng có thể vào Editor hoặc mở lại hướng dẫn sau. |
+| **Kịch bản chính** | 1. Mở Tutorial từ lần đầu sử dụng hoặc Help.<br>2. Xem các bước tạo/mở CV, chọn mẫu, sửa, Live Preview và lưu.<br>3. Dùng Next/Back để xem tiếp/quay lại.<br>4. Kết thúc và vào Editor. |
+| **Kịch bản phụ** | • Skip/Close: thoát mà không đổi CV; có thể mở lại từ Help. |
 | **Ràng buộc phi chức năng** | NFR-CV-01, 04. |
 
 ### 5.2.6. Quản lý ngân hàng thành tựu cá nhân
@@ -244,12 +237,12 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U006 |
 | **Tên Use Case** | Quản lý ngân hàng thành tựu cá nhân |
-| **Tóm tắt** | Lưu và dùng lại thông tin thành tựu trong các CV. |
+| **Tóm tắt** | Quản lý và dùng lại thành tựu trong các CV. |
 | **Tác nhân** | Sinh viên/người tìm việc. |
 | **Điều kiện tiên quyết** | Người dùng đã đăng nhập. |
-| **Kết quả** | Thành tựu được quản lý hoặc bản sao được đưa vào CV. |
-| **Kịch bản chính** | 1. Người dùng mở thư viện thành tựu.<br>2. Người dùng tạo/sửa/xóa thành tựu.<br>3. Người dùng chọn thành tựu muốn sử dụng.<br>4. Hệ thống chép nội dung đã chọn vào CV để tiếp tục chỉnh sửa. |
-| **Kịch bản phụ** | • Thư viện trống: hiển thị hướng dẫn tạo mới.<br>• Không có quyền: từ chối thao tác. |
+| **Kết quả** | Thành tựu được quản lý hoặc bản sao được chèn vào CV. |
+| **Kịch bản chính** | 1. Mở thư viện.<br>2. Tạo, sửa hoặc xóa thành tựu.<br>3. Chọn mục cần dùng.<br>4. Chép mục đã chọn vào CV để sửa riêng. |
+| **Kịch bản phụ** | • Thư viện trống: hướng dẫn tạo mục.<br>• Không có quyền: từ chối thao tác. |
 | **Ràng buộc phi chức năng** | NFR-CV-02, 04. |
 
 ### 5.2.7. Nhập dự án từ GitHub
@@ -258,12 +251,12 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U007 |
 | **Tên Use Case** | Nhập dự án từ GitHub |
-| **Tóm tắt** | Dùng dữ liệu repository công khai làm bản nháp mô tả dự án CV. |
+| **Tóm tắt** | Tạo bản nháp dự án từ repository công khai. |
 | **Tác nhân** | Sinh viên/người tìm việc; GitHub API (hỗ trợ). |
 | **Điều kiện tiên quyết** | Người dùng đã đăng nhập và cung cấp URL repository công khai hợp lệ. |
-| **Kết quả** | Thông tin đã được duyệt được đưa vào mục dự án của CV. |
-| **Kịch bản chính** | 1. Người dùng nhập URL repository.<br>2. Hệ thống lấy metadata và README khả dụng.<br>3. Hệ thống hiển thị bản nháp để kiểm tra.<br>4. Người dùng xác nhận vai trò, đóng góp và sửa mô tả.<br>5. Người dùng chọn đưa nội dung vào CV. |
-| **Kịch bản phụ** | • URL sai/repository riêng tư/không tồn tại: báo lỗi.<br>• Không có README: vẫn hiển thị metadata khả dụng.<br>• API lỗi hoặc giới hạn truy cập: cho thử lại/nhập tay. |
+| **Kết quả** | Dự án được thêm vào CV sau xác nhận. |
+| **Kịch bản chính** | 1. Nhập URL repository công khai.<br>2. Lấy metadata/README khả dụng.<br>3. Xem bản nháp.<br>4. Xác nhận đóng góp và sửa mô tả.<br>5. Chọn thêm vào CV. |
+| **Kịch bản phụ** | • URL sai/repository riêng tư/không tồn tại: báo lỗi.<br>• Thiếu README: dùng metadata khả dụng.<br>• API lỗi: thử lại hoặc nhập tay. |
 | **Ràng buộc phi chức năng** | NFR-CV-02, 03, 06. |
 
 ### 5.2.8. Chuyển đổi nội dung CV Việt – Anh
@@ -272,12 +265,12 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U008 |
 | **Tên Use Case** | Chuyển đổi nội dung CV Việt – Anh |
-| **Tóm tắt** | Duy trì hai phiên bản ngôn ngữ của cùng CV. |
+| **Tóm tắt** | Quản lý bản Việt và Anh của cùng CV. |
 | **Tác nhân** | Sinh viên/người tìm việc; dịch vụ AI bên ngoài (hỗ trợ). |
 | **Điều kiện tiên quyết** | Người dùng đã có CV và chọn ngôn ngữ đích. |
-| **Kết quả** | Nội dung ngôn ngữ đích được xem hoặc được người dùng duyệt/cập nhật. |
-| **Kịch bản chính** | 1. Người dùng chọn VI/EN.<br>2. Hệ thống hiển thị bản tương ứng hoặc đề xuất tạo bản nháp dịch.<br>3. Người dùng xem và chỉnh bản dịch.<br>4. Người dùng xác nhận lưu; Preview hiển thị theo ngôn ngữ đã chọn. |
-| **Kịch bản phụ** | • Dịch thất bại: giữ phiên bản hiện có.<br>• Bản nguồn thay đổi: đánh dấu nội dung dịch cần xem lại. |
+| **Kết quả** | Preview hiển thị ngôn ngữ chọn; bản dịch chỉ lưu sau duyệt. |
+| **Kịch bản chính** | 1. Chọn VI/EN.<br>2. Xem bản tương ứng hoặc bản nháp dịch.<br>3. Rà soát, sửa bản dịch.<br>4. Xác nhận lưu; Preview cập nhật. |
+| **Kịch bản phụ** | • Dịch lỗi: giữ hai bản hiện có.<br>• Bản nguồn đổi: đánh dấu bản dịch cần rà soát. |
 | **Ràng buộc phi chức năng** | NFR-CV-03, 04, 05. |
 
 ### 5.2.9. Xem trước CV trước khi in
@@ -286,17 +279,17 @@ Sơ đồ mô tả chín Use Case nghiệp vụ chính, bao phủ 11 Story. **Si
 | --- | --- |
 | **Use Case ID** | U009 |
 | **Tên Use Case** | Xem trước CV trước khi in |
-| **Tóm tắt** | Hiển thị CV theo bố cục trang in để người dùng rà soát lần cuối. |
+| **Tóm tắt** | Xem CV theo bố cục trang in. |
 | **Tác nhân** | Sinh viên/người tìm việc. |
 | **Điều kiện tiên quyết** | Người dùng có CV đang mở trong Editor. |
-| **Kết quả** | Print Preview hiển thị theo template/ngôn ngữ hiện tại; người dùng có thể quay lại sửa nội dung. |
-| **Kịch bản chính** | 1. Người dùng chọn Xem trước khi in.<br>2. Hệ thống dùng dữ liệu CV hiện có để dựng bố cục trang in, hiển thị phân trang và nội dung CV.<br>3. Người dùng xem lại tổng thể bố cục.<br>4. Người dùng quay về Editor hoặc tiếp tục tác vụ in/xuất nếu chức năng đó đã được xác nhận riêng. |
-| **Kịch bản phụ** | • CV chưa có nội dung: hiển thị trang trống hoặc hướng dẫn quay lại Editor.<br>• Dựng preview lỗi: thông báo và cho thử lại, không thay đổi dữ liệu CV. |
+| **Kết quả** | Print Preview theo mẫu/ngôn ngữ hiện tại; có thể quay lại sửa. |
+| **Kịch bản chính** | 1. Chọn Xem trước khi in.<br>2. Hệ thống dựng trang in từ CV hiện có, gồm nội dung và phân trang.<br>3. Người dùng rà soát bố cục.<br>4. Quay lại Editor để sửa nếu cần. |
+| **Kịch bản phụ** | • CV trống: hướng dẫn quay lại Editor.<br>• Dựng trang lỗi: báo lỗi, cho thử lại; không đổi CV. |
 | **Ràng buộc phi chức năng** | NFR-CV-01, 04, 05. |
 
 # 6. Bản mẫu (Prototype)
 
-Prototype Figma được xây dựng ở mức **low/mid-fidelity**, thể hiện luồng tương tác chứ chưa phải chức năng ứng dụng đã triển khai. Các nút Apply/Add/Save trong prototype có thể chỉ mô phỏng điều hướng.
+Sáu frame Figma và các trạng thái phụ minh họa thao tác; **chưa chứng minh chức năng FE/BE đã triển khai**. Lưu, AI, GitHub Import và duyệt bản dịch trong prototype dùng dữ liệu mẫu.
 
 **File thiết kế:** [HireUS — CV Builder & SeekerBot](https://www.figma.com/design/bMbUlGzrU298Icu0HoERU3/HireUS?node-id=55-184).
 
@@ -305,38 +298,38 @@ Prototype Figma được xây dựng ở mức **low/mid-fidelity**, thể hiệ
 | F01 | CV Dashboard | SCRUM-14, SCRUM-50 |
 | F02 | CV Editor + Live Preview; tự điền trường cơ bản còn trống từ Profile | SCRUM-10, SCRUM-14, SCRUM-15 |
 | F03 | CV Editor + AI Panel | SCRUM-17, 18, 19 |
-| F04 | Tutorial hướng dẫn sử dụng CV Builder (Next/Skip/Help) | SCRUM-50 |
+| F04 | Tutorial bốn bước (Next/Back/Skip/Help) | SCRUM-50 |
 | F05 | Achievement Library + GitHub Import | SCRUM-52, 55 |
 | F06 | Editor VI/EN + Print Preview (không có AI quality check) | SCRUM-49, 54 |
 
 ### Hình chụp các frame Figma
 
-**F01 — CV Dashboard:** tạo/mở CV và mở lại Tutorial.
+**F01 — Dashboard:** tạo/mở CV, Tutorial.
 
 ![F01 — CV Dashboard](./images/F01_CV_Dashboard.png)
 
-**F02 — CV Editor + Live Preview:** ví dụ các trường cơ bản còn trống được điền từ Profile; người dùng có thể sửa.
+**F02 — Editor:** Profile mẫu, Live Preview, chọn mẫu.
 
 ![F02 — CV Editor + Live Preview](./images/F02_CV_Editor_Preview.png)
 
-**F03 — CV Editor + AI Panel:** mô phỏng việc xem và duyệt gợi ý SeekerBot.
+**F03 — SeekerBot:** STAR, Hướng dẫn, Theo JD.
 
 ![F03 — CV Editor + AI Panel](./images/F03_SeekerBot_AI_Panel.png)
 
-**F04 — Tutorial:** hướng dẫn thao tác CV Builder; các nút Back/Next hiện mới là mô phỏng hình ảnh.
+**F04 — Tutorial:** bốn bước với Next/Back/Skip.
 
 ![F04 — Tutorial CV Builder](./images/F04_CV_Builder_Tutorial.png)
 
-**F05 — Achievement Library + GitHub Import:** mô phỏng chọn thành tựu và rà soát dữ liệu repository.
+**F05 — Thành tựu/GitHub:** chọn mục, duyệt nháp hoặc xem lỗi URL.
 
 ![F05 — Achievement Library + GitHub Import](./images/F05_Achievement_GitHub.png)
 
-**F06 — CV Việt–Anh + Print Preview:** xem bố cục trang in theo ngôn ngữ đang chọn; chưa thể hiện thao tác in/xuất PDF.
+**F06 — Song ngữ/Print Preview:** trang in, bản Anh mẫu, duyệt dịch; không xuất PDF.
 
 ![F06 — CV Việt–Anh + Print Preview](./images/F06_Bilingual_Print_Preview.png)
 
-**Luồng mẫu cần thử trên Figma:** F01 → F02 (đã có thông tin cơ bản từ Profile nếu có) → F03 → F02; F01 → F04 (tutorial, có Skip) → F02; F02 → F05 → F02; F02 → F06 (Print Preview/VI–EN) → F02. Các nút mô phỏng điều hướng, không chứng minh dữ liệu được lưu hoặc in thực tế.
+Các liên kết đã được kiểm tra trong cấu trúc Figma; cần thử thao tác trong **Present** trước khi khẳng định luồng chạy được. Ảnh là trạng thái minh họa, không chứng minh lưu dữ liệu, gọi AI/GitHub hoặc in thật.
 
 ---
 
-*Ghi chú rà soát trước nộp: (1) xác nhận phạm vi SCRUM-16; (2) thử các liên kết trong Figma Present, nhất là Tutorial và Print Preview, rồi thống nhất nội dung các bước; (3) đối chiếu ánh xạ trường với schema Profile; (4) nếu tài liệu được ghép vào báo cáo toàn nhóm, đưa bảng đánh giá thành viên theo template vào phần đầu của báo cáo chung, không tự khai % đóng góp.*
+*Cần nhóm chốt SCRUM-16, mẫu CV, Tutorial và ánh xạ Profile; thử Present. Bảng đánh giá thành viên thuộc báo cáo chung, chưa khai % đóng góp.*
