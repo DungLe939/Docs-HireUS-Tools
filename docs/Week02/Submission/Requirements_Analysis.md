@@ -544,15 +544,15 @@ Thông tin trích xuất phải có căn cứ từ bài nguồn; dữ liệu lư
 
 #### a. CV Builder & SeekerBot
 
-![Sơ đồ Use Case UML của CV Builder & SeekerBot](./images/CV_Builder_Use_Case_Current.svg)
+![Sơ đồ Use Case của CV Builder & SeekerBot](./images/CV_Builder_Use_Case_Current.svg)
 
 #### b. Voice Mock Interview
 
-![Sơ đồ Use Case](./images/Voice_Mock_Interview_Use_Case.png)
+![Sơ đồ Use Case của Voice Mock Interview](./images/Voice_Mock_Interview_Use_Case.png)
 
 #### c. Job Matching & Skill Gap
 
-![Sơ đồ Use Case](./images/Job_Matching_Use_Case_Cropped.png)
+![Sơ đồ Use Case của Job Matching & Skill Gap](./images/Job_Matching_Use_Case_Cropped.png)
 
 #### d. Job Tracking
 
