@@ -271,7 +271,7 @@ Quy ước mã:
 
 #### a. CV Builder & SeekerBot
 
-![Sơ đồ Use Case của CV Builder & SeekerBot](./images/CV_Builder_Use_Case_Current.svg)
+![Sơ đồ Use Case của CV Builder & SeekerBot](./images/CV_Builder_Use_Case.png)
 
 #### b. Voice Mock Interview
 
@@ -279,7 +279,7 @@ Quy ước mã:
 
 #### c. Job Matching & Skill Gap
 
-![Sơ đồ Use Case của Job Matching & Skill Gap](./images/Job_Matching_Use_Case_Cropped.png)
+![Sơ đồ Use Case của Job Matching & Skill Gap](./images/Job_Matching_Use_Case.png)
 
 #### d. Job Tracking
 
