@@ -87,3 +87,8 @@ DungLe
 
 # Personal research
 /docs/Week02/Research/
+
+# Bỏ qua Git của thư mục con Week02 Submission
+/docs/Week02/Submission/.git
+/docs/Week02/Submission/.gitignore
+/docs/Week02/Submission/index.html

@@ -1,0 +1,3563 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phân tích yêu cầu: Nền tảng HireUS Tools — Nhóm 02 — ĐH Khoa học Tự nhiên, ĐHQG-HCM</title>
+  <meta name="description"
+    content="Tài liệu Phân tích yêu cầu & Đặc tả hệ thống đồ án Nhập môn Công nghệ Phần mềm: Nền tảng HireUS Tools (Nhóm 02 - ĐH Khoa học Tự nhiên TP.HCM)">
+
+  <!-- Zero-flash theme initialization -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('hireus_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+
+    /* -------------------------------------------------------------
+       CSS VARIABLES & THEMES
+       ------------------------------------------------------------- */
+    :root,
+    [data-theme="dark"] {
+      --bg-body: #070a11;
+      --bg-mesh: radial-gradient(circle at 50% 0%, rgba(30, 58, 138, 0.22) 0%, transparent 55%),
+        radial-gradient(circle at 100% 40%, rgba(88, 28, 135, 0.12) 0%, transparent 45%);
+      --surface-card: #0f172a;
+      --surface-elevated: #162032;
+      --surface-muted: #1e293b;
+      --surface-hover: rgba(56, 189, 248, 0.08);
+      --border-main: #1e293b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(56, 189, 248, 0.25);
+
+      --text-main: #cbd5e1;
+      --text-heading: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+
+      --accent-blue: #38bdf8;
+      --accent-blue-hover: #0284c7;
+      --accent-indigo: #818cf8;
+      --accent-green: #34d399;
+      --accent-green-bg: rgba(52, 211, 153, 0.12);
+      --accent-green-border: rgba(52, 211, 153, 0.3);
+      --accent-amber: #fbbf24;
+      --accent-amber-bg: rgba(251, 191, 36, 0.12);
+      --accent-amber-border: rgba(251, 191, 36, 0.3);
+      --accent-cyan-bg: rgba(56, 189, 248, 0.12);
+      --accent-cyan-border: rgba(56, 189, 248, 0.3);
+
+      --table-header: #131d2e;
+      --table-row-even: #0f172a;
+      --table-row-odd: #121a2a;
+
+      --code-bg: #141c2c;
+      --code-border: #243248;
+      --code-text: #38bdf8;
+
+      --mermaid-bg: #0b111e;
+      --mermaid-border: #1e293b;
+
+      --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      --shadow-glow: 0 0 25px -5px rgba(56, 189, 248, 0.15);
+      --radius-main: 16px;
+      --radius-inner: 10px;
+    }
+
+    [data-theme="light"] {
+      --bg-body: #f8fafc;
+      --bg-mesh: radial-gradient(circle at 50% 0%, rgba(219, 234, 254, 0.6) 0%, transparent 60%);
+      --surface-card: #ffffff;
+      --surface-elevated: #f1f5f9;
+      --surface-muted: #e2e8f0;
+      --surface-hover: rgba(37, 99, 235, 0.05);
+      --border-main: #e2e8f0;
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --border-glow: rgba(37, 99, 235, 0.2);
+
+      --text-main: #334155;
+      --text-heading: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+
+      --accent-blue: #0284c7;
+      --accent-blue-hover: #0369a1;
+      --accent-indigo: #6366f1;
+      --accent-green: #059669;
+      --accent-green-bg: #ecfdf5;
+      --accent-green-border: #a7f3d0;
+      --accent-amber: #d97706;
+      --accent-amber-bg: #fffbeb;
+      --accent-amber-border: #fde68a;
+      --accent-cyan-bg: #f0f9ff;
+      --accent-cyan-border: #bae6fd;
+
+      --table-header: #f8fafc;
+      --table-row-even: #ffffff;
+      --table-row-odd: #f8fafc;
+
+      --code-bg: #f1f5f9;
+      --code-border: #cbd5e1;
+      --code-text: #0369a1;
+
+      --mermaid-bg: #ffffff;
+      --mermaid-border: #e2e8f0;
+
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
+      --shadow-glow: none;
+      --radius-main: 16px;
+      --radius-inner: 10px;
+    }
+
+    /* -------------------------------------------------------------
+       RESET & BASE STYLING
+       ------------------------------------------------------------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.975rem;
+      line-height: 1.78;
+      color: var(--text-main);
+      background-color: var(--bg-body);
+      background-image: var(--bg-mesh);
+      background-attachment: fixed;
+      padding: 0 0 60px 0;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Reading Progress Bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-indigo));
+      width: 0%;
+      z-index: 999;
+      transition: width 0.1s ease;
+    }
+
+    /* -------------------------------------------------------------
+       STICKY TOPBAR NAVIGATION
+       ------------------------------------------------------------- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11, 15, 25, 0.88);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.25s ease;
+    }
+
+    [data-theme="light"] .topbar {
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .topbar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .topbar-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+    }
+
+    .topbar-title .brand-logo {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+    }
+
+    .topbar-title span.doc-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--accent-cyan-bg);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-cyan-border);
+    }
+
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex: 1;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .topbar-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap !important;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-blue);
+      background: var(--surface-muted);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .btn-secondary {
+      background: var(--surface-elevated);
+      color: var(--text-main);
+      border-color: var(--border-main);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-muted);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.45);
+    }
+
+    /* -------------------------------------------------------------
+       MAIN CONTAINER & LAYOUT
+       ------------------------------------------------------------- */
+    .container {
+      max-width: 1100px;
+      margin: 32px auto 0 auto;
+      padding: 0 20px;
+    }
+
+    .doc-card {
+      background: var(--surface-card);
+      border-radius: var(--radius-main);
+      border: 1px solid var(--border-main);
+      box-shadow: var(--shadow-card);
+      padding: 56px 64px;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+      position: relative;
+    }
+
+    @media (max-width: 860px) {
+      .doc-card {
+        padding: 32px 20px;
+      }
+
+      .topbar-nav {
+        display: none;
+      }
+    }
+
+    /* -------------------------------------------------------------
+       HEADER & METADATA
+       ------------------------------------------------------------- */
+    .header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 36px;
+      margin-bottom: 40px;
+    }
+
+    .header-institution {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .badge-uni {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--accent-cyan-bg);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-cyan-border);
+    }
+
+    .badge-dept {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--surface-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border-main);
+    }
+
+    h1.main-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      line-height: 1.5;
+      letter-spacing: -0.025em;
+      /* Solid text keeps Vietnamese diacritics visible across browsers. */
+      color: var(--text-heading);
+      margin-bottom: 12px;
+    }
+
+    .sub-title {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: var(--accent-blue);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    /* Meta Info Box */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-inner);
+      padding: 20px 24px;
+      margin-top: 24px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+    }
+
+    .meta-value {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-heading);
+    }
+
+    .meta-value small {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION STYLES & TYPOGRAPHY
+       ------------------------------------------------------------- */
+    section {
+      margin-bottom: 52px;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-heading);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 12px;
+      margin-top: 40px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 22px;
+      background: linear-gradient(180deg, var(--accent-blue), var(--accent-indigo));
+      border-radius: 3px;
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--accent-blue);
+      margin-top: 32px;
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    h5 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--accent-indigo);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 18px;
+      text-align: justify;
+      color: var(--text-main);
+    }
+
+    strong {
+      color: var(--text-heading);
+      font-weight: 700;
+    }
+
+    ul,
+    ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+
+    li::marker {
+      color: var(--accent-blue);
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 40px 0;
+    }
+
+    /* -------------------------------------------------------------
+       TABLES
+       ------------------------------------------------------------- */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 24px 0 28px 0;
+      border-radius: var(--radius-inner);
+      border: 1px solid var(--border-main);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background: var(--surface-card);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.915rem;
+      text-align: left;
+    }
+
+    thead th {
+      background: var(--table-header);
+      color: var(--text-heading);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 14px 16px;
+      border-bottom: 2px solid var(--border-main);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border-main);
+      vertical-align: top;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--table-row-even);
+    }
+
+    tbody tr:nth-child(odd) {
+      background: var(--table-row-odd);
+    }
+
+    tbody tr:hover {
+      background: var(--surface-hover);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* -------------------------------------------------------------
+       BADGES & PILLS
+       ------------------------------------------------------------- */
+    .badge-role {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .badge-lead {
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+
+    .badge-ai {
+      background: rgba(129, 140, 248, 0.14);
+      color: var(--accent-indigo);
+      border: 1px solid rgba(129, 140, 248, 0.35);
+    }
+
+    .badge-dev {
+      background: rgba(52, 211, 153, 0.14);
+      color: var(--accent-green);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+    }
+
+    .badge-qa {
+      background: rgba(251, 191, 36, 0.14);
+      color: var(--accent-amber);
+      border: 1px solid rgba(251, 191, 36, 0.35);
+    }
+
+    .pill-free {
+      background: var(--accent-green-bg);
+      color: var(--accent-green);
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--accent-green-border);
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .pill-hours {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.82rem;
+      background: var(--surface-muted);
+      color: var(--accent-blue);
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-main);
+      display: inline-block;
+    }
+
+    .pill-sprint {
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--surface-elevated);
+      color: var(--text-heading);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-main);
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    /* -------------------------------------------------------------
+       CODE & DIAGRAM BLOCKS
+       ------------------------------------------------------------- */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.86em;
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--code-border);
+    }
+
+    .mermaid-box {
+      background: var(--mermaid-bg);
+      border: 1px solid var(--mermaid-border);
+      border-radius: var(--radius-inner);
+      padding: 28px 16px;
+      margin: 24px 0;
+      text-align: center;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.35);
+      overflow-x: auto;
+    }
+
+    /* -------------------------------------------------------------
+       CALLOUT / INFO BOXES
+       ------------------------------------------------------------- */
+    .callout {
+      background: var(--surface-elevated);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 0.93rem;
+      color: var(--text-main);
+    }
+
+    .callout-warning {
+      border-left-color: var(--accent-amber);
+      background: var(--accent-amber-bg);
+      border-top: 1px solid var(--accent-amber-border);
+      border-right: 1px solid var(--accent-amber-border);
+      border-bottom: 1px solid var(--accent-amber-border);
+      color: var(--text-heading);
+    }
+
+    .callout-success {
+      border-left-color: var(--accent-green);
+      background: var(--accent-green-bg);
+      border-top: 1px solid var(--accent-green-border);
+      border-right: 1px solid var(--accent-green-border);
+      border-bottom: 1px solid var(--accent-green-border);
+      color: var(--text-heading);
+    }
+
+    .callout p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* -------------------------------------------------------------
+       PRINT STYLES
+       ------------------------------------------------------------- */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #111827 !important;
+        padding: 0 !important;
+      }
+
+      .topbar,
+      #progress-bar {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .doc-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+      }
+
+      h1.main-title {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+      }
+
+      h2,
+      h3,
+      h4,
+      h5,
+      strong {
+        color: #000000 !important;
+      }
+
+      p,
+      li,
+      td {
+        color: #1f2937 !important;
+      }
+
+      table,
+      .table-container {
+        box-shadow: none !important;
+        border-color: #cbd5e1 !important;
+        page-break-inside: avoid;
+      }
+
+      th {
+        background: #f1f5f9 !important;
+        color: #000000 !important;
+        border-color: #94a3b8 !important;
+      }
+
+      td {
+        border-color: #e2e8f0 !important;
+      }
+
+      .mermaid-box {
+        background: #ffffff !important;
+        border-color: #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+
+      section {
+        page-break-inside: auto;
+      }
+    }
+
+    /* -------------------------------------------------------------
+       OUTLINE FLOATING BUTTON & DRAWER (LEFT SIDE)
+       ------------------------------------------------------------- */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      scroll-margin-top: 75px;
+    }
+
+    .outline-wrapper {
+      position: fixed;
+      left: 20px;
+      top: 72px;
+      z-index: 120;
+    }
+
+    /* Floating Pill Button */
+    .outline-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-glow);
+      border-radius: 999px;
+      color: var(--accent-blue);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), 0 0 10px rgba(56, 189, 248, 0.2);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .outline-btn:hover,
+    .outline-wrapper:hover .outline-btn,
+    .outline-wrapper.is-open .outline-btn {
+      background: var(--surface-card);
+      border-color: var(--accent-blue);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4), 0 0 14px rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      transform: translateY(-1px);
+    }
+
+    .outline-btn .btn-icon {
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+
+    /* Invisible hover buffer so moving mouse between button and drawer is 100% smooth */
+    .outline-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 320px;
+      height: 12px;
+    }
+
+    /* Floating Drawer Panel */
+    .outline-drawer {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 320px;
+      max-height: calc(100vh - 120px);
+      background: rgba(11, 17, 30, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glow);
+      border-radius: 14px;
+      box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px) scale(0.97);
+      transform-origin: top left;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    [data-theme="light"] .outline-drawer {
+      background: rgba(255, 255, 255, 0.96);
+      border-color: #cbd5e1;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    [data-theme="light"] .outline-btn {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: #cbd5e1;
+      color: #0284c7;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Show when wrapper hovered OR when opened/pinned */
+    .outline-wrapper:hover .outline-drawer,
+    .outline-wrapper.is-open .outline-drawer {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .outline-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.02);
+      flex-shrink: 0;
+    }
+
+    .outline-header-title {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+
+    .outline-list {
+      padding: 10px 8px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-main) transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .outline-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .outline-list::-webkit-scrollbar-thumb {
+      background: var(--border-main);
+      border-radius: 4px;
+    }
+
+    .outline-list::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-blue);
+    }
+
+    .outline-item {
+      display: block;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      line-height: 1.4;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-left: 2px solid transparent;
+    }
+
+    .outline-item.lvl-2 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-top: 6px;
+    }
+
+    .outline-item.lvl-3 {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-main);
+      padding-left: 18px;
+    }
+
+    .outline-item.lvl-4 {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding-left: 28px;
+    }
+
+    .outline-item.lvl-5 {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-subtle);
+      padding-left: 38px;
+      font-style: italic;
+    }
+
+    .outline-item:hover {
+      background: var(--accent-cyan-bg);
+      color: var(--accent-blue);
+      border-left-color: var(--accent-blue);
+    }
+
+    .outline-item.is-active {
+      background: var(--accent-cyan-bg);
+      color: var(--accent-blue);
+      border-left-color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    @media print {
+      .outline-wrapper {
+        display: none !important;
+      }
+    }
+
+    /* Signatures & Diagrams */
+    .signature-img {
+      height: 40px;
+      max-width: 120px;
+      object-fit: contain;
+      filter: contrast(110%);
+      display: inline-block;
+      vertical-align: middle;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    [data-theme="light"] .signature-img {
+      background: transparent;
+      padding: 0;
+    }
+
+    .diagram-container {
+      text-align: center;
+      margin: 28px 0;
+      padding: 20px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-inner);
+    }
+
+    .diagram-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .diagram-caption {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+  
+
+    
+    /* Formula Card */
+    .formula-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-main);
+      border-left: 3px solid var(--accent-indigo);
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin: 10px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      color: var(--accent-blue);
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    /* -------------------------------------------------------------
+       CUSTOM EXTENSIONS FOR WEEK 02 REQUIREMENTS ANALYSIS
+       ------------------------------------------------------------- */
+    h5 {
+      font-size: 1.15rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.02em !important;
+      color: var(--accent-indigo) !important;
+      margin-top: 32px !important;
+      margin-bottom: 14px !important;
+    }
+
+    h6 {
+      font-size: 1.05rem !important;
+      font-weight: 700 !important;
+      color: var(--text-heading) !important;
+      margin-top: 24px !important;
+      margin-bottom: 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    h6::before {
+      content: '▸' !important;
+      color: var(--accent-blue) !important;
+      font-size: 0.95em !important;
+      line-height: 1 !important;
+    }
+    /* NFR reference links */
+    a[id], .badge-uc[id] { scroll-margin-top: 90px; }
+
+    .pill-nfr {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8em;
+      font-weight: 700;
+      color: var(--accent-blue);
+      background: var(--accent-cyan-bg);
+      border: 1px solid var(--accent-cyan-border);
+      padding: 2px 7px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin: 2px 3px 2px 0;
+      transition: all 0.15s ease;
+      vertical-align: middle;
+    }
+    .pill-nfr:hover {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+      transform: translateY(-1px);
+    }
+    
+    .badge-uc {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-indigo);
+      background: rgba(129, 140, 248, 0.12);
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .badge-uc-link {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-indigo);
+      background: rgba(129, 140, 248, 0.12);
+      border: 1px solid rgba(129, 140, 248, 0.35);
+      padding: 2px 7px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .badge-uc-link:hover {
+      background: var(--accent-indigo);
+      color: #ffffff;
+      border-color: var(--accent-indigo);
+      transform: translateY(-1px);
+    }
+
+    .badge-br {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+      background: var(--accent-amber-bg);
+      border: 1px solid var(--accent-amber-border);
+      padding: 2px 7px;
+      border-radius: 5px;
+      margin-right: 6px;
+    }
+
+    .badge-frame {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      background: var(--accent-cyan-bg);
+      border: 1px solid var(--accent-cyan-border);
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-right: 8px;
+    }
+
+    /* Use Case Table Specifics */
+    .use-case-table-container {
+      margin: 20px 0 32px 0;
+      border-left: 3px solid var(--accent-blue);
+    }
+    .use-case-table-container table thead th {
+      background: var(--surface-muted);
+    }
+    .uc-prop-label {
+      width: 22%;
+      font-weight: 700;
+      color: var(--text-heading);
+      background: var(--surface-elevated) !important;
+      white-space: nowrap;
+      border-right: 1px solid var(--border-main);
+    }
+    .uc-prop-val {
+      line-height: 1.7;
+      color: var(--text-main);
+    }
+
+    /* Business Rule Card */
+    .rule-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-main);
+      border-left: 3px solid var(--accent-amber);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      transition: all 0.2s ease;
+    }
+    .rule-card:hover {
+      border-color: var(--accent-amber);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+    .rule-header {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .rule-content {
+      font-size: 0.92rem;
+      color: var(--text-main);
+      line-height: 1.65;
+    }
+    .rule-content p {
+      margin-bottom: 6px;
+    }
+    .rule-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Prototype Card */
+    .prototype-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-inner);
+      margin: 28px 0 36px 0;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s ease;
+    }
+    .prototype-card:hover {
+      border-color: var(--accent-blue);
+      box-shadow: var(--shadow-glow), var(--shadow-card);
+    }
+    .prototype-header {
+      background: var(--surface-elevated);
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .prototype-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+    .prototype-img-wrapper {
+      background: #090e17;
+      text-align: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    [data-theme="light"] .prototype-img-wrapper {
+      background: #f1f5f9;
+    }
+    .prototype-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      transition: transform 0.2s ease;
+    }
+    .prototype-desc {
+      padding: 16px 20px;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      background: var(--surface-card);
+      line-height: 1.65;
+    }
+    .prototype-desc p {
+      margin-bottom: 0;
+    }
+
+    /* Difficulty Cards in Section 2 */
+    .difficulty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 20px 0 28px 0;
+    }
+    .difficulty-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border-main);
+      border-radius: var(--radius-inner);
+      padding: 18px 20px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .difficulty-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+    .difficulty-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .difficulty-desc {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Workflow Banner in Prototype */
+    .workflow-box {
+      background: var(--accent-cyan-bg);
+      border: 1px solid var(--accent-cyan-border);
+      border-radius: var(--radius-inner);
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+      color: var(--text-heading);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .workflow-icon {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* Figma CTA Banner */
+    .figma-cta {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+      border: 1px solid var(--accent-cyan-border);
+      border-radius: var(--radius-inner);
+      padding: 20px 24px;
+      margin: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .figma-cta-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .figma-cta-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+    .figma-cta-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+    .figma-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0284c7;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s ease;
+    }
+    .figma-btn:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.5);
+    }
+    
+  </style>
+</head>
+
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- STICKY TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-content">
+      <div class="topbar-title">
+        <div class="brand-logo">H</div>
+        <span>HireUS Tools</span>
+        <span class="doc-tag">Nhóm 02 &bull; Phân tích yêu cầu</span>
+      </div>
+      <nav class="topbar-nav">
+        <a href="#sec-1" class="nav-link">1. Đánh giá</a>
+        <a href="#sec-2" class="nav-link">2. Bài toán</a>
+        <a href="#sec-3" class="nav-link">3. Yêu cầu</a>
+        <a href="#sec-4" class="nav-link">4. Use Case</a>
+        <a href="#sec-5" class="nav-link">5. Prototype</a>
+      </nav>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển chế độ sáng / tối">
+          <span id="themeIcon">☀️</span> <span id="themeLabel">Sáng</span>
+        </button>
+        <button class="btn btn-primary" onclick="window.print()" title="In hoặc lưu file PDF">
+          <span>🖨️ Xuất PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- FLOATING OUTLINE (LEFT SIDE) -->
+  <aside class="outline-wrapper" id="outlineWrapper" aria-label="Mục lục báo cáo">
+    <button class="outline-btn" id="outlineBtn" title="Rê chuột để xem outline chi tiết hoặc bấm để ghim">
+      <span class="btn-icon">📋</span>
+      <span>Outline</span>
+    </button>
+    <div class="outline-drawer" id="outlineDrawer">
+      <div class="outline-header">
+        <span class="outline-header-title">📑 Outline Chi Tiết</span>
+      </div>
+      <nav class="outline-list" id="outlineList">
+        <!-- Tự động sinh từ các tiêu đề H2 -> H5 -->
+      </nav>
+    </div>
+  </aside>
+
+  <div class="container">
+    <main class="doc-card">
+
+      <!-- HEADER SECTION -->
+      <header class="header">
+        <div class="header-institution">
+          <div class="badge-uni">ĐH Khoa học Tự nhiên, ĐHQG-HCM</div>
+          <div class="badge-dept">Khoa Công nghệ Thông tin &bull; Bộ môn Công nghệ Phần mềm</div>
+        </div>
+        <h1 class="main-title">PHÂN TÍCH YÊU CẦU</h1>
+        <div class="sub-title">REQUIREMENTS ANALYSIS &amp; SYSTEM SPECIFICATION: NỀN TẢNG HIREUS TOOLS &bull; NHÓM 02</div>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Môn học</span>
+            <span class="meta-value">Nhập môn Công nghệ Phần mềm<br><small>Introduction to Software Engineering</small></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Giảng viên hướng dẫn</span>
+            <span class="meta-value">Thầy Ngô Ngọc Đăng Khoa (GVTH)<br>Thầy Phạm Minh Tuấn (GVLT)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Nhóm sinh viên thực hiện</span>
+            <span class="meta-value">Nhóm 02 (4 thành viên)<br><small>Võ Minh Khoa, Võ Nguyễn Việt Hoàng, Đỗ Chí Cao, Lê Tấn Dũng</small></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Đợt báo cáo &amp; Tuần nộp</span>
+            <span class="meta-value">Week 02 &bull; Yêu cầu chức năng, phi chức năng, Use Case &amp; Prototype<br><small>Phiên bản 1.0 &bull; 07/11/2026</small></span>
+          </div>
+        </div>
+      </header>
+
+      <!-- SECTION 1 -->
+      <section id="sec-1">
+        <h2 id="sec-1-title">1. BẢNG ĐÁNH GIÁ THÀNH VIÊN</h2>
+<div class="table-container">
+<table>
+<thead><tr>
+<th style="text-align: center;">STT</th>
+<th style="text-align: center;">MSSV</th>
+<th style="text-align: left;">Họ và Tên</th>
+<th style="text-align: center;">% Đóng góp (Tối đa 100%)</th>
+<th style="text-align: center;">Chữ ký</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><code>24120194</code></td>
+<td style="text-align: left;"><strong>Võ Minh Khoa</strong></td>
+<td style="text-align: center;"><span class="pill-hours" style="color: var(--accent-green);">100%</span></td>
+<td style="text-align: center;"><img src="./image/Khoa.jpg" alt="Chữ ký Võ Minh Khoa" class="signature-img" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><code>24120249</code></td>
+<td style="text-align: left;"><strong>Võ Nguyễn Việt Hoàng</strong></td>
+<td style="text-align: center;"><span class="pill-hours" style="color: var(--accent-green);">100%</span></td>
+<td style="text-align: center;"><img src="./image/Hoang.png" alt="Chữ ký Võ Nguyễn Việt Hoàng" class="signature-img" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><code>24120270</code></td>
+<td style="text-align: left;"><strong>Đỗ Chí Cao</strong></td>
+<td style="text-align: center;"><span class="pill-hours" style="color: var(--accent-green);">100%</span></td>
+<td style="text-align: center;"><img src="./image/Cao.png" alt="Chữ ký Đỗ Chí Cao" class="signature-img" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><code>24120290</code></td>
+<td style="text-align: left;"><strong>Lê Tấn Dũng</strong></td>
+<td style="text-align: center;"><span class="pill-hours" style="color: var(--accent-green);">100%</span></td>
+<td style="text-align: center;"><img src="./image/Dung.jpg" alt="Chữ ký Lê Tấn Dũng" class="signature-img" /></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<a id="mo-ta-bai-toan"></a>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section id="sec-2">
+        <h2 id="sec-2-title">2. MÔ TẢ BÀI TOÁN</h2>
+<p>Trong thời đại AI, sinh viên rất khó để tìm và xin được một công việc. Đặc biệt đối với ngành Công nghệ Thông tin khi AI lên ngôi, những bạn Intern hay Fresher trong mảng này thường phải cạnh tranh gay gắt và nhà tuyển dụng cũng đòi hỏi rất nhiều thứ ở ứng viên. Sau khi phân tích và làm rõ, nhóm em hiện thấy có 4 khó khăn mà các bạn sinh viên IT hay gặp phải:</p>
+<div class="difficulty-grid">
+
+  <div class="difficulty-card">
+    <div class="difficulty-title">⚠️ Không biết viết CV và CV chưa đạt chuẩn</div>
+    <div class="difficulty-desc">Đa số CV sinh viên viết theo mẫu tự do, thiếu số liệu định lượng về dự án và dễ bị hệ thống tự động lọc hồ sơ ATS (Applicant Tracking System) loại bỏ rớt khỏi vòng CV.</div>
+  </div>
+</div>
+<div class="difficulty-grid">
+
+  <div class="difficulty-card">
+    <div class="difficulty-title">⚠️ Tâm lý thiếu tự tin khi tham gia phỏng vấn</div>
+    <div class="difficulty-desc">Mặc dù nắm vững kiến thức lý thuyết, nhiều sinh viên vẫn thiếu kinh nghiệm thực tế và cơ hội luyện tập với các câu hỏi phỏng vấn chuyên sâu theo hình thức 1:1, dẫn đến khả năng phản xạ và trình bày câu trả lời còn hạn chế. Bên cạnh đó, tại một số doanh nghiệp, phỏng vấn được thực hiện bằng tiếng Anh, khiến sinh viên gặp khó khăn trong việc diễn đạt ý tưởng, trình bày kiến thức chuyên môn và thể hiện năng lực của bản thân một cách rõ ràng, thuyết phục.</div>
+  </div>
+</div>
+<div class="difficulty-grid">
+
+  <div class="difficulty-card">
+    <div class="difficulty-title">⚠️ Khó tiếp cận thông tin tuyển dụng sớm</div>
+    <div class="difficulty-desc">Nhiều sinh viên mong muốn được thực tập và làm việc tại các doanh nghiệp mục tiêu nhưng lại gặp khó khăn trong việc cập nhật thông tin tuyển dụng. Các cơ hội thực tập thường được đăng tải phân tán trên nhiều nền tảng như: LinkedIn, Facebook, ITViec,... khiến thông tin dễ bị trôi hoặc bị lẫn giữa các bài đăng khác. Điều này khiến sinh viên có thể bỏ lỡ những vị trí phù hợp, các đợt tuyển dụng quan trọng hoặc những chương trình thực tập mà bản thân đang quan tâm.</div>
+  </div>
+</div>
+<div class="difficulty-grid">
+
+  <div class="difficulty-card">
+    <div class="difficulty-title">⚠️ Mơ hồ về độ phù hợp và khoảng cách kỹ năng so với thị trường việc làm</div>
+    <div class="difficulty-desc">Khi các bạn sinh viên rải hàng trăm CV và bị từ chối sau các cuộc phỏng vấn có thể là một cú sốc và các bạn không biết nguyên nhân từ đâu mà mình thất bại. Trên hết là, các bạn không biết rõ mình đang thiếu hụt kiến thức gì cụ thể để chủ động tự học và bù đắp đúng trọng tâm từ đó cải thiện mình khi đi phỏng vấn.</div>
+  </div>
+</div>
+<p>Để giải quyết trực diện 4 khó khăn thực tế đã nêu trên, nhóm đề xuất giải pháp hệ thống <strong>HireUS Tools</strong> gồm 4 phân hệ cốt lõi:</p>
+<ol>
+<li><strong>Phân hệ 1 - Xây dựng CV chuẩn ATS & Trợ lý SeekerBot:</strong> Cung cấp công cụ tạo và chỉnh sửa CV trực tuyến với các mẫu thiết kế chuyên nghiệp, hỗ trợ tối ưu hóa bố cục và nội dung theo tiêu chuẩn ATS nhằm tăng khả năng vượt qua vòng sàng lọc hồ sơ. Tích hợp trợ lý AI SeekerBot để hướng dẫn người dùng xây dựng nội dung CV, cải thiện cách mô tả kỹ năng, kinh nghiệm và dự án, đồng thời đưa ra các đề xuất điều chỉnh phù hợp với vị trí ứng tuyển.</li>
+<li><strong>Phân hệ 2 - Mô phỏng phỏng vấn Kỹ thuật Giọng nói (Voice Mock Interview):</strong> Thiết lập phòng phỏng vấn 1:1 tương tác giọng nói hai chiều thời gian thực với AI Tech Lead (hỗ trợ cả tiếng Việt và tiếng Anh), hỏi đáp linh hoạt theo ngữ cảnh và cung cấp báo cáo đánh giá chi tiết.</li>
+<li><strong>Phân hệ 3 - Tổng hợp Việc làm & Đối sánh Năng lực (Job Matching & Skill Gap):</strong> Bóc tách yêu cầu công việc từ Job, đối chiếu với CV của bản thân để tính điểm tương thích (%), chỉ ra chính xác các kỹ năng còn thiếu và gợi ý định hướng tự học bổ sung.</li>
+<li><strong>Phân hệ 4 - Săn tin tuyển dụng từ mạng xã hội (Job Tracking System):</strong> Định kỳ theo dõi các Fanpage, trang LinkedIn của các doanh nghiệp IT, tự động dùng AI sàng lọc tin phong trào để kịp thời thông báo các đợt mở đơn thực tập Intern và Fresher.</li>
+</ol>
+<hr />
+<a id="tong-quan-yeu-cau"></a>
+      </section>
+
+      <!-- SECTION 3 -->
+      <section id="sec-3">
+<h2 id="sec-3-title">3. TỔNG QUAN YÊU CẦU</h2>
+<a id="stakeholder"></a>
+<h3 id="3-1-danh-sach-cac-stakeholder">3.1. Danh sách các stakeholder</h3>
+<h4 id="a-so-do-ngu-canh-cua-he-thong-context-diagram">a. Sơ đồ ngữ cảnh của hệ thống (Context Diagram)</h4>
+<div class="diagram-container"><img src="./images/HireUS_System_Context.png" alt="Sơ đồ ngữ cảnh toàn hệ thống HireUS Tools" class="diagram-img" /><div class="diagram-caption">Sơ đồ ngữ cảnh toàn hệ thống HireUS Tools</div></div>
+<h4 id="b-vai-tro-cua-cac-ben-trong-so-do">b. Vai trò của các bên trong sơ đồ</h4>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: center;">STT</th>
+<th style="text-align: left;">Đối tượng</th>
+<th style="text-align: left;">Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><strong>Sinh viên IT / người tìm việc Intern, Fresher</strong></td>
+<td style="text-align: left;">Cung cấp hồ sơ, JD và tương tác; nhận CV, kết quả đánh giá, gợi ý và tin tuyển dụng.</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><strong>Dịch vụ AI bên ngoài</strong></td>
+<td style="text-align: left;">Xử lý nội dung và âm thanh; trả gợi ý, kết quả phân tích và âm thanh phản hồi.</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><strong>GitHub</strong></td>
+<td style="text-align: left;">Cung cấp thông tin mô tả và README của kho mã nguồn công khai theo đường dẫn được yêu cầu.</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><strong>Nền tảng tuyển dụng và mạng xã hội</strong></td>
+<td style="text-align: left;">Cung cấp tin từ các nguồn đang theo dõi trong phạm vi truy cập được hỗ trợ, ví dụ TopCV, Facebook, LinkedIn.</td>
+</tr>
+</tbody></table></div>
+<a id="danh-sach-yeu-cau"></a>
+<h3 id="3-2-danh-sach-yeu-cau">3.2. Danh sách yêu cầu</h3>
+<p>Quy ước mã:</p>
+<ul><li><strong>FR (Functional Requirement):</strong> Yêu cầu chức năng.</li><li><strong>NFR (Non-functional Requirement):</strong> Yêu cầu phi chức năng.</li><li><strong>BR (Business Rule):</strong> Quy tắc nghiệp vụ.</li><li><strong>CV (CV Builder &amp; SeekerBot):</strong> Phân hệ xây dựng CV và hỗ trợ cải thiện nội dung.</li><li><strong>VMI (Voice Mock Interview):</strong> Phân hệ phỏng vấn thử bằng giọng nói.</li><li><strong>JM (Job Matching &amp; Skill Gap):</strong> Phân hệ đánh giá độ phù hợp CV với JD và xác định khoảng cách kỹ năng.</li><li><strong>JT (Job Tracking):</strong> Phân hệ theo dõi tin tuyển dụng.</li><li><strong>UC (Use Case):</strong> Trường hợp sử dụng.</li></ul>
+<a id="yeu-cau-chuc-nang"></a>
+<h4 id="3-2-1-dac-ta-yeu-cau-chuc-nang">3.2.1. Đặc tả yêu cầu chức năng</h4>
+<h5 id="a-cv-builder-seekerbot">a. CV Builder &amp; SeekerBot</h5>
+<h6 id="tao-chinh-sua-xem-truoc-va-luu-cv">Tạo, chỉnh sửa, xem trước và lưu CV</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-CV-01</td>
+<td style="text-align: left;">Cho phép tạo CV theo các mục và tự điền thông tin cơ bản.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-02</td>
+<td style="text-align: left;">Cho phép thêm, sửa từng mục và cập nhật bản xem trước trực tiếp.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-03</td>
+<td style="text-align: left;">Kiểm tra trường bắt buộc, định dạng và báo lỗi tại trường.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-04</td>
+<td style="text-align: left;">Cho phép lưu CV và mở lại để tiếp tục chỉnh sửa.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-05</td>
+<td style="text-align: left;">Cho phép chọn mẫu và xem trước mà không làm mất nội dung CV.</td>
+</tr>
+</tbody></table></div>
+<h6 id="seekerbot-va-cai-thien-noi-dung-cv">SeekerBot và cải thiện nội dung CV</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-CV-06</td>
+<td style="text-align: left;">Cho phép yêu cầu SeekerBot hướng dẫn viết từng mục CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-07</td>
+<td style="text-align: left;">Cho phép chọn đoạn mô tả dự án hoặc kinh nghiệm để nhận gợi ý viết lại theo cấu trúc STAR (tình huống, nhiệm vụ, hành động, kết quả).</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-08</td>
+<td style="text-align: left;">Nhập JD để nhận gợi ý diễn đạt hoặc nhấn mạnh nội dung CV liên quan.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-09</td>
+<td style="text-align: left;">Hiển thị gợi ý cạnh bản gốc để người dùng duyệt, sửa hoặc bỏ qua.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-10</td>
+<td style="text-align: left;">Khi AI không phản hồi, thông báo lỗi và giữ nguyên CV.</td>
+</tr>
+</tbody></table></div>
+<h6 id="ngan-hang-thanh-tuu-va-nhap-du-an-github">Ngân hàng thành tựu và nhập dự án GitHub</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-CV-13</td>
+<td style="text-align: left;">Cho phép tạo, xem, sửa và xóa thành tựu cá nhân đã lưu.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-14</td>
+<td style="text-align: left;">Cho phép sao chép thành tựu đã chọn vào CV để chỉnh sửa độc lập.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-15</td>
+<td style="text-align: left;">Cho phép nhập đường dẫn kho mã nguồn GitHub công khai và lấy dữ liệu truy cập được.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-16</td>
+<td style="text-align: left;">Cho phép xem, sửa dữ liệu GitHub và xác nhận đóng góp cá nhân trước khi thêm vào CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-17</td>
+<td style="text-align: left;">Báo lỗi khi đường dẫn không hợp lệ, kho mã nguồn riêng tư, không tồn tại hoặc không truy xuất được.</td>
+</tr>
+</tbody></table></div>
+<h6 id="xem-truoc-bo-cuc-trang-in">Xem trước bố cục trang in</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-CV-22</td>
+<td style="text-align: left;">Mở <strong>bản xem trước khi in</strong> để xem và kiểm tra bố cục trang in.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-23</td>
+<td style="text-align: left;">Hiển thị nội dung, mẫu và phân trang; cho phép quay lại trình chỉnh sửa.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-24</td>
+<td style="text-align: left;">Bản xem trước khi in dùng CV hiện có, không dùng AI kiểm lỗi hoặc yêu cầu bổ sung.</td>
+</tr>
+</tbody></table></div>
+<h6 id="tu-dien-thong-tin-co-ban-tu-profile-account">Tự điền thông tin cơ bản từ Profile/Account</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-CV-25</td>
+<td style="text-align: left;">Khi tạo CV, điền ô cơ bản còn trống từ hồ sơ cá nhân đúng tài khoản; cho phép kiểm tra và sửa.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-CV-26</td>
+<td style="text-align: left;">Khi mở CV đã lưu, chỉ điền ô cơ bản còn trống từ hồ sơ cá nhân, không ghi đè nội dung đã có.</td>
+</tr>
+</tbody></table></div>
+<h6 id="cac-quy-tac-nghiep-vu-ap-dung">Các quy tắc nghiệp vụ áp dụng</h6>
+<div class="rule-card" id="br-cv-01"><div class="rule-header"><span class="badge-br">BR-CV-01</span><span class="rule-title">Quyền sở hữu CV và thành tựu</span></div><div class="rule-content"><p>Người dùng chỉ được xem, sửa, xóa CV và thành tựu thuộc quyền truy cập của mình.</p>
+</div></div>
+<div class="rule-card" id="br-cv-02"><div class="rule-header"><span class="badge-br">BR-CV-02</span><span class="rule-title">AI chỉ đưa ra gợi ý</span></div><div class="rule-content"><p>Mọi gợi ý SeekerBot/STAR/JD cần được duyệt trước khi áp dụng; không tạo dự án, vai trò, số liệu, chứng chỉ hoặc kinh nghiệm thiếu căn cứ.</p>
+</div></div>
+<div class="rule-card" id="br-cv-03"><div class="rule-header"><span class="badge-br">BR-CV-03</span><span class="rule-title">Phạm vi điều chỉnh theo JD</span></div><div class="rule-content"><p>Điều chỉnh theo JD chỉ dùng <strong>thông tin CV đã có</strong> để cải thiện cách diễn đạt; không chấm điểm hoặc phân tích Skill Gap.</p>
+</div></div>
+<div class="rule-card" id="br-cv-04"><div class="rule-header"><span class="badge-br">BR-CV-04</span><span class="rule-title">Dữ liệu CV dùng chung</span></div><div class="rule-content"><p>Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp và bản xem trước khi in dùng chung dữ liệu. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu.</p>
+</div></div>
+<div class="rule-card" id="br-cv-05"><div class="rule-header"><span class="badge-br">BR-CV-05</span><span class="rule-title">Tái sử dụng thành tựu</span></div><div class="rule-content"><p>Thành tựu được sao chép tại thời điểm chọn; sửa thư viện không cập nhật CV đã có.</p>
+</div></div>
+<div class="rule-card" id="br-cv-06"><div class="rule-header"><span class="badge-br">BR-CV-06</span><span class="rule-title">Nhập nội dung GitHub</span></div><div class="rule-content"><p>Chỉ lấy kho mã nguồn công khai; thông tin mô tả và tệp README không chứng minh đóng góp cá nhân. Người dùng kiểm tra, sửa và xác nhận trước khi thêm vào CV.</p>
+</div></div>
+<div class="rule-card" id="br-cv-08"><div class="rule-header"><span class="badge-br">BR-CV-08</span><span class="rule-title">Phạm vi xem trước khi in</span></div><div class="rule-content"><p>SCRUM-49 chỉ xem trước trang in theo nội dung và mẫu hiện tại, không kiểm lỗi bằng AI. In/xuất PDF thuộc SCRUM-16, chờ xác nhận phạm vi.</p>
+</div></div>
+<div class="rule-card" id="br-cv-09"><div class="rule-header"><span class="badge-br">BR-CV-09</span><span class="rule-title">Dữ liệu hồ sơ cá nhân và CV</span></div><div class="rule-content"><p>Chỉ tự điền ô cơ bản còn trống khi tạo/mở CV từ <strong>hồ sơ cá nhân tài khoản đang đăng nhập</strong>; người dùng được sửa. Thay đổi hồ sơ cá nhân không ghi đè CV đã lưu. Ánh xạ trường chờ đối chiếu cấu trúc dữ liệu hồ sơ cá nhân.</p>
+</div></div>
+<h5 id="b-voice-mock-interview">b. Voice Mock Interview</h5>
+<h6 id="thiet-lap-buoi-phong-van">Thiết lập buổi phỏng vấn</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-VMI-01</td>
+<td style="text-align: left;">Cho phép chọn chuyên môn (Frontend, Backend, Fullstack, Mobile, AI/Data) và cấp độ Intern/Fresher.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-02</td>
+<td style="text-align: left;">Cho phép chọn ngôn ngữ phỏng vấn tiếng Việt hoặc tiếng Anh.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-03</td>
+<td style="text-align: left;">Lấy danh sách CV từ các phân hệ CV Builder &amp; SeekerBot và Profile/Account và cho phép chọn một CV làm ngữ cảnh phỏng vấn.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-04</td>
+<td style="text-align: left;">Cho phép phỏng vấn theo vị trí mà không cần CV khi tài khoản chưa có hồ sơ.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-05</td>
+<td style="text-align: left;">Gửi vị trí, cấp độ, ngôn ngữ và tóm tắt CV đến AI để khởi tạo ngữ cảnh phiên và khung câu hỏi.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-06</td>
+<td style="text-align: left;">Kiểm tra tính hợp lệ của thiết lập trước khi chuyển sang kiểm tra thiết bị.</td>
+</tr>
+</tbody></table></div>
+<h6 id="kiem-tra-microphone-va-am-thanh">Kiểm tra microphone và âm thanh</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-VMI-07</td>
+<td style="text-align: left;">Yêu cầu quyền truy cập microphone từ trình duyệt và kiểm tra thiết bị thu âm trước khi phỏng vấn.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-08</td>
+<td style="text-align: left;">Hiển thị cường độ âm thanh đầu vào theo thời gian thực để kiểm tra microphone.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-09</td>
+<td style="text-align: left;">Báo lỗi và hướng dẫn cấp lại quyền hoặc đổi thiết bị khi microphone không khả dụng.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-10</td>
+<td style="text-align: left;">Cho phép bắt đầu khi kiểm tra thiết bị đạt yêu cầu hoặc người dùng xác nhận sẵn sàng, đồng thời phải có quyền microphone.</td>
+</tr>
+</tbody></table></div>
+<h6 id="tham-gia-phong-van-bang-giong-noi">Tham gia phỏng vấn bằng giọng nói</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-VMI-11</td>
+<td style="text-align: left;">Chuyển câu hỏi thành giọng nói (TTS) và phát theo ngôn ngữ đã chọn.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-12</td>
+<td style="text-align: left;">Thu câu trả lời qua microphone và gửi AI chuyển thành văn bản (STT).</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-13</td>
+<td style="text-align: left;">Hiển thị văn bản nhận diện để người dùng theo dõi, xác nhận gửi hoặc nói lại.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-14</td>
+<td style="text-align: left;">Gửi AI phân tích câu trả lời theo ngữ cảnh CV và vị trí ứng tuyển.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-15</td>
+<td style="text-align: left;">Sinh câu hỏi tiếp theo theo diễn tiến phiên, gồm câu hỏi đào sâu kỹ thuật dựa trên câu trả lời trước.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-16</td>
+<td style="text-align: left;">Cho phép kết thúc bất kỳ lúc nào; tự chuyển sang đánh giá khi đủ số câu hỏi quy định.</td>
+</tr>
+</tbody></table></div>
+<h6 id="tong-hop-danh-gia-buoi-phong-van">Tổng hợp, đánh giá buổi phỏng vấn</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-VMI-17</td>
+<td style="text-align: left;">Tổng hợp bản ghi hội thoại gồm toàn bộ câu hỏi và câu trả lời khi phiên kết thúc.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-18</td>
+<td style="text-align: left;">Gửi bản ghi hội thoại và cấu hình phiên đến AI để đánh giá kỹ thuật, tư duy giải quyết vấn đề và diễn đạt.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-19</td>
+<td style="text-align: left;">Chỉ rõ điểm mạnh, lỗ hổng kiến thức, hướng trả lời tốt hơn và chủ đề cần ôn tập.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-20</td>
+<td style="text-align: left;">Hiển thị báo cáo đầy đủ, nêu rõ kết quả phục vụ rèn luyện và không phải xác suất trúng tuyển.</td>
+</tr>
+</tbody></table></div>
+<h6 id="xem-lich-su-phong-van">Xem lịch sử phỏng vấn</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-VMI-21</td>
+<td style="text-align: left;">Lưu thời điểm, vị trí, cấp độ, ngôn ngữ, CV đã dùng, bản ghi hội thoại, điểm và toàn văn báo cáo từng phiên.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-22</td>
+<td style="text-align: left;">Liệt kê phiên mới nhất trước; cho xem lại bản ghi hội thoại và báo cáo từng phiên.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-23</td>
+<td style="text-align: left;">Giữ nguyên lịch sử và kết quả khi CV gốc thay đổi.</td>
+</tr>
+</tbody></table></div>
+<h6 id="xu-ly-su-co-va-gian-doan">Xử lý sự cố và gián đoạn</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-VMI-27</td>
+<td style="text-align: left;">Khi mất kết nối hoặc AI lỗi, thông báo và lưu hỏi đáp đã hoàn tất; không tự hủy phiên hoặc trả điểm 0%.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-VMI-28</td>
+<td style="text-align: left;">Khi tạo báo cáo bị gián đoạn, giữ bản ghi hội thoại và cho tạo lại báo cáo mà không cần phỏng vấn lại.</td>
+</tr>
+</tbody></table></div>
+<h6 id="cac-quy-tac-nghiep-vu-ap-dung-2">Các quy tắc nghiệp vụ áp dụng</h6>
+<div class="rule-card" id="br-vmi-01"><div class="rule-header"><span class="badge-br">BR-VMI-01</span><span class="rule-title">Cá nhân hóa câu hỏi theo ngữ cảnh và cấp độ</span></div><div class="rule-content"><ul><li><strong>Có CV:</strong> Ít nhất 40% câu hỏi chuyên môn dựa trực tiếp trên dự án, công nghệ và kinh nghiệm trong CV.</li><li><strong>Cấp độ Intern:</strong> Tập trung kiến thức nền tảng (OOP, cấu trúc dữ liệu, cú pháp ngôn ngữ, luồng hoạt động cơ bản của framework).</li><li><strong>Cấp độ Fresher:</strong> Mở rộng sang tư duy thiết kế kiến trúc, gỡ lỗi, kiểm thử, cơ sở dữ liệu, tối ưu hiệu năng và quy trình nhóm (Git, Agile/Scrum).</li></ul>
+</div></div>
+<div class="rule-card" id="br-vmi-02"><div class="rule-header"><span class="badge-br">BR-VMI-02</span><span class="rule-title">Điều kiện kiểm tra thiết bị âm thanh</span></div><div class="rule-content"><p>Bắt buộc có quyền microphone. Nếu mức âm bằng 0 suốt bài thử, cảnh báo và yêu cầu kiểm tra lại thiết bị.</p>
+</div></div>
+<div class="rule-card" id="br-vmi-03"><div class="rule-header"><span class="badge-br">BR-VMI-03</span><span class="rule-title">Cấu trúc và thời lượng phiên phỏng vấn</span></div><div class="rule-content"><p>Một phiên chuẩn gồm 5–8 câu hỏi theo 3 giai đoạn:</p>
+<ol><li><strong>Mở đầu (1 câu):</strong> Giới thiệu bản thân hoặc định hướng nghề nghiệp.</li><li><strong>Chuyên môn &amp; tình huống (3–6 câu):</strong> Câu hỏi kỹ thuật cốt lõi và đào sâu theo CV.</li><li><strong>Kết thúc (1 câu):</strong> Tổng kết hoặc cơ hội ứng viên đặt câu hỏi.</li></ol>
+<p>Tối đa <strong>3 phút/câu</strong>; hết giờ, thông báo và đề nghị gửi câu trả lời để chuyển câu.</p>
+</div></div>
+<div class="rule-card" id="br-vmi-04"><div class="rule-header"><span class="badge-br">BR-VMI-04</span><span class="rule-title">Tiêu chí và công thức tính điểm đánh giá</span></div><div class="rule-content"><p>Tổng điểm theo thang 100, dựa trên 3 tiêu chí:</p>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Tiêu chí</th>
+<th style="text-align: center;">Trọng số</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">Kiến thức kỹ thuật (Technical Knowledge)</td>
+<td style="text-align: center;">50%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Tư duy giải quyết vấn đề (Problem Solving)</td>
+<td style="text-align: center;">30%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Kỹ năng diễn đạt &amp; Phản xạ (Communication &amp; Fluency)</td>
+<td style="text-align: center;">20%</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-text">Điểm phỏng vấn = (Điểm kỹ thuật × 0.5) + (Điểm tư duy × 0.3) + (Điểm diễn đạt × 0.2)</code></pre>
+<p>Mỗi tiêu chí được chấm trên thang 100 dựa trên toàn bộ câu trả lời trong bản ghi hội thoại.</p>
+</div></div>
+<div class="rule-card" id="br-vmi-05"><div class="rule-header"><span class="badge-br">BR-VMI-05</span><span class="rule-title">Phân loại kết quả và định hướng ôn tập</span></div><div class="rule-content"><div class="table-container"><table><thead><tr>
+<th style="text-align: center;">Mức</th>
+<th style="text-align: center;">Điểm tổng hợp</th>
+<th style="text-align: left;">Khuyến nghị</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: center;"><strong>Đỏ</strong></td>
+<td style="text-align: center;">Dưới 50</td>
+<td style="text-align: left;">Ôn tập lại khái niệm kỹ thuật cốt lõi và luyện bộ câu hỏi cơ bản trước khi phỏng vấn thực tế.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Vàng</strong></td>
+<td style="text-align: center;">50 đến dưới 75</td>
+<td style="text-align: left;">Rà soát chi tiết dự án trong CV và rèn luyện kỹ năng tóm tắt câu trả lời súc tích hơn.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Xanh</strong></td>
+<td style="text-align: center;">Từ 75 trở lên</td>
+<td style="text-align: left;">Thể hiện kiến thức vững và phản xạ giao tiếp tốt; sẵn sàng tham gia phỏng vấn kỹ thuật tại doanh nghiệp.</td>
+</tr>
+</tbody></table></div>
+<p>Điểm phản ánh phần thể hiện trong phiên phỏng vấn cụ thể, không bảo đảm kết quả tuyển dụng thực tế.</p>
+</div></div>
+<h5 id="c-job-matching-skill-gap">c. Job Matching &amp; Skill Gap</h5>
+<h6 id="tiep-nhan-du-lieu-va-xac-dinh-huong-chuyen-mon">Tiếp nhận dữ liệu và xác định hướng chuyên môn</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JM-01</td>
+<td style="text-align: left;">Cho phép chọn một CV hiện có trong tài khoản để phân tích.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-02</td>
+<td style="text-align: left;">Cho phép nhập JD cần đối chiếu.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-03</td>
+<td style="text-align: left;">Kiểm tra đầu vào và thông báo nội dung cần bổ sung khi thiếu CV, JD hoặc chưa đủ dữ liệu phân tích.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-04</td>
+<td style="text-align: left;">Đề xuất hướng chuyên môn của CV và JD từ tên vị trí và nội dung; cho phép xác nhận hoặc sửa.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-05</td>
+<td style="text-align: left;">Cho phép phân tích khi chuyên môn cùng hướng hoặc giao nhau; nếu khác hoàn toàn, giải thích và yêu cầu chọn lại CV hoặc JD.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-06</td>
+<td style="text-align: left;">Khi chuyên môn giao nhau, đánh giá toàn bộ yêu cầu JD và chỉ rõ phần liên quan, phần yêu cầu mở rộng.</td>
+</tr>
+</tbody></table></div>
+<h6 id="boc-tach-va-xac-nhan-thong-tin">Bóc tách và xác nhận thông tin</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JM-07</td>
+<td style="text-align: left;">Bóc tách yêu cầu JD về chuyên môn, kỹ năng mềm, kinh nghiệm, dự án, ngoại ngữ, học vấn và điều kiện liên quan.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-08</td>
+<td style="text-align: left;">Phân loại yêu cầu thành bắt buộc, ưu tiên hoặc không nêu rõ theo JD.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-09</td>
+<td style="text-align: left;">Nhận diện bằng chứng trong CV cho từng yêu cầu và lưu đoạn nguồn tương ứng.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-10</td>
+<td style="text-align: left;">Chuẩn hóa cách viết đồng nghĩa; nhận diện quan hệ logic “và”, “hoặc”.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-11</td>
+<td style="text-align: left;">Hiển thị dữ liệu bóc tách và đoạn nguồn để người dùng kiểm tra, xác nhận trước khi đánh giá.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-12</td>
+<td style="text-align: left;">Cho phép sửa lỗi bóc tách theo CV và JD gốc; thông tin mới ngoài CV không làm tăng điểm hiện tại.</td>
+</tr>
+</tbody></table></div>
+<h6 id="danh-gia-muc-do-phu-hop">Đánh giá mức độ phù hợp</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JM-13</td>
+<td style="text-align: left;">Đối chiếu từng yêu cầu JD với bằng chứng CV để xác định mức đáp ứng.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-14</td>
+<td style="text-align: left;">Đánh giá năng lực thực hành qua công việc và đóng góp cá nhân trong dự án hoặc kinh nghiệm; chỉ liệt kê kỹ năng, tên dự án hoặc chức danh chưa đủ chứng minh đáp ứng đầy đủ.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-15</td>
+<td style="text-align: left;">Tính điểm phần trăm theo trọng số và mức đáp ứng; áp dụng giới hạn nếu yêu cầu bắt buộc chưa được đáp ứng đầy đủ.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-16</td>
+<td style="text-align: left;">Phân loại đỏ, vàng, xanh theo điểm cuối.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-17</td>
+<td style="text-align: left;">Hiển thị bảng đối chiếu, mức đáp ứng, bằng chứng từng yêu cầu; giải thích điểm và giới hạn điểm nếu có.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-18</td>
+<td style="text-align: left;">Khuyến nghị ứng tuyển theo mức phân loại; nêu rõ điểm không phải xác suất được tuyển.</td>
+</tr>
+</tbody></table></div>
+<h6 id="xac-dinh-khoang-trong-va-huong-cai-thien">Xác định khoảng trống và hướng cải thiện</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JM-19</td>
+<td style="text-align: left;">Liệt kê yêu cầu chưa có đủ bằng chứng trong CV, ưu tiên yêu cầu bắt buộc.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-20</td>
+<td style="text-align: left;">Tham chiếu hồ sơ cá nhân để tìm năng lực CV chưa thể hiện rõ; cho phép người dùng xác nhận hoặc bổ sung tình trạng năng lực.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-21</td>
+<td style="text-align: left;">Dựa trên hồ sơ cá nhân và xác nhận của người dùng để phân biệt cần bổ sung CV hay học, thực hành thêm; ghi “Chưa xác định” nếu thiếu thông tin.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-22</td>
+<td style="text-align: left;">Với năng lực đã có, chỉ rõ nội dung CV cần bổ sung và ví dụ trình bày từ thông tin đã xác nhận.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-23</td>
+<td style="text-align: left;">Với năng lực còn thiếu, đề xuất nội dung học và thực hành theo JD.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-24</td>
+<td style="text-align: left;">Cung cấp tài liệu liên quan kèm nguồn và đường dẫn đã kiểm chứng.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-25</td>
+<td style="text-align: left;">Không tự sửa CV hoặc tạo kỹ năng, kinh nghiệm, chứng chỉ, thành tích thiếu căn cứ; thông tin ngoài CV chỉ phục vụ gợi ý, không đổi điểm hiện tại.</td>
+</tr>
+</tbody></table></div>
+<h6 id="luu-lich-su-phan-tich">Lưu lịch sử phân tích</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JM-26</td>
+<td style="text-align: left;">Lưu CV và JD tại thời điểm phân tích, dữ liệu bóc tách đã xác nhận, bảng đối chiếu, điểm ban đầu, điểm cuối, mức phân loại và gợi ý đã tạo.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-27</td>
+<td style="text-align: left;">Cho phép xem danh sách và chi tiết các lần phân tích của mình.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-29</td>
+<td style="text-align: left;">Giữ nguyên dữ liệu và kết quả lịch sử khi CV gốc thay đổi.</td>
+</tr>
+</tbody></table></div>
+<h6 id="xu-ly-truong-hop-khong-the-hoan-thanh-phan-tich">Xử lý trường hợp không thể hoàn thành phân tích</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JM-30</td>
+<td style="text-align: left;">Khi thiếu dữ liệu hoặc phân tích thất bại, nêu lý do chưa thể đánh giá và cho phép bổ sung dữ liệu hoặc thử lại; không trả điểm 0%.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JM-31</td>
+<td style="text-align: left;">Nếu tạo gợi ý hoặc lấy tài liệu thất bại, giữ và hiển thị kết quả đối chiếu; cho phép thử lại phần lỗi.</td>
+</tr>
+</tbody></table></div>
+<h6 id="cac-quy-tac-nghiep-vu-ap-dung-3">Các quy tắc nghiệp vụ áp dụng</h6>
+<div class="rule-card" id="br-jm-01"><div class="rule-header"><span class="badge-br">BR-JM-01</span><span class="rule-title">Xác định hướng chuyên môn</span></div><div class="rule-content"><p>Xét chuyên môn từ tên vị trí và nội dung bóc tách, không yêu cầu tên vị trí trùng nhau. Ví dụ: React Developer/Angular Intern cùng hướng Frontend; Frontend/Fullstack giao nhau nhưng vẫn xét yêu cầu Backend; Frontend/Backend khác hướng nếu không có nội dung giao nhau.</p>
+</div></div>
+<div class="rule-card" id="br-jm-02"><div class="rule-header"><span class="badge-br">BR-JM-02</span><span class="rule-title">Diễn giải yêu cầu kết hợp</span></div><div class="rule-content"><ul><li><strong>“Và”:</strong> Đánh giá từng điều kiện; chỉ đạt đầy đủ khi đạt tất cả.</li><li><strong>“Hoặc”:</strong> Đạt đầy đủ một lựa chọn là đủ; không trừ điểm vì thiếu lựa chọn còn lại.</li></ul>
+</div></div>
+<div class="rule-card" id="br-jm-03"><div class="rule-header"><span class="badge-br">BR-JM-03</span><span class="rule-title">Trọng số yêu cầu</span></div><div class="rule-content"><div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Loại yêu cầu</th>
+<th style="text-align: right;">Trọng số</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">Bắt buộc</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ưu tiên</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Không nêu rõ</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody></table></div>
+<p>Yêu cầu không nêu rõ mức độ không được tự xem là bắt buộc để áp dụng giới hạn điểm.</p>
+</div></div>
+<div class="rule-card" id="br-jm-04"><div class="rule-header"><span class="badge-br">BR-JM-04</span><span class="rule-title">Mức đáp ứng</span></div><div class="rule-content"><div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mức đáp ứng</th>
+<th style="text-align: left;">Căn cứ đánh giá</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;"><strong>0%</strong></td>
+<td style="text-align: left;">Chưa có bằng chứng liên quan trong CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>25%</strong></td>
+<td style="text-align: left;">Có nhắc đến nhưng chưa chứng minh đáp ứng yêu cầu.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>50%</strong></td>
+<td style="text-align: left;">Có bằng chứng cụ thể nhưng chỉ đáp ứng một phần yêu cầu.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>100%</strong></td>
+<td style="text-align: left;">Có bằng chứng cụ thể đáp ứng đầy đủ yêu cầu.</td>
+</tr>
+</tbody></table></div>
+<p>Bằng chứng phải phù hợp yêu cầu; độ dài mô tả hoặc tên dự án không quyết định điểm. Học vấn, ngoại ngữ và điều kiện khác dùng thông tin tương ứng trong CV; năng lực thực hành ưu tiên mô tả việc đã làm và đóng góp cá nhân.</p>
+</div></div>
+<div class="rule-card" id="br-jm-05"><div class="rule-header"><span class="badge-br">BR-JM-05</span><span class="rule-title">Công thức điểm và giới hạn</span></div><div class="rule-content"><pre><code class="language-text">Điểm ban đầu =
+Σ(trọng số yêu cầu × mức đáp ứng)
+÷ Σ(trọng số yêu cầu)
+× 100</code></pre>
+<p>Mức đáp ứng trong công thức sử dụng các giá trị <code>0</code>, <code>0.25</code>, <code>0.5</code> và <code>1</code>.</p>
+<p>Nếu có bất kỳ yêu cầu bắt buộc nào chưa đáp ứng đầy đủ:</p>
+<pre><code class="language-text">Điểm cuối = min(Điểm ban đầu, 79%)</code></pre>
+<p>Nếu tất cả yêu cầu bắt buộc được đáp ứng đầy đủ, điểm cuối bằng điểm ban đầu.</p>
+</div></div>
+<div class="rule-card" id="br-jm-06"><div class="rule-header"><span class="badge-br">BR-JM-06</span><span class="rule-title">Phân loại và khuyến nghị</span></div><div class="rule-content"><div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mức</th>
+<th style="text-align: left;">Điểm cuối</th>
+<th style="text-align: left;">Khuyến nghị</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;"><strong>Đỏ</strong></td>
+<td style="text-align: left;">Dưới 50%</td>
+<td style="text-align: left;">Ưu tiên cải thiện trước khi ứng tuyển.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Vàng</strong></td>
+<td style="text-align: left;">Từ 50% đến dưới 80%</td>
+<td style="text-align: left;">Khuyến khích cân nhắc ứng tuyển, đồng thời cải thiện những điểm còn thiếu.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Xanh</strong></td>
+<td style="text-align: left;">Từ 80% trở lên</td>
+<td style="text-align: left;">CV thể hiện mức đáp ứng tốt đối với các yêu cầu được đánh giá.</td>
+</tr>
+</tbody></table></div>
+<p>Điểm chỉ phản ánh <strong>bằng chứng trong CV tại thời điểm phân tích</strong>, không đại diện toàn bộ năng lực. Trọng số và ngưỡng là quy tắc dự kiến, cần kiểm tra trên bộ CV và JD mẫu.</p>
+</div></div>
+<h5 id="d-job-tracking">d. Job Tracking</h5>
+<h6 id="quan-ly-nguon-tuyen-dung-can-theo-doi">Quản lý nguồn tuyển dụng cần theo dõi</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JT-01</td>
+<td style="text-align: left;">Hệ thống hiển thị danh sách các nhà đăng tin tuyển dụng.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-02</td>
+<td style="text-align: left;">Hệ thống cho phép thêm hoặc xóa nguồn theo dõi bằng đường dẫn Fanpage/LinkedIn được hỗ trợ.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-03</td>
+<td style="text-align: left;">Hệ thống cho phép tạm dừng và tiếp tục theo dõi nhà tuyển dụng cụ thể.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-04</td>
+<td style="text-align: left;">Hệ thống kiểm tra nguồn, cập nhật trạng thái: Truy cập được, Không truy cập được.</td>
+</tr>
+</tbody></table></div>
+<h6 id="nhan-va-quan-ly-tin-tu-nguon-dang-theo-doi">Nhận và quản lý tin từ nguồn đang theo dõi</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JT-05</td>
+<td style="text-align: left;">Hệ thống nhận tin tuyển dụng từ nguồn đang được bật theo dõi theo chu kỳ.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-06</td>
+<td style="text-align: left;">Hệ thống lưu bài đã nhận cùng nội dung, nhà đăng tin, liên kết gốc, thời gian đăng tin.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-07</td>
+<td style="text-align: left;">Hệ thống cho phép lưu, bỏ lưu hoặc xóa tin trong danh sách cá nhân; xác nhận trước khi xóa.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-08</td>
+<td style="text-align: left;">Hệ thống lưu hạn ứng tuyển khi xác định được và cập nhật trạng thái thời hạn: Còn hạn, Hết hạn hoặc Chưa xác định.</td>
+</tr>
+</tbody></table></div>
+<h6 id="sang-loc-va-ca-nhan-hoa-ket-qua">Sàng lọc và cá nhân hóa kết quả</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JT-09</td>
+<td style="text-align: left;">Hệ thống dùng AI sàng lọc tin IT Intern/Fresher và lưu kết quả cùng vị trí, địa điểm, yêu cầu, hạn nộp, cách ứng tuyển khi có.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-10</td>
+<td style="text-align: left;">Hệ thống hiển thị danh sách tin đã sàng lọc.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-11</td>
+<td style="text-align: left;">Hệ thống trả tin theo nguồn theo dõi và thông tin quan tâm của đúng tài khoản.</td>
+</tr>
+</tbody></table></div>
+<h6 id="thong-bao-co-hoi-tuyen-dung">Thông báo cơ hội tuyển dụng</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JT-12</td>
+<td style="text-align: left;">Sau lượt kiểm tra định kỳ, hệ thống tạo thông báo khi có tin mới đã sàng lọc phù hợp và chưa được xác định hết hạn.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-13</td>
+<td style="text-align: left;">Thông báo gồm tiêu đề, nhà tuyển dụng, vị trí, thời điểm và liên kết đến đúng tin chi tiết.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-14</td>
+<td style="text-align: left;">Hệ thống kiểm tra thời hạn tin, cập nhật hạn tin tuyển dụng.</td>
+</tr>
+</tbody></table></div>
+<h6 id="chi-tiet-tin-va-bai-dang-goc">Chi tiết tin và bài đăng gốc</h6>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Yêu cầu chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">FR-JT-15</td>
+<td style="text-align: left;">Hệ thống hiển thị nội dung đã lưu và các thông tin tuyển dụng được trích xuất.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-16</td>
+<td style="text-align: left;">Hệ thống gợi ý người dùng sử dụng AI trích xuất thông tin.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-17</td>
+<td style="text-align: left;">Hệ thống lưu đường dẫn của bài đăng gốc nếu người dùng muốn trực tiếp xem.</td>
+</tr>
+<tr>
+<td style="text-align: left;">FR-JT-18</td>
+<td style="text-align: left;">Nếu bài gốc đã xóa, cập nhật lên hệ thống: Tin không còn tồn tại.</td>
+</tr>
+</tbody></table></div>
+<h6 id="cac-quy-tac-nghiep-vu-ap-dung-4">Các quy tắc nghiệp vụ áp dụng</h6>
+<div class="rule-card" id="br-jt-01"><div class="rule-header"><span class="badge-br">BR-JT-01</span><span class="rule-title">Dữ liệu cá nhân</span></div><div class="rule-content"><p>Nguồn theo dõi, tin cá nhân và thông báo thuộc đúng tài khoản; Backend kiểm tra quyền truy cập. Xóa nguồn là bỏ quan hệ theo dõi, không xóa tài khoản doanh nghiệp. Lưu bài thu thập khác với đánh dấu tin quan tâm; bỏ lưu khác với xóa khỏi danh sách. Xóa chỉ tác động đến người thực hiện, không xóa bài gốc hoặc dữ liệu của người khác.</p>
+</div></div>
+<div class="rule-card" id="br-jt-02"><div class="rule-header"><span class="badge-br">BR-JT-02</span><span class="rule-title">Nguồn và chu kỳ theo dõi</span></div><div class="rule-content"><p>Nguồn là Fanpage/LinkedIn doanh nghiệp trong phạm vi truy cập hỗ trợ. Trạng thái theo dõi độc lập với khả năng truy cập; không truy cập được không chứng minh doanh nghiệp đã ngừng tuyển. Hệ thống kiểm tra theo chu kỳ cấu hình, chỉ phân phối tin mới cho người đang bật theo dõi. Tạm dừng giữ dữ liệu cũ; tiếp tục có hiệu lực từ lượt kiểm tra kế tiếp.</p>
+</div></div>
+<div class="rule-card" id="br-jt-03"><div class="rule-header"><span class="badge-br">BR-JT-03</span><span class="rule-title">Sàng lọc và cá nhân hóa</span></div><div class="rule-content"><p>AI dựa vào nội dung để chọn tin tuyển IT Intern/Fresher, kể cả bài tuyển nhiều cấp độ; không chỉ dựa vào từ khóa. Bài chưa rõ chưa được coi là phù hợp; không tự tạo thông tin thiếu. Kết quả dựa vào nguồn theo dõi và thông tin quan tâm; thiếu thông tin quan tâm thì dùng danh sách Intern/Fresher từ nguồn theo dõi. Job Tracking không tính điểm CV–JD hoặc Skill Gap.</p>
+</div></div>
+<div class="rule-card" id="br-jt-04"><div class="rule-header"><span class="badge-br">BR-JT-04</span><span class="rule-title">Thời hạn tin và thông báo</span></div><div class="rule-content"><p>Hạn rõ ràng hoặc thông báo đóng tuyển là căn cứ xác định hết hạn; hạn chỉ ghi ngày được hiểu đến cuối ngày theo múi giờ ứng dụng. Thiếu căn cứ thì ghi Chưa xác định, không mặc định còn hạn. Tin và thông báo dùng cùng trạng thái; tin hết hạn không tạo thông báo cơ hội mới, thông báo cũ vẫn được giữ và ghi Hết hạn.</p>
+</div></div>
+<div class="rule-card" id="br-jt-05"><div class="rule-header"><span class="badge-br">BR-JT-05</span><span class="rule-title">Chi tiết và bài gốc</span></div><div class="rule-content"><p>Thông tin trích xuất phải có căn cứ từ bài nguồn; dữ liệu lưu phản ánh thời điểm thu thập, không bảo đảm mới nhất. Mở bài gốc là điều hướng ra nền tảng ngoài, không nộp hồ sơ thay người dùng. Chỉ ghi Tin không còn tồn tại khi xác định bài đã bị xóa; lỗi truy cập hoặc yêu cầu đăng nhập không đồng nghĩa bài đã bị xóa. Bản đã lưu vẫn xem được nếu còn dữ liệu và quyền truy cập.</p>
+</div></div>
+<a id="yeu-cau-phi-chuc-nang"></a>
+<h4 id="3-2-2-dac-ta-yeu-cau-phi-chuc-nang">3.2.2. Đặc tả yêu cầu phi chức năng</h4>
+<h5 id="a-cv-builder-seekerbot-2">a. CV Builder &amp; SeekerBot</h5>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Nhóm</th>
+<th style="text-align: left;">Yêu cầu phi chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;"><a id="nfr-cv-01"></a>NFR-CV-01</td>
+<td style="text-align: left;">Dễ sử dụng</td>
+<td style="text-align: left;">Chỉ rõ mục đang chỉnh sửa, hiển thị bản xem trước dễ đọc và hướng dẫn sửa lỗi.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-cv-02"></a>NFR-CV-02</td>
+<td style="text-align: left;">Bảo mật</td>
+<td style="text-align: left;">Chỉ người có quyền được truy cập CV và thành tựu; khóa AI, GitHub được giữ ở máy chủ.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-cv-03"></a>NFR-CV-03</td>
+<td style="text-align: left;">Tin cậy</td>
+<td style="text-align: left;">Lỗi AI hoặc GitHub không làm mất CV, gián đoạn lưu và chỉnh sửa; gợi ý chỉ được áp dụng sau khi duyệt.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-cv-05"></a>NFR-CV-05</td>
+<td style="text-align: left;">Khả năng đọc</td>
+<td style="text-align: left;">Trang in không cắt hoặc chồng lấn nội dung quan trọng trong các mẫu được hỗ trợ.</td>
+</tr>
+</tbody></table></div>
+<h5 id="b-voice-mock-interview-2">b. Voice Mock Interview</h5>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Nhóm</th>
+<th style="text-align: left;">Yêu cầu phi chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;"><a id="nfr-vmi-01"></a>NFR-VMI-01</td>
+<td style="text-align: left;">Hiệu năng</td>
+<td style="text-align: left;">Khi mạng ổn định, thời gian từ khi trả lời xong đến khi phát câu hỏi tiếp theo không quá 5 giây.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-vmi-02"></a>NFR-VMI-02</td>
+<td style="text-align: left;">Dễ sử dụng</td>
+<td style="text-align: left;">Sóng âm thể hiện rõ trạng thái nghe, nói; câu hỏi, bản nhận diện giọng nói và báo cáo hỗ trợ tiếng Việt, tiếng Anh.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-vmi-03"></a>NFR-VMI-03</td>
+<td style="text-align: left;">Bảo mật</td>
+<td style="text-align: left;">Chỉ tài khoản sở hữu được truy cập âm thanh, bản ghi hội thoại và báo cáo; khóa AI được bảo vệ ở máy chủ.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-vmi-04"></a>NFR-VMI-04</td>
+<td style="text-align: left;">Tin cậy</td>
+<td style="text-align: left;">Giữ dữ liệu hỏi đáp khi phiên gián đoạn và cho phép tạo lại báo cáo mà không mất dữ liệu.</td>
+</tr>
+</tbody></table></div>
+<h5 id="c-job-matching-skill-gap-2">c. Job Matching &amp; Skill Gap</h5>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Nhóm</th>
+<th style="text-align: left;">Yêu cầu phi chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;"><a id="nfr-jm-01"></a>NFR-JM-01</td>
+<td style="text-align: left;">Dễ sử dụng</td>
+<td style="text-align: left;">Giao diện dùng tiếng Việt dễ hiểu; điểm và mức đánh giá được giải thích bằng nhãn chữ và màu sắc.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jm-02"></a>NFR-JM-02</td>
+<td style="text-align: left;">Bảo mật</td>
+<td style="text-align: left;">Chỉ người có quyền được truy cập CV, hồ sơ cá nhân và lịch sử; khóa AI được giữ ở máy chủ.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jm-03"></a>NFR-JM-03</td>
+<td style="text-align: left;">Nhất quán</td>
+<td style="text-align: left;">Cùng dữ liệu đã xác nhận và phiên bản công thức phải cho cùng điểm và mức phân loại.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jm-04"></a>NFR-JM-04</td>
+<td style="text-align: left;">Tin cậy</td>
+<td style="text-align: left;">Lỗi tạo gợi ý hoặc lấy tài liệu không làm mất kết quả đối chiếu đã hoàn thành và lưu thành công.</td>
+</tr>
+</tbody></table></div>
+<h5 id="d-job-tracking-2">d. Job Tracking</h5>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Nhóm</th>
+<th style="text-align: left;">Yêu cầu phi chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;"><a id="nfr-jt-01"></a>NFR-JT-01</td>
+<td style="text-align: left;">Dễ sử dụng</td>
+<td style="text-align: left;">Trạng thái có nhãn rõ ràng, không chỉ dùng màu; thao tác xóa có xác nhận và báo kết quả.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jt-02"></a>NFR-JT-02</td>
+<td style="text-align: left;">Bảo mật</td>
+<td style="text-align: left;">Kiểm tra quyền theo tài khoản ở máy chủ; không lộ dữ liệu người khác hoặc khóa dịch vụ.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jt-03"></a>NFR-JT-03</td>
+<td style="text-align: left;">Toàn vẹn dữ liệu</td>
+<td style="text-align: left;">Thao tác cá nhân không làm mất dữ liệu người khác; lưu lỗi không báo thành công.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jt-04"></a>NFR-JT-04</td>
+<td style="text-align: left;">Nhất quán</td>
+<td style="text-align: left;">Danh sách, chi tiết và thông báo thống nhất kết quả phân loại và trạng thái thời hạn.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jt-05"></a>NFR-JT-05</td>
+<td style="text-align: left;">Khả năng đáp ứng</td>
+<td style="text-align: left;">Thu thập/AI không chặn xem tin đã lưu; có trạng thái tải. Mục tiêu phản hồi được chốt qua thử nghiệm.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jt-06"></a>NFR-JT-06</td>
+<td style="text-align: left;">Khả năng đọc</td>
+<td style="text-align: left;">Hiển thị rõ tiếng Việt, nội dung dài và trường thiếu trên kích thước màn hình hỗ trợ.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jt-07"></a>NFR-JT-07</td>
+<td style="text-align: left;">Kiểm chứng được</td>
+<td style="text-align: left;">Lưu nguồn, thời điểm và căn cứ thời hạn; kiểm tra AI bằng bài mẫu đã gán nhãn.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a id="nfr-jt-08"></a>NFR-JT-08</td>
+<td style="text-align: left;">Khả năng bảo trì</td>
+<td style="text-align: left;">Tách tích hợp nguồn/AI khỏi nghiệp vụ cá nhân; cấu hình được chu kỳ; FE dùng hợp đồng API của BE.</td>
+</tr>
+</tbody></table></div>
+<hr />
+<a id="dac-ta-yeu-cau"></a>
+
+      </section>
+
+      <!-- SECTION 4 -->
+      <section id="sec-4">
+<h2 id="sec-4-title">4. ĐẶC TẢ YÊU CẦU</h2>
+<a id="so-do-use-case"></a>
+<h3 id="4-1-so-do-use-case">4.1. Sơ đồ Use Case</h3>
+<h4 id="a-cv-builder-seekerbot-3">a. CV Builder &amp; SeekerBot</h4>
+<div class="diagram-container"><img src="./images/CV_Builder_Use_Case_Current.svg" alt="Sơ đồ Use Case UML của CV Builder &amp; SeekerBot" class="diagram-img" /><div class="diagram-caption">Sơ đồ Use Case UML của CV Builder &amp; SeekerBot</div></div>
+<h4 id="b-voice-mock-interview-3">b. Voice Mock Interview</h4>
+<div class="diagram-container"><img src="./images/Voice_Mock_Interview_Use_Case.png" alt="Sơ đồ Use Case" class="diagram-img" /><div class="diagram-caption">Sơ đồ Use Case</div></div>
+<h4 id="c-job-matching-skill-gap-3">c. Job Matching &amp; Skill Gap</h4>
+<div class="diagram-container"><img src="./images/Job_Matching_Use_Case_Cropped.png" alt="Sơ đồ Use Case" class="diagram-img" /><div class="diagram-caption">Sơ đồ Use Case</div></div>
+<h4 id="d-job-tracking-3">d. Job Tracking</h4>
+<div class="diagram-container"><img src="./images/Job_Tracking_Use_Case.png" alt="Sơ đồ Use Case của Job Tracking" class="diagram-img" /><div class="diagram-caption">Sơ đồ Use Case của Job Tracking</div></div>
+<a id="dac-ta-use-case"></a>
+<h3 id="4-2-dac-ta-use-case">4.2. Đặc tả Use Case</h3>
+<h4 id="a-cv-builder-seekerbot-4">a. CV Builder &amp; SeekerBot</h4>
+<h5 id="tao-chinh-sua-va-xem-truoc-cv">Tạo, chỉnh sửa và xem trước CV</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-cv-01">UC-CV-01</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Tạo, chỉnh sửa và xem trước CV</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Tạo, sửa CV và xem trước trực tiếp.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên/người tìm việc; phân hệ Profile/Account.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Người dùng đã đăng nhập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Bản xem trước phản ánh dữ liệu chỉnh sửa hợp lệ.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng tạo hoặc mở CV.<br>2. Hệ thống điền ô cơ bản còn trống từ hồ sơ cá nhân đúng tài khoản, giữ dữ liệu đã lưu.<br>3. Người dùng chỉnh sửa; hệ thống cập nhật bản xem trước.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Hồ sơ cá nhân thiếu dữ liệu: cho nhập tay.<br>• Dữ liệu sai: chỉ rõ trường cần sửa.<br>• Rời trang chưa lưu: cảnh báo mất thay đổi.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-cv-01" class="pill-nfr">NFR-CV-01</a>; đảm bảo toàn vẹn dữ liệu dùng chung giữa các phân hệ.</td>
+</tr>
+</tbody></table></div>
+<h5 id="luu-va-mo-lai-cv">Lưu và mở lại CV</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-cv-02">UC-CV-02</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Lưu và mở lại CV</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Lưu CV và mở lại để chỉnh sửa.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên/người tìm việc.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đã đăng nhập và có CV cần lưu hoặc mở.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Nội dung và mẫu CV được lưu, mở đúng tài khoản.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng chọn lưu CV.<br>2. Hệ thống lưu nội dung và mẫu.<br>3. Người dùng mở CV đã lưu; hệ thống hiển thị nội dung và bản xem trước.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Lưu lỗi: thông báo chưa lưu, cho thử lại.<br>• Không có quyền: từ chối mở CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-cv-02" class="pill-nfr">NFR-CV-02</a>, <a href="#nfr-cv-03" class="pill-nfr">NFR-CV-03</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="chon-mau-trinh-bay-cv">Chọn mẫu trình bày CV</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-cv-03">UC-CV-03</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Chọn mẫu trình bày CV</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đổi mẫu, giữ nguyên nội dung CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên/người tìm việc.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đang chỉnh sửa CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Bản xem trước áp dụng mẫu đã chọn.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng mở danh sách mẫu.<br>2. Chọn mẫu; hệ thống cập nhật bản xem trước và giữ nội dung.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Mẫu lỗi: giữ mẫu cũ và thông báo.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-cv-01" class="pill-nfr">NFR-CV-01</a>; giữ nguyên dữ liệu nội dung khi chuyển đổi mẫu.</td>
+</tr>
+</tbody></table></div>
+<h5 id="nhan-va-duyet-goi-y-tu-seekerbot">Nhận và duyệt gợi ý từ SeekerBot</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-cv-04">UC-CV-04</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Nhận và duyệt gợi ý từ SeekerBot</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Nhận gợi ý hướng dẫn, STAR hoặc điều chỉnh theo JD.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên/người tìm việc; dịch vụ AI.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Có mục CV cần hỗ trợ; chế độ theo JD cần có JD.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">CV chỉ cập nhật phần gợi ý được duyệt.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng chọn chế độ hỗ trợ.<br>2. Hệ thống gửi ngữ cảnh đến AI và hiển thị gợi ý cạnh bản gốc.<br>3. Người dùng duyệt, sửa hoặc bỏ qua; hệ thống chỉ áp dụng phần được duyệt.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Thiếu dữ liệu hoặc JD: yêu cầu bổ sung.<br>• AI lỗi: giữ CV, cho thử lại.<br>• Gợi ý sai thực tế: cho sửa hoặc bỏ qua.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-cv-02" class="pill-nfr">NFR-CV-02</a>, <a href="#nfr-cv-03" class="pill-nfr">NFR-CV-03</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="quan-ly-ngan-hang-thanh-tuu-ca-nhan">Quản lý ngân hàng thành tựu cá nhân</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-cv-06">UC-CV-06</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Quản lý ngân hàng thành tựu cá nhân</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Quản lý và tái sử dụng thành tựu cá nhân.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên/người tìm việc.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Người dùng đã đăng nhập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Thành tựu được cập nhật hoặc sao chép vào CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng mở thư viện thành tựu.<br>2. Tạo, sửa hoặc xóa mục.<br>3. Chọn mục để sao chép vào CV và chỉnh sửa độc lập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Thư viện trống: hướng dẫn tạo mục.<br>• Không có quyền: từ chối thao tác.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-cv-02" class="pill-nfr">NFR-CV-02</a>; dữ liệu thành tựu cá nhân lưu trữ độc lập và bảo mật.</td>
+</tr>
+</tbody></table></div>
+<h5 id="nhap-du-an-tu-github">Nhập dự án từ GitHub</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-cv-07">UC-CV-07</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Nhập dự án từ GitHub</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Tạo bản nháp dự án từ kho mã nguồn công khai.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên/người tìm việc; GitHub API.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đã đăng nhập và có đường dẫn kho mã nguồn cần nhập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Dự án được thêm vào CV sau khi xác nhận.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng nhập đường dẫn; hệ thống lấy thông tin mô tả và README khả dụng.<br>2. Người dùng kiểm tra bản nháp, xác nhận đóng góp và sửa mô tả.<br>3. Chọn thêm vào CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Đường dẫn sai, kho riêng tư hoặc không tồn tại: báo lỗi.<br>• Thiếu README: dùng thông tin mô tả khả dụng.<br>• API lỗi: cho thử lại hoặc nhập tay.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-cv-02" class="pill-nfr">NFR-CV-02</a>, <a href="#nfr-cv-03" class="pill-nfr">NFR-CV-03</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="xem-truoc-bo-cuc-trang-in-2">Xem trước bố cục trang in</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-cv-09">UC-CV-09</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem trước bố cục trang in</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Kiểm tra bố cục CV theo trang in.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên/người tìm việc.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Có CV đang mở trong trình chỉnh sửa.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Hiển thị bố cục theo nội dung và mẫu hiện tại.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng chọn xem trước khi in.<br>2. Hệ thống hiển thị nội dung và phân trang.<br>3. Người dùng rà soát, quay lại chỉnh sửa nếu cần.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• CV trống: hướng dẫn quay lại chỉnh sửa.<br>• Dựng trang lỗi: thông báo, cho thử lại và giữ nguyên CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-cv-01" class="pill-nfr">NFR-CV-01</a>, <a href="#nfr-cv-05" class="pill-nfr">NFR-CV-05</a>; hiển thị trung thực định dạng in ấn chuẩn trang A4.</td>
+</tr>
+</tbody></table></div>
+<h4 id="b-voice-mock-interview-4">b. Voice Mock Interview</h4>
+<h5 id="thiet-lap-buoi-phong-van-2">Thiết lập buổi phỏng vấn</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-vmi-01">UC-VMI-01</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Thiết lập buổi phỏng vấn</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Cấu hình phiên phỏng vấn.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên; các phân hệ CV Builder &amp; SeekerBot và Profile/Account; dịch vụ AI.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên đã đăng nhập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Cấu hình hợp lệ, sẵn sàng kiểm tra thiết bị.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Sinh viên mở phỏng vấn thử; hệ thống tải danh sách CV.<br>2. Chọn vị trí, cấp độ, ngôn ngữ và CV, rồi xác nhận.<br>3. Hệ thống kiểm tra, gửi cấu hình đến AI để tạo ngữ cảnh và chuyển sang kiểm tra thiết bị.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Chưa có CV: cho phỏng vấn theo vị trí.<br>• Thiếu dữ liệu: yêu cầu bổ sung.<br>• AI không phản hồi: thông báo, cho thử lại.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-vmi-02" class="pill-nfr">NFR-VMI-02</a>, <a href="#nfr-vmi-03" class="pill-nfr">NFR-VMI-03</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="tham-gia-phong-van-bang-giong-noi-2">Tham gia phỏng vấn bằng giọng nói</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-vmi-02">UC-VMI-02</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Tham gia phỏng vấn bằng giọng nói</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Hỏi đáp bằng giọng nói với AI.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên; dịch vụ AI.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đã thiết lập phiên thành công (<a href="#uc-vmi-01" class="badge-uc-link">UC-VMI-01</a>).</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Phiên hoàn tất; bản ghi hội thoại và báo cáo được lưu.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Thực hiện <a href="#uc-vmi-03" class="badge-uc-link">UC-VMI-03</a> — Kiểm tra microphone và âm thanh.<br>2. AI phát câu hỏi; sinh viên trả lời qua microphone.<br>3. Hệ thống hiển thị văn bản nhận diện để sinh viên xác nhận gửi.<br>4. AI phân tích và tạo câu hỏi tiếp theo; lặp đến khi đủ câu hoặc sinh viên kết thúc.<br>5. Thực hiện <a href="#uc-vmi-04" class="badge-uc-link">UC-VMI-04</a> — Tổng hợp, đánh giá và hiển thị báo cáo.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Nhận diện sai: cho nói lại; nghe chưa rõ: cho nhắc lại câu hỏi.<br>• Mất kết nối: giữ dữ liệu, cho kết nối lại hoặc kết thúc sớm.<br>• Hủy phiên: cảnh báo phiên chưa hoàn thành không được tính điểm.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-vmi-01" class="pill-nfr">NFR-VMI-01</a>; hiển thị sóng âm trực quan và bảo mật đường truyền âm thanh.</td>
+</tr>
+</tbody></table></div>
+<h5 id="kiem-tra-microphone-va-am-thanh-2">Kiểm tra microphone và âm thanh</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-vmi-03">UC-VMI-03</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Kiểm tra microphone và âm thanh</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Kiểm tra microphone và loa hoặc tai nghe.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đã thiết lập phiên (<a href="#uc-vmi-01" class="badge-uc-link">UC-VMI-01</a>).</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Thiết bị được xác nhận để tiếp tục phỏng vấn.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Hệ thống yêu cầu quyền microphone; sinh viên cấp quyền và nói thử.<br>2. Hệ thống hiển thị âm lượng, phát âm thanh mẫu; sinh viên xác nhận nghe rõ.<br>3. Sinh viên chọn sẵn sàng để tiếp tục <a href="#uc-vmi-02" class="badge-uc-link">UC-VMI-02</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Chưa cấp quyền: hướng dẫn cấp lại.<br>• Không có tín hiệu: hướng dẫn kiểm tra hoặc đổi microphone.<br>• Không nghe âm mẫu: hướng dẫn kiểm tra âm lượng hoặc đổi thiết bị đầu ra.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-vmi-02" class="pill-nfr">NFR-VMI-02</a>; phản hồi âm lượng theo thời gian thực.</td>
+</tr>
+</tbody></table></div>
+<h5 id="tong-hop-danh-gia-buoi-phong-van-2">Tổng hợp, đánh giá buổi phỏng vấn</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-vmi-04">UC-VMI-04</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Tổng hợp, đánh giá buổi phỏng vấn</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Chấm điểm và đề xuất cải thiện từ bản ghi hội thoại.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên; dịch vụ AI.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Phiên đã kết thúc do đủ câu hỏi hoặc sinh viên chủ động kết thúc.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Báo cáo được hiển thị và lưu.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Hệ thống gửi toàn bộ bản ghi hội thoại và cấu hình đến AI.<br>2. AI đánh giá ba tiêu chí, xác định điểm mạnh, điểm yếu và gợi ý ôn tập.<br>3. Hệ thống tính điểm và phân loại theo quy tắc đánh giá phỏng vấn, lưu và hiển thị báo cáo.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• AI lỗi: giữ bản ghi, cho tạo lại báo cáo.<br>• Chưa có câu trả lời: báo không đủ dữ liệu, không lưu kết quả đánh giá.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-vmi-02" class="pill-nfr">NFR-VMI-02</a>, <a href="#nfr-vmi-04" class="pill-nfr">NFR-VMI-04</a>; kết quả đánh giá nhất quán và minh bạch.</td>
+</tr>
+</tbody></table></div>
+<h5 id="xem-lich-su-phong-van-2">Xem lịch sử phỏng vấn</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-vmi-05">UC-VMI-05</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem lịch sử phỏng vấn</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem lại các phiên phỏng vấn.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên đã đăng nhập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Hiển thị danh sách hoặc chi tiết phiên đã lưu.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Sinh viên mở lịch sử; hệ thống liệt kê ngày, vị trí, ngôn ngữ, điểm và mức phân loại.<br>2. Chọn phiên để xem cấu hình, CV, bản ghi hội thoại và báo cáo.<br>3. Có thể chọn phỏng vấn lại để tạo phiên mới với cấu hình cũ.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Chưa có lịch sử: hướng dẫn tạo phiên mới.<br>• Không có quyền: từ chối truy cập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-vmi-03" class="pill-nfr">NFR-VMI-03</a>; ảnh chụp kết quả lịch sử được bảo toàn nguyên vẹn.</td>
+</tr>
+</tbody></table></div>
+<h4 id="c-job-matching-skill-gap-4">c. Job Matching &amp; Skill Gap</h4>
+<h5 id="danh-gia-muc-phu-hop-cv-jd">Đánh giá mức phù hợp CV–JD</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-jm-01">UC-JM-01</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đánh giá mức phù hợp CV–JD</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đối chiếu CV với JD, trả điểm và giải thích.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên; các phân hệ CV Builder &amp; SeekerBot và Profile/Account; dịch vụ AI.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đã đăng nhập và có CV trong hệ thống.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Kết quả được hiển thị và lưu vào lịch sử.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Sinh viên chọn CV và nhập JD.<br>2. Hệ thống bóc tách thông tin, đề xuất chuyên môn và thực hiện <a href="#uc-jm-02" class="badge-uc-link">UC-JM-02</a> để xác nhận.<br>3. Hệ thống kiểm tra chuyên môn, đối chiếu và tính điểm theo quy tắc đánh giá phù hợp.<br>4. Hiển thị điểm, mức phân loại, bằng chứng, giải thích và lưu kết quả.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Thiếu dữ liệu: yêu cầu bổ sung.<br>• Khác hướng hoàn toàn: yêu cầu chọn lại CV hoặc JD.<br>• Phân tích lỗi: thông báo, cho thử lại; không trả điểm 0%.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-jm-01" class="pill-nfr">NFR-JM-01</a>, <a href="#nfr-jm-02" class="pill-nfr">NFR-JM-02</a>, <a href="#nfr-jm-03" class="pill-nfr">NFR-JM-03</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="kiem-tra-va-xac-nhan-thong-tin-boc-tach">Kiểm tra và xác nhận thông tin bóc tách</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-jm-02">UC-JM-02</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Kiểm tra và xác nhận thông tin bóc tách</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Kiểm tra dữ liệu bóc tách trước khi đánh giá.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Hệ thống đã bóc tách thông tin CV và JD.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Dữ liệu được xác nhận để tính điểm; CV gốc không bị thay đổi.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Hệ thống hiển thị chuyên môn, yêu cầu JD và bằng chứng CV kèm đoạn nguồn.<br>2. Sinh viên sửa lỗi đọc hiểu theo nội dung gốc, không thêm thông tin ngoài CV để tăng điểm.<br>3. Sinh viên xác nhận; hệ thống tiếp tục đánh giá.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Thông tin chưa rõ: đối chiếu và điều chỉnh theo nguồn.<br>• Chưa xác nhận hoặc hủy: chưa tính điểm.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-jm-01" class="pill-nfr">NFR-JM-01</a>, <a href="#nfr-jm-02" class="pill-nfr">NFR-JM-02</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="xem-huong-cai-thien-cv-va-nang-luc">Xem hướng cải thiện CV và năng lực</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-jm-03">UC-JM-03</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem hướng cải thiện CV và năng lực</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đề xuất cải thiện CV hoặc bổ sung năng lực.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên; các phân hệ CV Builder &amp; SeekerBot và Profile/Account; dịch vụ AI.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đã có kết quả đánh giá CV–JD.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Gợi ý được hiển thị, lưu cùng lần phân tích; không tự sửa CV hoặc đổi điểm.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Sinh viên yêu cầu xem hướng cải thiện.<br>2. Hệ thống tìm yêu cầu chưa đáp ứng đầy đủ, tham chiếu hồ sơ cá nhân; sinh viên xác nhận năng lực.<br>3. Hệ thống ưu tiên yêu cầu bắt buộc, đề xuất cách bổ sung CV hoặc nội dung học, thực hành kèm nguồn đã kiểm chứng.<br>4. Hiển thị và lưu gợi ý.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Thiếu thông tin năng lực: ghi “Chưa xác định”, không kết luận chưa biết.<br>• Không có khoảng trống: thông báo không có yêu cầu cần bổ sung.<br>• Lỗi gợi ý hoặc lấy nguồn: giữ kết quả đối chiếu, cho thử lại phần lỗi.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-jm-01" class="pill-nfr">NFR-JM-01</a>, <a href="#nfr-jm-02" class="pill-nfr">NFR-JM-02</a>, <a href="#nfr-jm-04" class="pill-nfr">NFR-JM-04</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="xem-lich-su-va-chi-tiet-phan-tich">Xem lịch sử và chi tiết phân tích</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-jm-04">UC-JM-04</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem lịch sử và chi tiết phân tích</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem lại các lần phân tích đã lưu.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên đã đăng nhập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Hiển thị danh sách hoặc chi tiết phân tích.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Sinh viên mở lịch sử và chọn một lần phân tích.<br>2. Hệ thống hiển thị CV, JD, điểm, giải thích và gợi ý đã lưu.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Chưa có lịch sử: thông báo danh sách trống.<br>• Không có quyền: từ chối hiển thị.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-jm-02" class="pill-nfr">NFR-JM-02</a>; lưu bản chụp dữ liệu phân tích độc lập với CV gốc.</td>
+</tr>
+</tbody></table></div>
+<h4 id="d-job-tracking-4">d. Job Tracking</h4>
+<p><strong>Xử lý chung:</strong> các thao tác cá nhân yêu cầu đăng nhập và đúng quyền truy cập. Khi đang tải, danh sách rỗng hoặc xử lý lỗi, hệ thống thông báo phù hợp; không báo thành công khi chưa lưu và không làm mất dữ liệu đã có.</p>
+<h5 id="quan-ly-nguon-tuyen-dung-theo-doi">Quản lý nguồn tuyển dụng theo dõi</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-jt-01">UC-JT-01</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Quản lý nguồn tuyển dụng theo dõi</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Thêm/xóa, tạm dừng/tiếp tục và kiểm tra nguồn.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên; nền tảng mạng xã hội.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Người dùng đã đăng nhập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Danh sách và trạng thái nguồn của tài khoản được cập nhật.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng nhập đường dẫn nguồn.<br>2. Hệ thống kiểm tra đường dẫn và khả năng truy cập.<br>3. Lưu nguồn theo dõi, hiển thị trạng thái.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Tạm dừng/tiếp tục: đổi trạng thái; xóa: xác nhận bỏ theo dõi.<br>• URL sai/không hỗ trợ: yêu cầu sửa; nguồn không truy cập được: cho giữ hoặc hủy.<br>• Lưu lỗi: giữ dữ liệu nhập.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-jt-01" class="pill-nfr">NFR-JT-01</a>, <a href="#nfr-jt-02" class="pill-nfr">NFR-JT-02</a>, <a href="#nfr-jt-03" class="pill-nfr">NFR-JT-03</a>, <a href="#nfr-jt-07" class="pill-nfr">NFR-JT-07</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="nhan-thong-bao-moi-theo-chu-ky">Nhận thông báo mới theo chu kỳ</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-jt-02">UC-JT-02</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Nhận thông báo mới theo chu kỳ</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Định kỳ thu thập, sàng lọc tin và thông báo cơ hội mới.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên nhận thông báo; nền tảng mạng xã hội; AI. Bộ lập lịch nội bộ kích hoạt.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Có nguồn đang được bật theo dõi; chu kỳ và phương thức truy cập đã cấu hình.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Bài, kết quả sàng lọc và thời hạn được lưu; người đủ điều kiện nhận thông báo liên kết đúng tin.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Đến lịch, hệ thống thu thập bài mới từ nguồn theo dõi.<br>2. AI sàng lọc; hệ thống lưu kết quả và trạng thái hạn.<br>3. Tạo thông báo tin phù hợp cho người còn theo dõi; khi mở, cập nhật hạn và cho xem chi tiết.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Không có bài/tin phù hợp hoặc AI chưa xác định được: không thông báo; nguồn lỗi thì cập nhật trạng thái.<br>• Tin hết hạn/người dừng theo dõi: không thông báo mới; thiếu hạn: ghi Chưa xác định.<br>• Tin hết hạn sau khi thông báo: giữ nhãn Hết hạn; tin không khả dụng: báo tương ứng.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-jt-01" class="pill-nfr">NFR-JT-01</a>, <a href="#nfr-jt-02" class="pill-nfr">NFR-JT-02</a>, <a href="#nfr-jt-03" class="pill-nfr">NFR-JT-03</a>, <a href="#nfr-jt-04" class="pill-nfr">NFR-JT-04</a>, <a href="#nfr-jt-05" class="pill-nfr">NFR-JT-05</a>, <a href="#nfr-jt-06" class="pill-nfr">NFR-JT-06</a>, <a href="#nfr-jt-07" class="pill-nfr">NFR-JT-07</a>, <a href="#nfr-jt-08" class="pill-nfr">NFR-JT-08</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="xem-tin-da-sang-loc-theo-ca-nhan-hoa">Xem tin đã sàng lọc theo cá nhân hóa</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-jt-03">UC-JT-03</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem tin đã sàng lọc theo cá nhân hóa</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem danh sách tin Intern/Fresher theo nguồn và thông tin quan tâm.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên; Profile/Account.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Người dùng đã đăng nhập; bài được sàng lọc qua <a href="#uc-jt-02" class="badge-uc-link">UC-JT-02</a> trước khi xuất hiện trong danh sách phù hợp.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Người dùng xem tin phù hợp, có nguồn và trạng thái hạn.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng mở danh sách tin.<br>2. Hệ thống chọn tin đã sàng lọc theo nguồn và thông tin quan tâm.<br>3. Hiển thị danh sách, cho chọn xem chi tiết qua <a href="#uc-jt-04" class="badge-uc-link">UC-JT-04</a>.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Thiếu thông tin quan tâm: dùng tin Intern/Fresher từ nguồn theo dõi.<br>• Chưa có nguồn/tin phù hợp: hướng dẫn bổ sung; tin chưa phân loại hợp lệ không được hiển thị.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-jt-01" class="pill-nfr">NFR-JT-01</a>, <a href="#nfr-jt-02" class="pill-nfr">NFR-JT-02</a>, <a href="#nfr-jt-04" class="pill-nfr">NFR-JT-04</a>, <a href="#nfr-jt-05" class="pill-nfr">NFR-JT-05</a>, <a href="#nfr-jt-06" class="pill-nfr">NFR-JT-06</a>, <a href="#nfr-jt-07" class="pill-nfr">NFR-JT-07</a>.</td>
+</tr>
+</tbody></table></div>
+<h5 id="xem-chi-tiet-va-mo-tin-tuyen-dung-goc">Xem chi tiết và mở tin tuyển dụng gốc</h5>
+<div class="table-container use-case-table-container"><table><thead><tr>
+<th style="text-align: left;">Thành phần</th>
+<th style="text-align: left;">Đặc tả</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Use Case ID</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><span class="badge-uc" id="uc-jt-04">UC-JT-04</span></td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem chi tiết và mở tin tuyển dụng gốc</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Xem chi tiết, lưu/bỏ lưu/xóa tin cá nhân và truy cập bài gốc.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Sinh viên; nền tảng mạng xã hội; AI hỗ trợ trích xuất khi được yêu cầu.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Điều kiện tiên quyết</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Đã đăng nhập và có quyền xem tin.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
+<td style="text-align: left;" class="uc-prop-val">Chi tiết được hiển thị; thao tác quản lý tin cá nhân được lưu hoặc bài gốc được mở theo lựa chọn.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng chọn tin từ danh sách hoặc thông báo.<br>2. Hệ thống kiểm tra quyền, hiển thị chi tiết, nguồn và trạng thái hạn.<br>3. Người dùng có thể mở bài gốc qua URL đã lưu.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
+<td style="text-align: left;" class="uc-prop-val">• Lưu/bỏ lưu: cập nhật đánh dấu; xóa: xác nhận rồi bỏ khỏi danh sách cá nhân, không hiện lại khi tải lại trang. Hủy/lỗi giữ dữ liệu.<br>• Thiếu trường: ghi Chưa có thông tin; thiếu URL: không cho mở; yêu cầu AI trích xuất chỉ dùng dữ liệu có căn cứ.<br>• Bài gốc đã xóa: báo Tin không còn tồn tại; lỗi truy cập/đăng nhập: báo tương ứng. Bản lưu còn quyền vẫn xem được; tin hết hạn giữ nhãn và vẫn lưu được.<br>• Tin không tồn tại/không có quyền: từ chối mở.</td>
+</tr>
+<tr>
+<td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
+<td style="text-align: left;" class="uc-prop-val"><a href="#nfr-jt-01" class="pill-nfr">NFR-JT-01</a>, <a href="#nfr-jt-02" class="pill-nfr">NFR-JT-02</a>, <a href="#nfr-jt-03" class="pill-nfr">NFR-JT-03</a>, <a href="#nfr-jt-04" class="pill-nfr">NFR-JT-04</a>, <a href="#nfr-jt-06" class="pill-nfr">NFR-JT-06</a>, <a href="#nfr-jt-07" class="pill-nfr">NFR-JT-07</a>.</td>
+</tr>
+</tbody></table></div>
+<hr />
+<a id="prototype"></a>
+
+      </section>
+
+      <!-- SECTION 5 -->
+      <section id="sec-5">
+<h2 id="sec-5-title">5. BẢN MẪU (PROTOTYPE)</h2>
+<div class="figma-cta"><div class="figma-cta-content"><div class="figma-cta-title">HireUS Prototype</div></div><a class="figma-btn" target="_blank" rel="noopener" href="https://www.figma.com/design/bMbUlGzrU298Icu0HoERU3/HireUS?node-id=55-184&amp;t=PSHtKrrGStMNBFOE-1">Mở Figma Prototype ↗</a></div>
+<p><em>Lưu ý: Đây chỉ là các bản mẫu prototype nhằm minh họa các chức năng, giao diện có thể thay đổi trong tương lai.</em></p>
+<h3 id="5-1-cv-builder-seekerbot">5.1. CV Builder &amp; SeekerBot</h3>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã màn hình</th>
+<th style="text-align: left;">Tên màn hình</th>
+<th style="text-align: left;">Mô tả chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">F01</td>
+<td style="text-align: left;">Danh sách CV</td>
+<td style="text-align: left;">Quản lý danh sách CV cá nhân và tạo CV mới.</td>
+</tr>
+<tr>
+<td style="text-align: left;">F02</td>
+<td style="text-align: left;">Chỉnh sửa và xem trước CV</td>
+<td style="text-align: left;">Chỉnh sửa nội dung CV, tự điền trường cơ bản từ hồ sơ cá nhân và xem trước trực tiếp.</td>
+</tr>
+<tr>
+<td style="text-align: left;">F03</td>
+<td style="text-align: left;">Chỉnh sửa CV với SeekerBot</td>
+<td style="text-align: left;">SeekerBot hướng dẫn cải thiện nội dung, gợi ý theo STAR và điều chỉnh theo JD.</td>
+</tr>
+<tr>
+<td style="text-align: left;">F05</td>
+<td style="text-align: left;">Thành tựu và nhập dự án GitHub</td>
+<td style="text-align: left;">Quản lý ngân hàng thành tựu cá nhân và trích xuất dữ liệu dự án từ GitHub.</td>
+</tr>
+</tbody></table></div>
+<div class="prototype-card" id="frame-f01"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">F01</span>Danh sách CV</span></div><div class="prototype-img-wrapper"><img src="./images/F01_CV_Dashboard.png" alt="F01 — Danh sách CV" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-f02"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">F02</span>Chỉnh sửa và xem trước CV</span></div><div class="prototype-img-wrapper"><img src="./images/F02_CV_Editor_Preview.png" alt="F02 — Chỉnh sửa và xem trước CV" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Thông tin từ hồ sơ cá nhân chỉ được điền vào các ô còn trống.</p>
+</div></div>
+<div class="prototype-card" id="frame-f03"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">F03</span>Chỉnh sửa CV với SeekerBot</span></div><div class="prototype-img-wrapper"><img src="./images/F03_SeekerBot_AI_Panel.png" alt="F03 — Chỉnh sửa CV với SeekerBot" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Người dùng kiểm tra và duyệt gợi ý trước khi áp dụng vào CV.</p>
+</div></div>
+<div class="prototype-card" id="frame-f05"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">F05</span>Thành tựu và nhập dự án GitHub</span></div><div class="prototype-img-wrapper"><img src="./images/F05_Achievement_GitHub.png" alt="F05 — Thành tựu và nhập dự án GitHub" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Dữ liệu GitHub được tạo thành bản nháp để người dùng kiểm tra trước khi thêm vào CV.</p>
+</div></div>
+<h3 id="5-2-voice-mock-interview">5.2. Voice Mock Interview</h3>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã màn hình</th>
+<th style="text-align: left;">Tên màn hình</th>
+<th style="text-align: left;">Mô tả chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">VMI-F01</td>
+<td style="text-align: left;">Thiết lập buổi phỏng vấn</td>
+<td style="text-align: left;">Lựa chọn vị trí ứng tuyển, cấp độ kinh nghiệm, ngôn ngữ và CV ngữ cảnh.</td>
+</tr>
+<tr>
+<td style="text-align: left;">VMI-F02</td>
+<td style="text-align: left;">Kiểm tra microphone và âm thanh</td>
+<td style="text-align: left;">Kiểm tra quyền microphone, tín hiệu thu âm theo thời gian thực và phát âm thanh mẫu.</td>
+</tr>
+<tr>
+<td style="text-align: left;">VMI-F03</td>
+<td style="text-align: left;">Phòng phỏng vấn giọng nói</td>
+<td style="text-align: left;">Hỏi đáp với AI, hiển thị câu hỏi, sóng âm, văn bản nhận diện và các nút điều khiển phiên.</td>
+</tr>
+<tr>
+<td style="text-align: left;">VMI-F04</td>
+<td style="text-align: left;">Đang tạo báo cáo</td>
+<td style="text-align: left;">Hiển thị tiến trình AI phân tích hội thoại và tổng hợp kết quả đánh giá.</td>
+</tr>
+<tr>
+<td style="text-align: left;">VMI-F05</td>
+<td style="text-align: left;">Báo cáo đánh giá</td>
+<td style="text-align: left;">Trình bày tổng điểm, phân tích chi tiết tiêu chí, điểm mạnh và nội dung cần ôn tập.</td>
+</tr>
+<tr>
+<td style="text-align: left;">VMI-F06</td>
+<td style="text-align: left;">Lịch sử phỏng vấn</td>
+<td style="text-align: left;">Danh sách các phiên phỏng vấn đã lưu, cho phép xem lại báo cáo hoặc tái sử dụng cấu hình.</td>
+</tr>
+</tbody></table></div>
+<div class="prototype-card" id="frame-vmi-f01"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">VMI-F01</span>Thiết lập buổi phỏng vấn</span></div><div class="prototype-img-wrapper"><img src="./images/VMI-F01-Setup.png" alt="VMI-F01 — Thiết lập buổi phỏng vấn" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-vmi-f02"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">VMI-F02</span>Kiểm tra microphone và âm thanh</span></div><div class="prototype-img-wrapper"><img src="./images/VMI-F02-Mic-Check.png" alt="VMI-F02 — Kiểm tra microphone và âm thanh" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Người dùng nói thử và nghe âm thanh mẫu trước khi bắt đầu phiên.</p>
+</div></div>
+<div class="prototype-card" id="frame-vmi-f03"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">VMI-F03</span>Phòng phỏng vấn giọng nói</span></div><div class="prototype-img-wrapper"><img src="./images/VMI-F03-Interview.png" alt="VMI-F03 — Phòng phỏng vấn" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-vmi-f04"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">VMI-F04</span>Đang tạo báo cáo</span></div><div class="prototype-img-wrapper"><img src="./images/VMI-F04-Processing.png" alt="VMI-F04 — Đang tạo báo cáo" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-vmi-f05"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">VMI-F05</span>Báo cáo đánh giá</span></div><div class="prototype-img-wrapper"><img src="./images/VMI-F05-Report.png" alt="VMI-F05 — Báo cáo đánh giá" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-vmi-f06"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">VMI-F06</span>Lịch sử phỏng vấn</span></div><div class="prototype-img-wrapper"><img src="./images/VMI-F06-History.png" alt="VMI-F06 — Lịch sử phỏng vấn" class="prototype-img" loading="lazy" /></div></div>
+<h3 id="5-3-job-matching-skill-gap">5.3. Job Matching &amp; Skill Gap</h3>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã màn hình</th>
+<th style="text-align: left;">Tên màn hình</th>
+<th style="text-align: left;">Mô tả chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">JM-F01</td>
+<td style="text-align: left;">Chọn CV và nhập JD</td>
+<td style="text-align: left;">Chọn CV đã có, dán nội dung JD tuyển dụng và xem tóm tắt thông tin đầu vào.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JM-F02</td>
+<td style="text-align: left;">Kiểm tra thông tin bóc tách</td>
+<td style="text-align: left;">Xác nhận hướng chuyên môn, danh mục yêu cầu JD và bằng chứng trong CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JM-F03</td>
+<td style="text-align: left;">Kết quả đối chiếu</td>
+<td style="text-align: left;">Hiển thị điểm số phù hợp, mức cảnh báo màu và bảng phân tích bằng chứng chi tiết.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JM-F04</td>
+<td style="text-align: left;">Hướng cải thiện</td>
+<td style="text-align: left;">Gợi ý bổ sung điểm còn thiếu trong CV và đề xuất tài liệu học tập, thực hành.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JM-F05</td>
+<td style="text-align: left;">Lịch sử phân tích</td>
+<td style="text-align: left;">Danh sách các phiên đánh giá đã lưu, hỗ trợ xem lại chi tiết kết quả.</td>
+</tr>
+</tbody></table></div>
+<div class="prototype-card" id="frame-jm-f01"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JM-F01</span>Chọn CV và nhập JD</span></div><div class="prototype-img-wrapper"><img src="./images/JM-F01-Input.png" alt="JM-F01 — Chọn CV và nhập JD" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-jm-f02"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JM-F02</span>Kiểm tra thông tin bóc tách</span></div><div class="prototype-img-wrapper"><img src="./images/JM-F02-Confirm.png" alt="JM-F02 — Kiểm tra thông tin bóc tách" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Các điều chỉnh phải dựa trên nội dung CV và JD gốc.</p>
+</div></div>
+<div class="prototype-card" id="frame-jm-f03"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JM-F03</span>Kết quả đối chiếu</span></div><div class="prototype-img-wrapper"><img src="./images/JM-F03-Result.png" alt="JM-F03 — Kết quả đối chiếu" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-jm-f04"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JM-F04</span>Hướng cải thiện</span></div><div class="prototype-img-wrapper"><img src="./images/JM-F04-Improve.png" alt="JM-F04 — Hướng cải thiện" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Phân biệt năng lực đã có nhưng CV chưa thể hiện với năng lực cần học hoặc thực hành thêm.</p>
+</div></div>
+<div class="prototype-card" id="frame-jm-f05"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JM-F05</span>Lịch sử phân tích</span></div><div class="prototype-img-wrapper"><img src="./images/JM-F05-History.png" alt="JM-F05 — Lịch sử phân tích" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Mỗi lần phân tích lưu một bản chụp dữ liệu riêng, độc lập với CV gốc.</p>
+</div></div>
+<p><strong>Luồng thao tác chính:</strong> Chọn CV/JD → Kiểm tra thông tin bóc tách → Xem kết quả đối chiếu → Xem hướng cải thiện; mở Lịch sử để đối chiếu tiến bộ giữa các lần cập nhật CV.</p>
+<h3 id="5-4-job-tracking">5.4. Job Tracking</h3>
+<div class="table-container"><table><thead><tr>
+<th style="text-align: left;">Mã màn hình</th>
+<th style="text-align: left;">Tên màn hình</th>
+<th style="text-align: left;">Mô tả chức năng</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;">JT-F01</td>
+<td style="text-align: left;">Nguồn tuyển dụng theo dõi</td>
+<td style="text-align: left;">Quản lý danh sách nguồn tin, kiểm tra trạng thái truy cập, tạm dừng hoặc xóa nguồn.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JT-F02</td>
+<td style="text-align: left;">Thêm nguồn tuyển dụng</td>
+<td style="text-align: left;">Nhập URL Fanpage / LinkedIn, kiểm tra tính hợp lệ và thêm vào danh sách theo dõi.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JT-F03</td>
+<td style="text-align: left;">Danh sách tin tuyển dụng</td>
+<td style="text-align: left;">Hiển thị các cơ hội việc làm IT Intern/Fresher đã sàng lọc và cá nhân hóa theo hồ sơ.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JT-F04</td>
+<td style="text-align: left;">Danh sách tin đã lưu</td>
+<td style="text-align: left;">Quản lý tin tuyển dụng đã đánh dấu, hỗ trợ bỏ lưu hoặc xóa khỏi tài khoản.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JT-F05</td>
+<td style="text-align: left;">Thông báo cơ hội mới</td>
+<td style="text-align: left;">Nhận thông báo cơ hội việc làm mới phù hợp và theo dõi trạng thái hạn nộp hồ sơ.</td>
+</tr>
+<tr>
+<td style="text-align: left;">JT-F06</td>
+<td style="text-align: left;">Chi tiết tin và bài gốc</td>
+<td style="text-align: left;">Hiển thị nội dung trích xuất, thông tin doanh nghiệp, thời hạn và liên kết mở bài gốc.</td>
+</tr>
+</tbody></table></div>
+<div class="prototype-card" id="frame-jt-f01"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JT-F01</span>Nguồn tuyển dụng theo dõi</span></div><div class="prototype-img-wrapper"><img src="./images/JT-F01-Sources.png" alt="JT-F01 — Nguồn theo dõi" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Trạng thái theo dõi của người dùng được trình bày riêng với tình trạng truy cập nguồn.</p>
+</div></div>
+<div class="prototype-card" id="frame-jt-f02"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JT-F02</span>Thêm nguồn tuyển dụng</span></div><div class="prototype-img-wrapper"><img src="./images/JT-F02-Add-Source.png" alt="JT-F02 — Thêm nguồn" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-jt-f03"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JT-F03</span>Danh sách tin tuyển dụng</span></div><div class="prototype-img-wrapper"><img src="./images/JT-F03-Feed.png" alt="JT-F03 — Danh sách tin tuyển dụng" class="prototype-img" loading="lazy" /></div></div>
+<div class="prototype-card" id="frame-jt-f04"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JT-F04</span>Danh sách tin đã lưu</span></div><div class="prototype-img-wrapper"><img src="./images/JT-F04-Saved.png" alt="JT-F04 — Tin đã lưu" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Bỏ lưu và xóa khỏi danh sách cá nhân là hai thao tác khác nhau; xóa cần được xác nhận.</p>
+</div></div>
+<div class="prototype-card" id="frame-jt-f05"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JT-F05</span>Thông báo cơ hội mới</span></div><div class="prototype-img-wrapper"><img src="./images/JT-F05-Notifications.png" alt="JT-F05 — Thông báo tuyển dụng" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Thông báo thể hiện thời hạn tại thời điểm xem: Còn hạn, Hết hạn hoặc Chưa xác định hạn.</p>
+</div></div>
+<div class="prototype-card" id="frame-jt-f06"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">JT-F06</span>Chi tiết tin và bài gốc</span></div><div class="prototype-img-wrapper"><img src="./images/JT-F06-Detail.png" alt="JT-F06 — Chi tiết và bài gốc" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Nội dung bài nguồn được phân biệt với thông tin do AI trích xuất hoặc tóm tắt.</p>
+</div></div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- INTERACTIVE CLIENT SCRIPTS -->
+  <script>
+    // Theme Switcher with persistence
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('hireus_theme', newTheme);
+      updateThemeBtn(newTheme);
+    }
+
+    function updateThemeBtn(theme) {
+      const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
+      if (theme === 'light') {
+        if (icon) icon.textContent = '🌙';
+        if (label) label.textContent = 'Tối';
+      } else {
+        if (icon) icon.textContent = '☀️';
+        if (label) label.textContent = 'Sáng';
+      }
+    }
+
+    // Reading Progress Indicator
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      const progressBar = document.getElementById('progress-bar');
+      if (progressBar) {
+        progressBar.style.width = progress + '%';
+      }
+    });
+
+    // Initialize button state & Outline generator
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      updateThemeBtn(currentTheme);
+
+      // Automatic Outline Generator & ScrollSpy
+      const outlineList = document.getElementById('outlineList');
+      const outlineWrapper = document.getElementById('outlineWrapper');
+      const outlineBtn = document.getElementById('outlineBtn');
+      if (!outlineList || !outlineWrapper || !outlineBtn) return;
+
+      // Toggle Pin on Click
+      outlineBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        outlineWrapper.classList.toggle('is-open');
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!outlineWrapper.contains(e.target)) {
+          outlineWrapper.classList.remove('is-open');
+        }
+      });
+
+      // Find all headings inside doc-card
+      const headings = document.querySelectorAll('.doc-card h2, .doc-card h3, .doc-card h4');
+      const items = [];
+
+      headings.forEach((heading, index) => {
+        if (!heading.id) {
+          heading.id = 'heading-node-' + index;
+        }
+
+        const level = heading.tagName.toLowerCase().replace('h', '');
+        const link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.className = 'outline-item lvl-' + level;
+        link.textContent = heading.textContent.trim();
+        link.title = heading.textContent.trim();
+
+        link.addEventListener('click', () => {
+          if (!outlineWrapper.classList.contains('is-open')) {
+            outlineWrapper.classList.remove('is-open');
+          }
+        });
+
+        outlineList.appendChild(link);
+        items.push({ heading: heading, link: link });
+      });
+
+      // ScrollSpy to highlight active heading
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const scrollPos = window.scrollY + 100;
+            let currentActive = null;
+
+            for (let i = 0; i < items.length; i++) {
+              if (items[i].heading.offsetTop <= scrollPos) {
+                currentActive = items[i];
+              } else {
+                break;
+              }
+            }
+
+            items.forEach(item => item.link.classList.remove('is-active'));
+            if (currentActive) {
+              currentActive.link.classList.add('is-active');
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
