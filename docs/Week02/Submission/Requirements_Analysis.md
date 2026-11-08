@@ -137,7 +137,7 @@ Quy ước mã:
 | **BR-CV-04** | Dữ liệu CV dùng chung | Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp và bản xem trước khi in dùng chung dữ liệu. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu. |
 | **BR-CV-05** | Tái sử dụng thành tựu | Thành tựu được sao chép tại thời điểm chọn; sửa thư viện không cập nhật CV đã có. |
 | **BR-CV-06** | Nhập nội dung GitHub | Chỉ lấy kho mã nguồn công khai; thông tin mô tả và tệp README không chứng minh đóng góp cá nhân. Người dùng kiểm tra, sửa và xác nhận trước khi thêm vào CV. |
-| **BR-CV-08** | Phạm vi xem trước khi in | SCRUM-49 chỉ xem trước trang in theo nội dung và mẫu hiện tại, không kiểm lỗi bằng AI. In/xuất PDF thuộc SCRUM-16, chờ xác nhận phạm vi. |
+| **BR-CV-08** | Phạm vi xem trước khi in | Bản xem trước khi in hiển thị nội dung, mẫu và phân trang của CV hiện tại; không thực hiện kiểm lỗi bằng AI. |
 | **BR-CV-09** | Dữ liệu hồ sơ cá nhân và CV | Chỉ tự điền ô cơ bản còn trống khi tạo/mở CV từ **hồ sơ cá nhân tài khoản đang đăng nhập**; người dùng được sửa. Thay đổi hồ sơ cá nhân không ghi đè CV đã lưu. Ánh xạ trường chờ đối chiếu cấu trúc dữ liệu hồ sơ cá nhân. |
 
 ##### b. Voice Mock Interview
