@@ -1178,6 +1178,65 @@
       margin-right: 8px;
     }
 
+    /* Requirement and business-rule tables */
+    .requirements-table-container table {
+      table-layout: fixed;
+      min-width: 860px;
+    }
+    .requirements-table-container th:first-child {
+      width: 130px;
+    }
+    .requirements-table-container th:nth-child(2) {
+      width: 22%;
+    }
+    .requirements-table-container th:nth-child(3) {
+      width: 20%;
+    }
+    .business-rules-table-container table {
+      table-layout: fixed;
+      min-width: 700px;
+    }
+    .business-rules-table-container th:first-child {
+      width: 120px;
+    }
+    .business-rules-table-container th:nth-child(2) {
+      width: 24%;
+    }
+    .requirements-table-container td:first-child,
+    .business-rules-table-container td:first-child {
+      white-space: nowrap;
+    }
+    .business-rules-table-container code {
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    @media print {
+      .requirements-table-container table,
+      .business-rules-table-container table {
+        min-width: 0;
+        page-break-inside: auto;
+      }
+      .requirements-table-container,
+      .business-rules-table-container {
+        overflow: visible;
+        page-break-inside: auto;
+      }
+      .requirements-table-container th,
+      .requirements-table-container td,
+      .business-rules-table-container th,
+      .business-rules-table-container td {
+        padding: 8px;
+      }
+      .requirements-table-container tr,
+      .business-rules-table-container tr {
+        break-inside: avoid;
+      }
+      .requirements-table-container th:first-child,
+      .business-rules-table-container th:first-child {
+        width: 110px;
+      }
+    }
+
     /* Use Case Table Specifics */
     .use-case-table-container {
       margin: 20px 0 32px 0;
@@ -1603,805 +1662,570 @@
 <a id="yeu-cau-chuc-nang"></a>
 <h4 id="3-2-1-dac-ta-yeu-cau-chuc-nang">3.2.1. Đặc tả yêu cầu chức năng</h4>
 <h5 id="a-cv-builder-seekerbot">a. CV Builder &amp; SeekerBot</h5>
-<h6 id="tao-chinh-sua-xem-truoc-va-luu-cv">Tạo, chỉnh sửa, xem trước và lưu CV</h6>
-<div class="table-container"><table><thead><tr>
+<div class="table-container requirements-table-container"><table><thead><tr>
 <th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Details</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;">FR-CV-01</td>
-<td style="text-align: left;">Cho phép tạo CV theo các mục và tự điền thông tin cơ bản.</td>
+<td style="text-align: left;"><strong>FR-CV-01</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn tạo CV và tận dụng hồ sơ cá nhân để giảm nhập lại.</td>
+<td style="text-align: left;">Tạo CV và tự điền thông tin cơ bản.</td>
+<td style="text-align: left;">Khởi tạo CV theo các mục được hỗ trợ. Khi tạo hoặc mở CV đã lưu, chỉ điền ô cơ bản còn trống từ hồ sơ tài khoản đang đăng nhập; cho kiểm tra, sửa và không ghi đè nội dung đã có, kể cả khi hồ sơ thay đổi.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-CV-02</td>
-<td style="text-align: left;">Cho phép thêm, sửa từng mục và cập nhật bản xem trước trực tiếp.</td>
+<td style="text-align: left;"><strong>FR-CV-02</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn chỉnh sửa và kiểm tra CV để hoàn thiện nội dung.</td>
+<td style="text-align: left;">Chỉnh sửa, kiểm tra và xem trước CV.</td>
+<td style="text-align: left;">Cho phép thêm, sửa từng mục và cập nhật bản xem trước trực tiếp. Kiểm tra trường bắt buộc, định dạng dữ liệu và báo lỗi tại trường tương ứng để người dùng sửa.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-CV-03</td>
-<td style="text-align: left;">Kiểm tra trường bắt buộc, định dạng và báo lỗi tại trường.</td>
+<td style="text-align: left;"><strong>FR-CV-04</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn lưu CV để tiếp tục chỉnh sửa sau.</td>
+<td style="text-align: left;">Lưu và mở lại CV.</td>
+<td style="text-align: left;">Lưu cả nội dung và mẫu CV theo tài khoản; mở lại đúng bản đã lưu để tiếp tục chỉnh sửa.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-CV-04</td>
-<td style="text-align: left;">Cho phép lưu CV và mở lại để tiếp tục chỉnh sửa.</td>
+<td style="text-align: left;"><strong>FR-CV-05</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn chọn mẫu phù hợp để trình bày CV.</td>
+<td style="text-align: left;">Chọn mẫu trình bày CV.</td>
+<td style="text-align: left;">Cho phép chọn mẫu và xem trước kết quả; đổi mẫu chỉ thay cách trình bày, giữ nguyên nội dung CV.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-CV-05</td>
-<td style="text-align: left;">Cho phép chọn mẫu và xem trước mà không làm mất nội dung CV.</td>
-</tr>
-</tbody></table></div>
-<h6 id="seekerbot-va-cai-thien-noi-dung-cv">SeekerBot và cải thiện nội dung CV</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-CV-06</td>
-<td style="text-align: left;">Cho phép yêu cầu SeekerBot hướng dẫn viết từng mục CV.</td>
+<td style="text-align: left;"><strong>FR-CV-06</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhận hướng dẫn và gợi ý để cải thiện cách trình bày CV.</td>
+<td style="text-align: left;">Gợi ý cải thiện nội dung bằng SeekerBot.</td>
+<td style="text-align: left;">Hỗ trợ hướng dẫn theo mục, viết lại đoạn dự án/kinh nghiệm theo STAR (tình huống, nhiệm vụ, hành động, kết quả), hoặc điều chỉnh cách diễn đạt theo JD. Chỉ dùng thông tin CV đã có, không tạo nội dung thiếu căn cứ, chấm điểm CV–JD hay phân tích Skill Gap.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-CV-07</td>
-<td style="text-align: left;">Cho phép chọn đoạn mô tả dự án hoặc kinh nghiệm để nhận gợi ý viết lại theo cấu trúc STAR (tình huống, nhiệm vụ, hành động, kết quả).</td>
+<td style="text-align: left;"><strong>FR-CV-09</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn kiểm tra gợi ý AI để chủ động cập nhật CV.</td>
+<td style="text-align: left;">Duyệt và áp dụng gợi ý AI.</td>
+<td style="text-align: left;">Hiển thị gợi ý cạnh bản gốc; người dùng được sửa, duyệt hoặc bỏ qua, chỉ áp dụng phần đã duyệt. AI không phản hồi thì thông báo và giữ nguyên CV, cho tiếp tục chỉnh sửa, lưu.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-CV-08</td>
-<td style="text-align: left;">Nhập JD để nhận gợi ý diễn đạt hoặc nhấn mạnh nội dung CV liên quan.</td>
+<td style="text-align: left;"><strong>FR-CV-13</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn quản lý và tái sử dụng thành tựu để viết CV thuận tiện.</td>
+<td style="text-align: left;">Quản lý và tái sử dụng thành tựu cá nhân.</td>
+<td style="text-align: left;">Cho tạo, xem, sửa, xóa thành tựu có quyền truy cập và sao chép mục đã chọn vào CV. Bản sao được chỉnh sửa độc lập; sửa thư viện không tự cập nhật nội dung CV đã có.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-CV-09</td>
-<td style="text-align: left;">Hiển thị gợi ý cạnh bản gốc để người dùng duyệt, sửa hoặc bỏ qua.</td>
+<td style="text-align: left;"><strong>FR-CV-15</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhập dự án GitHub để bổ sung thông tin đúng đóng góp của mình.</td>
+<td style="text-align: left;">Nhập và xác nhận dữ liệu GitHub.</td>
+<td style="text-align: left;">Nhận đường dẫn kho công khai, lấy mô tả và README trong phạm vi truy cập hỗ trợ; cho xem, sửa và xác nhận đóng góp cá nhân trước khi thêm vào CV. Dữ liệu kho không tự chứng minh đóng góp. Đường dẫn sai, kho riêng tư, không tồn tại hoặc không truy xuất được thì báo lỗi, không báo lấy dữ liệu thành công.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-CV-10</td>
-<td style="text-align: left;">Khi AI không phản hồi, thông báo lỗi và giữ nguyên CV.</td>
-</tr>
-</tbody></table></div>
-<h6 id="ngan-hang-thanh-tuu-va-nhap-du-an-github">Ngân hàng thành tựu và nhập dự án GitHub</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-CV-13</td>
-<td style="text-align: left;">Cho phép tạo, xem, sửa và xóa thành tựu cá nhân đã lưu.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-CV-14</td>
-<td style="text-align: left;">Cho phép sao chép thành tựu đã chọn vào CV để chỉnh sửa độc lập.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-CV-15</td>
-<td style="text-align: left;">Cho phép nhập đường dẫn kho mã nguồn GitHub công khai và lấy dữ liệu truy cập được.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-CV-16</td>
-<td style="text-align: left;">Cho phép xem, sửa dữ liệu GitHub và xác nhận đóng góp cá nhân trước khi thêm vào CV.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-CV-17</td>
-<td style="text-align: left;">Báo lỗi khi đường dẫn không hợp lệ, kho mã nguồn riêng tư, không tồn tại hoặc không truy xuất được.</td>
-</tr>
-</tbody></table></div>
-<h6 id="xem-truoc-bo-cuc-trang-in">Xem trước bố cục trang in</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-CV-22</td>
-<td style="text-align: left;">Mở <strong>bản xem trước khi in</strong> để xem và kiểm tra bố cục trang in.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-CV-23</td>
-<td style="text-align: left;">Hiển thị nội dung, mẫu và phân trang; cho phép quay lại trình chỉnh sửa.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-CV-24</td>
-<td style="text-align: left;">Bản xem trước khi in dùng CV hiện có, không dùng AI kiểm lỗi hoặc yêu cầu bổ sung.</td>
-</tr>
-</tbody></table></div>
-<h6 id="tu-dien-thong-tin-co-ban-tu-profile-account">Tự điền thông tin cơ bản từ Profile/Account</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-CV-25</td>
-<td style="text-align: left;">Khi tạo CV, điền ô cơ bản còn trống từ hồ sơ cá nhân đúng tài khoản; cho phép kiểm tra và sửa.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-CV-26</td>
-<td style="text-align: left;">Khi mở CV đã lưu, chỉ điền ô cơ bản còn trống từ hồ sơ cá nhân, không ghi đè nội dung đã có.</td>
+<td style="text-align: left;"><strong>FR-CV-22</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn xem bố cục trang in để kiểm tra CV trước khi in.</td>
+<td style="text-align: left;">Xem trước bố cục trang in.</td>
+<td style="text-align: left;">Hiển thị nội dung, mẫu và phân trang theo CV hiện tại; cho quay lại trình chỉnh sửa khi cần thay đổi. Bước này không dùng AI kiểm lỗi hoặc yêu cầu bổ sung nội dung.</td>
 </tr>
 </tbody></table></div>
 <h6 id="cac-quy-tac-nghiep-vu-ap-dung">Các quy tắc nghiệp vụ áp dụng</h6>
-<div class="rule-card" id="br-cv-01"><div class="rule-header"><span class="badge-br">BR-CV-01</span><span class="rule-title">Quyền sở hữu CV và thành tựu</span></div><div class="rule-content"><p>Người dùng chỉ được xem, sửa, xóa CV và thành tựu thuộc quyền truy cập của mình.</p>
-</div></div>
-<div class="rule-card" id="br-cv-02"><div class="rule-header"><span class="badge-br">BR-CV-02</span><span class="rule-title">AI chỉ đưa ra gợi ý</span></div><div class="rule-content"><p>Mọi gợi ý SeekerBot/STAR/JD cần được duyệt trước khi áp dụng; không tạo dự án, vai trò, số liệu, chứng chỉ hoặc kinh nghiệm thiếu căn cứ.</p>
-</div></div>
-<div class="rule-card" id="br-cv-03"><div class="rule-header"><span class="badge-br">BR-CV-03</span><span class="rule-title">Phạm vi điều chỉnh theo JD</span></div><div class="rule-content"><p>Điều chỉnh theo JD chỉ dùng <strong>thông tin CV đã có</strong> để cải thiện cách diễn đạt; không chấm điểm hoặc phân tích Skill Gap.</p>
-</div></div>
-<div class="rule-card" id="br-cv-04"><div class="rule-header"><span class="badge-br">BR-CV-04</span><span class="rule-title">Dữ liệu CV dùng chung</span></div><div class="rule-content"><p>Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp và bản xem trước khi in dùng chung dữ liệu. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu.</p>
-</div></div>
-<div class="rule-card" id="br-cv-05"><div class="rule-header"><span class="badge-br">BR-CV-05</span><span class="rule-title">Tái sử dụng thành tựu</span></div><div class="rule-content"><p>Thành tựu được sao chép tại thời điểm chọn; sửa thư viện không cập nhật CV đã có.</p>
-</div></div>
-<div class="rule-card" id="br-cv-06"><div class="rule-header"><span class="badge-br">BR-CV-06</span><span class="rule-title">Nhập nội dung GitHub</span></div><div class="rule-content"><p>Chỉ lấy kho mã nguồn công khai; thông tin mô tả và tệp README không chứng minh đóng góp cá nhân. Người dùng kiểm tra, sửa và xác nhận trước khi thêm vào CV.</p>
-</div></div>
-<div class="rule-card" id="br-cv-08"><div class="rule-header"><span class="badge-br">BR-CV-08</span><span class="rule-title">Phạm vi xem trước khi in</span></div><div class="rule-content"><p>SCRUM-49 chỉ xem trước trang in theo nội dung và mẫu hiện tại, không kiểm lỗi bằng AI. In/xuất PDF thuộc SCRUM-16, chờ xác nhận phạm vi.</p>
-</div></div>
-<div class="rule-card" id="br-cv-09"><div class="rule-header"><span class="badge-br">BR-CV-09</span><span class="rule-title">Dữ liệu hồ sơ cá nhân và CV</span></div><div class="rule-content"><p>Chỉ tự điền ô cơ bản còn trống khi tạo/mở CV từ <strong>hồ sơ cá nhân tài khoản đang đăng nhập</strong>; người dùng được sửa. Thay đổi hồ sơ cá nhân không ghi đè CV đã lưu. Ánh xạ trường chờ đối chiếu cấu trúc dữ liệu hồ sơ cá nhân.</p>
-</div></div>
+<div class="table-container business-rules-table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Quy tắc</th>
+<th style="text-align: left;">Nội dung</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;"><strong>BR-CV-01</strong></td>
+<td style="text-align: left;">Quyền sở hữu CV và thành tựu</td>
+<td style="text-align: left;">Người dùng chỉ được xem, sửa, xóa CV và thành tựu thuộc quyền truy cập của mình.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-CV-02</strong></td>
+<td style="text-align: left;">AI chỉ đưa ra gợi ý</td>
+<td style="text-align: left;">Mọi gợi ý SeekerBot/STAR/JD cần được duyệt trước khi áp dụng; không tạo dự án, vai trò, số liệu, chứng chỉ hoặc kinh nghiệm thiếu căn cứ.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-CV-03</strong></td>
+<td style="text-align: left;">Phạm vi điều chỉnh theo JD</td>
+<td style="text-align: left;">Điều chỉnh theo JD chỉ dùng <strong>thông tin CV đã có</strong> để cải thiện cách diễn đạt; không chấm điểm hoặc phân tích Skill Gap.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-CV-04</strong></td>
+<td style="text-align: left;">Dữ liệu CV dùng chung</td>
+<td style="text-align: left;">Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp và bản xem trước khi in dùng chung dữ liệu. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-CV-05</strong></td>
+<td style="text-align: left;">Tái sử dụng thành tựu</td>
+<td style="text-align: left;">Thành tựu được sao chép tại thời điểm chọn; sửa thư viện không cập nhật CV đã có.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-CV-06</strong></td>
+<td style="text-align: left;">Nhập nội dung GitHub</td>
+<td style="text-align: left;">Chỉ lấy kho mã nguồn công khai; thông tin mô tả và tệp README không chứng minh đóng góp cá nhân. Người dùng kiểm tra, sửa và xác nhận trước khi thêm vào CV.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-CV-08</strong></td>
+<td style="text-align: left;">Phạm vi xem trước khi in</td>
+<td style="text-align: left;">SCRUM-49 chỉ xem trước trang in theo nội dung và mẫu hiện tại, không kiểm lỗi bằng AI. In/xuất PDF thuộc SCRUM-16, chờ xác nhận phạm vi.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-CV-09</strong></td>
+<td style="text-align: left;">Dữ liệu hồ sơ cá nhân và CV</td>
+<td style="text-align: left;">Chỉ tự điền ô cơ bản còn trống khi tạo/mở CV từ <strong>hồ sơ cá nhân tài khoản đang đăng nhập</strong>; người dùng được sửa. Thay đổi hồ sơ cá nhân không ghi đè CV đã lưu. Ánh xạ trường chờ đối chiếu cấu trúc dữ liệu hồ sơ cá nhân.</td>
+</tr>
+</tbody></table></div>
 <h5 id="b-voice-mock-interview">b. Voice Mock Interview</h5>
-<h6 id="thiet-lap-buoi-phong-van">Thiết lập buổi phỏng vấn</h6>
-<div class="table-container"><table><thead><tr>
+<div class="table-container requirements-table-container"><table><thead><tr>
 <th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Details</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;">FR-VMI-01</td>
-<td style="text-align: left;">Cho phép chọn chuyên môn (Frontend, Backend, Fullstack, Mobile, AI/Data) và cấp độ Intern/Fresher.</td>
+<td style="text-align: left;"><strong>FR-VMI-01</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn cấu hình buổi phỏng vấn để luyện tập phù hợp nhu cầu.</td>
+<td style="text-align: left;">Thiết lập nội dung và ngôn ngữ phỏng vấn.</td>
+<td style="text-align: left;">Chọn chuyên môn Frontend, Backend, Fullstack, Mobile hoặc AI/Data; cấp độ Intern/Fresher và ngôn ngữ Việt/Anh. Lấy danh sách CV từ CV Builder &amp; SeekerBot, Profile/Account để chọn một CV làm ngữ cảnh; tài khoản chưa có hồ sơ vẫn được luyện theo vị trí và cấp độ.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-VMI-02</td>
-<td style="text-align: left;">Cho phép chọn ngôn ngữ phỏng vấn tiếng Việt hoặc tiếng Anh.</td>
+<td style="text-align: left;"><strong>FR-VMI-05</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn khởi tạo phiên theo thiết lập để nhận câu hỏi phù hợp.</td>
+<td style="text-align: left;">Kiểm tra và khởi tạo ngữ cảnh phỏng vấn.</td>
+<td style="text-align: left;">Kiểm tra tính hợp lệ của thiết lập, yêu cầu sửa lựa chọn chưa hợp lệ. Gửi vị trí, cấp độ, ngôn ngữ và tóm tắt CV nếu có đến AI để tạo ngữ cảnh, khung câu hỏi trước khi chuyển sang kiểm tra thiết bị.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-VMI-03</td>
-<td style="text-align: left;">Lấy danh sách CV từ các phân hệ CV Builder &amp; SeekerBot và Profile/Account và cho phép chọn một CV làm ngữ cảnh phỏng vấn.</td>
+<td style="text-align: left;"><strong>FR-VMI-07</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn kiểm tra thiết bị để sẵn sàng trả lời bằng giọng nói.</td>
+<td style="text-align: left;">Kiểm tra microphone và cho bắt đầu phiên.</td>
+<td style="text-align: left;">Xin quyền microphone từ trình duyệt, kiểm tra thiết bị và hiển thị cường độ âm theo thời gian thực. Nếu không khả dụng, báo lỗi, hướng dẫn cấp lại quyền hoặc đổi thiết bị. Chỉ bắt đầu khi đã có quyền microphone và kiểm tra đạt yêu cầu hoặc người dùng xác nhận sẵn sàng.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-VMI-04</td>
-<td style="text-align: left;">Cho phép phỏng vấn theo vị trí mà không cần CV khi tài khoản chưa có hồ sơ.</td>
+<td style="text-align: left;"><strong>FR-VMI-11</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn hỏi đáp bằng giọng nói và kiểm tra văn bản để gửi đúng câu trả lời.</td>
+<td style="text-align: left;">Thực hiện hỏi đáp bằng giọng nói.</td>
+<td style="text-align: left;">Phát câu hỏi bằng TTS theo ngôn ngữ đã chọn; thu câu trả lời qua microphone có quyền truy cập và gửi AI chuyển thành văn bản bằng STT. Hiển thị văn bản để người dùng theo dõi, xác nhận gửi hoặc nói lại nếu nhận diện chưa đúng.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-VMI-05</td>
-<td style="text-align: left;">Gửi vị trí, cấp độ, ngôn ngữ và tóm tắt CV đến AI để khởi tạo ngữ cảnh phiên và khung câu hỏi.</td>
+<td style="text-align: left;"><strong>FR-VMI-14</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhận câu hỏi đào sâu để luyện giải thích kiến thức.</td>
+<td style="text-align: left;">Phân tích câu trả lời và sinh câu hỏi tiếp theo.</td>
+<td style="text-align: left;">Gửi AI phân tích câu trả lời theo CV và vị trí ứng tuyển; dựa vào câu trả lời trước, ngữ cảnh và diễn tiến phiên để sinh câu hỏi tiếp theo, gồm câu hỏi đào sâu kỹ thuật.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-VMI-06</td>
-<td style="text-align: left;">Kiểm tra tính hợp lệ của thiết lập trước khi chuyển sang kiểm tra thiết bị.</td>
-</tr>
-</tbody></table></div>
-<h6 id="kiem-tra-microphone-va-am-thanh">Kiểm tra microphone và âm thanh</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-VMI-07</td>
-<td style="text-align: left;">Yêu cầu quyền truy cập microphone từ trình duyệt và kiểm tra thiết bị thu âm trước khi phỏng vấn.</td>
+<td style="text-align: left;"><strong>FR-VMI-16</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn chủ động kết thúc để xem lại buổi luyện tập.</td>
+<td style="text-align: left;">Kết thúc phiên và tổng hợp hội thoại.</td>
+<td style="text-align: left;">Cho kết thúc bất kỳ lúc nào; tự chuyển sang đánh giá khi đủ số câu hỏi quy định. Khi kết thúc, tổng hợp toàn bộ câu hỏi và câu trả lời đã thực hiện để đánh giá, xem lại.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-VMI-08</td>
-<td style="text-align: left;">Hiển thị cường độ âm thanh đầu vào theo thời gian thực để kiểm tra microphone.</td>
+<td style="text-align: left;"><strong>FR-VMI-18</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhận báo cáo để biết mức thể hiện và hướng ôn tập.</td>
+<td style="text-align: left;">Đánh giá và đề xuất cải thiện sau phỏng vấn.</td>
+<td style="text-align: left;">Gửi hội thoại và cấu hình phiên đến AI để đánh giá kỹ thuật, tư duy giải quyết vấn đề và diễn đạt. Báo cáo nêu điểm mạnh, lỗ hổng kiến thức, hướng trả lời tốt hơn và chủ đề cần ôn; kết quả phục vụ rèn luyện, không phải xác suất trúng tuyển.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-VMI-09</td>
-<td style="text-align: left;">Báo lỗi và hướng dẫn cấp lại quyền hoặc đổi thiết bị khi microphone không khả dụng.</td>
+<td style="text-align: left;"><strong>FR-VMI-21</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn lưu và xem lại các phiên để theo dõi quá trình luyện tập.</td>
+<td style="text-align: left;">Lưu và xem lịch sử phỏng vấn.</td>
+<td style="text-align: left;">Lưu thời điểm, vị trí, cấp độ, ngôn ngữ, CV đã dùng, toàn bộ hội thoại, điểm và báo cáo; liệt kê phiên mới nhất trước và cho mở chi tiết. Lịch sử giữ nguyên dữ liệu tại thời điểm phỏng vấn, không đổi khi CV gốc thay đổi.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-VMI-10</td>
-<td style="text-align: left;">Cho phép bắt đầu khi kiểm tra thiết bị đạt yêu cầu hoặc người dùng xác nhận sẵn sàng, đồng thời phải có quyền microphone.</td>
-</tr>
-</tbody></table></div>
-<h6 id="tham-gia-phong-van-bang-giong-noi">Tham gia phỏng vấn bằng giọng nói</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-VMI-11</td>
-<td style="text-align: left;">Chuyển câu hỏi thành giọng nói (TTS) và phát theo ngôn ngữ đã chọn.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-12</td>
-<td style="text-align: left;">Thu câu trả lời qua microphone và gửi AI chuyển thành văn bản (STT).</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-13</td>
-<td style="text-align: left;">Hiển thị văn bản nhận diện để người dùng theo dõi, xác nhận gửi hoặc nói lại.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-14</td>
-<td style="text-align: left;">Gửi AI phân tích câu trả lời theo ngữ cảnh CV và vị trí ứng tuyển.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-15</td>
-<td style="text-align: left;">Sinh câu hỏi tiếp theo theo diễn tiến phiên, gồm câu hỏi đào sâu kỹ thuật dựa trên câu trả lời trước.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-16</td>
-<td style="text-align: left;">Cho phép kết thúc bất kỳ lúc nào; tự chuyển sang đánh giá khi đủ số câu hỏi quy định.</td>
-</tr>
-</tbody></table></div>
-<h6 id="tong-hop-danh-gia-buoi-phong-van">Tổng hợp, đánh giá buổi phỏng vấn</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-VMI-17</td>
-<td style="text-align: left;">Tổng hợp bản ghi hội thoại gồm toàn bộ câu hỏi và câu trả lời khi phiên kết thúc.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-18</td>
-<td style="text-align: left;">Gửi bản ghi hội thoại và cấu hình phiên đến AI để đánh giá kỹ thuật, tư duy giải quyết vấn đề và diễn đạt.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-19</td>
-<td style="text-align: left;">Chỉ rõ điểm mạnh, lỗ hổng kiến thức, hướng trả lời tốt hơn và chủ đề cần ôn tập.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-20</td>
-<td style="text-align: left;">Hiển thị báo cáo đầy đủ, nêu rõ kết quả phục vụ rèn luyện và không phải xác suất trúng tuyển.</td>
-</tr>
-</tbody></table></div>
-<h6 id="xem-lich-su-phong-van">Xem lịch sử phỏng vấn</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-VMI-21</td>
-<td style="text-align: left;">Lưu thời điểm, vị trí, cấp độ, ngôn ngữ, CV đã dùng, bản ghi hội thoại, điểm và toàn văn báo cáo từng phiên.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-22</td>
-<td style="text-align: left;">Liệt kê phiên mới nhất trước; cho xem lại bản ghi hội thoại và báo cáo từng phiên.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-23</td>
-<td style="text-align: left;">Giữ nguyên lịch sử và kết quả khi CV gốc thay đổi.</td>
-</tr>
-</tbody></table></div>
-<h6 id="xu-ly-su-co-va-gian-doan">Xử lý sự cố và gián đoạn</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-VMI-27</td>
-<td style="text-align: left;">Khi mất kết nối hoặc AI lỗi, thông báo và lưu hỏi đáp đã hoàn tất; không tự hủy phiên hoặc trả điểm 0%.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-VMI-28</td>
-<td style="text-align: left;">Khi tạo báo cáo bị gián đoạn, giữ bản ghi hội thoại và cho tạo lại báo cáo mà không cần phỏng vấn lại.</td>
+<td style="text-align: left;"><strong>FR-VMI-27</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn giữ phần đã làm để tiếp tục sử dụng kết quả khi có gián đoạn.</td>
+<td style="text-align: left;">Xử lý gián đoạn và tạo lại báo cáo.</td>
+<td style="text-align: left;">Mất kết nối hoặc AI lỗi thì thông báo, lưu hỏi đáp đã hoàn tất; không tự hủy phiên hoặc trả điểm 0%. Nếu tạo báo cáo bị gián đoạn, giữ hội thoại và cho tạo lại báo cáo mà không phải phỏng vấn lại.</td>
 </tr>
 </tbody></table></div>
 <h6 id="cac-quy-tac-nghiep-vu-ap-dung-2">Các quy tắc nghiệp vụ áp dụng</h6>
-<div class="rule-card" id="br-vmi-01"><div class="rule-header"><span class="badge-br">BR-VMI-01</span><span class="rule-title">Cá nhân hóa câu hỏi theo ngữ cảnh và cấp độ</span></div><div class="rule-content"><ul><li><strong>Có CV:</strong> Ít nhất 40% câu hỏi chuyên môn dựa trực tiếp trên dự án, công nghệ và kinh nghiệm trong CV.</li><li><strong>Cấp độ Intern:</strong> Tập trung kiến thức nền tảng (OOP, cấu trúc dữ liệu, cú pháp ngôn ngữ, luồng hoạt động cơ bản của framework).</li><li><strong>Cấp độ Fresher:</strong> Mở rộng sang tư duy thiết kế kiến trúc, gỡ lỗi, kiểm thử, cơ sở dữ liệu, tối ưu hiệu năng và quy trình nhóm (Git, Agile/Scrum).</li></ul>
-</div></div>
-<div class="rule-card" id="br-vmi-02"><div class="rule-header"><span class="badge-br">BR-VMI-02</span><span class="rule-title">Điều kiện kiểm tra thiết bị âm thanh</span></div><div class="rule-content"><p>Bắt buộc có quyền microphone. Nếu mức âm bằng 0 suốt bài thử, cảnh báo và yêu cầu kiểm tra lại thiết bị.</p>
-</div></div>
-<div class="rule-card" id="br-vmi-03"><div class="rule-header"><span class="badge-br">BR-VMI-03</span><span class="rule-title">Cấu trúc và thời lượng phiên phỏng vấn</span></div><div class="rule-content"><p>Một phiên chuẩn gồm 5–8 câu hỏi theo 3 giai đoạn:</p>
-<ol><li><strong>Mở đầu (1 câu):</strong> Giới thiệu bản thân hoặc định hướng nghề nghiệp.</li><li><strong>Chuyên môn &amp; tình huống (3–6 câu):</strong> Câu hỏi kỹ thuật cốt lõi và đào sâu theo CV.</li><li><strong>Kết thúc (1 câu):</strong> Tổng kết hoặc cơ hội ứng viên đặt câu hỏi.</li></ol>
-<p>Tối đa <strong>3 phút/câu</strong>; hết giờ, thông báo và đề nghị gửi câu trả lời để chuyển câu.</p>
-</div></div>
-<div class="rule-card" id="br-vmi-04"><div class="rule-header"><span class="badge-br">BR-VMI-04</span><span class="rule-title">Tiêu chí và công thức tính điểm đánh giá</span></div><div class="rule-content"><p>Tổng điểm theo thang 100, dựa trên 3 tiêu chí:</p>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Tiêu chí</th>
-<th style="text-align: center;">Trọng số</th>
+<div class="table-container business-rules-table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Quy tắc</th>
+<th style="text-align: left;">Nội dung</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;">Kiến thức kỹ thuật (Technical Knowledge)</td>
-<td style="text-align: center;">50%</td>
+<td style="text-align: left;"><strong>BR-VMI-01</strong></td>
+<td style="text-align: left;">Cá nhân hóa câu hỏi theo ngữ cảnh và cấp độ</td>
+<td style="text-align: left;">• <strong>Có CV:</strong> Ít nhất 40% câu hỏi chuyên môn dựa trực tiếp trên dự án, công nghệ và kinh nghiệm trong CV.<br>• <strong>Cấp độ Intern:</strong> Tập trung kiến thức nền tảng (OOP, cấu trúc dữ liệu, cú pháp ngôn ngữ, luồng hoạt động cơ bản của framework).<br>• <strong>Cấp độ Fresher:</strong> Mở rộng sang tư duy thiết kế kiến trúc, gỡ lỗi, kiểm thử, cơ sở dữ liệu, tối ưu hiệu năng và quy trình nhóm (Git, Agile/Scrum).</td>
 </tr>
 <tr>
-<td style="text-align: left;">Tư duy giải quyết vấn đề (Problem Solving)</td>
-<td style="text-align: center;">30%</td>
+<td style="text-align: left;"><strong>BR-VMI-02</strong></td>
+<td style="text-align: left;">Điều kiện kiểm tra thiết bị âm thanh</td>
+<td style="text-align: left;">Bắt buộc có quyền microphone. Nếu mức âm bằng 0 suốt bài thử, cảnh báo và yêu cầu kiểm tra lại thiết bị.</td>
 </tr>
 <tr>
-<td style="text-align: left;">Kỹ năng diễn đạt &amp; Phản xạ (Communication &amp; Fluency)</td>
-<td style="text-align: center;">20%</td>
+<td style="text-align: left;"><strong>BR-VMI-03</strong></td>
+<td style="text-align: left;">Cấu trúc và thời lượng phiên phỏng vấn</td>
+<td style="text-align: left;">Một phiên chuẩn gồm 5–8 câu hỏi theo 3 giai đoạn:<br>1. <strong>Mở đầu (1 câu):</strong> Giới thiệu bản thân hoặc định hướng nghề nghiệp.<br>2. <strong>Chuyên môn &amp; tình huống (3–6 câu):</strong> Câu hỏi kỹ thuật cốt lõi và đào sâu theo CV.<br>3. <strong>Kết thúc (1 câu):</strong> Tổng kết hoặc cơ hội ứng viên đặt câu hỏi.<br>Tối đa <strong>3 phút/câu</strong>; hết giờ, thông báo và đề nghị gửi câu trả lời để chuyển câu.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-VMI-04</strong></td>
+<td style="text-align: left;">Tiêu chí và công thức tính điểm đánh giá</td>
+<td style="text-align: left;">Tổng điểm theo thang 100, dựa trên 3 tiêu chí:<br>• Kiến thức kỹ thuật (Technical Knowledge): trọng số 50%.<br>• Tư duy giải quyết vấn đề (Problem Solving): trọng số 30%.<br>• Kỹ năng diễn đạt &amp; Phản xạ (Communication &amp; Fluency): trọng số 20%.<br><strong>Công thức:</strong> <code>Điểm phỏng vấn = (Điểm kỹ thuật × 0.5) + (Điểm tư duy × 0.3) + (Điểm diễn đạt × 0.2)</code>.<br>Mỗi tiêu chí được chấm trên thang 100 dựa trên toàn bộ câu trả lời trong bản ghi hội thoại.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-VMI-05</strong></td>
+<td style="text-align: left;">Phân loại kết quả và định hướng ôn tập</td>
+<td style="text-align: left;"><strong>Đỏ — dưới 50:</strong> Ôn tập lại khái niệm kỹ thuật cốt lõi và luyện bộ câu hỏi cơ bản trước khi phỏng vấn thực tế.<br><strong>Vàng — 50 đến dưới 75:</strong> Rà soát chi tiết dự án trong CV và rèn luyện kỹ năng tóm tắt câu trả lời súc tích hơn.<br><strong>Xanh — từ 75 trở lên:</strong> Thể hiện kiến thức vững và phản xạ giao tiếp tốt; sẵn sàng tham gia phỏng vấn kỹ thuật tại doanh nghiệp.<br>Điểm phản ánh phần thể hiện trong phiên phỏng vấn cụ thể, không bảo đảm kết quả tuyển dụng thực tế.</td>
 </tr>
 </tbody></table></div>
-<pre><code class="language-text">Điểm phỏng vấn = (Điểm kỹ thuật × 0.5) + (Điểm tư duy × 0.3) + (Điểm diễn đạt × 0.2)</code></pre>
-<p>Mỗi tiêu chí được chấm trên thang 100 dựa trên toàn bộ câu trả lời trong bản ghi hội thoại.</p>
-</div></div>
-<div class="rule-card" id="br-vmi-05"><div class="rule-header"><span class="badge-br">BR-VMI-05</span><span class="rule-title">Phân loại kết quả và định hướng ôn tập</span></div><div class="rule-content"><div class="table-container"><table><thead><tr>
-<th style="text-align: center;">Mức</th>
-<th style="text-align: center;">Điểm tổng hợp</th>
-<th style="text-align: left;">Khuyến nghị</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: center;"><strong>Đỏ</strong></td>
-<td style="text-align: center;">Dưới 50</td>
-<td style="text-align: left;">Ôn tập lại khái niệm kỹ thuật cốt lõi và luyện bộ câu hỏi cơ bản trước khi phỏng vấn thực tế.</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Vàng</strong></td>
-<td style="text-align: center;">50 đến dưới 75</td>
-<td style="text-align: left;">Rà soát chi tiết dự án trong CV và rèn luyện kỹ năng tóm tắt câu trả lời súc tích hơn.</td>
-</tr>
-<tr>
-<td style="text-align: center;"><strong>Xanh</strong></td>
-<td style="text-align: center;">Từ 75 trở lên</td>
-<td style="text-align: left;">Thể hiện kiến thức vững và phản xạ giao tiếp tốt; sẵn sàng tham gia phỏng vấn kỹ thuật tại doanh nghiệp.</td>
-</tr>
-</tbody></table></div>
-<p>Điểm phản ánh phần thể hiện trong phiên phỏng vấn cụ thể, không bảo đảm kết quả tuyển dụng thực tế.</p>
-</div></div>
 <h5 id="c-job-matching-skill-gap">c. Job Matching &amp; Skill Gap</h5>
-<h6 id="tiep-nhan-du-lieu-va-xac-dinh-huong-chuyen-mon">Tiếp nhận dữ liệu và xác định hướng chuyên môn</h6>
-<div class="table-container"><table><thead><tr>
+<div class="table-container requirements-table-container"><table><thead><tr>
 <th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Details</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;">FR-JM-01</td>
-<td style="text-align: left;">Cho phép chọn một CV hiện có trong tài khoản để phân tích.</td>
+<td style="text-align: left;"><strong>FR-JM-01</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn cung cấp CV và JD để đánh giá theo công việc quan tâm.</td>
+<td style="text-align: left;">Tiếp nhận và kiểm tra dữ liệu đối chiếu.</td>
+<td style="text-align: left;">Chọn một CV hiện có trong tài khoản và nhập nội dung JD. Kiểm tra CV, JD và mức đầy đủ của dữ liệu; thông báo cụ thể nội dung thiếu cần bổ sung trước khi phân tích. Điểm phản ánh CV tại thời điểm phân tích.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-02</td>
-<td style="text-align: left;">Cho phép nhập JD cần đối chiếu.</td>
+<td style="text-align: left;"><strong>FR-JM-04</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn đối chiếu đúng chuyên môn để nhận đánh giá phù hợp.</td>
+<td style="text-align: left;">Xác định và kiểm tra hướng chuyên môn.</td>
+<td style="text-align: left;">Đề xuất chuyên môn từ tên vị trí và nội dung CV, JD; cho xác nhận hoặc sửa. Cho phân tích khi cùng hướng hoặc giao nhau; nếu khác hoàn toàn, giải thích và yêu cầu chọn lại CV/JD. Khi giao nhau, vẫn xét toàn bộ JD và chỉ rõ phần liên quan, phần yêu cầu mở rộng.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-03</td>
-<td style="text-align: left;">Kiểm tra đầu vào và thông báo nội dung cần bổ sung khi thiếu CV, JD hoặc chưa đủ dữ liệu phân tích.</td>
+<td style="text-align: left;"><strong>FR-JM-07</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn biết yêu cầu và bằng chứng để kiểm tra căn cứ đối chiếu.</td>
+<td style="text-align: left;">Bóc tách yêu cầu JD và bằng chứng CV.</td>
+<td style="text-align: left;">Nhận diện yêu cầu chuyên môn, kỹ năng mềm, kinh nghiệm, dự án, ngoại ngữ, học vấn và điều kiện liên quan; gắn nhãn bắt buộc, ưu tiên hoặc không nêu rõ theo JD, không tự coi yêu cầu chưa rõ là bắt buộc. Tìm bằng chứng CV kèm đoạn nguồn, chuẩn hóa cách viết đồng nghĩa. “Và” cần đạt đủ điều kiện, “hoặc” chỉ cần đạt một lựa chọn.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-04</td>
-<td style="text-align: left;">Đề xuất hướng chuyên môn của CV và JD từ tên vị trí và nội dung; cho phép xác nhận hoặc sửa.</td>
+<td style="text-align: left;"><strong>FR-JM-11</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn kiểm tra và sửa dữ liệu để đánh giá đúng CV hiện tại.</td>
+<td style="text-align: left;">Kiểm tra, chỉnh sửa và xác nhận dữ liệu bóc tách.</td>
+<td style="text-align: left;">Hiển thị yêu cầu, bằng chứng và đoạn nguồn CV, JD; cho sửa lỗi đọc hiểu theo nội dung gốc, chỉ đánh giá sau khi người dùng xác nhận. Thông tin mới ngoài CV chỉ phục vụ gợi ý, không tăng điểm hiện tại.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-05</td>
-<td style="text-align: left;">Cho phép phân tích khi chuyên môn cùng hướng hoặc giao nhau; nếu khác hoàn toàn, giải thích và yêu cầu chọn lại CV hoặc JD.</td>
+<td style="text-align: left;"><strong>FR-JM-13</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn biết mức đáp ứng để hiểu chất lượng bằng chứng trong CV.</td>
+<td style="text-align: left;">Đánh giá mức đáp ứng từng yêu cầu.</td>
+<td style="text-align: left;">Đối chiếu yêu cầu JD với bằng chứng CV và chấm 0%, 25%, 50% hoặc 100%. Năng lực thực hành xét công việc và đóng góp cá nhân trong dự án/kinh nghiệm; chỉ liệt kê kỹ năng, tên dự án hay chức danh chưa đủ để đạt đầy đủ.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-06</td>
-<td style="text-align: left;">Khi chuyên môn giao nhau, đánh giá toàn bộ yêu cầu JD và chỉ rõ phần liên quan, phần yêu cầu mở rộng.</td>
-</tr>
-</tbody></table></div>
-<h6 id="boc-tach-va-xac-nhan-thong-tin">Bóc tách và xác nhận thông tin</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JM-07</td>
-<td style="text-align: left;">Bóc tách yêu cầu JD về chuyên môn, kỹ năng mềm, kinh nghiệm, dự án, ngoại ngữ, học vấn và điều kiện liên quan.</td>
+<td style="text-align: left;"><strong>FR-JM-15</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn biết điểm và mức phù hợp để cân nhắc ứng tuyển.</td>
+<td style="text-align: left;">Tính điểm và phân loại độ phù hợp CV–JD.</td>
+<td style="text-align: left;">Tính phần trăm theo mức đáp ứng; trọng số bắt buộc là 2, ưu tiên và không nêu rõ là 1. Nếu có yêu cầu bắt buộc chưa đạt đầy đủ, điểm tối đa 79%. Phân loại theo điểm cuối: đỏ dưới 50%, vàng từ 50% đến dưới 80%, xanh từ 80% trở lên.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-08</td>
-<td style="text-align: left;">Phân loại yêu cầu thành bắt buộc, ưu tiên hoặc không nêu rõ theo JD.</td>
+<td style="text-align: left;"><strong>FR-JM-17</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn hiểu lý do đánh giá để cân nhắc việc ứng tuyển.</td>
+<td style="text-align: left;">Giải thích kết quả và khuyến nghị ứng tuyển.</td>
+<td style="text-align: left;">Hiển thị yêu cầu, mức đáp ứng, bằng chứng tương ứng; giải thích điểm và lý do giới hạn điểm nếu có. Đỏ: ưu tiên cải thiện; vàng: khuyến khích cân nhắc ứng tuyển và bổ sung điểm thiếu; xanh: CV đáp ứng tốt. Nêu rõ điểm không phải xác suất được tuyển.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-09</td>
-<td style="text-align: left;">Nhận diện bằng chứng trong CV cho từng yêu cầu và lưu đoạn nguồn tương ứng.</td>
+<td style="text-align: left;"><strong>FR-JM-19</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn biết mình thiếu cách trình bày hay năng lực để cải thiện đúng hướng.</td>
+<td style="text-align: left;">Xác định khoảng trống và hướng cải thiện.</td>
+<td style="text-align: left;">Liệt kê yêu cầu chưa đủ bằng chứng, ưu tiên yêu cầu bắt buộc. Tham chiếu hồ sơ cá nhân, cho xác nhận hoặc bổ sung tình trạng năng lực để phân biệt cần viết rõ CV hay học, thực hành thêm; thiếu thông tin thì ghi “Chưa xác định”.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-10</td>
-<td style="text-align: left;">Chuẩn hóa cách viết đồng nghĩa; nhận diện quan hệ logic “và”, “hoặc”.</td>
+<td style="text-align: left;"><strong>FR-JM-22</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhận ví dụ đúng thực tế để tự bổ sung nội dung CV.</td>
+<td style="text-align: left;">Gợi ý cải thiện cách trình bày CV.</td>
+<td style="text-align: left;">Với năng lực đã có, chỉ rõ nội dung cần bổ sung và đưa ví dụ từ thông tin đã xác nhận. Không tự sửa CV hoặc tạo kỹ năng, kinh nghiệm, chứng chỉ, thành tích thiếu căn cứ; thông tin ngoài CV chỉ phục vụ gợi ý, không đổi điểm hiện tại.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-11</td>
-<td style="text-align: left;">Hiển thị dữ liệu bóc tách và đoạn nguồn để người dùng kiểm tra, xác nhận trước khi đánh giá.</td>
+<td style="text-align: left;"><strong>FR-JM-23</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn có hướng học và tài liệu để bổ sung năng lực còn thiếu.</td>
+<td style="text-align: left;">Gợi ý học tập và tài liệu cải thiện.</td>
+<td style="text-align: left;">Đề xuất nội dung học, hoạt động thực hành gắn với yêu cầu JD chưa đáp ứng; kèm tài liệu liên quan có nguồn và đường dẫn đã kiểm chứng.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-12</td>
-<td style="text-align: left;">Cho phép sửa lỗi bóc tách theo CV và JD gốc; thông tin mới ngoài CV không làm tăng điểm hiện tại.</td>
-</tr>
-</tbody></table></div>
-<h6 id="danh-gia-muc-do-phu-hop">Đánh giá mức độ phù hợp</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JM-13</td>
-<td style="text-align: left;">Đối chiếu từng yêu cầu JD với bằng chứng CV để xác định mức đáp ứng.</td>
+<td style="text-align: left;"><strong>FR-JM-26</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn lưu và xem lại phân tích để theo dõi mức phù hợp của CV.</td>
+<td style="text-align: left;">Lưu và xem lịch sử phân tích.</td>
+<td style="text-align: left;">Lưu CV, JD tại thời điểm phân tích, dữ liệu bóc tách đã xác nhận, bảng đối chiếu, điểm ban đầu, điểm cuối, mức phân loại và gợi ý. Cho xem danh sách, chi tiết các lần phân tích của mình; giữ nguyên kết quả khi CV gốc thay đổi.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JM-14</td>
-<td style="text-align: left;">Đánh giá năng lực thực hành qua công việc và đóng góp cá nhân trong dự án hoặc kinh nghiệm; chỉ liệt kê kỹ năng, tên dự án hoặc chức danh chưa đủ chứng minh đáp ứng đầy đủ.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-15</td>
-<td style="text-align: left;">Tính điểm phần trăm theo trọng số và mức đáp ứng; áp dụng giới hạn nếu yêu cầu bắt buộc chưa được đáp ứng đầy đủ.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-16</td>
-<td style="text-align: left;">Phân loại đỏ, vàng, xanh theo điểm cuối.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-17</td>
-<td style="text-align: left;">Hiển thị bảng đối chiếu, mức đáp ứng, bằng chứng từng yêu cầu; giải thích điểm và giới hạn điểm nếu có.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-18</td>
-<td style="text-align: left;">Khuyến nghị ứng tuyển theo mức phân loại; nêu rõ điểm không phải xác suất được tuyển.</td>
-</tr>
-</tbody></table></div>
-<h6 id="xac-dinh-khoang-trong-va-huong-cai-thien">Xác định khoảng trống và hướng cải thiện</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JM-19</td>
-<td style="text-align: left;">Liệt kê yêu cầu chưa có đủ bằng chứng trong CV, ưu tiên yêu cầu bắt buộc.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-20</td>
-<td style="text-align: left;">Tham chiếu hồ sơ cá nhân để tìm năng lực CV chưa thể hiện rõ; cho phép người dùng xác nhận hoặc bổ sung tình trạng năng lực.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-21</td>
-<td style="text-align: left;">Dựa trên hồ sơ cá nhân và xác nhận của người dùng để phân biệt cần bổ sung CV hay học, thực hành thêm; ghi “Chưa xác định” nếu thiếu thông tin.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-22</td>
-<td style="text-align: left;">Với năng lực đã có, chỉ rõ nội dung CV cần bổ sung và ví dụ trình bày từ thông tin đã xác nhận.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-23</td>
-<td style="text-align: left;">Với năng lực còn thiếu, đề xuất nội dung học và thực hành theo JD.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-24</td>
-<td style="text-align: left;">Cung cấp tài liệu liên quan kèm nguồn và đường dẫn đã kiểm chứng.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-25</td>
-<td style="text-align: left;">Không tự sửa CV hoặc tạo kỹ năng, kinh nghiệm, chứng chỉ, thành tích thiếu căn cứ; thông tin ngoài CV chỉ phục vụ gợi ý, không đổi điểm hiện tại.</td>
-</tr>
-</tbody></table></div>
-<h6 id="luu-lich-su-phan-tich">Lưu lịch sử phân tích</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JM-26</td>
-<td style="text-align: left;">Lưu CV và JD tại thời điểm phân tích, dữ liệu bóc tách đã xác nhận, bảng đối chiếu, điểm ban đầu, điểm cuối, mức phân loại và gợi ý đã tạo.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-27</td>
-<td style="text-align: left;">Cho phép xem danh sách và chi tiết các lần phân tích của mình.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-29</td>
-<td style="text-align: left;">Giữ nguyên dữ liệu và kết quả lịch sử khi CV gốc thay đổi.</td>
-</tr>
-</tbody></table></div>
-<h6 id="xu-ly-truong-hop-khong-the-hoan-thanh-phan-tich">Xử lý trường hợp không thể hoàn thành phân tích</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JM-30</td>
-<td style="text-align: left;">Khi thiếu dữ liệu hoặc phân tích thất bại, nêu lý do chưa thể đánh giá và cho phép bổ sung dữ liệu hoặc thử lại; không trả điểm 0%.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JM-31</td>
-<td style="text-align: left;">Nếu tạo gợi ý hoặc lấy tài liệu thất bại, giữ và hiển thị kết quả đối chiếu; cho phép thử lại phần lỗi.</td>
+<td style="text-align: left;"><strong>FR-JM-30</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn biết nguyên nhân lỗi để bổ sung hoặc thử lại mà không mất kết quả.</td>
+<td style="text-align: left;">Xử lý lỗi phân tích và tạo gợi ý.</td>
+<td style="text-align: left;">Thiếu dữ liệu hoặc phân tích lỗi thì nêu lý do, cho bổ sung/thử lại, không trả điểm 0% thay lỗi. Tạo gợi ý hoặc lấy tài liệu thất bại thì giữ, hiển thị kết quả đối chiếu đã có và cho thử lại riêng phần lỗi.</td>
 </tr>
 </tbody></table></div>
 <h6 id="cac-quy-tac-nghiep-vu-ap-dung-3">Các quy tắc nghiệp vụ áp dụng</h6>
-<div class="rule-card" id="br-jm-01"><div class="rule-header"><span class="badge-br">BR-JM-01</span><span class="rule-title">Xác định hướng chuyên môn</span></div><div class="rule-content"><p>Xét chuyên môn từ tên vị trí và nội dung bóc tách, không yêu cầu tên vị trí trùng nhau. Ví dụ: React Developer/Angular Intern cùng hướng Frontend; Frontend/Fullstack giao nhau nhưng vẫn xét yêu cầu Backend; Frontend/Backend khác hướng nếu không có nội dung giao nhau.</p>
-</div></div>
-<div class="rule-card" id="br-jm-02"><div class="rule-header"><span class="badge-br">BR-JM-02</span><span class="rule-title">Diễn giải yêu cầu kết hợp</span></div><div class="rule-content"><ul><li><strong>“Và”:</strong> Đánh giá từng điều kiện; chỉ đạt đầy đủ khi đạt tất cả.</li><li><strong>“Hoặc”:</strong> Đạt đầy đủ một lựa chọn là đủ; không trừ điểm vì thiếu lựa chọn còn lại.</li></ul>
-</div></div>
-<div class="rule-card" id="br-jm-03"><div class="rule-header"><span class="badge-br">BR-JM-03</span><span class="rule-title">Trọng số yêu cầu</span></div><div class="rule-content"><div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Loại yêu cầu</th>
-<th style="text-align: right;">Trọng số</th>
+<div class="table-container business-rules-table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Quy tắc</th>
+<th style="text-align: left;">Nội dung</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;">Bắt buộc</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: left;"><strong>BR-JM-01</strong></td>
+<td style="text-align: left;">Xác định hướng chuyên môn</td>
+<td style="text-align: left;">Xét chuyên môn từ tên vị trí và nội dung bóc tách, không yêu cầu tên vị trí trùng nhau. Ví dụ: React Developer/Angular Intern cùng hướng Frontend; Frontend/Fullstack giao nhau nhưng vẫn xét yêu cầu Backend; Frontend/Backend khác hướng nếu không có nội dung giao nhau.</td>
 </tr>
 <tr>
-<td style="text-align: left;">Ưu tiên</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;"><strong>BR-JM-02</strong></td>
+<td style="text-align: left;">Diễn giải yêu cầu kết hợp</td>
+<td style="text-align: left;">• <strong>“Và”:</strong> Đánh giá từng điều kiện; chỉ đạt đầy đủ khi đạt tất cả.<br>• <strong>“Hoặc”:</strong> Đạt đầy đủ một lựa chọn là đủ; không trừ điểm vì thiếu lựa chọn còn lại.</td>
 </tr>
 <tr>
-<td style="text-align: left;">Không nêu rõ</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: left;"><strong>BR-JM-03</strong></td>
+<td style="text-align: left;">Trọng số yêu cầu</td>
+<td style="text-align: left;"><strong>Trọng số:</strong> Bắt buộc: 2; ưu tiên: 1; không nêu rõ: 1.<br>Yêu cầu không nêu rõ mức độ không được tự xem là bắt buộc để áp dụng giới hạn điểm.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-JM-04</strong></td>
+<td style="text-align: left;">Mức đáp ứng</td>
+<td style="text-align: left;"><strong>0%:</strong> Chưa có bằng chứng liên quan trong CV.<br><strong>25%:</strong> Có nhắc đến nhưng chưa chứng minh đáp ứng yêu cầu.<br><strong>50%:</strong> Có bằng chứng cụ thể nhưng chỉ đáp ứng một phần yêu cầu.<br><strong>100%:</strong> Có bằng chứng cụ thể đáp ứng đầy đủ yêu cầu.<br>Bằng chứng phải phù hợp yêu cầu; độ dài mô tả hoặc tên dự án không quyết định điểm. Học vấn, ngoại ngữ và điều kiện khác dùng thông tin tương ứng trong CV; năng lực thực hành ưu tiên mô tả việc đã làm và đóng góp cá nhân.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-JM-05</strong></td>
+<td style="text-align: left;">Công thức điểm và giới hạn</td>
+<td style="text-align: left;"><strong>Công thức:</strong> <code>Điểm ban đầu = Σ(trọng số yêu cầu × mức đáp ứng) ÷ Σ(trọng số yêu cầu) × 100</code>.<br>Mức đáp ứng trong công thức sử dụng các giá trị <code>0</code>, <code>0.25</code>, <code>0.5</code> và <code>1</code>.<br>Nếu có bất kỳ yêu cầu bắt buộc nào chưa đáp ứng đầy đủ: <code>Điểm cuối = min(Điểm ban đầu, 79%)</code>.<br>Nếu tất cả yêu cầu bắt buộc được đáp ứng đầy đủ, điểm cuối bằng điểm ban đầu.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-JM-06</strong></td>
+<td style="text-align: left;">Phân loại và khuyến nghị</td>
+<td style="text-align: left;"><strong>Đỏ — dưới 50%:</strong> Ưu tiên cải thiện trước khi ứng tuyển.<br><strong>Vàng — từ 50% đến dưới 80%:</strong> Khuyến khích cân nhắc ứng tuyển, đồng thời cải thiện những điểm còn thiếu.<br><strong>Xanh — từ 80% trở lên:</strong> CV thể hiện mức đáp ứng tốt đối với các yêu cầu được đánh giá.<br>Điểm chỉ phản ánh <strong>bằng chứng trong CV tại thời điểm phân tích</strong>, không đại diện toàn bộ năng lực. Trọng số và ngưỡng là quy tắc dự kiến, cần kiểm tra trên bộ CV và JD mẫu.</td>
 </tr>
 </tbody></table></div>
-<p>Yêu cầu không nêu rõ mức độ không được tự xem là bắt buộc để áp dụng giới hạn điểm.</p>
-</div></div>
-<div class="rule-card" id="br-jm-04"><div class="rule-header"><span class="badge-br">BR-JM-04</span><span class="rule-title">Mức đáp ứng</span></div><div class="rule-content"><div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mức đáp ứng</th>
-<th style="text-align: left;">Căn cứ đánh giá</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;"><strong>0%</strong></td>
-<td style="text-align: left;">Chưa có bằng chứng liên quan trong CV.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>25%</strong></td>
-<td style="text-align: left;">Có nhắc đến nhưng chưa chứng minh đáp ứng yêu cầu.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>50%</strong></td>
-<td style="text-align: left;">Có bằng chứng cụ thể nhưng chỉ đáp ứng một phần yêu cầu.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>100%</strong></td>
-<td style="text-align: left;">Có bằng chứng cụ thể đáp ứng đầy đủ yêu cầu.</td>
-</tr>
-</tbody></table></div>
-<p>Bằng chứng phải phù hợp yêu cầu; độ dài mô tả hoặc tên dự án không quyết định điểm. Học vấn, ngoại ngữ và điều kiện khác dùng thông tin tương ứng trong CV; năng lực thực hành ưu tiên mô tả việc đã làm và đóng góp cá nhân.</p>
-</div></div>
-<div class="rule-card" id="br-jm-05"><div class="rule-header"><span class="badge-br">BR-JM-05</span><span class="rule-title">Công thức điểm và giới hạn</span></div><div class="rule-content"><pre><code class="language-text">Điểm ban đầu =
-Σ(trọng số yêu cầu × mức đáp ứng)
-÷ Σ(trọng số yêu cầu)
-× 100</code></pre>
-<p>Mức đáp ứng trong công thức sử dụng các giá trị <code>0</code>, <code>0.25</code>, <code>0.5</code> và <code>1</code>.</p>
-<p>Nếu có bất kỳ yêu cầu bắt buộc nào chưa đáp ứng đầy đủ:</p>
-<pre><code class="language-text">Điểm cuối = min(Điểm ban đầu, 79%)</code></pre>
-<p>Nếu tất cả yêu cầu bắt buộc được đáp ứng đầy đủ, điểm cuối bằng điểm ban đầu.</p>
-</div></div>
-<div class="rule-card" id="br-jm-06"><div class="rule-header"><span class="badge-br">BR-JM-06</span><span class="rule-title">Phân loại và khuyến nghị</span></div><div class="rule-content"><div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mức</th>
-<th style="text-align: left;">Điểm cuối</th>
-<th style="text-align: left;">Khuyến nghị</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;"><strong>Đỏ</strong></td>
-<td style="text-align: left;">Dưới 50%</td>
-<td style="text-align: left;">Ưu tiên cải thiện trước khi ứng tuyển.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Vàng</strong></td>
-<td style="text-align: left;">Từ 50% đến dưới 80%</td>
-<td style="text-align: left;">Khuyến khích cân nhắc ứng tuyển, đồng thời cải thiện những điểm còn thiếu.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Xanh</strong></td>
-<td style="text-align: left;">Từ 80% trở lên</td>
-<td style="text-align: left;">CV thể hiện mức đáp ứng tốt đối với các yêu cầu được đánh giá.</td>
-</tr>
-</tbody></table></div>
-<p>Điểm chỉ phản ánh <strong>bằng chứng trong CV tại thời điểm phân tích</strong>, không đại diện toàn bộ năng lực. Trọng số và ngưỡng là quy tắc dự kiến, cần kiểm tra trên bộ CV và JD mẫu.</p>
-</div></div>
 <h5 id="d-job-tracking">d. Job Tracking</h5>
-<h6 id="quan-ly-nguon-tuyen-dung-can-theo-doi">Quản lý nguồn tuyển dụng cần theo dõi</h6>
-<div class="table-container"><table><thead><tr>
+<div class="table-container requirements-table-container"><table><thead><tr>
 <th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Details</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;">FR-JT-01</td>
-<td style="text-align: left;">Hệ thống hiển thị danh sách các nhà đăng tin tuyển dụng.</td>
+<td style="text-align: left;"><strong>FR-JT-01</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn quản lý các nguồn để chủ động theo dõi cơ hội tuyển dụng.</td>
+<td style="text-align: left;">Quản lý nguồn tuyển dụng theo dõi.</td>
+<td style="text-align: left;">Hiển thị nhà đăng tin; cho thêm/xóa nguồn bằng đường dẫn Fanpage/LinkedIn hỗ trợ, tạm dừng hoặc tiếp tục từng nguồn theo tài khoản. Xóa nguồn chỉ bỏ theo dõi; tạm dừng giữ dữ liệu cũ, tiếp tục từ lượt kiểm tra kế tiếp. Kiểm tra trạng thái Truy cập được/Không truy cập được; lỗi truy cập không đồng nghĩa ngừng tuyển.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JT-02</td>
-<td style="text-align: left;">Hệ thống cho phép thêm hoặc xóa nguồn theo dõi bằng đường dẫn Fanpage/LinkedIn được hỗ trợ.</td>
+<td style="text-align: left;"><strong>FR-JT-05</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhận và lưu tin mới để theo dõi nguồn quan tâm.</td>
+<td style="text-align: left;">Thu thập và lưu tin theo chu kỳ.</td>
+<td style="text-align: left;">Kiểm tra các nguồn đang bật theo chu kỳ cấu hình; lưu nội dung bài, nhà đăng tin, liên kết gốc và thời gian đăng. Chỉ phân phối tin mới cho tài khoản còn bật theo dõi nguồn đó.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JT-03</td>
-<td style="text-align: left;">Hệ thống cho phép tạm dừng và tiếp tục theo dõi nhà tuyển dụng cụ thể.</td>
+<td style="text-align: left;"><strong>FR-JT-07</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn quản lý danh sách cá nhân để giữ lại tin cần quan tâm.</td>
+<td style="text-align: left;">Quản lý tin trong danh sách cá nhân.</td>
+<td style="text-align: left;">Cho phép lưu, bỏ lưu hoặc xóa tin; xác nhận trước khi xóa. Thao tác chỉ ảnh hưởng danh sách của người thực hiện, không xóa bài gốc hoặc dữ liệu người khác.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JT-04</td>
-<td style="text-align: left;">Hệ thống kiểm tra nguồn, cập nhật trạng thái: Truy cập được, Không truy cập được.</td>
-</tr>
-</tbody></table></div>
-<h6 id="nhan-va-quan-ly-tin-tu-nguon-dang-theo-doi">Nhận và quản lý tin từ nguồn đang theo dõi</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JT-05</td>
-<td style="text-align: left;">Hệ thống nhận tin tuyển dụng từ nguồn đang được bật theo dõi theo chu kỳ.</td>
+<td style="text-align: left;"><strong>FR-JT-08</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn biết thời hạn tin để chọn cơ hội còn phù hợp.</td>
+<td style="text-align: left;">Quản lý hạn ứng tuyển và trạng thái tin.</td>
+<td style="text-align: left;">Lưu, cập nhật hạn dựa trên hạn ứng tuyển hoặc thông báo đóng tuyển; hạn chỉ ghi ngày tính đến cuối ngày theo múi giờ ứng dụng. Gắn trạng thái Còn hạn, Hết hạn hoặc Chưa xác định; thiếu căn cứ không được mặc định còn hạn.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JT-06</td>
-<td style="text-align: left;">Hệ thống lưu bài đã nhận cùng nội dung, nhà đăng tin, liên kết gốc, thời gian đăng tin.</td>
+<td style="text-align: left;"><strong>FR-JT-09</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn xem tin được sàng lọc theo quan tâm để tìm cơ hội phù hợp.</td>
+<td style="text-align: left;">Sàng lọc và cá nhân hóa danh sách tin.</td>
+<td style="text-align: left;">AI chọn tin IT Intern/Fresher theo nội dung; lưu vị trí, địa điểm, yêu cầu, hạn nộp và cách ứng tuyển khi có, không coi bài chưa rõ đối tượng là phù hợp. Hiển thị theo nguồn theo dõi và thông tin quan tâm đúng tài khoản; thiếu thông tin quan tâm thì dùng tin Intern/Fresher từ nguồn đang theo dõi.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JT-07</td>
-<td style="text-align: left;">Hệ thống cho phép lưu, bỏ lưu hoặc xóa tin trong danh sách cá nhân; xác nhận trước khi xóa.</td>
+<td style="text-align: left;"><strong>FR-JT-12</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhận thông báo để kịp xem cơ hội mới.</td>
+<td style="text-align: left;">Thông báo cơ hội tuyển dụng mới.</td>
+<td style="text-align: left;">Sau lượt kiểm tra định kỳ, thông báo tin mới đã sàng lọc phù hợp và chưa được xác định hết hạn; không tạo thông báo cơ hội mới cho tin hết hạn. Thông báo gồm tiêu đề, nhà tuyển dụng, vị trí, thời điểm và liên kết mở đúng tin chi tiết.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JT-08</td>
-<td style="text-align: left;">Hệ thống lưu hạn ứng tuyển khi xác định được và cập nhật trạng thái thời hạn: Còn hạn, Hết hạn hoặc Chưa xác định.</td>
-</tr>
-</tbody></table></div>
-<h6 id="sang-loc-va-ca-nhan-hoa-ket-qua">Sàng lọc và cá nhân hóa kết quả</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JT-09</td>
-<td style="text-align: left;">Hệ thống dùng AI sàng lọc tin IT Intern/Fresher và lưu kết quả cùng vị trí, địa điểm, yêu cầu, hạn nộp, cách ứng tuyển khi có.</td>
+<td style="text-align: left;"><strong>FR-JT-15</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn xem chi tiết và dùng hỗ trợ trích xuất để hiểu tin tuyển dụng.</td>
+<td style="text-align: left;">Xem chi tiết và yêu cầu trích xuất thông tin.</td>
+<td style="text-align: left;">Hiển thị nội dung đã lưu, các trường được trích xuất và gợi ý người dùng yêu cầu AI trích xuất; kết quả phải có căn cứ từ bài nguồn, không tự bổ sung dữ liệu thiếu. Bản lưu phản ánh thời điểm thu thập, không bảo đảm trùng bài gốc mới nhất.</td>
 </tr>
 <tr>
-<td style="text-align: left;">FR-JT-10</td>
-<td style="text-align: left;">Hệ thống hiển thị danh sách tin đã sàng lọc.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JT-11</td>
-<td style="text-align: left;">Hệ thống trả tin theo nguồn theo dõi và thông tin quan tâm của đúng tài khoản.</td>
-</tr>
-</tbody></table></div>
-<h6 id="thong-bao-co-hoi-tuyen-dung">Thông báo cơ hội tuyển dụng</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JT-12</td>
-<td style="text-align: left;">Sau lượt kiểm tra định kỳ, hệ thống tạo thông báo khi có tin mới đã sàng lọc phù hợp và chưa được xác định hết hạn.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JT-13</td>
-<td style="text-align: left;">Thông báo gồm tiêu đề, nhà tuyển dụng, vị trí, thời điểm và liên kết đến đúng tin chi tiết.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JT-14</td>
-<td style="text-align: left;">Hệ thống kiểm tra thời hạn tin, cập nhật hạn tin tuyển dụng.</td>
-</tr>
-</tbody></table></div>
-<h6 id="chi-tiet-tin-va-bai-dang-goc">Chi tiết tin và bài đăng gốc</h6>
-<div class="table-container"><table><thead><tr>
-<th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Yêu cầu chức năng</th>
-</tr></thead><tbody>
-<tr>
-<td style="text-align: left;">FR-JT-15</td>
-<td style="text-align: left;">Hệ thống hiển thị nội dung đã lưu và các thông tin tuyển dụng được trích xuất.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JT-16</td>
-<td style="text-align: left;">Hệ thống gợi ý người dùng sử dụng AI trích xuất thông tin.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JT-17</td>
-<td style="text-align: left;">Hệ thống lưu đường dẫn của bài đăng gốc nếu người dùng muốn trực tiếp xem.</td>
-</tr>
-<tr>
-<td style="text-align: left;">FR-JT-18</td>
-<td style="text-align: left;">Nếu bài gốc đã xóa, cập nhật lên hệ thống: Tin không còn tồn tại.</td>
+<td style="text-align: left;"><strong>FR-JT-17</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn kiểm tra bài gốc để xác minh thông tin tuyển dụng.</td>
+<td style="text-align: left;">Mở bài gốc và cập nhật tình trạng tồn tại.</td>
+<td style="text-align: left;">Lưu đường dẫn để mở bài trên nền tảng ngoài, không nộp hồ sơ thay người dùng. Chỉ ghi “Tin không còn tồn tại” khi xác định bài đã xóa; lỗi truy cập hoặc yêu cầu đăng nhập không được coi là bài đã xóa.</td>
 </tr>
 </tbody></table></div>
 <h6 id="cac-quy-tac-nghiep-vu-ap-dung-4">Các quy tắc nghiệp vụ áp dụng</h6>
-<div class="rule-card" id="br-jt-01"><div class="rule-header"><span class="badge-br">BR-JT-01</span><span class="rule-title">Dữ liệu cá nhân</span></div><div class="rule-content"><p>Nguồn theo dõi, tin cá nhân và thông báo thuộc đúng tài khoản; Backend kiểm tra quyền truy cập. Xóa nguồn là bỏ quan hệ theo dõi, không xóa tài khoản doanh nghiệp. Lưu bài thu thập khác với đánh dấu tin quan tâm; bỏ lưu khác với xóa khỏi danh sách. Xóa chỉ tác động đến người thực hiện, không xóa bài gốc hoặc dữ liệu của người khác.</p>
-</div></div>
-<div class="rule-card" id="br-jt-02"><div class="rule-header"><span class="badge-br">BR-JT-02</span><span class="rule-title">Nguồn và chu kỳ theo dõi</span></div><div class="rule-content"><p>Nguồn là Fanpage/LinkedIn doanh nghiệp trong phạm vi truy cập hỗ trợ. Trạng thái theo dõi độc lập với khả năng truy cập; không truy cập được không chứng minh doanh nghiệp đã ngừng tuyển. Hệ thống kiểm tra theo chu kỳ cấu hình, chỉ phân phối tin mới cho người đang bật theo dõi. Tạm dừng giữ dữ liệu cũ; tiếp tục có hiệu lực từ lượt kiểm tra kế tiếp.</p>
-</div></div>
-<div class="rule-card" id="br-jt-03"><div class="rule-header"><span class="badge-br">BR-JT-03</span><span class="rule-title">Sàng lọc và cá nhân hóa</span></div><div class="rule-content"><p>AI dựa vào nội dung để chọn tin tuyển IT Intern/Fresher, kể cả bài tuyển nhiều cấp độ; không chỉ dựa vào từ khóa. Bài chưa rõ chưa được coi là phù hợp; không tự tạo thông tin thiếu. Kết quả dựa vào nguồn theo dõi và thông tin quan tâm; thiếu thông tin quan tâm thì dùng danh sách Intern/Fresher từ nguồn theo dõi. Job Tracking không tính điểm CV–JD hoặc Skill Gap.</p>
-</div></div>
-<div class="rule-card" id="br-jt-04"><div class="rule-header"><span class="badge-br">BR-JT-04</span><span class="rule-title">Thời hạn tin và thông báo</span></div><div class="rule-content"><p>Hạn rõ ràng hoặc thông báo đóng tuyển là căn cứ xác định hết hạn; hạn chỉ ghi ngày được hiểu đến cuối ngày theo múi giờ ứng dụng. Thiếu căn cứ thì ghi Chưa xác định, không mặc định còn hạn. Tin và thông báo dùng cùng trạng thái; tin hết hạn không tạo thông báo cơ hội mới, thông báo cũ vẫn được giữ và ghi Hết hạn.</p>
-</div></div>
-<div class="rule-card" id="br-jt-05"><div class="rule-header"><span class="badge-br">BR-JT-05</span><span class="rule-title">Chi tiết và bài gốc</span></div><div class="rule-content"><p>Thông tin trích xuất phải có căn cứ từ bài nguồn; dữ liệu lưu phản ánh thời điểm thu thập, không bảo đảm mới nhất. Mở bài gốc là điều hướng ra nền tảng ngoài, không nộp hồ sơ thay người dùng. Chỉ ghi Tin không còn tồn tại khi xác định bài đã bị xóa; lỗi truy cập hoặc yêu cầu đăng nhập không đồng nghĩa bài đã bị xóa. Bản đã lưu vẫn xem được nếu còn dữ liệu và quyền truy cập.</p>
-</div></div>
+<div class="table-container business-rules-table-container"><table><thead><tr>
+<th style="text-align: left;">Mã</th>
+<th style="text-align: left;">Quy tắc</th>
+<th style="text-align: left;">Nội dung</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align: left;"><strong>BR-JT-01</strong></td>
+<td style="text-align: left;">Dữ liệu cá nhân</td>
+<td style="text-align: left;">Nguồn theo dõi, tin cá nhân và thông báo thuộc đúng tài khoản; Backend kiểm tra quyền truy cập. Xóa nguồn là bỏ quan hệ theo dõi, không xóa tài khoản doanh nghiệp. Lưu bài thu thập khác với đánh dấu tin quan tâm; bỏ lưu khác với xóa khỏi danh sách. Xóa chỉ tác động đến người thực hiện, không xóa bài gốc hoặc dữ liệu của người khác.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-JT-02</strong></td>
+<td style="text-align: left;">Nguồn và chu kỳ theo dõi</td>
+<td style="text-align: left;">Nguồn là Fanpage/LinkedIn doanh nghiệp trong phạm vi truy cập hỗ trợ. Trạng thái theo dõi độc lập với khả năng truy cập; không truy cập được không chứng minh doanh nghiệp đã ngừng tuyển. Hệ thống kiểm tra theo chu kỳ cấu hình, chỉ phân phối tin mới cho người đang bật theo dõi. Tạm dừng giữ dữ liệu cũ; tiếp tục có hiệu lực từ lượt kiểm tra kế tiếp.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-JT-03</strong></td>
+<td style="text-align: left;">Sàng lọc và cá nhân hóa</td>
+<td style="text-align: left;">AI dựa vào nội dung để chọn tin tuyển IT Intern/Fresher, kể cả bài tuyển nhiều cấp độ; không chỉ dựa vào từ khóa. Bài chưa rõ chưa được coi là phù hợp; không tự tạo thông tin thiếu. Kết quả dựa vào nguồn theo dõi và thông tin quan tâm; thiếu thông tin quan tâm thì dùng danh sách Intern/Fresher từ nguồn theo dõi. Job Tracking không tính điểm CV–JD hoặc Skill Gap.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-JT-04</strong></td>
+<td style="text-align: left;">Thời hạn tin và thông báo</td>
+<td style="text-align: left;">Hạn rõ ràng hoặc thông báo đóng tuyển là căn cứ xác định hết hạn; hạn chỉ ghi ngày được hiểu đến cuối ngày theo múi giờ ứng dụng. Thiếu căn cứ thì ghi Chưa xác định, không mặc định còn hạn. Tin và thông báo dùng cùng trạng thái; tin hết hạn không tạo thông báo cơ hội mới, thông báo cũ vẫn được giữ và ghi Hết hạn.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-JT-05</strong></td>
+<td style="text-align: left;">Chi tiết và bài gốc</td>
+<td style="text-align: left;">Thông tin trích xuất phải có căn cứ từ bài nguồn; dữ liệu lưu phản ánh thời điểm thu thập, không bảo đảm mới nhất. Mở bài gốc là điều hướng ra nền tảng ngoài, không nộp hồ sơ thay người dùng. Chỉ ghi Tin không còn tồn tại khi xác định bài đã bị xóa; lỗi truy cập hoặc yêu cầu đăng nhập không đồng nghĩa bài đã bị xóa. Bản đã lưu vẫn xem được nếu còn dữ liệu và quyền truy cập.</td>
+</tr>
+</tbody></table></div>
 <a id="yeu-cau-phi-chuc-nang"></a>
 <h4 id="3-2-2-dac-ta-yeu-cau-phi-chuc-nang">3.2.2. Đặc tả yêu cầu phi chức năng</h4>
 <h5 id="a-cv-builder-seekerbot-2">a. CV Builder &amp; SeekerBot</h5>
-<div class="table-container"><table><thead><tr>
+<div class="table-container requirements-table-container"><table><thead><tr>
 <th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Nhóm</th>
-<th style="text-align: left;">Yêu cầu phi chức năng</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Details</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;"><a id="nfr-cv-01"></a>NFR-CV-01</td>
-<td style="text-align: left;">Dễ sử dụng</td>
-<td style="text-align: left;">Chỉ rõ mục đang chỉnh sửa, hiển thị bản xem trước dễ đọc và hướng dẫn sửa lỗi.</td>
+<td style="text-align: left;"><a id="nfr-cv-01"></a><strong>NFR-CV-01</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn thao tác dễ hiểu để chỉnh sửa CV thuận tiện.</td>
+<td style="text-align: left;"><strong>Dễ sử dụng:</strong> Hỗ trợ chỉnh sửa CV rõ ràng.</td>
+<td style="text-align: left;">Chỉ rõ mục đang chỉnh sửa, hiển thị bản xem trước dễ đọc và hướng dẫn sửa lỗi tại trường liên quan.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-cv-02"></a>NFR-CV-02</td>
-<td style="text-align: left;">Bảo mật</td>
-<td style="text-align: left;">Chỉ người có quyền được truy cập CV và thành tựu; khóa AI, GitHub được giữ ở máy chủ.</td>
+<td style="text-align: left;"><a id="nfr-cv-02"></a><strong>NFR-CV-02</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn được bảo vệ dữ liệu để yên tâm sử dụng CV và thành tựu.</td>
+<td style="text-align: left;"><strong>Bảo mật:</strong> Bảo vệ CV và thành tựu.</td>
+<td style="text-align: left;">Chỉ người có quyền được truy cập CV và thành tựu; khóa dịch vụ AI, GitHub được giữ ở máy chủ.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-cv-03"></a>NFR-CV-03</td>
-<td style="text-align: left;">Tin cậy</td>
-<td style="text-align: left;">Lỗi AI hoặc GitHub không làm mất CV, gián đoạn lưu và chỉnh sửa; gợi ý chỉ được áp dụng sau khi duyệt.</td>
+<td style="text-align: left;"><a id="nfr-cv-03"></a><strong>NFR-CV-03</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn tiếp tục làm việc để không mất CV khi dịch vụ ngoài lỗi.</td>
+<td style="text-align: left;"><strong>Tin cậy:</strong> Duy trì dữ liệu khi dịch vụ ngoài lỗi.</td>
+<td style="text-align: left;">Lỗi AI hoặc GitHub không làm mất CV hay gián đoạn chỉnh sửa, lưu; gợi ý chỉ được áp dụng sau khi người dùng duyệt.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-cv-05"></a>NFR-CV-05</td>
-<td style="text-align: left;">Khả năng đọc</td>
-<td style="text-align: left;">Trang in không cắt hoặc chồng lấn nội dung quan trọng trong các mẫu được hỗ trợ.</td>
+<td style="text-align: left;"><a id="nfr-cv-05"></a><strong>NFR-CV-05</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn đọc được trang in để kiểm tra CV đầy đủ.</td>
+<td style="text-align: left;"><strong>Khả năng đọc:</strong> Bảo đảm bố cục trang in rõ ràng.</td>
+<td style="text-align: left;">Với các mẫu được hỗ trợ, nội dung quan trọng không bị cắt hoặc chồng lấn trong bản xem trước khi in.</td>
 </tr>
 </tbody></table></div>
 <h5 id="b-voice-mock-interview-2">b. Voice Mock Interview</h5>
-<div class="table-container"><table><thead><tr>
+<div class="table-container requirements-table-container"><table><thead><tr>
 <th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Nhóm</th>
-<th style="text-align: left;">Yêu cầu phi chức năng</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Details</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;"><a id="nfr-vmi-01"></a>NFR-VMI-01</td>
-<td style="text-align: left;">Hiệu năng</td>
+<td style="text-align: left;"><a id="nfr-vmi-01"></a><strong>NFR-VMI-01</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhận câu hỏi kịp thời để giữ nhịp phỏng vấn.</td>
+<td style="text-align: left;"><strong>Hiệu năng:</strong> Phản hồi kịp thời trong phiên.</td>
 <td style="text-align: left;">Khi mạng ổn định, thời gian từ khi trả lời xong đến khi phát câu hỏi tiếp theo không quá 5 giây.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-vmi-02"></a>NFR-VMI-02</td>
-<td style="text-align: left;">Dễ sử dụng</td>
-<td style="text-align: left;">Sóng âm thể hiện rõ trạng thái nghe, nói; câu hỏi, bản nhận diện giọng nói và báo cáo hỗ trợ tiếng Việt, tiếng Anh.</td>
+<td style="text-align: left;"><a id="nfr-vmi-02"></a><strong>NFR-VMI-02</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn hiểu trạng thái và ngôn ngữ để tham gia phỏng vấn thuận tiện.</td>
+<td style="text-align: left;"><strong>Dễ sử dụng:</strong> Thể hiện rõ trạng thái phỏng vấn.</td>
+<td style="text-align: left;">Sóng âm cho biết trạng thái nghe, nói; câu hỏi, văn bản nhận diện giọng nói và báo cáo hỗ trợ tiếng Việt, tiếng Anh.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-vmi-03"></a>NFR-VMI-03</td>
-<td style="text-align: left;">Bảo mật</td>
+<td style="text-align: left;"><a id="nfr-vmi-03"></a><strong>NFR-VMI-03</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn giữ riêng tư buổi luyện tập để bảo vệ dữ liệu cá nhân.</td>
+<td style="text-align: left;"><strong>Bảo mật:</strong> Giữ riêng tư dữ liệu phỏng vấn.</td>
 <td style="text-align: left;">Chỉ tài khoản sở hữu được truy cập âm thanh, bản ghi hội thoại và báo cáo; khóa AI được bảo vệ ở máy chủ.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-vmi-04"></a>NFR-VMI-04</td>
-<td style="text-align: left;">Tin cậy</td>
-<td style="text-align: left;">Giữ dữ liệu hỏi đáp khi phiên gián đoạn và cho phép tạo lại báo cáo mà không mất dữ liệu.</td>
+<td style="text-align: left;"><a id="nfr-vmi-04"></a><strong>NFR-VMI-04</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn giữ được hỏi đáp để khôi phục kết quả khi gián đoạn.</td>
+<td style="text-align: left;"><strong>Tin cậy:</strong> Giữ dữ liệu khi phiên gián đoạn.</td>
+<td style="text-align: left;">Bảo toàn hỏi đáp đã hoàn tất khi gián đoạn; cho tạo lại báo cáo từ dữ liệu đã có mà không làm mất nội dung phiên.</td>
 </tr>
 </tbody></table></div>
 <h5 id="c-job-matching-skill-gap-2">c. Job Matching &amp; Skill Gap</h5>
-<div class="table-container"><table><thead><tr>
+<div class="table-container requirements-table-container"><table><thead><tr>
 <th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Nhóm</th>
-<th style="text-align: left;">Yêu cầu phi chức năng</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Details</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;"><a id="nfr-jm-01"></a>NFR-JM-01</td>
-<td style="text-align: left;">Dễ sử dụng</td>
-<td style="text-align: left;">Giao diện dùng tiếng Việt dễ hiểu; điểm và mức đánh giá được giải thích bằng nhãn chữ và màu sắc.</td>
+<td style="text-align: left;"><a id="nfr-jm-01"></a><strong>NFR-JM-01</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn hiểu kết quả để biết mức phù hợp và hướng cải thiện.</td>
+<td style="text-align: left;"><strong>Dễ sử dụng:</strong> Trình bày kết quả dễ hiểu.</td>
+<td style="text-align: left;">Giao diện sử dụng tiếng Việt; điểm và mức đánh giá có giải thích bằng nhãn chữ và màu sắc, giúp người dùng hiểu kết quả đối chiếu.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jm-02"></a>NFR-JM-02</td>
-<td style="text-align: left;">Bảo mật</td>
-<td style="text-align: left;">Chỉ người có quyền được truy cập CV, hồ sơ cá nhân và lịch sử; khóa AI được giữ ở máy chủ.</td>
+<td style="text-align: left;"><a id="nfr-jm-02"></a><strong>NFR-JM-02</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn được bảo vệ thông tin để yên tâm phân tích CV.</td>
+<td style="text-align: left;"><strong>Bảo mật:</strong> Bảo vệ dữ liệu phân tích cá nhân.</td>
+<td style="text-align: left;">Chỉ người có quyền được truy cập CV, hồ sơ cá nhân và lịch sử phân tích; khóa AI được giữ ở máy chủ.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jm-03"></a>NFR-JM-03</td>
-<td style="text-align: left;">Nhất quán</td>
-<td style="text-align: left;">Cùng dữ liệu đã xác nhận và phiên bản công thức phải cho cùng điểm và mức phân loại.</td>
+<td style="text-align: left;"><a id="nfr-jm-03"></a><strong>NFR-JM-03</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn nhận điểm nhất quán để tin cậy kết quả đối chiếu.</td>
+<td style="text-align: left;"><strong>Nhất quán:</strong> Duy trì kết quả chấm điểm ổn định.</td>
+<td style="text-align: left;">Cùng dữ liệu đối chiếu đã xác nhận và cùng phiên bản công thức phải cho cùng điểm và mức phân loại.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jm-04"></a>NFR-JM-04</td>
-<td style="text-align: left;">Tin cậy</td>
+<td style="text-align: left;"><a id="nfr-jm-04"></a><strong>NFR-JM-04</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn giữ kết quả đối chiếu để sử dụng dù phần gợi ý lỗi.</td>
+<td style="text-align: left;"><strong>Tin cậy:</strong> Bảo toàn kết quả đối chiếu đã lưu.</td>
 <td style="text-align: left;">Lỗi tạo gợi ý hoặc lấy tài liệu không làm mất kết quả đối chiếu đã hoàn thành và lưu thành công.</td>
 </tr>
 </tbody></table></div>
 <h5 id="d-job-tracking-2">d. Job Tracking</h5>
-<div class="table-container"><table><thead><tr>
+<div class="table-container requirements-table-container"><table><thead><tr>
 <th style="text-align: left;">Mã</th>
-<th style="text-align: left;">Nhóm</th>
-<th style="text-align: left;">Yêu cầu phi chức năng</th>
+<th style="text-align: left;">User Story</th>
+<th style="text-align: left;">Requirement</th>
+<th style="text-align: left;">Details</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align: left;"><a id="nfr-jt-01"></a>NFR-JT-01</td>
-<td style="text-align: left;">Dễ sử dụng</td>
-<td style="text-align: left;">Trạng thái có nhãn rõ ràng, không chỉ dùng màu; thao tác xóa có xác nhận và báo kết quả.</td>
+<td style="text-align: left;"><a id="nfr-jt-01"></a><strong>NFR-JT-01</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn hiểu trạng thái và thao tác để quản lý tin thuận tiện.</td>
+<td style="text-align: left;"><strong>Dễ sử dụng:</strong> Thể hiện rõ trạng thái và thao tác.</td>
+<td style="text-align: left;">Trạng thái có nhãn chữ, không chỉ phân biệt bằng màu; thao tác xóa cần xác nhận và thông báo kết quả.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jt-02"></a>NFR-JT-02</td>
-<td style="text-align: left;">Bảo mật</td>
-<td style="text-align: left;">Kiểm tra quyền theo tài khoản ở máy chủ; không lộ dữ liệu người khác hoặc khóa dịch vụ.</td>
+<td style="text-align: left;"><a id="nfr-jt-02"></a><strong>NFR-JT-02</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn được bảo vệ dữ liệu để sử dụng theo dõi tin an toàn.</td>
+<td style="text-align: left;"><strong>Bảo mật:</strong> Bảo vệ dữ liệu theo tài khoản.</td>
+<td style="text-align: left;">Máy chủ kiểm tra quyền theo tài khoản; không làm lộ dữ liệu người khác hoặc khóa dịch vụ.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jt-03"></a>NFR-JT-03</td>
-<td style="text-align: left;">Toàn vẹn dữ liệu</td>
-<td style="text-align: left;">Thao tác cá nhân không làm mất dữ liệu người khác; lưu lỗi không báo thành công.</td>
+<td style="text-align: left;"><a id="nfr-jt-03"></a><strong>NFR-JT-03</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn quản lý tin riêng để không ảnh hưởng dữ liệu người khác.</td>
+<td style="text-align: left;"><strong>Toàn vẹn dữ liệu:</strong> Giữ đúng phạm vi thao tác cá nhân.</td>
+<td style="text-align: left;">Thao tác trên nguồn hoặc tin cá nhân không làm mất dữ liệu người khác; lưu thất bại không được báo thành công.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jt-04"></a>NFR-JT-04</td>
-<td style="text-align: left;">Nhất quán</td>
-<td style="text-align: left;">Danh sách, chi tiết và thông báo thống nhất kết quả phân loại và trạng thái thời hạn.</td>
+<td style="text-align: left;"><a id="nfr-jt-04"></a><strong>NFR-JT-04</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn thấy trạng thái thống nhất để hiểu đúng tình trạng cơ hội.</td>
+<td style="text-align: left;"><strong>Nhất quán:</strong> Đồng bộ kết quả và trạng thái tin.</td>
+<td style="text-align: left;">Danh sách, chi tiết và thông báo phải thống nhất kết quả phân loại và trạng thái thời hạn của cùng tin tuyển dụng.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jt-05"></a>NFR-JT-05</td>
-<td style="text-align: left;">Khả năng đáp ứng</td>
-<td style="text-align: left;">Thu thập/AI không chặn xem tin đã lưu; có trạng thái tải. Mục tiêu phản hồi được chốt qua thử nghiệm.</td>
+<td style="text-align: left;"><a id="nfr-jt-05"></a><strong>NFR-JT-05</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn tiếp tục xem tin để không phải chờ thu thập hoặc AI.</td>
+<td style="text-align: left;"><strong>Khả năng đáp ứng:</strong> Không chặn việc xem tin đã lưu.</td>
+<td style="text-align: left;">Thu thập nguồn và xử lý AI không chặn xem tin đã lưu; hiển thị trạng thái tải. Mục tiêu thời gian phản hồi được chốt qua thử nghiệm.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jt-06"></a>NFR-JT-06</td>
-<td style="text-align: left;">Khả năng đọc</td>
-<td style="text-align: left;">Hiển thị rõ tiếng Việt, nội dung dài và trường thiếu trên kích thước màn hình hỗ trợ.</td>
+<td style="text-align: left;"><a id="nfr-jt-06"></a><strong>NFR-JT-06</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn đọc tin rõ ràng để sử dụng trên màn hình hỗ trợ.</td>
+<td style="text-align: left;"><strong>Khả năng đọc:</strong> Hiển thị tin rõ trên màn hình hỗ trợ.</td>
+<td style="text-align: left;">Hiển thị rõ tiếng Việt, nội dung dài và các trường thiếu thông tin trên các kích thước màn hình được hỗ trợ.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jt-07"></a>NFR-JT-07</td>
-<td style="text-align: left;">Kiểm chứng được</td>
-<td style="text-align: left;">Lưu nguồn, thời điểm và căn cứ thời hạn; kiểm tra AI bằng bài mẫu đã gán nhãn.</td>
+<td style="text-align: left;"><a id="nfr-jt-07"></a><strong>NFR-JT-07</strong></td>
+<td style="text-align: left;">Là sinh viên, tôi muốn kiểm tra căn cứ để tin cậy thông tin được xử lý.</td>
+<td style="text-align: left;"><strong>Kiểm chứng được:</strong> Lưu căn cứ và kiểm tra kết quả AI.</td>
+<td style="text-align: left;">Lưu nguồn, thời điểm thu thập và căn cứ xác định thời hạn; kiểm tra việc sàng lọc AI bằng các bài mẫu đã gán nhãn.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><a id="nfr-jt-08"></a>NFR-JT-08</td>
-<td style="text-align: left;">Khả năng bảo trì</td>
-<td style="text-align: left;">Tách tích hợp nguồn/AI khỏi nghiệp vụ cá nhân; cấu hình được chu kỳ; FE dùng hợp đồng API của BE.</td>
+<td style="text-align: left;"><a id="nfr-jt-08"></a><strong>NFR-JT-08</strong></td>
+<td style="text-align: left;">Là thành viên nhóm phát triển, tôi muốn thay đổi tích hợp thuận tiện để bảo trì hệ thống.</td>
+<td style="text-align: left;"><strong>Khả năng bảo trì:</strong> Tách tích hợp khỏi nghiệp vụ cá nhân.</td>
+<td style="text-align: left;">Tích hợp nguồn và AI được tách riêng; chu kỳ thu thập có thể cấu hình, giao diện dùng hợp đồng API của phía máy chủ.</td>
 </tr>
 </tbody></table></div>
 <hr />
 <a id="dac-ta-yeu-cau"></a>
+
 
       </section>
 
