@@ -115,378 +115,105 @@ Quy ước mã:
 
 ##### a. CV Builder & SeekerBot
 
-###### Tạo, chỉnh sửa, xem trước và lưu CV
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-CV-01 | Cho phép tạo CV theo các mục và tự điền thông tin cơ bản. |
-| FR-CV-02 | Cho phép thêm, sửa từng mục và cập nhật bản xem trước trực tiếp. |
-| FR-CV-03 | Kiểm tra trường bắt buộc, định dạng và báo lỗi tại trường. |
-| FR-CV-04 | Cho phép lưu CV và mở lại để tiếp tục chỉnh sửa. |
-| FR-CV-05 | Cho phép chọn mẫu và xem trước mà không làm mất nội dung CV. |
-
-###### SeekerBot và cải thiện nội dung CV
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-CV-06 | Cho phép yêu cầu SeekerBot hướng dẫn viết từng mục CV. |
-| FR-CV-07 | Cho phép chọn đoạn mô tả dự án hoặc kinh nghiệm để nhận gợi ý viết lại theo cấu trúc STAR (tình huống, nhiệm vụ, hành động, kết quả). |
-| FR-CV-08 | Nhập JD để nhận gợi ý diễn đạt hoặc nhấn mạnh nội dung CV liên quan. |
-| FR-CV-09 | Hiển thị gợi ý cạnh bản gốc để người dùng duyệt, sửa hoặc bỏ qua. |
-| FR-CV-10 | Khi AI không phản hồi, thông báo lỗi và giữ nguyên CV. |
-
-###### Ngân hàng thành tựu và nhập dự án GitHub
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-CV-13 | Cho phép tạo, xem, sửa và xóa thành tựu cá nhân đã lưu. |
-| FR-CV-14 | Cho phép sao chép thành tựu đã chọn vào CV để chỉnh sửa độc lập. |
-| FR-CV-15 | Cho phép nhập đường dẫn kho mã nguồn GitHub công khai và lấy dữ liệu truy cập được. |
-| FR-CV-16 | Cho phép xem, sửa dữ liệu GitHub và xác nhận đóng góp cá nhân trước khi thêm vào CV. |
-| FR-CV-17 | Báo lỗi khi đường dẫn không hợp lệ, kho mã nguồn riêng tư, không tồn tại hoặc không truy xuất được. |
-
-###### Xem trước bố cục trang in
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-CV-22 | Mở **bản xem trước khi in** để xem và kiểm tra bố cục trang in. |
-| FR-CV-23 | Hiển thị nội dung, mẫu và phân trang; cho phép quay lại trình chỉnh sửa. |
-| FR-CV-24 | Bản xem trước khi in dùng CV hiện có, không dùng AI kiểm lỗi hoặc yêu cầu bổ sung. |
-
-###### Tự điền thông tin cơ bản từ Profile/Account
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-CV-25 | Khi tạo CV, điền ô cơ bản còn trống từ hồ sơ cá nhân đúng tài khoản; cho phép kiểm tra và sửa. |
-| FR-CV-26 | Khi mở CV đã lưu, chỉ điền ô cơ bản còn trống từ hồ sơ cá nhân, không ghi đè nội dung đã có. |
+| Mã | User Story | Requirement | Details |
+| --- | --- | --- | --- |
+| **FR-CV-01** | Là sinh viên, tôi muốn tạo CV và tận dụng hồ sơ cá nhân để giảm nhập lại. | Tạo CV và tự điền thông tin cơ bản. | Khởi tạo CV theo các mục được hỗ trợ. Khi tạo hoặc mở CV đã lưu, chỉ điền ô cơ bản còn trống từ hồ sơ tài khoản đang đăng nhập; cho kiểm tra, sửa và không ghi đè nội dung đã có, kể cả khi hồ sơ thay đổi. |
+| **FR-CV-02** | Là sinh viên, tôi muốn chỉnh sửa và kiểm tra CV để hoàn thiện nội dung. | Chỉnh sửa, kiểm tra và xem trước CV. | Cho phép thêm, sửa từng mục và cập nhật bản xem trước trực tiếp. Kiểm tra trường bắt buộc, định dạng dữ liệu và báo lỗi tại trường tương ứng để người dùng sửa. |
+| **FR-CV-04** | Là sinh viên, tôi muốn lưu CV để tiếp tục chỉnh sửa sau. | Lưu và mở lại CV. | Lưu cả nội dung và mẫu CV theo tài khoản; mở lại đúng bản đã lưu để tiếp tục chỉnh sửa. |
+| **FR-CV-05** | Là sinh viên, tôi muốn chọn mẫu phù hợp để trình bày CV. | Chọn mẫu trình bày CV. | Cho phép chọn mẫu và xem trước kết quả; đổi mẫu chỉ thay cách trình bày, giữ nguyên nội dung CV. |
+| **FR-CV-06** | Là sinh viên, tôi muốn nhận hướng dẫn và gợi ý để cải thiện cách trình bày CV. | Gợi ý cải thiện nội dung bằng SeekerBot. | Hỗ trợ hướng dẫn theo mục, viết lại đoạn dự án/kinh nghiệm theo STAR (tình huống, nhiệm vụ, hành động, kết quả), hoặc điều chỉnh cách diễn đạt theo JD. Chỉ dùng thông tin CV đã có, không tạo nội dung thiếu căn cứ, chấm điểm CV–JD hay phân tích Skill Gap. |
+| **FR-CV-09** | Là sinh viên, tôi muốn kiểm tra gợi ý AI để chủ động cập nhật CV. | Duyệt và áp dụng gợi ý AI. | Hiển thị gợi ý cạnh bản gốc; người dùng được sửa, duyệt hoặc bỏ qua, chỉ áp dụng phần đã duyệt. AI không phản hồi thì thông báo và giữ nguyên CV, cho tiếp tục chỉnh sửa, lưu. |
+| **FR-CV-13** | Là sinh viên, tôi muốn quản lý và tái sử dụng thành tựu để viết CV thuận tiện. | Quản lý và tái sử dụng thành tựu cá nhân. | Cho tạo, xem, sửa, xóa thành tựu có quyền truy cập và sao chép mục đã chọn vào CV. Bản sao được chỉnh sửa độc lập; sửa thư viện không tự cập nhật nội dung CV đã có. |
+| **FR-CV-15** | Là sinh viên, tôi muốn nhập dự án GitHub để bổ sung thông tin đúng đóng góp của mình. | Nhập và xác nhận dữ liệu GitHub. | Nhận đường dẫn kho công khai, lấy mô tả và README trong phạm vi truy cập hỗ trợ; cho xem, sửa và xác nhận đóng góp cá nhân trước khi thêm vào CV. Dữ liệu kho không tự chứng minh đóng góp. Đường dẫn sai, kho riêng tư, không tồn tại hoặc không truy xuất được thì báo lỗi, không báo lấy dữ liệu thành công. |
+| **FR-CV-22** | Là sinh viên, tôi muốn xem bố cục trang in để kiểm tra CV trước khi in. | Xem trước bố cục trang in. | Hiển thị nội dung, mẫu và phân trang theo CV hiện tại; cho quay lại trình chỉnh sửa khi cần thay đổi. Bước này không dùng AI kiểm lỗi hoặc yêu cầu bổ sung nội dung. |
 
 ###### Các quy tắc nghiệp vụ áp dụng
 
-**BR-CV-01 — Quyền sở hữu CV và thành tựu**
-
-Người dùng chỉ được xem, sửa, xóa CV và thành tựu thuộc quyền truy cập của mình.
-
-**BR-CV-02 — AI chỉ đưa ra gợi ý**
-
-Mọi gợi ý SeekerBot/STAR/JD cần được duyệt trước khi áp dụng; không tạo dự án, vai trò, số liệu, chứng chỉ hoặc kinh nghiệm thiếu căn cứ.
-
-**BR-CV-03 — Phạm vi điều chỉnh theo JD**
-
-Điều chỉnh theo JD chỉ dùng **thông tin CV đã có** để cải thiện cách diễn đạt; không chấm điểm hoặc phân tích Skill Gap.
-
-**BR-CV-04 — Dữ liệu CV dùng chung**
-
-Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp và bản xem trước khi in dùng chung dữ liệu. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu.
-
-**BR-CV-05 — Tái sử dụng thành tựu**
-
-Thành tựu được sao chép tại thời điểm chọn; sửa thư viện không cập nhật CV đã có.
-
-**BR-CV-06 — Nhập nội dung GitHub**
-
-Chỉ lấy kho mã nguồn công khai; thông tin mô tả và tệp README không chứng minh đóng góp cá nhân. Người dùng kiểm tra, sửa và xác nhận trước khi thêm vào CV.
-
-**BR-CV-08 — Phạm vi xem trước khi in**
-
-SCRUM-49 chỉ xem trước trang in theo nội dung và mẫu hiện tại, không kiểm lỗi bằng AI. In/xuất PDF thuộc SCRUM-16, chờ xác nhận phạm vi.
-
-**BR-CV-09 — Dữ liệu hồ sơ cá nhân và CV**
-
-Chỉ tự điền ô cơ bản còn trống khi tạo/mở CV từ **hồ sơ cá nhân tài khoản đang đăng nhập**; người dùng được sửa. Thay đổi hồ sơ cá nhân không ghi đè CV đã lưu. Ánh xạ trường chờ đối chiếu cấu trúc dữ liệu hồ sơ cá nhân.
+| Mã | Quy tắc | Nội dung |
+| --- | --- | --- |
+| **BR-CV-01** | Quyền sở hữu CV và thành tựu | Người dùng chỉ được xem, sửa, xóa CV và thành tựu thuộc quyền truy cập của mình. |
+| **BR-CV-02** | AI chỉ đưa ra gợi ý | Mọi gợi ý SeekerBot/STAR/JD cần được duyệt trước khi áp dụng; không tạo dự án, vai trò, số liệu, chứng chỉ hoặc kinh nghiệm thiếu căn cứ. |
+| **BR-CV-03** | Phạm vi điều chỉnh theo JD | Điều chỉnh theo JD chỉ dùng **thông tin CV đã có** để cải thiện cách diễn đạt; không chấm điểm hoặc phân tích Skill Gap. |
+| **BR-CV-04** | Dữ liệu CV dùng chung | Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp và bản xem trước khi in dùng chung dữ liệu. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu. |
+| **BR-CV-05** | Tái sử dụng thành tựu | Thành tựu được sao chép tại thời điểm chọn; sửa thư viện không cập nhật CV đã có. |
+| **BR-CV-06** | Nhập nội dung GitHub | Chỉ lấy kho mã nguồn công khai; thông tin mô tả và tệp README không chứng minh đóng góp cá nhân. Người dùng kiểm tra, sửa và xác nhận trước khi thêm vào CV. |
+| **BR-CV-08** | Phạm vi xem trước khi in | SCRUM-49 chỉ xem trước trang in theo nội dung và mẫu hiện tại, không kiểm lỗi bằng AI. In/xuất PDF thuộc SCRUM-16, chờ xác nhận phạm vi. |
+| **BR-CV-09** | Dữ liệu hồ sơ cá nhân và CV | Chỉ tự điền ô cơ bản còn trống khi tạo/mở CV từ **hồ sơ cá nhân tài khoản đang đăng nhập**; người dùng được sửa. Thay đổi hồ sơ cá nhân không ghi đè CV đã lưu. Ánh xạ trường chờ đối chiếu cấu trúc dữ liệu hồ sơ cá nhân. |
 
 ##### b. Voice Mock Interview
 
-###### Thiết lập buổi phỏng vấn
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-VMI-01 | Cho phép chọn chuyên môn (Frontend, Backend, Fullstack, Mobile, AI/Data) và cấp độ Intern/Fresher. |
-| FR-VMI-02 | Cho phép chọn ngôn ngữ phỏng vấn tiếng Việt hoặc tiếng Anh. |
-| FR-VMI-03 | Lấy danh sách CV từ các phân hệ CV Builder & SeekerBot và Profile/Account và cho phép chọn một CV làm ngữ cảnh phỏng vấn. |
-| FR-VMI-04 | Cho phép phỏng vấn theo vị trí mà không cần CV khi tài khoản chưa có hồ sơ. |
-| FR-VMI-05 | Gửi vị trí, cấp độ, ngôn ngữ và tóm tắt CV đến AI để khởi tạo ngữ cảnh phiên và khung câu hỏi. |
-| FR-VMI-06 | Kiểm tra tính hợp lệ của thiết lập trước khi chuyển sang kiểm tra thiết bị. |
-
-###### Kiểm tra microphone và âm thanh
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-VMI-07 | Yêu cầu quyền truy cập microphone từ trình duyệt và kiểm tra thiết bị thu âm trước khi phỏng vấn. |
-| FR-VMI-08 | Hiển thị cường độ âm thanh đầu vào theo thời gian thực để kiểm tra microphone. |
-| FR-VMI-09 | Báo lỗi và hướng dẫn cấp lại quyền hoặc đổi thiết bị khi microphone không khả dụng. |
-| FR-VMI-10 | Cho phép bắt đầu khi kiểm tra thiết bị đạt yêu cầu hoặc người dùng xác nhận sẵn sàng, đồng thời phải có quyền microphone. |
-
-###### Tham gia phỏng vấn bằng giọng nói
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-VMI-11 | Chuyển câu hỏi thành giọng nói (TTS) và phát theo ngôn ngữ đã chọn. |
-| FR-VMI-12 | Thu câu trả lời qua microphone và gửi AI chuyển thành văn bản (STT). |
-| FR-VMI-13 | Hiển thị văn bản nhận diện để người dùng theo dõi, xác nhận gửi hoặc nói lại. |
-| FR-VMI-14 | Gửi AI phân tích câu trả lời theo ngữ cảnh CV và vị trí ứng tuyển. |
-| FR-VMI-15 | Sinh câu hỏi tiếp theo theo diễn tiến phiên, gồm câu hỏi đào sâu kỹ thuật dựa trên câu trả lời trước. |
-| FR-VMI-16 | Cho phép kết thúc bất kỳ lúc nào; tự chuyển sang đánh giá khi đủ số câu hỏi quy định. |
-
-###### Tổng hợp, đánh giá buổi phỏng vấn
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-VMI-17 | Tổng hợp bản ghi hội thoại gồm toàn bộ câu hỏi và câu trả lời khi phiên kết thúc. |
-| FR-VMI-18 | Gửi bản ghi hội thoại và cấu hình phiên đến AI để đánh giá kỹ thuật, tư duy giải quyết vấn đề và diễn đạt. |
-| FR-VMI-19 | Chỉ rõ điểm mạnh, lỗ hổng kiến thức, hướng trả lời tốt hơn và chủ đề cần ôn tập. |
-| FR-VMI-20 | Hiển thị báo cáo đầy đủ, nêu rõ kết quả phục vụ rèn luyện và không phải xác suất trúng tuyển. |
-
-###### Xem lịch sử phỏng vấn
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-VMI-21 | Lưu thời điểm, vị trí, cấp độ, ngôn ngữ, CV đã dùng, bản ghi hội thoại, điểm và toàn văn báo cáo từng phiên. |
-| FR-VMI-22 | Liệt kê phiên mới nhất trước; cho xem lại bản ghi hội thoại và báo cáo từng phiên. |
-| FR-VMI-23 | Giữ nguyên lịch sử và kết quả khi CV gốc thay đổi. |
-
-###### Xử lý sự cố và gián đoạn
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-VMI-27 | Khi mất kết nối hoặc AI lỗi, thông báo và lưu hỏi đáp đã hoàn tất; không tự hủy phiên hoặc trả điểm 0%. |
-| FR-VMI-28 | Khi tạo báo cáo bị gián đoạn, giữ bản ghi hội thoại và cho tạo lại báo cáo mà không cần phỏng vấn lại. |
+| Mã | User Story | Requirement | Details |
+| --- | --- | --- | --- |
+| **FR-VMI-01** | Là sinh viên, tôi muốn cấu hình buổi phỏng vấn để luyện tập phù hợp nhu cầu. | Thiết lập nội dung và ngôn ngữ phỏng vấn. | Chọn chuyên môn Frontend, Backend, Fullstack, Mobile hoặc AI/Data; cấp độ Intern/Fresher và ngôn ngữ Việt/Anh. Lấy danh sách CV từ CV Builder & SeekerBot, Profile/Account để chọn một CV làm ngữ cảnh; tài khoản chưa có hồ sơ vẫn được luyện theo vị trí và cấp độ. |
+| **FR-VMI-05** | Là sinh viên, tôi muốn khởi tạo phiên theo thiết lập để nhận câu hỏi phù hợp. | Kiểm tra và khởi tạo ngữ cảnh phỏng vấn. | Kiểm tra tính hợp lệ của thiết lập, yêu cầu sửa lựa chọn chưa hợp lệ. Gửi vị trí, cấp độ, ngôn ngữ và tóm tắt CV nếu có đến AI để tạo ngữ cảnh, khung câu hỏi trước khi chuyển sang kiểm tra thiết bị. |
+| **FR-VMI-07** | Là sinh viên, tôi muốn kiểm tra thiết bị để sẵn sàng trả lời bằng giọng nói. | Kiểm tra microphone và cho bắt đầu phiên. | Xin quyền microphone từ trình duyệt, kiểm tra thiết bị và hiển thị cường độ âm theo thời gian thực. Nếu không khả dụng, báo lỗi, hướng dẫn cấp lại quyền hoặc đổi thiết bị. Chỉ bắt đầu khi đã có quyền microphone và kiểm tra đạt yêu cầu hoặc người dùng xác nhận sẵn sàng. |
+| **FR-VMI-11** | Là sinh viên, tôi muốn hỏi đáp bằng giọng nói và kiểm tra văn bản để gửi đúng câu trả lời. | Thực hiện hỏi đáp bằng giọng nói. | Phát câu hỏi bằng TTS theo ngôn ngữ đã chọn; thu câu trả lời qua microphone có quyền truy cập và gửi AI chuyển thành văn bản bằng STT. Hiển thị văn bản để người dùng theo dõi, xác nhận gửi hoặc nói lại nếu nhận diện chưa đúng. |
+| **FR-VMI-14** | Là sinh viên, tôi muốn nhận câu hỏi đào sâu để luyện giải thích kiến thức. | Phân tích câu trả lời và sinh câu hỏi tiếp theo. | Gửi AI phân tích câu trả lời theo CV và vị trí ứng tuyển; dựa vào câu trả lời trước, ngữ cảnh và diễn tiến phiên để sinh câu hỏi tiếp theo, gồm câu hỏi đào sâu kỹ thuật. |
+| **FR-VMI-16** | Là sinh viên, tôi muốn chủ động kết thúc để xem lại buổi luyện tập. | Kết thúc phiên và tổng hợp hội thoại. | Cho kết thúc bất kỳ lúc nào; tự chuyển sang đánh giá khi đủ số câu hỏi quy định. Khi kết thúc, tổng hợp toàn bộ câu hỏi và câu trả lời đã thực hiện để đánh giá, xem lại. |
+| **FR-VMI-18** | Là sinh viên, tôi muốn nhận báo cáo để biết mức thể hiện và hướng ôn tập. | Đánh giá và đề xuất cải thiện sau phỏng vấn. | Gửi hội thoại và cấu hình phiên đến AI để đánh giá kỹ thuật, tư duy giải quyết vấn đề và diễn đạt. Báo cáo nêu điểm mạnh, lỗ hổng kiến thức, hướng trả lời tốt hơn và chủ đề cần ôn; kết quả phục vụ rèn luyện, không phải xác suất trúng tuyển. |
+| **FR-VMI-21** | Là sinh viên, tôi muốn lưu và xem lại các phiên để theo dõi quá trình luyện tập. | Lưu và xem lịch sử phỏng vấn. | Lưu thời điểm, vị trí, cấp độ, ngôn ngữ, CV đã dùng, toàn bộ hội thoại, điểm và báo cáo; liệt kê phiên mới nhất trước và cho mở chi tiết. Lịch sử giữ nguyên dữ liệu tại thời điểm phỏng vấn, không đổi khi CV gốc thay đổi. |
+| **FR-VMI-27** | Là sinh viên, tôi muốn giữ phần đã làm để tiếp tục sử dụng kết quả khi có gián đoạn. | Xử lý gián đoạn và tạo lại báo cáo. | Mất kết nối hoặc AI lỗi thì thông báo, lưu hỏi đáp đã hoàn tất; không tự hủy phiên hoặc trả điểm 0%. Nếu tạo báo cáo bị gián đoạn, giữ hội thoại và cho tạo lại báo cáo mà không phải phỏng vấn lại. |
 
 ###### Các quy tắc nghiệp vụ áp dụng
 
-**BR-VMI-01 — Cá nhân hóa câu hỏi theo ngữ cảnh và cấp độ**
-
-- **Có CV:** Ít nhất 40% câu hỏi chuyên môn dựa trực tiếp trên dự án, công nghệ và kinh nghiệm trong CV.
-- **Cấp độ Intern:** Tập trung kiến thức nền tảng (OOP, cấu trúc dữ liệu, cú pháp ngôn ngữ, luồng hoạt động cơ bản của framework).
-- **Cấp độ Fresher:** Mở rộng sang tư duy thiết kế kiến trúc, gỡ lỗi, kiểm thử, cơ sở dữ liệu, tối ưu hiệu năng và quy trình nhóm (Git, Agile/Scrum).
-
-**BR-VMI-02 — Điều kiện kiểm tra thiết bị âm thanh**
-
-Bắt buộc có quyền microphone. Nếu mức âm bằng 0 suốt bài thử, cảnh báo và yêu cầu kiểm tra lại thiết bị.
-
-**BR-VMI-03 — Cấu trúc và thời lượng phiên phỏng vấn**
-
-Một phiên chuẩn gồm 5–8 câu hỏi theo 3 giai đoạn:
-1. **Mở đầu (1 câu):** Giới thiệu bản thân hoặc định hướng nghề nghiệp.
-2. **Chuyên môn & tình huống (3–6 câu):** Câu hỏi kỹ thuật cốt lõi và đào sâu theo CV.
-3. **Kết thúc (1 câu):** Tổng kết hoặc cơ hội ứng viên đặt câu hỏi.
-
-Tối đa **3 phút/câu**; hết giờ, thông báo và đề nghị gửi câu trả lời để chuyển câu.
-
-**BR-VMI-04 — Tiêu chí và công thức tính điểm đánh giá**
-
-Tổng điểm theo thang 100, dựa trên 3 tiêu chí:
-
-| Tiêu chí | Trọng số |
-|---|:---:|
-| Kiến thức kỹ thuật (Technical Knowledge) | 50% |
-| Tư duy giải quyết vấn đề (Problem Solving) | 30% |
-| Kỹ năng diễn đạt & Phản xạ (Communication & Fluency) | 20% |
-
-```text
-Điểm phỏng vấn = (Điểm kỹ thuật × 0.5) + (Điểm tư duy × 0.3) + (Điểm diễn đạt × 0.2)
-```
-
-Mỗi tiêu chí được chấm trên thang 100 dựa trên toàn bộ câu trả lời trong bản ghi hội thoại.
-
-**BR-VMI-05 — Phân loại kết quả và định hướng ôn tập**
-
-| Mức | Điểm tổng hợp | Khuyến nghị |
-|:---:|:---:|---|
-| **Đỏ** | Dưới 50 | Ôn tập lại khái niệm kỹ thuật cốt lõi và luyện bộ câu hỏi cơ bản trước khi phỏng vấn thực tế. |
-| **Vàng** | 50 đến dưới 75 | Rà soát chi tiết dự án trong CV và rèn luyện kỹ năng tóm tắt câu trả lời súc tích hơn. |
-| **Xanh** | Từ 75 trở lên | Thể hiện kiến thức vững và phản xạ giao tiếp tốt; sẵn sàng tham gia phỏng vấn kỹ thuật tại doanh nghiệp. |
-
-Điểm phản ánh phần thể hiện trong phiên phỏng vấn cụ thể, không bảo đảm kết quả tuyển dụng thực tế.
+| Mã | Quy tắc | Nội dung |
+| --- | --- | --- |
+| **BR-VMI-01** | Cá nhân hóa câu hỏi theo ngữ cảnh và cấp độ | • **Có CV:** Ít nhất 40% câu hỏi chuyên môn dựa trực tiếp trên dự án, công nghệ và kinh nghiệm trong CV.<br>• **Cấp độ Intern:** Tập trung kiến thức nền tảng (OOP, cấu trúc dữ liệu, cú pháp ngôn ngữ, luồng hoạt động cơ bản của framework).<br>• **Cấp độ Fresher:** Mở rộng sang tư duy thiết kế kiến trúc, gỡ lỗi, kiểm thử, cơ sở dữ liệu, tối ưu hiệu năng và quy trình nhóm (Git, Agile/Scrum). |
+| **BR-VMI-02** | Điều kiện kiểm tra thiết bị âm thanh | Bắt buộc có quyền microphone. Nếu mức âm bằng 0 suốt bài thử, cảnh báo và yêu cầu kiểm tra lại thiết bị. |
+| **BR-VMI-03** | Cấu trúc và thời lượng phiên phỏng vấn | Một phiên chuẩn gồm 5–8 câu hỏi theo 3 giai đoạn:<br>1. **Mở đầu (1 câu):** Giới thiệu bản thân hoặc định hướng nghề nghiệp.<br>2. **Chuyên môn & tình huống (3–6 câu):** Câu hỏi kỹ thuật cốt lõi và đào sâu theo CV.<br>3. **Kết thúc (1 câu):** Tổng kết hoặc cơ hội ứng viên đặt câu hỏi.<br>Tối đa **3 phút/câu**; hết giờ, thông báo và đề nghị gửi câu trả lời để chuyển câu. |
+| **BR-VMI-04** | Tiêu chí và công thức tính điểm đánh giá | Tổng điểm theo thang 100, dựa trên 3 tiêu chí:<br>• Kiến thức kỹ thuật (Technical Knowledge): trọng số 50%.<br>• Tư duy giải quyết vấn đề (Problem Solving): trọng số 30%.<br>• Kỹ năng diễn đạt & Phản xạ (Communication & Fluency): trọng số 20%.<br>**Công thức:** `Điểm phỏng vấn = (Điểm kỹ thuật × 0.5) + (Điểm tư duy × 0.3) + (Điểm diễn đạt × 0.2)`.<br>Mỗi tiêu chí được chấm trên thang 100 dựa trên toàn bộ câu trả lời trong bản ghi hội thoại. |
+| **BR-VMI-05** | Phân loại kết quả và định hướng ôn tập | **Đỏ — dưới 50:** Ôn tập lại khái niệm kỹ thuật cốt lõi và luyện bộ câu hỏi cơ bản trước khi phỏng vấn thực tế.<br>**Vàng — 50 đến dưới 75:** Rà soát chi tiết dự án trong CV và rèn luyện kỹ năng tóm tắt câu trả lời súc tích hơn.<br>**Xanh — từ 75 trở lên:** Thể hiện kiến thức vững và phản xạ giao tiếp tốt; sẵn sàng tham gia phỏng vấn kỹ thuật tại doanh nghiệp.<br>Điểm phản ánh phần thể hiện trong phiên phỏng vấn cụ thể, không bảo đảm kết quả tuyển dụng thực tế. |
 
 ##### c. Job Matching & Skill Gap
 
-###### Tiếp nhận dữ liệu và xác định hướng chuyên môn
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-JM-01 | Cho phép chọn một CV hiện có trong tài khoản để phân tích. |
-| FR-JM-02 | Cho phép nhập JD cần đối chiếu. |
-| FR-JM-03 | Kiểm tra đầu vào và thông báo nội dung cần bổ sung khi thiếu CV, JD hoặc chưa đủ dữ liệu phân tích. |
-| FR-JM-04 | Đề xuất hướng chuyên môn của CV và JD từ tên vị trí và nội dung; cho phép xác nhận hoặc sửa. |
-| FR-JM-05 | Cho phép phân tích khi chuyên môn cùng hướng hoặc giao nhau; nếu khác hoàn toàn, giải thích và yêu cầu chọn lại CV hoặc JD. |
-| FR-JM-06 | Khi chuyên môn giao nhau, đánh giá toàn bộ yêu cầu JD và chỉ rõ phần liên quan, phần yêu cầu mở rộng. |
-
-###### Bóc tách và xác nhận thông tin
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-JM-07 | Bóc tách yêu cầu JD về chuyên môn, kỹ năng mềm, kinh nghiệm, dự án, ngoại ngữ, học vấn và điều kiện liên quan. |
-| FR-JM-08 | Phân loại yêu cầu thành bắt buộc, ưu tiên hoặc không nêu rõ theo JD. |
-| FR-JM-09 | Nhận diện bằng chứng trong CV cho từng yêu cầu và lưu đoạn nguồn tương ứng. |
-| FR-JM-10 | Chuẩn hóa cách viết đồng nghĩa; nhận diện quan hệ logic “và”, “hoặc”. |
-| FR-JM-11 | Hiển thị dữ liệu bóc tách và đoạn nguồn để người dùng kiểm tra, xác nhận trước khi đánh giá. |
-| FR-JM-12 | Cho phép sửa lỗi bóc tách theo CV và JD gốc; thông tin mới ngoài CV không làm tăng điểm hiện tại. |
-
-###### Đánh giá mức độ phù hợp
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-JM-13 | Đối chiếu từng yêu cầu JD với bằng chứng CV để xác định mức đáp ứng. |
-| FR-JM-14 | Đánh giá năng lực thực hành qua công việc và đóng góp cá nhân trong dự án hoặc kinh nghiệm; chỉ liệt kê kỹ năng, tên dự án hoặc chức danh chưa đủ chứng minh đáp ứng đầy đủ. |
-| FR-JM-15 | Tính điểm phần trăm theo trọng số và mức đáp ứng; áp dụng giới hạn nếu yêu cầu bắt buộc chưa được đáp ứng đầy đủ. |
-| FR-JM-16 | Phân loại đỏ, vàng, xanh theo điểm cuối. |
-| FR-JM-17 | Hiển thị bảng đối chiếu, mức đáp ứng, bằng chứng từng yêu cầu; giải thích điểm và giới hạn điểm nếu có. |
-| FR-JM-18 | Khuyến nghị ứng tuyển theo mức phân loại; nêu rõ điểm không phải xác suất được tuyển. |
-
-###### Xác định khoảng trống và hướng cải thiện
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-JM-19 | Liệt kê yêu cầu chưa có đủ bằng chứng trong CV, ưu tiên yêu cầu bắt buộc. |
-| FR-JM-20 | Tham chiếu hồ sơ cá nhân để tìm năng lực CV chưa thể hiện rõ; cho phép người dùng xác nhận hoặc bổ sung tình trạng năng lực. |
-| FR-JM-21 | Dựa trên hồ sơ cá nhân và xác nhận của người dùng để phân biệt cần bổ sung CV hay học, thực hành thêm; ghi “Chưa xác định” nếu thiếu thông tin. |
-| FR-JM-22 | Với năng lực đã có, chỉ rõ nội dung CV cần bổ sung và ví dụ trình bày từ thông tin đã xác nhận. |
-| FR-JM-23 | Với năng lực còn thiếu, đề xuất nội dung học và thực hành theo JD. |
-| FR-JM-24 | Cung cấp tài liệu liên quan kèm nguồn và đường dẫn đã kiểm chứng. |
-| FR-JM-25 | Không tự sửa CV hoặc tạo kỹ năng, kinh nghiệm, chứng chỉ, thành tích thiếu căn cứ; thông tin ngoài CV chỉ phục vụ gợi ý, không đổi điểm hiện tại. |
-
-###### Lưu lịch sử phân tích
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-JM-26 | Lưu CV và JD tại thời điểm phân tích, dữ liệu bóc tách đã xác nhận, bảng đối chiếu, điểm ban đầu, điểm cuối, mức phân loại và gợi ý đã tạo. |
-| FR-JM-27 | Cho phép xem danh sách và chi tiết các lần phân tích của mình. |
-| FR-JM-29 | Giữ nguyên dữ liệu và kết quả lịch sử khi CV gốc thay đổi. |
-
-###### Xử lý trường hợp không thể hoàn thành phân tích
-
-| Mã | Yêu cầu chức năng |
-|---|---|
-| FR-JM-30 | Khi thiếu dữ liệu hoặc phân tích thất bại, nêu lý do chưa thể đánh giá và cho phép bổ sung dữ liệu hoặc thử lại; không trả điểm 0%. |
-| FR-JM-31 | Nếu tạo gợi ý hoặc lấy tài liệu thất bại, giữ và hiển thị kết quả đối chiếu; cho phép thử lại phần lỗi. |
+| Mã | User Story | Requirement | Details |
+| --- | --- | --- | --- |
+| **FR-JM-01** | Là sinh viên, tôi muốn cung cấp CV và JD để đánh giá theo công việc quan tâm. | Tiếp nhận và kiểm tra dữ liệu đối chiếu. | Chọn một CV hiện có trong tài khoản và nhập nội dung JD. Kiểm tra CV, JD và mức đầy đủ của dữ liệu; thông báo cụ thể nội dung thiếu cần bổ sung trước khi phân tích. Điểm phản ánh CV tại thời điểm phân tích. |
+| **FR-JM-04** | Là sinh viên, tôi muốn đối chiếu đúng chuyên môn để nhận đánh giá phù hợp. | Xác định và kiểm tra hướng chuyên môn. | Đề xuất chuyên môn từ tên vị trí và nội dung CV, JD; cho xác nhận hoặc sửa. Cho phân tích khi cùng hướng hoặc giao nhau; nếu khác hoàn toàn, giải thích và yêu cầu chọn lại CV/JD. Khi giao nhau, vẫn xét toàn bộ JD và chỉ rõ phần liên quan, phần yêu cầu mở rộng. |
+| **FR-JM-07** | Là sinh viên, tôi muốn biết yêu cầu và bằng chứng để kiểm tra căn cứ đối chiếu. | Bóc tách yêu cầu JD và bằng chứng CV. | Nhận diện yêu cầu chuyên môn, kỹ năng mềm, kinh nghiệm, dự án, ngoại ngữ, học vấn và điều kiện liên quan; gắn nhãn bắt buộc, ưu tiên hoặc không nêu rõ theo JD, không tự coi yêu cầu chưa rõ là bắt buộc. Tìm bằng chứng CV kèm đoạn nguồn, chuẩn hóa cách viết đồng nghĩa. “Và” cần đạt đủ điều kiện, “hoặc” chỉ cần đạt một lựa chọn. |
+| **FR-JM-11** | Là sinh viên, tôi muốn kiểm tra và sửa dữ liệu để đánh giá đúng CV hiện tại. | Kiểm tra, chỉnh sửa và xác nhận dữ liệu bóc tách. | Hiển thị yêu cầu, bằng chứng và đoạn nguồn CV, JD; cho sửa lỗi đọc hiểu theo nội dung gốc, chỉ đánh giá sau khi người dùng xác nhận. Thông tin mới ngoài CV chỉ phục vụ gợi ý, không tăng điểm hiện tại. |
+| **FR-JM-13** | Là sinh viên, tôi muốn biết mức đáp ứng để hiểu chất lượng bằng chứng trong CV. | Đánh giá mức đáp ứng từng yêu cầu. | Đối chiếu yêu cầu JD với bằng chứng CV và chấm 0%, 25%, 50% hoặc 100%. Năng lực thực hành xét công việc và đóng góp cá nhân trong dự án/kinh nghiệm; chỉ liệt kê kỹ năng, tên dự án hay chức danh chưa đủ để đạt đầy đủ. |
+| **FR-JM-15** | Là sinh viên, tôi muốn biết điểm và mức phù hợp để cân nhắc ứng tuyển. | Tính điểm và phân loại độ phù hợp CV–JD. | Tính phần trăm theo mức đáp ứng; trọng số bắt buộc là 2, ưu tiên và không nêu rõ là 1. Nếu có yêu cầu bắt buộc chưa đạt đầy đủ, điểm tối đa 79%. Phân loại theo điểm cuối: đỏ dưới 50%, vàng từ 50% đến dưới 80%, xanh từ 80% trở lên. |
+| **FR-JM-17** | Là sinh viên, tôi muốn hiểu lý do đánh giá để cân nhắc việc ứng tuyển. | Giải thích kết quả và khuyến nghị ứng tuyển. | Hiển thị yêu cầu, mức đáp ứng, bằng chứng tương ứng; giải thích điểm và lý do giới hạn điểm nếu có. Đỏ: ưu tiên cải thiện; vàng: khuyến khích cân nhắc ứng tuyển và bổ sung điểm thiếu; xanh: CV đáp ứng tốt. Nêu rõ điểm không phải xác suất được tuyển. |
+| **FR-JM-19** | Là sinh viên, tôi muốn biết mình thiếu cách trình bày hay năng lực để cải thiện đúng hướng. | Xác định khoảng trống và hướng cải thiện. | Liệt kê yêu cầu chưa đủ bằng chứng, ưu tiên yêu cầu bắt buộc. Tham chiếu hồ sơ cá nhân, cho xác nhận hoặc bổ sung tình trạng năng lực để phân biệt cần viết rõ CV hay học, thực hành thêm; thiếu thông tin thì ghi “Chưa xác định”. |
+| **FR-JM-22** | Là sinh viên, tôi muốn nhận ví dụ đúng thực tế để tự bổ sung nội dung CV. | Gợi ý cải thiện cách trình bày CV. | Với năng lực đã có, chỉ rõ nội dung cần bổ sung và đưa ví dụ từ thông tin đã xác nhận. Không tự sửa CV hoặc tạo kỹ năng, kinh nghiệm, chứng chỉ, thành tích thiếu căn cứ; thông tin ngoài CV chỉ phục vụ gợi ý, không đổi điểm hiện tại. |
+| **FR-JM-23** | Là sinh viên, tôi muốn có hướng học và tài liệu để bổ sung năng lực còn thiếu. | Gợi ý học tập và tài liệu cải thiện. | Đề xuất nội dung học, hoạt động thực hành gắn với yêu cầu JD chưa đáp ứng; kèm tài liệu liên quan có nguồn và đường dẫn đã kiểm chứng. |
+| **FR-JM-26** | Là sinh viên, tôi muốn lưu và xem lại phân tích để theo dõi mức phù hợp của CV. | Lưu và xem lịch sử phân tích. | Lưu CV, JD tại thời điểm phân tích, dữ liệu bóc tách đã xác nhận, bảng đối chiếu, điểm ban đầu, điểm cuối, mức phân loại và gợi ý. Cho xem danh sách, chi tiết các lần phân tích của mình; giữ nguyên kết quả khi CV gốc thay đổi. |
+| **FR-JM-30** | Là sinh viên, tôi muốn biết nguyên nhân lỗi để bổ sung hoặc thử lại mà không mất kết quả. | Xử lý lỗi phân tích và tạo gợi ý. | Thiếu dữ liệu hoặc phân tích lỗi thì nêu lý do, cho bổ sung/thử lại, không trả điểm 0% thay lỗi. Tạo gợi ý hoặc lấy tài liệu thất bại thì giữ, hiển thị kết quả đối chiếu đã có và cho thử lại riêng phần lỗi. |
 
 ###### Các quy tắc nghiệp vụ áp dụng
 
-**BR-JM-01 — Xác định hướng chuyên môn**
-
-Xét chuyên môn từ tên vị trí và nội dung bóc tách, không yêu cầu tên vị trí trùng nhau. Ví dụ: React Developer/Angular Intern cùng hướng Frontend; Frontend/Fullstack giao nhau nhưng vẫn xét yêu cầu Backend; Frontend/Backend khác hướng nếu không có nội dung giao nhau.
-
-**BR-JM-02 — Diễn giải yêu cầu kết hợp**
-
-- **“Và”:** Đánh giá từng điều kiện; chỉ đạt đầy đủ khi đạt tất cả.
-- **“Hoặc”:** Đạt đầy đủ một lựa chọn là đủ; không trừ điểm vì thiếu lựa chọn còn lại.
-
-**BR-JM-03 — Trọng số yêu cầu**
-
-| Loại yêu cầu | Trọng số |
-|---|---:|
-| Bắt buộc | 2 |
-| Ưu tiên | 1 |
-| Không nêu rõ | 1 |
-
-Yêu cầu không nêu rõ mức độ không được tự xem là bắt buộc để áp dụng giới hạn điểm.
-
-**BR-JM-04 — Mức đáp ứng**
-
-| Mức đáp ứng | Căn cứ đánh giá |
-|---|---|
-| **0%** | Chưa có bằng chứng liên quan trong CV. |
-| **25%** | Có nhắc đến nhưng chưa chứng minh đáp ứng yêu cầu. |
-| **50%** | Có bằng chứng cụ thể nhưng chỉ đáp ứng một phần yêu cầu. |
-| **100%** | Có bằng chứng cụ thể đáp ứng đầy đủ yêu cầu. |
-
-Bằng chứng phải phù hợp yêu cầu; độ dài mô tả hoặc tên dự án không quyết định điểm. Học vấn, ngoại ngữ và điều kiện khác dùng thông tin tương ứng trong CV; năng lực thực hành ưu tiên mô tả việc đã làm và đóng góp cá nhân.
-
-**BR-JM-05 — Công thức điểm và giới hạn**
-
-```text
-Điểm ban đầu =
-Σ(trọng số yêu cầu × mức đáp ứng)
-÷ Σ(trọng số yêu cầu)
-× 100
-```
-
-Mức đáp ứng trong công thức sử dụng các giá trị `0`, `0.25`, `0.5` và `1`.
-
-Nếu có bất kỳ yêu cầu bắt buộc nào chưa đáp ứng đầy đủ:
-
-```text
-Điểm cuối = min(Điểm ban đầu, 79%)
-```
-
-Nếu tất cả yêu cầu bắt buộc được đáp ứng đầy đủ, điểm cuối bằng điểm ban đầu.
-
-**BR-JM-06 — Phân loại và khuyến nghị**
-
-| Mức | Điểm cuối | Khuyến nghị |
-|---|---|---|
-| **Đỏ** | Dưới 50% | Ưu tiên cải thiện trước khi ứng tuyển. |
-| **Vàng** | Từ 50% đến dưới 80% | Khuyến khích cân nhắc ứng tuyển, đồng thời cải thiện những điểm còn thiếu. |
-| **Xanh** | Từ 80% trở lên | CV thể hiện mức đáp ứng tốt đối với các yêu cầu được đánh giá. |
-
-Điểm chỉ phản ánh **bằng chứng trong CV tại thời điểm phân tích**, không đại diện toàn bộ năng lực. Trọng số và ngưỡng là quy tắc dự kiến, cần kiểm tra trên bộ CV và JD mẫu.
+| Mã | Quy tắc | Nội dung |
+| --- | --- | --- |
+| **BR-JM-01** | Xác định hướng chuyên môn | Xét chuyên môn từ tên vị trí và nội dung bóc tách, không yêu cầu tên vị trí trùng nhau. Ví dụ: React Developer/Angular Intern cùng hướng Frontend; Frontend/Fullstack giao nhau nhưng vẫn xét yêu cầu Backend; Frontend/Backend khác hướng nếu không có nội dung giao nhau. |
+| **BR-JM-02** | Diễn giải yêu cầu kết hợp | • **“Và”:** Đánh giá từng điều kiện; chỉ đạt đầy đủ khi đạt tất cả.<br>• **“Hoặc”:** Đạt đầy đủ một lựa chọn là đủ; không trừ điểm vì thiếu lựa chọn còn lại. |
+| **BR-JM-03** | Trọng số yêu cầu | **Trọng số:** Bắt buộc: 2; ưu tiên: 1; không nêu rõ: 1.<br>Yêu cầu không nêu rõ mức độ không được tự xem là bắt buộc để áp dụng giới hạn điểm. |
+| **BR-JM-04** | Mức đáp ứng | **0%:** Chưa có bằng chứng liên quan trong CV.<br>**25%:** Có nhắc đến nhưng chưa chứng minh đáp ứng yêu cầu.<br>**50%:** Có bằng chứng cụ thể nhưng chỉ đáp ứng một phần yêu cầu.<br>**100%:** Có bằng chứng cụ thể đáp ứng đầy đủ yêu cầu.<br>Bằng chứng phải phù hợp yêu cầu; độ dài mô tả hoặc tên dự án không quyết định điểm. Học vấn, ngoại ngữ và điều kiện khác dùng thông tin tương ứng trong CV; năng lực thực hành ưu tiên mô tả việc đã làm và đóng góp cá nhân. |
+| **BR-JM-05** | Công thức điểm và giới hạn | **Công thức:** `Điểm ban đầu = Σ(trọng số yêu cầu × mức đáp ứng) ÷ Σ(trọng số yêu cầu) × 100`.<br>Mức đáp ứng trong công thức sử dụng các giá trị `0`, `0.25`, `0.5` và `1`.<br>Nếu có bất kỳ yêu cầu bắt buộc nào chưa đáp ứng đầy đủ: `Điểm cuối = min(Điểm ban đầu, 79%)`.<br>Nếu tất cả yêu cầu bắt buộc được đáp ứng đầy đủ, điểm cuối bằng điểm ban đầu. |
+| **BR-JM-06** | Phân loại và khuyến nghị | **Đỏ — dưới 50%:** Ưu tiên cải thiện trước khi ứng tuyển.<br>**Vàng — từ 50% đến dưới 80%:** Khuyến khích cân nhắc ứng tuyển, đồng thời cải thiện những điểm còn thiếu.<br>**Xanh — từ 80% trở lên:** CV thể hiện mức đáp ứng tốt đối với các yêu cầu được đánh giá.<br>Điểm chỉ phản ánh **bằng chứng trong CV tại thời điểm phân tích**, không đại diện toàn bộ năng lực. Trọng số và ngưỡng là quy tắc dự kiến, cần kiểm tra trên bộ CV và JD mẫu. |
 
 ##### d. Job Tracking
 
-###### Quản lý nguồn tuyển dụng cần theo dõi
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-JT-01 | Hệ thống hiển thị danh sách các nhà đăng tin tuyển dụng. |
-| FR-JT-02 | Hệ thống cho phép thêm hoặc xóa nguồn theo dõi bằng đường dẫn Fanpage/LinkedIn được hỗ trợ. |
-| FR-JT-03 | Hệ thống cho phép tạm dừng và tiếp tục theo dõi nhà tuyển dụng cụ thể. |
-| FR-JT-04 | Hệ thống kiểm tra nguồn, cập nhật trạng thái: Truy cập được, Không truy cập được. |
-
-###### Nhận và quản lý tin từ nguồn đang theo dõi
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-JT-05 | Hệ thống nhận tin tuyển dụng từ nguồn đang được bật theo dõi theo chu kỳ. |
-| FR-JT-06 | Hệ thống lưu bài đã nhận cùng nội dung, nhà đăng tin, liên kết gốc, thời gian đăng tin. |
-| FR-JT-07 | Hệ thống cho phép lưu, bỏ lưu hoặc xóa tin trong danh sách cá nhân; xác nhận trước khi xóa. |
-| FR-JT-08 | Hệ thống lưu hạn ứng tuyển khi xác định được và cập nhật trạng thái thời hạn: Còn hạn, Hết hạn hoặc Chưa xác định. |
-
-###### Sàng lọc và cá nhân hóa kết quả
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-JT-09 | Hệ thống dùng AI sàng lọc tin IT Intern/Fresher và lưu kết quả cùng vị trí, địa điểm, yêu cầu, hạn nộp, cách ứng tuyển khi có. |
-| FR-JT-10 | Hệ thống hiển thị danh sách tin đã sàng lọc. |
-| FR-JT-11 | Hệ thống trả tin theo nguồn theo dõi và thông tin quan tâm của đúng tài khoản. |
-
-###### Thông báo cơ hội tuyển dụng
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-JT-12 | Sau lượt kiểm tra định kỳ, hệ thống tạo thông báo khi có tin mới đã sàng lọc phù hợp và chưa được xác định hết hạn. |
-| FR-JT-13 | Thông báo gồm tiêu đề, nhà tuyển dụng, vị trí, thời điểm và liên kết đến đúng tin chi tiết. |
-| FR-JT-14 | Hệ thống kiểm tra thời hạn tin, cập nhật hạn tin tuyển dụng. |
-
-###### Chi tiết tin và bài đăng gốc
-
-| Mã | Yêu cầu chức năng |
-| --- | --- |
-| FR-JT-15 | Hệ thống hiển thị nội dung đã lưu và các thông tin tuyển dụng được trích xuất. |
-| FR-JT-16 | Hệ thống gợi ý người dùng sử dụng AI trích xuất thông tin. |
-| FR-JT-17 | Hệ thống lưu đường dẫn của bài đăng gốc nếu người dùng muốn trực tiếp xem. |
-| FR-JT-18 | Nếu bài gốc đã xóa, cập nhật lên hệ thống: Tin không còn tồn tại. |
+| Mã | User Story | Requirement | Details |
+| --- | --- | --- | --- |
+| **FR-JT-01** | Là sinh viên, tôi muốn quản lý các nguồn để chủ động theo dõi cơ hội tuyển dụng. | Quản lý nguồn tuyển dụng theo dõi. | Hiển thị nhà đăng tin; cho thêm/xóa nguồn bằng đường dẫn Fanpage/LinkedIn hỗ trợ, tạm dừng hoặc tiếp tục từng nguồn theo tài khoản. Xóa nguồn chỉ bỏ theo dõi; tạm dừng giữ dữ liệu cũ, tiếp tục từ lượt kiểm tra kế tiếp. Kiểm tra trạng thái Truy cập được/Không truy cập được; lỗi truy cập không đồng nghĩa ngừng tuyển. |
+| **FR-JT-05** | Là sinh viên, tôi muốn nhận và lưu tin mới để theo dõi nguồn quan tâm. | Thu thập và lưu tin theo chu kỳ. | Kiểm tra các nguồn đang bật theo chu kỳ cấu hình; lưu nội dung bài, nhà đăng tin, liên kết gốc và thời gian đăng. Chỉ phân phối tin mới cho tài khoản còn bật theo dõi nguồn đó. |
+| **FR-JT-07** | Là sinh viên, tôi muốn quản lý danh sách cá nhân để giữ lại tin cần quan tâm. | Quản lý tin trong danh sách cá nhân. | Cho phép lưu, bỏ lưu hoặc xóa tin; xác nhận trước khi xóa. Thao tác chỉ ảnh hưởng danh sách của người thực hiện, không xóa bài gốc hoặc dữ liệu người khác. |
+| **FR-JT-08** | Là sinh viên, tôi muốn biết thời hạn tin để chọn cơ hội còn phù hợp. | Quản lý hạn ứng tuyển và trạng thái tin. | Lưu, cập nhật hạn dựa trên hạn ứng tuyển hoặc thông báo đóng tuyển; hạn chỉ ghi ngày tính đến cuối ngày theo múi giờ ứng dụng. Gắn trạng thái Còn hạn, Hết hạn hoặc Chưa xác định; thiếu căn cứ không được mặc định còn hạn. |
+| **FR-JT-09** | Là sinh viên, tôi muốn xem tin được sàng lọc theo quan tâm để tìm cơ hội phù hợp. | Sàng lọc và cá nhân hóa danh sách tin. | AI chọn tin IT Intern/Fresher theo nội dung; lưu vị trí, địa điểm, yêu cầu, hạn nộp và cách ứng tuyển khi có, không coi bài chưa rõ đối tượng là phù hợp. Hiển thị theo nguồn theo dõi và thông tin quan tâm đúng tài khoản; thiếu thông tin quan tâm thì dùng tin Intern/Fresher từ nguồn đang theo dõi. |
+| **FR-JT-12** | Là sinh viên, tôi muốn nhận thông báo để kịp xem cơ hội mới. | Thông báo cơ hội tuyển dụng mới. | Sau lượt kiểm tra định kỳ, thông báo tin mới đã sàng lọc phù hợp và chưa được xác định hết hạn; không tạo thông báo cơ hội mới cho tin hết hạn. Thông báo gồm tiêu đề, nhà tuyển dụng, vị trí, thời điểm và liên kết mở đúng tin chi tiết. |
+| **FR-JT-15** | Là sinh viên, tôi muốn xem chi tiết và dùng hỗ trợ trích xuất để hiểu tin tuyển dụng. | Xem chi tiết và yêu cầu trích xuất thông tin. | Hiển thị nội dung đã lưu, các trường được trích xuất và gợi ý người dùng yêu cầu AI trích xuất; kết quả phải có căn cứ từ bài nguồn, không tự bổ sung dữ liệu thiếu. Bản lưu phản ánh thời điểm thu thập, không bảo đảm trùng bài gốc mới nhất. |
+| **FR-JT-17** | Là sinh viên, tôi muốn kiểm tra bài gốc để xác minh thông tin tuyển dụng. | Mở bài gốc và cập nhật tình trạng tồn tại. | Lưu đường dẫn để mở bài trên nền tảng ngoài, không nộp hồ sơ thay người dùng. Chỉ ghi “Tin không còn tồn tại” khi xác định bài đã xóa; lỗi truy cập hoặc yêu cầu đăng nhập không được coi là bài đã xóa. |
 
 ###### Các quy tắc nghiệp vụ áp dụng
 
-**BR-JT-01 — Dữ liệu cá nhân**
-
-Nguồn theo dõi, tin cá nhân và thông báo thuộc đúng tài khoản; Backend kiểm tra quyền truy cập. Xóa nguồn là bỏ quan hệ theo dõi, không xóa tài khoản doanh nghiệp. Lưu bài thu thập khác với đánh dấu tin quan tâm; bỏ lưu khác với xóa khỏi danh sách. Xóa chỉ tác động đến người thực hiện, không xóa bài gốc hoặc dữ liệu của người khác.
-
-**BR-JT-02 — Nguồn và chu kỳ theo dõi**
-
-Nguồn là Fanpage/LinkedIn doanh nghiệp trong phạm vi truy cập hỗ trợ. Trạng thái theo dõi độc lập với khả năng truy cập; không truy cập được không chứng minh doanh nghiệp đã ngừng tuyển. Hệ thống kiểm tra theo chu kỳ cấu hình, chỉ phân phối tin mới cho người đang bật theo dõi. Tạm dừng giữ dữ liệu cũ; tiếp tục có hiệu lực từ lượt kiểm tra kế tiếp.
-
-**BR-JT-03 — Sàng lọc và cá nhân hóa**
-
-AI dựa vào nội dung để chọn tin tuyển IT Intern/Fresher, kể cả bài tuyển nhiều cấp độ; không chỉ dựa vào từ khóa. Bài chưa rõ chưa được coi là phù hợp; không tự tạo thông tin thiếu. Kết quả dựa vào nguồn theo dõi và thông tin quan tâm; thiếu thông tin quan tâm thì dùng danh sách Intern/Fresher từ nguồn theo dõi. Job Tracking không tính điểm CV–JD hoặc Skill Gap.
-
-**BR-JT-04 — Thời hạn tin và thông báo**
-
-Hạn rõ ràng hoặc thông báo đóng tuyển là căn cứ xác định hết hạn; hạn chỉ ghi ngày được hiểu đến cuối ngày theo múi giờ ứng dụng. Thiếu căn cứ thì ghi Chưa xác định, không mặc định còn hạn. Tin và thông báo dùng cùng trạng thái; tin hết hạn không tạo thông báo cơ hội mới, thông báo cũ vẫn được giữ và ghi Hết hạn.
-
-**BR-JT-05 — Chi tiết và bài gốc**
-
-Thông tin trích xuất phải có căn cứ từ bài nguồn; dữ liệu lưu phản ánh thời điểm thu thập, không bảo đảm mới nhất. Mở bài gốc là điều hướng ra nền tảng ngoài, không nộp hồ sơ thay người dùng. Chỉ ghi Tin không còn tồn tại khi xác định bài đã bị xóa; lỗi truy cập hoặc yêu cầu đăng nhập không đồng nghĩa bài đã bị xóa. Bản đã lưu vẫn xem được nếu còn dữ liệu và quyền truy cập.
+| Mã | Quy tắc | Nội dung |
+| --- | --- | --- |
+| **BR-JT-01** | Dữ liệu cá nhân | Nguồn theo dõi, tin cá nhân và thông báo thuộc đúng tài khoản; Backend kiểm tra quyền truy cập. Xóa nguồn là bỏ quan hệ theo dõi, không xóa tài khoản doanh nghiệp. Lưu bài thu thập khác với đánh dấu tin quan tâm; bỏ lưu khác với xóa khỏi danh sách. Xóa chỉ tác động đến người thực hiện, không xóa bài gốc hoặc dữ liệu của người khác. |
+| **BR-JT-02** | Nguồn và chu kỳ theo dõi | Nguồn là Fanpage/LinkedIn doanh nghiệp trong phạm vi truy cập hỗ trợ. Trạng thái theo dõi độc lập với khả năng truy cập; không truy cập được không chứng minh doanh nghiệp đã ngừng tuyển. Hệ thống kiểm tra theo chu kỳ cấu hình, chỉ phân phối tin mới cho người đang bật theo dõi. Tạm dừng giữ dữ liệu cũ; tiếp tục có hiệu lực từ lượt kiểm tra kế tiếp. |
+| **BR-JT-03** | Sàng lọc và cá nhân hóa | AI dựa vào nội dung để chọn tin tuyển IT Intern/Fresher, kể cả bài tuyển nhiều cấp độ; không chỉ dựa vào từ khóa. Bài chưa rõ chưa được coi là phù hợp; không tự tạo thông tin thiếu. Kết quả dựa vào nguồn theo dõi và thông tin quan tâm; thiếu thông tin quan tâm thì dùng danh sách Intern/Fresher từ nguồn theo dõi. Job Tracking không tính điểm CV–JD hoặc Skill Gap. |
+| **BR-JT-04** | Thời hạn tin và thông báo | Hạn rõ ràng hoặc thông báo đóng tuyển là căn cứ xác định hết hạn; hạn chỉ ghi ngày được hiểu đến cuối ngày theo múi giờ ứng dụng. Thiếu căn cứ thì ghi Chưa xác định, không mặc định còn hạn. Tin và thông báo dùng cùng trạng thái; tin hết hạn không tạo thông báo cơ hội mới, thông báo cũ vẫn được giữ và ghi Hết hạn. |
+| **BR-JT-05** | Chi tiết và bài gốc | Thông tin trích xuất phải có căn cứ từ bài nguồn; dữ liệu lưu phản ánh thời điểm thu thập, không bảo đảm mới nhất. Mở bài gốc là điều hướng ra nền tảng ngoài, không nộp hồ sơ thay người dùng. Chỉ ghi Tin không còn tồn tại khi xác định bài đã bị xóa; lỗi truy cập hoặc yêu cầu đăng nhập không đồng nghĩa bài đã bị xóa. Bản đã lưu vẫn xem được nếu còn dữ liệu và quyền truy cập. |
 
 <a id="yeu-cau-phi-chuc-nang"></a>
 
@@ -494,43 +221,43 @@ Thông tin trích xuất phải có căn cứ từ bài nguồn; dữ liệu lư
 
 ##### a. CV Builder & SeekerBot
 
-| Mã | Nhóm | Yêu cầu phi chức năng |
-| --- | --- | --- |
-| <a id="nfr-cv-01"></a>NFR-CV-01 | Dễ sử dụng | Chỉ rõ mục đang chỉnh sửa, hiển thị bản xem trước dễ đọc và hướng dẫn sửa lỗi. |
-| <a id="nfr-cv-02"></a>NFR-CV-02 | Bảo mật | Chỉ người có quyền được truy cập CV và thành tựu; khóa AI, GitHub được giữ ở máy chủ. |
-| <a id="nfr-cv-03"></a>NFR-CV-03 | Tin cậy | Lỗi AI hoặc GitHub không làm mất CV, gián đoạn lưu và chỉnh sửa; gợi ý chỉ được áp dụng sau khi duyệt. |
-| <a id="nfr-cv-05"></a>NFR-CV-05 | Khả năng đọc | Trang in không cắt hoặc chồng lấn nội dung quan trọng trong các mẫu được hỗ trợ. |
+| Mã | User Story | Requirement | Details |
+| --- | --- | --- | --- |
+| <a id="nfr-cv-01"></a>**NFR-CV-01** | Là sinh viên, tôi muốn thao tác dễ hiểu để chỉnh sửa CV thuận tiện. | **Dễ sử dụng:** Hỗ trợ chỉnh sửa CV rõ ràng. | Chỉ rõ mục đang chỉnh sửa, hiển thị bản xem trước dễ đọc và hướng dẫn sửa lỗi tại trường liên quan. |
+| <a id="nfr-cv-02"></a>**NFR-CV-02** | Là sinh viên, tôi muốn được bảo vệ dữ liệu để yên tâm sử dụng CV và thành tựu. | **Bảo mật:** Bảo vệ CV và thành tựu. | Chỉ người có quyền được truy cập CV và thành tựu; khóa dịch vụ AI, GitHub được giữ ở máy chủ. |
+| <a id="nfr-cv-03"></a>**NFR-CV-03** | Là sinh viên, tôi muốn tiếp tục làm việc để không mất CV khi dịch vụ ngoài lỗi. | **Tin cậy:** Duy trì dữ liệu khi dịch vụ ngoài lỗi. | Lỗi AI hoặc GitHub không làm mất CV hay gián đoạn chỉnh sửa, lưu; gợi ý chỉ được áp dụng sau khi người dùng duyệt. |
+| <a id="nfr-cv-05"></a>**NFR-CV-05** | Là sinh viên, tôi muốn đọc được trang in để kiểm tra CV đầy đủ. | **Khả năng đọc:** Bảo đảm bố cục trang in rõ ràng. | Với các mẫu được hỗ trợ, nội dung quan trọng không bị cắt hoặc chồng lấn trong bản xem trước khi in. |
 
 ##### b. Voice Mock Interview
 
-| Mã | Nhóm | Yêu cầu phi chức năng |
-| --- | --- | --- |
-| <a id="nfr-vmi-01"></a>NFR-VMI-01 | Hiệu năng | Khi mạng ổn định, thời gian từ khi trả lời xong đến khi phát câu hỏi tiếp theo không quá 5 giây. |
-| <a id="nfr-vmi-02"></a>NFR-VMI-02 | Dễ sử dụng | Sóng âm thể hiện rõ trạng thái nghe, nói; câu hỏi, bản nhận diện giọng nói và báo cáo hỗ trợ tiếng Việt, tiếng Anh. |
-| <a id="nfr-vmi-03"></a>NFR-VMI-03 | Bảo mật | Chỉ tài khoản sở hữu được truy cập âm thanh, bản ghi hội thoại và báo cáo; khóa AI được bảo vệ ở máy chủ. |
-| <a id="nfr-vmi-04"></a>NFR-VMI-04 | Tin cậy | Giữ dữ liệu hỏi đáp khi phiên gián đoạn và cho phép tạo lại báo cáo mà không mất dữ liệu. |
+| Mã | User Story | Requirement | Details |
+| --- | --- | --- | --- |
+| <a id="nfr-vmi-01"></a>**NFR-VMI-01** | Là sinh viên, tôi muốn nhận câu hỏi kịp thời để giữ nhịp phỏng vấn. | **Hiệu năng:** Phản hồi kịp thời trong phiên. | Khi mạng ổn định, thời gian từ khi trả lời xong đến khi phát câu hỏi tiếp theo không quá 5 giây. |
+| <a id="nfr-vmi-02"></a>**NFR-VMI-02** | Là sinh viên, tôi muốn hiểu trạng thái và ngôn ngữ để tham gia phỏng vấn thuận tiện. | **Dễ sử dụng:** Thể hiện rõ trạng thái phỏng vấn. | Sóng âm cho biết trạng thái nghe, nói; câu hỏi, văn bản nhận diện giọng nói và báo cáo hỗ trợ tiếng Việt, tiếng Anh. |
+| <a id="nfr-vmi-03"></a>**NFR-VMI-03** | Là sinh viên, tôi muốn giữ riêng tư buổi luyện tập để bảo vệ dữ liệu cá nhân. | **Bảo mật:** Giữ riêng tư dữ liệu phỏng vấn. | Chỉ tài khoản sở hữu được truy cập âm thanh, bản ghi hội thoại và báo cáo; khóa AI được bảo vệ ở máy chủ. |
+| <a id="nfr-vmi-04"></a>**NFR-VMI-04** | Là sinh viên, tôi muốn giữ được hỏi đáp để khôi phục kết quả khi gián đoạn. | **Tin cậy:** Giữ dữ liệu khi phiên gián đoạn. | Bảo toàn hỏi đáp đã hoàn tất khi gián đoạn; cho tạo lại báo cáo từ dữ liệu đã có mà không làm mất nội dung phiên. |
 
 ##### c. Job Matching & Skill Gap
 
-| Mã | Nhóm | Yêu cầu phi chức năng |
-| --- | --- | --- |
-| <a id="nfr-jm-01"></a>NFR-JM-01 | Dễ sử dụng | Giao diện dùng tiếng Việt dễ hiểu; điểm và mức đánh giá được giải thích bằng nhãn chữ và màu sắc. |
-| <a id="nfr-jm-02"></a>NFR-JM-02 | Bảo mật | Chỉ người có quyền được truy cập CV, hồ sơ cá nhân và lịch sử; khóa AI được giữ ở máy chủ. |
-| <a id="nfr-jm-03"></a>NFR-JM-03 | Nhất quán | Cùng dữ liệu đã xác nhận và phiên bản công thức phải cho cùng điểm và mức phân loại. |
-| <a id="nfr-jm-04"></a>NFR-JM-04 | Tin cậy | Lỗi tạo gợi ý hoặc lấy tài liệu không làm mất kết quả đối chiếu đã hoàn thành và lưu thành công. |
+| Mã | User Story | Requirement | Details |
+| --- | --- | --- | --- |
+| <a id="nfr-jm-01"></a>**NFR-JM-01** | Là sinh viên, tôi muốn hiểu kết quả để biết mức phù hợp và hướng cải thiện. | **Dễ sử dụng:** Trình bày kết quả dễ hiểu. | Giao diện sử dụng tiếng Việt; điểm và mức đánh giá có giải thích bằng nhãn chữ và màu sắc, giúp người dùng hiểu kết quả đối chiếu. |
+| <a id="nfr-jm-02"></a>**NFR-JM-02** | Là sinh viên, tôi muốn được bảo vệ thông tin để yên tâm phân tích CV. | **Bảo mật:** Bảo vệ dữ liệu phân tích cá nhân. | Chỉ người có quyền được truy cập CV, hồ sơ cá nhân và lịch sử phân tích; khóa AI được giữ ở máy chủ. |
+| <a id="nfr-jm-03"></a>**NFR-JM-03** | Là sinh viên, tôi muốn nhận điểm nhất quán để tin cậy kết quả đối chiếu. | **Nhất quán:** Duy trì kết quả chấm điểm ổn định. | Cùng dữ liệu đối chiếu đã xác nhận và cùng phiên bản công thức phải cho cùng điểm và mức phân loại. |
+| <a id="nfr-jm-04"></a>**NFR-JM-04** | Là sinh viên, tôi muốn giữ kết quả đối chiếu để sử dụng dù phần gợi ý lỗi. | **Tin cậy:** Bảo toàn kết quả đối chiếu đã lưu. | Lỗi tạo gợi ý hoặc lấy tài liệu không làm mất kết quả đối chiếu đã hoàn thành và lưu thành công. |
 
 ##### d. Job Tracking
 
-| Mã | Nhóm | Yêu cầu phi chức năng |
-| --- | --- | --- |
-| <a id="nfr-jt-01"></a>NFR-JT-01 | Dễ sử dụng | Trạng thái có nhãn rõ ràng, không chỉ dùng màu; thao tác xóa có xác nhận và báo kết quả. |
-| <a id="nfr-jt-02"></a>NFR-JT-02 | Bảo mật | Kiểm tra quyền theo tài khoản ở máy chủ; không lộ dữ liệu người khác hoặc khóa dịch vụ. |
-| <a id="nfr-jt-03"></a>NFR-JT-03 | Toàn vẹn dữ liệu | Thao tác cá nhân không làm mất dữ liệu người khác; lưu lỗi không báo thành công. |
-| <a id="nfr-jt-04"></a>NFR-JT-04 | Nhất quán | Danh sách, chi tiết và thông báo thống nhất kết quả phân loại và trạng thái thời hạn. |
-| <a id="nfr-jt-05"></a>NFR-JT-05 | Khả năng đáp ứng | Thu thập/AI không chặn xem tin đã lưu; có trạng thái tải. Mục tiêu phản hồi được chốt qua thử nghiệm. |
-| <a id="nfr-jt-06"></a>NFR-JT-06 | Khả năng đọc | Hiển thị rõ tiếng Việt, nội dung dài và trường thiếu trên kích thước màn hình hỗ trợ. |
-| <a id="nfr-jt-07"></a>NFR-JT-07 | Kiểm chứng được | Lưu nguồn, thời điểm và căn cứ thời hạn; kiểm tra AI bằng bài mẫu đã gán nhãn. |
-| <a id="nfr-jt-08"></a>NFR-JT-08 | Khả năng bảo trì | Tách tích hợp nguồn/AI khỏi nghiệp vụ cá nhân; cấu hình được chu kỳ; FE dùng hợp đồng API của BE. |
+| Mã | User Story | Requirement | Details |
+| --- | --- | --- | --- |
+| <a id="nfr-jt-01"></a>**NFR-JT-01** | Là sinh viên, tôi muốn hiểu trạng thái và thao tác để quản lý tin thuận tiện. | **Dễ sử dụng:** Thể hiện rõ trạng thái và thao tác. | Trạng thái có nhãn chữ, không chỉ phân biệt bằng màu; thao tác xóa cần xác nhận và thông báo kết quả. |
+| <a id="nfr-jt-02"></a>**NFR-JT-02** | Là sinh viên, tôi muốn được bảo vệ dữ liệu để sử dụng theo dõi tin an toàn. | **Bảo mật:** Bảo vệ dữ liệu theo tài khoản. | Máy chủ kiểm tra quyền theo tài khoản; không làm lộ dữ liệu người khác hoặc khóa dịch vụ. |
+| <a id="nfr-jt-03"></a>**NFR-JT-03** | Là sinh viên, tôi muốn quản lý tin riêng để không ảnh hưởng dữ liệu người khác. | **Toàn vẹn dữ liệu:** Giữ đúng phạm vi thao tác cá nhân. | Thao tác trên nguồn hoặc tin cá nhân không làm mất dữ liệu người khác; lưu thất bại không được báo thành công. |
+| <a id="nfr-jt-04"></a>**NFR-JT-04** | Là sinh viên, tôi muốn thấy trạng thái thống nhất để hiểu đúng tình trạng cơ hội. | **Nhất quán:** Đồng bộ kết quả và trạng thái tin. | Danh sách, chi tiết và thông báo phải thống nhất kết quả phân loại và trạng thái thời hạn của cùng tin tuyển dụng. |
+| <a id="nfr-jt-05"></a>**NFR-JT-05** | Là sinh viên, tôi muốn tiếp tục xem tin để không phải chờ thu thập hoặc AI. | **Khả năng đáp ứng:** Không chặn việc xem tin đã lưu. | Thu thập nguồn và xử lý AI không chặn xem tin đã lưu; hiển thị trạng thái tải. Mục tiêu thời gian phản hồi được chốt qua thử nghiệm. |
+| <a id="nfr-jt-06"></a>**NFR-JT-06** | Là sinh viên, tôi muốn đọc tin rõ ràng để sử dụng trên màn hình hỗ trợ. | **Khả năng đọc:** Hiển thị tin rõ trên màn hình hỗ trợ. | Hiển thị rõ tiếng Việt, nội dung dài và các trường thiếu thông tin trên các kích thước màn hình được hỗ trợ. |
+| <a id="nfr-jt-07"></a>**NFR-JT-07** | Là sinh viên, tôi muốn kiểm tra căn cứ để tin cậy thông tin được xử lý. | **Kiểm chứng được:** Lưu căn cứ và kiểm tra kết quả AI. | Lưu nguồn, thời điểm thu thập và căn cứ xác định thời hạn; kiểm tra việc sàng lọc AI bằng các bài mẫu đã gán nhãn. |
+| <a id="nfr-jt-08"></a>**NFR-JT-08** | Là thành viên nhóm phát triển, tôi muốn thay đổi tích hợp thuận tiện để bảo trì hệ thống. | **Khả năng bảo trì:** Tách tích hợp khỏi nghiệp vụ cá nhân. | Tích hợp nguồn và AI được tách riêng; chu kỳ thu thập có thể cấu hình, giao diện dùng hợp đồng API của phía máy chủ. |
 
 ---
 
