@@ -1526,7 +1526,7 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">Đợt báo cáo &amp; Tuần nộp</span>
-            <span class="meta-value">Week 02 &bull; Yêu cầu chức năng, phi chức năng, Use Case &amp; Prototype<br><small>Phiên bản 1.0 &bull; 07/11/2026</small></span>
+            <span class="meta-value">Week 02 &bull; Yêu cầu chức năng, phi chức năng, Use Case &amp; Prototype<br><small>Phiên bản 1.1 &bull; Cập nhật 13/11/2026</small></span>
           </div>
         </div>
       </header>
@@ -1718,9 +1718,9 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>FR-CV-22</strong></td>
-<td style="text-align: left;">Là sinh viên, tôi muốn xem bố cục trang in để kiểm tra CV trước khi in.</td>
-<td style="text-align: left;">Xem trước bố cục trang in.</td>
-<td style="text-align: left;">Hiển thị nội dung, mẫu và phân trang theo CV hiện tại; cho quay lại trình chỉnh sửa khi cần thay đổi. Bước này không dùng AI kiểm lỗi hoặc yêu cầu bổ sung nội dung.</td>
+<td style="text-align: left;">Là sinh viên, tôi muốn xem bố cục và xuất CV thành PDF để sử dụng khi ứng tuyển.</td>
+<td style="text-align: left;">Xem trước bố cục trang in và xuất PDF.</td>
+<td style="text-align: left;">Hiển thị nội dung, mẫu và phân trang theo CV hiện tại; cho quay lại trình chỉnh sửa khi cần thay đổi. Cho xuất CV hiện tại thành file PDF để tải về; nếu xuất lỗi thì thông báo, giữ nguyên CV và cho thử lại. Xem trước và xuất PDF không dùng AI kiểm lỗi hoặc yêu cầu bổ sung nội dung.</td>
 </tr>
 </tbody></table></div>
 <h6 id="cac-quy-tac-nghiep-vu-ap-dung">Các quy tắc nghiệp vụ áp dụng</h6>
@@ -1747,7 +1747,7 @@
 <tr>
 <td style="text-align: left;"><strong>BR-CV-04</strong></td>
 <td style="text-align: left;">Dữ liệu CV dùng chung</td>
-<td style="text-align: left;">Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp và bản xem trước khi in dùng chung dữ liệu. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu.</td>
+<td style="text-align: left;">Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp, bản xem trước khi in và file PDF xuất ra dùng cùng nội dung CV hiện tại. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>BR-CV-05</strong></td>
@@ -1761,8 +1761,8 @@
 </tr>
 <tr>
 <td style="text-align: left;"><strong>BR-CV-08</strong></td>
-<td style="text-align: left;">Phạm vi xem trước khi in</td>
-<td style="text-align: left;">Bản xem trước khi in hiển thị nội dung, mẫu và phân trang của CV hiện tại; không thực hiện kiểm lỗi bằng AI.</td>
+<td style="text-align: left;">Phạm vi xem trước và xuất PDF</td>
+<td style="text-align: left;">Bản xem trước khi in và file PDF hiển thị nội dung, mẫu và phân trang của CV hiện tại; không thực hiện kiểm lỗi bằng AI. Người dùng chủ động chọn xuất PDF; lỗi xuất không được làm mất CV.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>BR-CV-09</strong></td>
@@ -2098,9 +2098,9 @@
 </tr>
 <tr>
 <td style="text-align: left;"><a id="nfr-cv-05"></a><strong>NFR-CV-05</strong></td>
-<td style="text-align: left;">Là sinh viên, tôi muốn đọc được trang in để kiểm tra CV đầy đủ.</td>
-<td style="text-align: left;"><strong>Khả năng đọc:</strong> Bảo đảm bố cục trang in rõ ràng.</td>
-<td style="text-align: left;">Với các mẫu được hỗ trợ, nội dung quan trọng không bị cắt hoặc chồng lấn trong bản xem trước khi in.</td>
+<td style="text-align: left;">Là sinh viên, tôi muốn đọc được trang in và PDF để sử dụng CV đầy đủ.</td>
+<td style="text-align: left;"><strong>Khả năng đọc:</strong> Bảo đảm bố cục trang in và PDF rõ ràng.</td>
+<td style="text-align: left;">Với các mẫu được hỗ trợ, nội dung quan trọng không bị cắt hoặc chồng lấn trong bản xem trước khi in và file PDF xuất ra; hiển thị đúng tiếng Việt.</td>
 </tr>
 </tbody></table></div>
 <h5 id="b-voice-mock-interview-2">b. Voice Mock Interview</h5>
@@ -2235,7 +2235,7 @@
 <a id="so-do-use-case"></a>
 <h3 id="4-1-so-do-use-case">4.1. Sơ đồ Use Case</h3>
 <h4 id="a-cv-builder-seekerbot-3">a. CV Builder &amp; SeekerBot</h4>
-<div class="diagram-container"><img src="./images/CV_Builder_Use_Case.png" alt="Sơ đồ Use Case của CV Builder &amp; SeekerBot" class="diagram-img" /><div class="diagram-caption">Sơ đồ Use Case của CV Builder &amp; SeekerBot</div></div>
+<div class="diagram-container"><img src="./images/CV_Builder_Use_Case_Current.svg" alt="Sơ đồ Use Case của CV Builder &amp; SeekerBot" class="diagram-img" /><div class="diagram-caption">Sơ đồ Use Case của CV Builder &amp; SeekerBot</div></div>
 <h4 id="b-voice-mock-interview-3">b. Voice Mock Interview</h4>
 <div class="diagram-container"><img src="./images/Voice_Mock_Interview_Use_Case.png" alt="Sơ đồ Use Case của Voice Mock Interview" class="diagram-img" /><div class="diagram-caption">Sơ đồ Use Case của Voice Mock Interview</div></div>
 <h4 id="c-job-matching-skill-gap-3">c. Job Matching &amp; Skill Gap</h4>
@@ -2497,7 +2497,7 @@
 <td style="text-align: left;" class="uc-prop-val"><a href="#nfr-cv-02" class="pill-nfr">NFR-CV-02</a>, <a href="#nfr-cv-03" class="pill-nfr">NFR-CV-03</a>.</td>
 </tr>
 </tbody></table></div>
-<h5 id="xem-truoc-bo-cuc-trang-in-2">Xem trước bố cục trang in</h5>
+<h5 id="xem-truoc-bo-cuc-trang-in-2">Xem trước bố cục trang in và xuất PDF</h5>
 <div class="table-container use-case-table-container"><table><thead><tr>
 <th style="text-align: left;">Thành phần</th>
 <th style="text-align: left;">Đặc tả</th>
@@ -2508,11 +2508,11 @@
 </tr>
 <tr>
 <td style="text-align: left;" class="uc-prop-label"><strong>Tên Use Case</strong></td>
-<td style="text-align: left;" class="uc-prop-val">Xem trước bố cục trang in</td>
+<td style="text-align: left;" class="uc-prop-val">Xem trước bố cục trang in và xuất PDF</td>
 </tr>
 <tr>
 <td style="text-align: left;" class="uc-prop-label"><strong>Tóm tắt</strong></td>
-<td style="text-align: left;" class="uc-prop-val">Kiểm tra bố cục CV theo trang in.</td>
+<td style="text-align: left;" class="uc-prop-val">Kiểm tra bố cục CV theo trang in và tải file PDF.</td>
 </tr>
 <tr>
 <td style="text-align: left;" class="uc-prop-label"><strong>Tác nhân</strong></td>
@@ -2524,15 +2524,15 @@
 </tr>
 <tr>
 <td style="text-align: left;" class="uc-prop-label"><strong>Kết quả</strong></td>
-<td style="text-align: left;" class="uc-prop-val">Hiển thị bố cục theo nội dung và mẫu hiện tại.</td>
+<td style="text-align: left;" class="uc-prop-val">Hiển thị bố cục theo nội dung và mẫu hiện tại; tải được file PDF khi chọn xuất thành công.</td>
 </tr>
 <tr>
 <td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản chính</strong></td>
-<td style="text-align: left;" class="uc-prop-val">1. Người dùng chọn xem trước khi in.<br>2. Hệ thống hiển thị nội dung và phân trang.<br>3. Người dùng rà soát, quay lại chỉnh sửa nếu cần.</td>
+<td style="text-align: left;" class="uc-prop-val">1. Người dùng chọn xem trước khi in.<br>2. Hệ thống hiển thị nội dung và phân trang.<br>3. Người dùng rà soát, quay lại chỉnh sửa nếu cần.<br>4. Người dùng chọn xuất PDF; hệ thống tạo file theo CV hiện tại và cho tải về.</td>
 </tr>
 <tr>
 <td style="text-align: left;" class="uc-prop-label"><strong>Kịch bản phụ</strong></td>
-<td style="text-align: left;" class="uc-prop-val">• CV trống: hướng dẫn quay lại chỉnh sửa.<br>• Dựng trang lỗi: thông báo, cho thử lại và giữ nguyên CV.</td>
+<td style="text-align: left;" class="uc-prop-val">• CV trống: hướng dẫn quay lại chỉnh sửa.<br>• Dựng trang hoặc xuất PDF lỗi: thông báo, cho thử lại và giữ nguyên CV; không báo xuất thành công khi chưa tạo được file.</td>
 </tr>
 <tr>
 <td style="text-align: left;" class="uc-prop-label"><strong>Ràng buộc phi chức năng</strong></td>
@@ -3099,6 +3099,7 @@
 <h2 id="sec-5-title">5. BẢN MẪU (PROTOTYPE)</h2>
 <div class="figma-cta"><div class="figma-cta-content"><div class="figma-cta-title">HireUS Prototype</div></div><a class="figma-btn" target="_blank" rel="noopener" href="https://www.figma.com/design/bMbUlGzrU298Icu0HoERU3/HireUS?node-id=55-184&amp;t=PSHtKrrGStMNBFOE-1">Mở Figma Prototype ↗</a></div>
 <p><em>Lưu ý: Đây chỉ là các bản mẫu prototype nhằm minh họa các chức năng, giao diện có thể thay đổi trong tương lai.</em></p>
+<p><strong>Căn cứ triển khai:</strong> Khi ảnh khác nội dung đã cập nhật, dùng FR/BR/NFR và Use Case trong báo cáo. Chỉ số, thang điểm hoặc chức năng còn trên ảnh cũ không tự bổ sung vào phạm vi; xem <a href="./README.md#đối-chiếu-prototype-với-đặc-tả">ghi chú đối chiếu prototype</a>.</p>
 <h3 id="5-1-cv-builder-seekerbot">5.1. CV Builder &amp; SeekerBot</h3>
 <div class="table-container"><table><thead><tr>
 <th style="text-align: left;">Mã màn hình</th>
@@ -3133,6 +3134,7 @@
 </div></div>
 <div class="prototype-card" id="frame-f05"><div class="prototype-header"><span class="prototype-title"><span class="badge-frame">F05</span>Thành tựu và nhập dự án GitHub</span></div><div class="prototype-img-wrapper"><img src="./images/F05_Achievement_GitHub.png" alt="F05 — Thành tựu và nhập dự án GitHub" class="prototype-img" loading="lazy" /></div><div class="prototype-desc"><p>Dữ liệu GitHub được tạo thành bản nháp để người dùng kiểm tra trước khi thêm vào CV.</p>
 </div></div>
+<p>Phạm vi hiện tại có cả xem trước trang in và xuất PDF theo FR-CV-22, BR-CV-08 và UC-CV-09. Ảnh prototype chưa bổ sung minh họa thao tác xuất PDF; không khôi phục chức năng CV song ngữ từ ảnh F06 cũ.</p>
 <h3 id="5-2-voice-mock-interview">5.2. Voice Mock Interview</h3>
 <div class="table-container"><table><thead><tr>
 <th style="text-align: left;">Mã màn hình</th>

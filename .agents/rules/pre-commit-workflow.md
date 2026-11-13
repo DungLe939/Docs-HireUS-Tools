@@ -1,19 +1,71 @@
-# Kiểm tra, commit và push
+# Cập nhật nhánh, đối chiếu tài liệu và công bố
 
-Áp dụng [quy tắc nguồn dữ liệu](./source-of-truth.md) trước khi thay đổi nội dung.
+Áp dụng [quy tắc nguồn](./source-of-truth.md). Các lệnh ở đây chạy từ repo tài liệu;
+trong workspace, skill `team-sync` tại `../.agents/skills/team-sync/SKILL.md`
+phối hợp repo con và gitlink cha. Clone riêng vẫn dùng được quy trình dưới đây.
 
-## Hoàn thành chỉnh sửa
+## Khi bắt đầu việc có sửa
 
-1. Xem `git status --short` và diff, phân biệt thay đổi đang có của người dùng với thay đổi mới.
-2. Kiểm tra nội dung theo nguồn, liên kết và ảnh. Với Markdown/HTML cùng tài liệu, đối chiếu nội dung và mở HTML để kiểm tra hiển thị khi thay đổi bố cục.
-3. Cập nhật timeline khi có tiến độ thực tế hoặc điều chỉnh kế hoạch. Không bắt buộc đổi timeline vì sửa lỗi chính tả hoặc công cụ. Cập nhật `.agents/README.md` khi đổi cách dùng skills/scripts.
-4. Chạy kiểm tra phù hợp rồi báo file đã sửa, kết quả kiểm tra và phần chưa xác minh. Kết thúc đầu việc không tự cấp quyền commit/push.
+Xem nhánh/upstream, staged/unstaged/untracked và ghi HEAD làm mốc đầu việc.
+Nhắc cập nhật nguồn nếu chưa thực hiện cho đầu việc; không lặp lại mỗi lượt chat.
+Đọc/review local không tự cho phép pull hoặc lấy Drive.
+
+Yêu cầu cập nhật/push cho phép fetch remote liên quan. Sau fetch, xem ahead/behind
+và diff với đúng ref đích; không mặc định lấy `main` hoặc nhánh có timestamp mới nhất.
+Working tree sạch và chỉ behind thì fast-forward bằng `git pull --ff-only`
+theo upstream đã xác minh. Working tree bẩn thì bảo vệ thay đổi; không tự stash/reset
+hoặc stage phần ngoài phạm vi. Không gọi nguồn đã cache là mới nhất khi fetch lỗi.
+
+## Rà tài liệu và tổng hợp công việc
+
+Dùng [docs-maintenance](../skills/docs-maintenance/SKILL.md) cho cả commit chưa push,
+diff và file mới liên quan. Tìm tài liệu bị tác động theo epic, mã yêu cầu, API,
+lệnh chạy và callers; đừng chỉ xem commit cuối.
+
+- Sửa hướng dẫn/tổng hợp sai; gộp/bỏ bản dẫn xuất trùng hoặc đã được thay thế có căn cứ,
+  cập nhật dẫn chiếu/ảnh còn dùng. Giữ nguồn lịch sử có ghi chú về bản hiện hành.
+- Đồng bộ nội dung Markdown/HTML, mã và số đếm; mở/render khi đổi bố cục.
+- Chỉ đổi timeline khi có tiến độ thực tế hoặc điều chỉnh kế hoạch liên quan.
+  Đổi cách dùng skills/scripts thì sửa hướng dẫn tương ứng.
+- Tổng hợp đã làm gì, bằng chứng/kiểm tra, tài liệu sửa/giữ/xóa và lý do, phần còn thiếu.
+  Không cần sửa tài liệu thì ghi đã đối chiếu những gì. Mặc định tổng hợp trong
+  phản hồi/PR description; không tạo báo cáo/changelog riêng cho mọi lần push.
+- Rà tài liệu không mặc định tải Drive. Chỉ dùng
+  [drive-sync](../skills/drive-sync/SKILL.md) nếu yêu cầu gồm nguồn ngoài đó.
 
 ## Khi được yêu cầu commit hoặc push
 
-- Yêu cầu commit cho phép stage và commit phần việc liên quan. Yêu cầu push bao gồm tạo commit cần thiết cho phần việc đang trao đổi, trừ khi người dùng giới hạn khác. Quyền cho một lần push không tự áp dụng cho các đầu việc mới.
-- Kiểm tra nhánh, remote và staged diff. Stage theo phạm vi, không tự đưa thay đổi không liên quan vào commit.
-- Chạy `git diff --cached --check` và `bash .agents/scripts/pre_commit_check.sh`.
-- Dùng Conventional Commits, mô tả kết quả cụ thể. Không tự bỏ qua hook.
-- Chỉ push khi được yêu cầu. Không tự force-push. Nếu remote đi trước, fetch và đánh giá diff trước khi tích hợp, giữ các thay đổi local.
-- Xác nhận kết quả push từ Git, báo nhánh và commit. Không báo đã push chỉ vì đã commit.
+Yêu cầu commit cho phép stage/commit phần việc liên quan. Yêu cầu push bao gồm
+commit cần thiết và cập nhật tài liệu liên quan cho phần việc đang trao đổi, trừ
+khi người dùng giới hạn chỉ push commit có sẵn hoặc một repo cụ thể.
+Quyền cho một lần công bố không tự áp dụng cho đầu việc mới.
+
+1. Xác minh repo, nhánh, remote và ref đích; giữ nhánh thành viên.
+   Kiểm tra cả thay đổi có sẵn, không tự đưa tất cả vào commit.
+2. Chạy kiểm tra phù hợp; stage đúng file/hunk, đọc staged diff, chạy
+   `git diff --cached --check` và `bash .agents/scripts/pre_commit_check.sh`.
+   Cảnh báo không chứng minh nội dung đúng; đối chiếu thủ công phần liên quan.
+3. Dùng Conventional Commits mô tả kết quả cụ thể. Không bỏ qua hook hoặc công bố
+   khi kiểm tra bắt buộc còn lỗi; báo giới hạn nếu công cụ không chạy được.
+4. Trước push, fetch/xác minh remote lại nếu có thể đã thay đổi trong lúc làm.
+   Nếu remote đi trước hoặc non-fast-forward, xem diff hai phía và tích hợp cùng
+   upstream đã xác minh. Yêu cầu cập nhật/push cho phép merge thông thường bảo toàn
+   lịch sử; không tự rebase nhánh đã chia sẻ, force-push hoặc đổi đích.
+5. Giải quyết conflict có căn cứ; chọn nội dung mới nhất của phần liên quan,
+   không lấy hàng loạt `ours/theirs` hay dùng timestamp commit để bỏ quyết định local.
+   Hỏi chỉ phần nghiệp vụ/quyền/dữ liệu chưa rõ, tiếp tục phần độc lập.
+6. Sau tích hợp, rà lại tài liệu và chạy lại kiểm tra phần bị tác động rồi push đúng ref.
+   Nếu remote tiếp tục đi trước, chỉ thêm một vòng fetch/tích hợp/push; sau đó
+   dừng retry và báo tình trạng, giữ nguyên phần đã làm.
+7. Xác minh phản hồi Git và commit/ref đích. Báo nhánh, commit, kết quả và phần chưa
+   công bố; không báo đã push chỉ vì đã commit.
+
+## Nhiều repo
+
+Khi yêu cầu công bố workspace, commit/push các repo con liên quan trước rồi mới
+cập nhật gitlink và push repo cha. Không đưa gitlink ngoài phạm vi vào commit.
+Nếu một repo chưa push thành công, báo phần đã công bố và phần còn chờ; không push
+repo cha trỏ tới commit con chưa công bố, không tự rollback lịch sử đã push.
+
+Không gửi keys/cache/incoming vào Git và không tự đăng Jira/Drive hay cài hook
+global từ yêu cầu push. Kết thúc chỉnh sửa tài liệu không tự cấp quyền commit/push.

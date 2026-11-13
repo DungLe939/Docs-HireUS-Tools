@@ -1,26 +1,36 @@
 ---
 name: drive-sync
-description: Lấy và đối chiếu tài liệu Google Drive khi người dùng yêu cầu đồng bộ hoặc lấy tài liệu mới, bảo vệ các chỉnh sửa local.
+description: Lấy và đối chiếu tài liệu Google Drive khi người dùng yêu cầu; bảo vệ chỉnh sửa local và phân biệt bản tải về với nguồn nghiệp vụ mới nhất.
 ---
 
-# Đồng bộ Drive
+# Đồng bộ tài liệu từ Drive
 
-Đọc [quy trình đồng bộ](../../rules/drive-sync-workflow.md) và [quy tắc nguồn dữ liệu](../../rules/source-of-truth.md). Không kích hoạt chỉ vì người dùng muốn đọc tài liệu local.
+Đọc [quy trình sync](../../rules/drive-sync-workflow.md) và
+[quy tắc nguồn](../../rules/source-of-truth.md).
+Chỉ dùng khi được yêu cầu lấy/sync tài liệu; đọc repo local không kích hoạt sync.
 
-## Sử dụng
-
-Từ thư mục gốc dự án:
+Ưu tiên connector Drive đang có nếu truy cập được nguồn; không giả định tên tool,
+quyền tài khoản hoặc API của một agent cụ thể.
+Ghi ID/đường dẫn, revision/ngày sửa của nguồn để so sánh đúng tài liệu.
+Nếu chỉ có nguồn công khai, có thể dùng script chuẩn Python từ repo tài liệu:
 
 ```bash
-# Cập nhật Git fast-forward rồi đối chiếu Drive (yêu cầu working tree sạch)
-./.agents/scripts/sync.sh --week Week01
-
-# Chỉ lấy Drive nếu người dùng yêu cầu như vậy, không tự pull Git
-python3 .agents/scripts/sync_drive.py --week Week01
+python3 .agents/scripts/sync_drive.py --week Week02
 ```
 
-`--week` chọn tuần theo yêu cầu thực tế, mặc định Week01 để tương thích. `--folder` chọn ID thư mục nguồn. `--target` chọn thư mục đích bên trong dự án. `--force` không còn được hỗ trợ vì có thể ghi đè nội dung đã kiểm tra.
+Đổi `--week`/`--folder` theo nguồn được giao, không tự coi Week02 là mặc định.
+Script không bảo đảm đọc thư mục con hoặc nguồn cần đăng nhập.
+`sync.sh` còn thực hiện Git pull; chỉ dùng khi yêu cầu gồm cập nhật Git.
 
-Script dùng thư viện chuẩn Python, đọc trang thư mục Drive công khai. Nếu cần đăng nhập hoặc không nhận diện được danh sách, báo giới hạn và dừng, không đổi quyền chia sẻ của người dùng. Không bảo đảm nhận diện thư mục con hay mọi định dạng Google Docs.
+Đối chiếu local, remote và baseline trước khi thay thế.
+Bảo vệ file sửa local, bản Submission, file bị xóa/di chuyển local và file có sẵn
+chưa có baseline: giữ bản khác biệt để đối chiếu, không ghi đè tự động.
+“Lấy bản mới nhất làm gốc” là quy tắc chọn nội dung, không phải quyền xóa thay đổi local.
+Không đổi quyền chia sẻ hoặc tự xóa file theo remote.
 
-Mỗi lần chạy tải bản remote để so sánh, không dựa vào hash local để kết luận remote chưa đổi. Xung đột giữ ở `.agents/scripts/.sync_incoming/`, không ghi đè bản local. Báo file thay đổi, không đổi, xung đột và lỗi. Đối chiếu bản incoming trước khi người dùng quyết định cách hợp nhất, không tự coi bản Drive là nguồn chuẩn.
+Báo file mới/cập nhật/không đổi/xung đột/lỗi và nguồn đã đọc.
+Không báo đã đồng bộ toàn Drive nếu chỉ đọc được một tập con.
+Chỉ kết luận nội dung mới hơn sau khi kiểm tra revision và phạm vi thay đổi.
+Nếu tác vụ gồm cập nhật tài liệu làm việc, dùng
+[docs-maintenance](../docs-maintenance/SKILL.md) để đưa thay đổi đã xác minh vào
+báo cáo/tổng quan liên quan. Không coi tải xong file là đã cập nhật mọi bản tổng hợp.
