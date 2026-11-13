@@ -2,6 +2,8 @@
 
 > Bản ghép nguyên văn để xem chung bốn phân hệ. Nội dung từng bài, mã yêu cầu, số mục, bảng, sơ đồ Mermaid, liên kết và ghi chú được giữ nguyên từ các file nguồn. Chỉ thêm phần điều hướng và tiêu đề phân cách giữa các bài; chưa chuẩn hóa thành báo cáo chung theo template.
 
+> **Ghi chú hiệu lực ngày 13/11/2026:** NFR-VMI-01 hiện là 10 giây cho từng lần chờ: upload audio → text STT (clip thông thường đến khoảng 30s), và nộp `/answers` → audio câu hỏi tiếp theo (AI + TTS); không tính thời gian xác nhận text. Mốc 4 giây ở phần ghép nguyên văn dưới đây được giữ làm lịch sử, không còn áp dụng. Xem [đặc tả hiện hành](../Submission/Requirements_Analysis.md#nfr-vmi-01).
+
 ## Điều hướng
 
 - [Phân hệ 1 — CV Builder & SeekerBot](#phan-he-1) — [Bai_lam_CV_Builder_SeekerBot.md](./Bai_lam_CV_Builder_SeekerBot.md)

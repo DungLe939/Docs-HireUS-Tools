@@ -4,7 +4,7 @@ group: "Nhóm 02"
 course: "Nhập môn Công nghệ Phần mềm (Introduction to Software Engineering)"
 institution: "Khoa Công nghệ Thông tin - Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM"
 date: "13/11/2026"
-version: "1.1"
+version: "1.2"
 ---
 
 # NHẬP MÔN CÔNG NGHỆ PHẦN MỀM
@@ -233,7 +233,7 @@ Quy ước mã:
 
 | Mã | User Story | Requirement | Details |
 | --- | --- | --- | --- |
-| <a id="nfr-vmi-01"></a>**NFR-VMI-01** | Là sinh viên, tôi muốn nhận câu hỏi kịp thời để giữ nhịp phỏng vấn. | **Hiệu năng:** Phản hồi kịp thời trong phiên. | Khi mạng ổn định, thời gian từ khi trả lời xong đến khi phát câu hỏi tiếp theo không quá 5 giây. |
+| <a id="nfr-vmi-01"></a>**NFR-VMI-01** | Là sinh viên, tôi muốn nhận câu hỏi kịp thời để giữ nhịp phỏng vấn. | **Hiệu năng:** Phản hồi kịp thời trong phiên. | Khi mạng ổn định, mỗi lần chờ không quá 10 giây: (a) từ lúc gửi audio đến lúc nhận văn bản STT, với clip trả lời thông thường đến khoảng 30 giây; (b) từ lúc nộp POST /answers đến khi có audio câu hỏi tiếp theo, gồm AI sinh câu hỏi và TTS. Không tính thời gian người dùng xác nhận/chỉnh sửa văn bản giữa hai bước. Cập nhật ngày 13/11/2026. |
 | <a id="nfr-vmi-02"></a>**NFR-VMI-02** | Là sinh viên, tôi muốn hiểu trạng thái và ngôn ngữ để tham gia phỏng vấn thuận tiện. | **Dễ sử dụng:** Thể hiện rõ trạng thái phỏng vấn. | Sóng âm cho biết trạng thái nghe, nói; câu hỏi, văn bản nhận diện giọng nói và báo cáo hỗ trợ tiếng Việt, tiếng Anh. |
 | <a id="nfr-vmi-03"></a>**NFR-VMI-03** | Là sinh viên, tôi muốn giữ riêng tư buổi luyện tập để bảo vệ dữ liệu cá nhân. | **Bảo mật:** Giữ riêng tư dữ liệu phỏng vấn. | Chỉ tài khoản sở hữu được truy cập âm thanh, bản ghi hội thoại và báo cáo; khóa AI được bảo vệ ở máy chủ. |
 | <a id="nfr-vmi-04"></a>**NFR-VMI-04** | Là sinh viên, tôi muốn giữ được hỏi đáp để khôi phục kết quả khi gián đoạn. | **Tin cậy:** Giữ dữ liệu khi phiên gián đoạn. | Bảo toàn hỏi đáp đã hoàn tất khi gián đoạn; cho tạo lại báo cáo từ dữ liệu đã có mà không làm mất nội dung phiên. |

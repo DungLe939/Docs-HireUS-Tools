@@ -127,7 +127,7 @@ Mỗi tiêu chí được chấm trên thang 100 dựa trên toàn bộ câu tr�
 
 | Mã | Nhóm | Yêu cầu phi chức năng |
 |---|---|---|
-| NFR-VMI-01 | Hiệu năng | Độ trễ từ khi sinh viên hoàn thành câu trả lời đến khi phát câu hỏi tiếp theo (STT → TTS) không quá 5 giây trong điều kiện mạng ổn định. |
+| NFR-VMI-01 | Hiệu năng | Khi mạng ổn định, mỗi lần chờ không quá 10 giây: (a) từ lúc gửi audio đến lúc nhận văn bản STT, với clip trả lời thông thường đến khoảng 30 giây; (b) từ lúc nộp POST /answers đến khi có audio câu hỏi tiếp theo, gồm AI sinh câu hỏi và TTS. Không tính thời gian người dùng xác nhận/chỉnh sửa văn bản giữa hai bước. Cập nhật theo quyết định người dùng ngày 13/11/2026. |
 | NFR-VMI-02 | Dễ sử dụng | Giao diện cung cấp trực quan hóa sóng âm (audio visualizer) thể hiện trạng thái đang nghe/đang nói; hỗ trợ song ngữ từ câu hỏi, phiên âm đến báo cáo đánh giá. |
 | NFR-VMI-03 | Bảo mật | Âm thanh, transcript và báo cáo chỉ được truy cập bởi tài khoản sở hữu; API key của dịch vụ AI phải lưu và bảo vệ tại backend. |
 | NFR-VMI-04 | Độ tin cậy | Khi phiên bị ngắt quãng, hệ thống bảo toàn dữ liệu trao đổi và cho phép khôi phục tạo báo cáo mà không mất dữ liệu. |
@@ -166,7 +166,7 @@ Mỗi tiêu chí được chấm trên thang 100 dựa trên toàn bộ câu tr�
 | **Kết quả** | Phiên phỏng vấn hoàn thành; transcript và báo cáo đánh giá được lưu vào hệ thống. |
 | **Kịch bản chính** | 1. Hệ thống thực hiện `<<include>>` **U003 – Kiểm tra microphone và âm thanh**.<br>2. Hệ thống bắt đầu phiên; **Dịch vụ AI** sinh câu hỏi đầu, phát qua TTS.<br>3. Sinh viên nghe và trả lời bằng giọng nói qua microphone.<br>4. Hệ thống gửi âm thanh đến AI để chuyển STT và hiển thị văn bản cho sinh viên theo dõi.<br>5. Sinh viên xác nhận; hệ thống gửi câu trả lời để AI phân tích và sinh câu hỏi tiếp theo.<br>6. Lặp lại bước 2–5 đến khi hoàn thành hoặc sinh viên kết thúc.<br>7. Hệ thống thực hiện `<<include>>` **U004 – Tổng hợp, đánh giá buổi phỏng vấn** và hiển thị báo cáo. |
 | **Kịch bản phụ** | • STT nhận diện chưa chính xác: Sinh viên chọn nói lại.<br>• Chưa nghe rõ câu hỏi: Sinh viên yêu cầu AI nhắc lại.<br>• Mất kết nối: Lưu dữ liệu đã có, cho phép kết nối lại hoặc kết thúc sớm.<br>• Sinh viên hủy: Cảnh báo phiên chưa hoàn thành không được tính điểm. |
-| **Ràng buộc phi chức năng** | Độ trễ âm thanh hai chiều không quá 4 giây; audio visualizer; bảo mật đường truyền. |
+| **Ràng buộc phi chức năng** | NFR-VMI-01 hiện hành: tối đa 10 giây riêng cho STT (clip thông thường đến khoảng 30s) và cho AI + TTS sau khi nộp /answers; không tính bước xác nhận text; audio visualizer; bảo mật đường truyền. |
 
 ### 4.2.3. Kiểm tra microphone và âm thanh
 

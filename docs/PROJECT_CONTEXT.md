@@ -56,6 +56,26 @@ Họp 09/11 giao triển khai từng epic đến **23:59 ngày 15/11/2026**, h�
 **21:00 ngày 16/11/2026**. Đây là mốc giao việc, chưa phải trạng thái hoàn thành.
 Chưa xác nhận đã nộp bài, được giảng viên duyệt, database hoạt động hay tiến độ Jira.
 
+## Voice Mock Interview — cập nhật sau review 13/11/2026
+
+NFR-VMI-01 theo quyết định người dùng: Khi mạng ổn định, mỗi lần chờ không quá 10 giây: (a) từ lúc gửi audio đến lúc nhận văn bản STT, với clip trả lời thông thường đến khoảng 30 giây; (b) từ lúc nộp POST /answers đến khi có audio câu hỏi tiếp theo, gồm AI sinh câu hỏi và TTS. Không tính thời gian người dùng xác nhận/chỉnh sửa văn bản giữa hai bước.
+Nguồn hiện hành: [NFR-VMI-01](./Week02/Submission/Requirements_Analysis.md#nfr-vmi-01).
+
+| Phần việc | Bằng chứng hiện có | Phần còn thiếu |
+| --- | --- | --- |
+| Task 7/8 | Backend có TTS Zonos, draft STT tách `/answers`, ownership và lỗi sạch | Zonos chưa chạy thật; chưa có số đo AI + TTS |
+| Sửa chuẩn hóa số | `9fb9d7a`, số theo vi/en; giữ URL/semver/ngày/IP | Chuỗi số nhóm nghìn trùng semver cần nhãn phiên bản |
+| Cấu hình CPU + đo | `74698e6`, small/int8, auto tối đa 4 thread; 5/15/30/60s ×3 cho small và large | Audio espeak lặp có WER cao; cần giọng người thật |
+| Shutdown + NFR | `34515aa`, teardown model/worker/cache; smoke SIGTERM cả hai model không còn cảnh báo semaphore | Chưa kiểm thử tải hoặc GPU |
+
+Kiểm tra hiện tại: build pass; **285 unit / 8 suites**, **160 e2e / 7 suites**;
+**19 test service Python** và **3 test script đo**. Baseline trước sửa review là
+252 unit, 160 e2e, 9 Python; test local có sẵn được giữ nguyên. Số đo/bảng WER và
+điều kiện smoke Zonos: `backend/docs/vmi/tts-stt-integration-notes.md` trong workspace.
+Small mặc định có max dưới 1,7s ở 5/15/30s trong mẫu tổng hợp này; large/fast có
+max dưới 6s ở cùng mốc. Đây chỉ là kết quả latency mẫu; không chứng minh chất
+lượng nhận diện hoặc NFR cho giọng thật/GPU. Xem [ngữ cảnh VMI](VMI_CONTEXT.md).
+
 ## Quy ước duy trì
 
 - Nội dung thay đổi trong báo cáo phải được cập nhật ở cả Markdown và HTML.

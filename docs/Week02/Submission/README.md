@@ -48,9 +48,10 @@ lưu trong thư mục `images/`; không xóa ảnh dư chỉ vì không được
   Không khôi phục chức năng song ngữ hoặc tutorial từ các mục F04/F06 cũ.
 - Sơ đồ CV trong báo cáo dùng `images/CV_Builder_Use_Case_Current.svg`, cập nhật
   nhãn UC-CV-09 cho preview + xuất PDF. PNG cũ được giữ làm tài nguyên lịch sử.
-- NFR-VMI-01 hiện dùng mục tiêu phản hồi **không quá 5 giây** khi mạng ổn định.
-  UC-VMI-02 hiện dẫn NFR-VMI-01, không còn giá trị 4 giây trong bản báo cáo.
-  Giá trị cũ còn ở bài nguồn không thay mục tiêu hiện tại.
+- NFR-VMI-01 cập nhật ngày 13/11/2026: **không quá 10 giây cho từng lần chờ**
+  khi mạng ổn định: (a) upload audio → text STT cho clip thông thường đến khoảng
+  30s; (b) nộp `/answers` → audio câu hỏi tiếp theo (AI + TTS). Không tính thời
+  gian ứng viên xác nhận text. Mốc 4s/5s trong nguồn lịch sử không còn áp dụng.
 - Mục 3.1 dùng sơ đồ ngữ cảnh chung. Bảng thành viên, chữ ký và phát biểu bài toán
   lấy từ Week01 theo xác nhận trước đó; lần rà này không tự đánh giá lại tỷ lệ đóng góp.
 - Proposal và các bài nguồn được giữ làm lịch sử; nội dung trong đó không tự bổ sung
