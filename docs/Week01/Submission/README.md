@@ -1,6 +1,6 @@
 # Hồ sơ Project Proposal — Nhóm 02
 
-[Project_Proposal.md](./Project_Proposal.md) và [Project_Proposal.html](./Project_Proposal.html) là bản người dùng đã kiểm tra, dùng làm nguồn chuẩn cho tài liệu phụ.
+[Project_Proposal.md](./Project_Proposal.md) và [Project_Proposal.html](./Project_Proposal.html) là bản người dùng đã kiểm tra, giữ bối cảnh, dự toán và kế hoạch ban đầu. Hành vi hiện tại theo [đặc tả Week02](../../Week02/Submission/Requirements_Analysis.md); phân công và mốc giao việc mới theo [hồ sơ họp](../../Meetings/README.md) và [bối cảnh dự án](../../PROJECT_CONTEXT.md). Không dùng phân công dự kiến trong Proposal để thay xác nhận hiện tại của nhóm.
 
 GVTH: Thầy Ngô Ngọc Đăng Khoa. GVLT: Thầy Phạm Minh Tuấn.
 

@@ -1,19 +1,28 @@
 ---
 name: anti-ai-fluff
-description: Rà soát văn phong tài liệu kỹ thuật để diễn đạt rõ, ngắn gọn và đúng dữ kiện khi người dùng yêu cầu biên tập hoặc chuẩn bị bài nộp.
+description: Biên tập tài liệu HireUS cho rõ, ngắn và đúng dữ kiện; dùng khi cần sửa diễn đạt hoặc review văn phong trước nộp.
 ---
 
-# Biên tập tài liệu kỹ thuật
+# Biên tập văn phong có căn cứ
 
-Áp dụng [quy tắc nguồn dữ liệu](../../rules/source-of-truth.md). Ưu tiên tính đúng và ý nghĩa trước hình thức.
+Đọc [quy tắc nguồn](../../rules/source-of-truth.md). Nếu chỉ review,
+đề xuất sửa và lý do; nếu được giao biên tập, sửa đúng phạm vi.
 
-## Cách rà soát
+Bỏ phần mở đầu chung chung, quảng cáo, lặp ý và khẳng định tuyệt đối thiếu nguồn.
+Dùng động từ và hành vi cụ thể đã có trong yêu cầu; không thêm tính năng hoặc
+con số chỉ để văn bản nghe thuyết phục hơn.
 
-- Bỏ câu mở đầu chung chung, lời quảng cáo, khẳng định tuyệt đối và ý lặp không thêm thông tin.
-- Thay tính từ mơ hồ bằng mô tả chức năng có trong nguồn. Ví dụ: “hệ thống vượt trội” → “hệ thống đối chiếu CV với yêu cầu tuyển dụng”. Không thêm con số để câu nghe cụ thể hơn.
-- Giữ số liệu đã được người dùng chốt, ghi rõ là dự kiến, mục tiêu hay kết quả đo. Thiếu nguồn thì nêu chưa xác minh hoặc bỏ khẳng định đó, không tự thay bằng số khác.
-- Dùng thuật ngữ nhất quán. Giải thích chữ viết tắt khi người đọc cần, mô tả thành phẩm trước khi dẫn tên file.
-- Dấu chấm phẩy, ngoặc đơn, danh sách có cấu trúc song song không phải bằng chứng “AI writing”. Chỉ sửa khi làm câu khó đọc hoặc lặp thừa.
-- Không tự áp số trang. Độ dài theo template/thông báo đã đọc hoặc yêu cầu người dùng.
+Giữ thuật ngữ, mã FR/BR/NFR/UC và điều kiện quan trọng:
+- Tự điền ô trống khác với ghi đè CV.
+- Chưa có bằng chứng khác với người dùng không có năng lực.
+- Chưa xác định hạn khác với còn hạn; không truy cập được khác với bài đã xóa.
+- Điểm tham khảo khác với xác suất được tuyển.
+- Prototype, kế hoạch, đã thực hiện và đã kiểm tra là các trạng thái khác nhau.
 
-Khi chỉ được yêu cầu review, nêu đoạn có vấn đề, lý do và phương án sửa. Khi được yêu cầu biên tập, sửa trong phạm vi cho phép, giữ quyết định và dữ kiện đã kiểm tra. Không sửa nguồn chuẩn trong tác vụ chỉ đồng bộ tài liệu phụ.
+Không coi độ dài câu, dấu gạch ngang hoặc dấu chấm phẩy là bằng chứng tác giả AI.
+Không tự đặt số trang, đổi số liệu hoặc thay yêu cầu chỉ để “bớt AI”.
+Nếu số liệu/nhận định có mâu thuẫn, dùng bản nội dung mới nhất và ghi nguồn,
+không tự trung bình hoặc gộp các bản cũ.
+
+Sau biên tập, đối chiếu nội dung với nguồn; nếu tài liệu có cả Markdown và HTML,
+đồng bộ phần thay đổi chung. Báo những chỗ cần xác minh dữ kiện riêng với sửa câu chữ.

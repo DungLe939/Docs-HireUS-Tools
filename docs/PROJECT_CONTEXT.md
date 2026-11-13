@@ -1,35 +1,65 @@
 # Bối cảnh dự án HireUS Tools
 
-## Nguồn thông tin chuẩn
+> Cập nhật 13/11/2026 từ đặc tả Week02, biên bản họp và xác nhận của Dũng.
 
-[Project Proposal Markdown](./Week01/Submission/Project_Proposal.md) và [bản HTML](./Week01/Submission/Project_Proposal.html) là hai tài liệu người dùng xác nhận đã kiểm tra. Khi tài liệu phụ mâu thuẫn với Proposal, lấy Proposal làm căn cứ cho phạm vi và kế hoạch hiện tại. Nếu hai bản Proposal khác nhau, cần đối chiếu và xác nhận điểm khác biệt.
+## Nguồn đang dùng
 
-Tài liệu do AI tạo trước đây, kể cả nội dung trong `.agents/`, không tự chứng minh tính chính xác của dữ kiện. Không suy diễn kế hoạch thành công việc đã hoàn thành, số liệu dự kiến thành kết quả đo, hoặc tài liệu tổng hợp thành quyết định của cuộc họp.
+| Nội dung | Nguồn |
+| --- | --- |
+| Hành vi, FR/BR/NFR, Use Case | [Requirements Analysis Week02](./Week02/Submission/Requirements_Analysis.md) và [HTML](./Week02/Submission/Requirements_Analysis.html) |
+| Quyết định họp, phân công và mốc công việc | [Hồ sơ họp](./Meetings/README.md), gồm PDF gốc và xác nhận bổ sung |
+| Bối cảnh, dự toán và kế hoạch ban đầu | [Proposal](./Week01/Submission/Project_Proposal.md) và [HTML](./Week01/Submission/Project_Proposal.html) |
+| Theo dõi các mốc có nguồn | [Timeline](./WEEKLY_TIMELINE.md) |
 
-## Thông tin môn học và nhóm
+Khi cùng nội dung mâu thuẫn, lấy phiên bản nội dung mới nhất theo
+[quy tắc nguồn](../.agents/rules/source-of-truth.md). Proposal và bài nguồn thành viên
+không thay thế các điều chỉnh mới hơn trong Week02. Biên bản xác nhận việc giao việc,
+không chứng minh công việc đã hoàn thành.
+
+## Môn học và thành viên
 
 - Môn: Nhập môn Công nghệ Phần mềm, Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM.
 - GVTH: Thầy Ngô Ngọc Đăng Khoa. GVLT: Thầy Phạm Minh Tuấn.
-- Nhóm 02: Võ Minh Khoa, Võ Nguyễn Việt Hoàng, Đỗ Chí Cao, Lê Tấn Dũng.
-- Lê Tấn Dũng phụ trách trưởng nhóm/PM và kỹ sư AI.
-- Quy trình dự kiến: Scrum, 8 tuần, 4 sprint, mỗi sprint 2 tuần.
+- Nhóm 02; trưởng nhóm: Lê Tấn Dũng.
+- Scrum trên Jira; mã nguồn tổ chức thành repo cha và ba repo con Frontend, Backend, Docs
+  theo [biên bản 12/10](./Week01/Team_Decision/Meeting_01.md).
 
-## Phạm vi và công nghệ
+## Phạm vi và người phụ trách hiện tại
 
-HireUS Tools hỗ trợ sinh viên IT tìm việc Intern/Fresher qua 4 phân hệ: tạo CV và SeekerBot, phỏng vấn giọng nói, Job Matching & Skill Gap, Job Tracking.
+Phân công dưới đây được Dũng xác nhận ngày 13/11/2026, thay phân công dự kiến trong
+Proposal cho công việc hiện tại. Mỗi thành viên triển khai epic của mình qua các lớp
+FE/BE cần thiết; vai trò công nghệ trong Proposal không giới hạn thành viên vào một lớp.
 
-Công nghệ dự kiến gồm Next.js, NestJS, PostgreSQL/Prisma, FastAPI trên Kaggle, DeepSeek API và mô hình âm thanh Hugging Face. Sản phẩm dự kiến đóng gói Docker Compose chạy cục bộ. Nhóm quản lý công việc trên Jira và mã nguồn trên GitHub.
+| Thành viên | MSSV | Epic phụ trách | Phối hợp chung |
+| --- | --- | --- | --- |
+| Võ Minh Khoa | 24120194 | CV Builder & SeekerBot | Tìm hiểu style prototype Figma và MCP theo họp 01/11 |
+| Võ Nguyễn Việt Hoàng | 24120249 | Voice Mock Interview | Tạo `ui_context` và nhánh UI theo họp 09/11 |
+| Đỗ Chí Cao | 24120270 | Job Tracking | Tạo database và chia sẻ thông tin kết nối theo họp 09/11 |
+| Lê Tấn Dũng | 24120290 | Job Matching & Skill Gap | Trưởng nhóm; rà phạm vi và duyệt các đầu việc đề xuất |
 
-Công số dự kiến là 8 giờ/người/tuần, tổng 256 người-giờ trong 8 tuần. Phân công, cấu hình và chi phí chi tiết xem Proposal, mục 5.
+Chi tiết nghiệp vụ và các điểm cần chốt xem [ghi chú Week02](./Week02/Submission/README.md).
+CV có cả xem trước trang in và xuất PDF theo xác nhận của Dũng ngày 13/11/2026.
+Ảnh prototype có thể khác đặc tả mới nhất; không lấy số câu hỏi, công thức điểm hoặc
+chức năng trong ảnh để thay FR/BR/NFR.
 
-## Bài nộp và tài liệu
+## Công nghệ và tình trạng
 
-Theo phần thông báo gốc được lưu trong [thông báo môn học](./Week01/Material/Thông_báo_1.md), bài nộp cần Markdown và HTML hiển thị cùng nội dung, kiểm tra kết quả AI và trình bày đúng trọng tâm. Thời gian mỗi đợt là 1–2 tuần từ khi giảng viên đăng yêu cầu, chưa đủ căn cứ xác định ngày nộp cụ thể.
+Next.js, NestJS và PostgreSQL được thống nhất trong họp 12/10. Prisma, dịch vụ AI
+FastAPI trên Kaggle, DeepSeek, mô hình âm thanh Hugging Face và Docker Compose là
+các lựa chọn trong Proposal; tài liệu này không xác nhận chúng đã được tích hợp.
 
-- [Tiến độ và kế hoạch](./WEEKLY_TIMELINE.md).
-- [Hồ sơ Proposal](./Week01/Submission/README.md).
-- [Template gốc](./Week01/Material/Template%230-ProjectProposal-2022.pdf).
-- [Kế hoạch tổng hợp từ Proposal](./Week01/Team_Decision/Material/HireUS_Implementation_Plan.md) và [HTML](./Week01/Team_Decision/Material/HireUS_Implementation_Plan.html).
-- [Biên bản 01](./Week01/Team_Decision/Meeting_01.md) và [biên bản 02](./Week01/Team_Decision/Meeting_02.md): bản ghi hiện có, chưa được xác minh lại từ ghi chép gốc trong lần rà soát này.
+Kế hoạch ban đầu là 8 tuần, 4 sprint, 8 giờ/người/tuần, tổng 256 người-giờ.
+[Kế hoạch triển khai](./Week01/Team_Decision/Material/HireUS_Implementation_Plan.md)
+tách các giả định này khỏi công việc được giao trong tháng 11.
 
-Hiện thư mục này chứa tài liệu và công cụ hỗ trợ tài liệu. Việc có kế hoạch FE/BE không xác nhận rằng mã nguồn ứng dụng đã được triển khai.
+Họp 09/11 giao triển khai từng epic đến **23:59 ngày 15/11/2026**, họp tiếp lúc
+**21:00 ngày 16/11/2026**. Đây là mốc giao việc, chưa phải trạng thái hoàn thành.
+Chưa xác nhận đã nộp bài, được giảng viên duyệt, database hoạt động hay tiến độ Jira.
+
+## Quy ước duy trì
+
+- Nội dung thay đổi trong báo cáo phải được cập nhật ở cả Markdown và HTML.
+- Bài nguồn và PDF gốc được giữ để truy vết; không sửa lịch sử cho giống đặc tả mới.
+- Cập nhật quyết định trong hồ sơ họp, yêu cầu trong Week02; các trang tổng quan dẫn
+  về đó thay vì tạo thêm bản đặc tả.
+- Không lưu khóa kết nối thực tế vào tài liệu hoặc suy trạng thái đã làm từ kế hoạch.

@@ -1,51 +1,92 @@
 # Hồ sơ phân tích yêu cầu Week02 — Nhóm 02
 
-## Bản nộp Markdown
+> Bản làm việc 1.1 cập nhật ngày 13/11/2026; bản 1.0 ban đầu đề ngày 07/11.
+> Baseline nội dung trong Git có lần cập nhật ngày 08/11/2026 (`5777fba`). Các ghi chú dưới đây mô tả bản hiện có,
+> không xác nhận đã nộp hoặc được giảng viên duyệt.
 
-- [Requirements_Analysis.md](./Requirements_Analysis.md): báo cáo tổng hợp theo template Week02.
-- `images/`: sơ đồ và hình prototype được báo cáo tham chiếu.
-- `image/`: bốn ảnh chữ ký được sao chép nguyên bản từ hồ sơ Week01 theo yêu cầu người dùng.
+## File cần dùng
 
-Khi nộp hoặc sao chép, giữ nguyên hai thư mục ảnh cạnh file Markdown. Không cần nộp các bản research riêng.
+- [Requirements_Analysis.md](./Requirements_Analysis.md) và
+  [Requirements_Analysis.html](./Requirements_Analysis.html): nội dung báo cáo hiện tại.
+- `images/`: sơ đồ và ảnh prototype; báo cáo đang tham chiếu 26 file riêng.
+- `image/`: bốn ảnh chữ ký lấy từ Week01 theo yêu cầu trước đó của nhóm.
 
-## Cách tổng hợp
+Khi chia sẻ/nộp, giữ nguyên cả hai thư mục ảnh cạnh báo cáo. `index.html` nếu có
+trong checkout là bản xem local của HTML, đang được ignore; không lấy đó làm nguồn
+đặc tả riêng. Bài nguồn/research không tự cần đưa vào gói nộp.
 
-- Job Tracking đã tích hợp nội dung và 8 ảnh từ [PR #6 của Cao](https://github.com/DungLe939/Docs-HireUS-Tools/pull/6), commit `c59a5c1d3c9e9a9ce08e2bb77c1a676235368a6d`: 18 FR, 5 BR, 8 NFR và 4 Use Case. Chỉ bỏ cột Jira, điều chỉnh cấp tiêu đề và thêm liên kết nội bộ theo định dạng báo cáo; giữ mục 3.1 toàn hệ thống và phần prototype chung. Không merge PR hoặc sửa bài nguồn.
-- Theo yêu cầu giảm khối lượng triển khai: bỏ FR-CV-11, 12, 18–21, BR-CV-07, UC-CV-05, UC-CV-08 và các phần prototype F04, F06; giữ chức năng xem trước trang in. Mã còn lại không đánh lại. Sơ đồ CV Builder dùng SVG mới; file nguồn và thiết kế Figma được giữ nguyên.
-- Mục 4.2 hiện có 20 Use Case và các trường theo mẫu; rút các luồng xử lý, gộp ghi chú vào bảng, bỏ dòng truy vết Jira riêng của Job Tracking và cập nhật dẫn chiếu NFR sau khi gộp.
-- Mục 3.2.2 hiện có 20 NFR: CV giữ bản rút gọn; Job Tracking dùng đủ 8 NFR của PR #6, gồm NFR-JT-06 và NFR-JT-08. Các liên kết từ Use Case đã được cập nhật tương ứng.
-- Mục 3.1 dùng sơ đồ ngữ cảnh chung toàn hệ thống (ảnh PNG) cùng bảng stakeholder đã được người dùng duyệt, thay cho các sơ đồ riêng từng phân hệ.
-- Bảng thành viên (gồm tỷ lệ đóng góp và chữ ký) và phần phát biểu bài toán được lấy nguyên nội dung Week01 theo xác nhận của người dùng trong phiên này.
-- Nội dung yêu cầu, quy tắc nghiệp vụ và bảng Use Case được tổng hợp từ bốn bài trong `../Team Decision/`. Mục 3.2.1 đã rút gọn câu chữ và gom giải thích mã trùng lặp theo yêu cầu người dùng; giữ các hành vi, điều kiện, quy tắc, mã FR/NFR/BR. ID Use Case đã được chuẩn hóa theo tiền tố phân hệ. Cột Story/Jira đã được bỏ khỏi bảng yêu cầu chức năng theo yêu cầu người dùng.
-- Mã Use Case trong mục 4.2 dùng dạng `UC-CV-01`, `UC-VMI-01`, `UC-JM-01`, `UC-JT-01` để không trùng giữa các phân hệ. Mã và dẫn chiếu trong phần văn bản đã được cập nhật; sơ đồ CV Builder đã được cập nhật theo phạm vi rút gọn; sơ đồ Job Tracking dùng bản 4 Use Case từ PR #6; các sơ đồ khác giữ nguyên.
-- Phần prototype CV Builder đã bỏ hướng dẫn người mới và CV song ngữ; ảnh F06 gộp song ngữ và trang in không còn được đưa vào bản nộp. Sáu ảnh Job Tracking được lấy từ PR #6 của Cao. Ảnh Job Matching và Voice Mock Interview đã được xuất từ Figma; không tạo màn hình mới.
-- Các file bài làm riêng và bản Proposal gốc không bị sửa.
+## Phạm vi và số đếm hiện tại
 
-## Điểm cần nhóm xác nhận trước khi nộp
+Đếm theo **dòng yêu cầu trong bảng**, không theo số lớn nhất của mã. FR đã được gộp
+hành vi, giữ mã đại diện và các khoảng trống; không suy từ đó rằng mọi mã nguồn cũ
+còn là một dòng riêng trong báo cáo.
 
-1. Voice Mock Interview: NFR-VMI-01 ghi độ trễ không quá **5 giây**, nhưng ràng buộc trong Use Case tham gia phỏng vấn ghi **4 giây**. Báo cáo giữ nguyên cả hai giá trị từ bài nguồn, chưa tự quyết định thay nhóm.
-2. Voice Mock Interview: bảng FR hiện chuyển từ FR-VMI-23 sang FR-VMI-27, 28. Giữ mã nguồn, không tự thêm yêu cầu hoặc đánh số lại.
-3. CV Builder: SCRUM-16 (in/xuất PDF) vẫn là phạm vi cần nhóm xác nhận theo bài nguồn.
-4. Thử các liên kết và thao tác trên Figma Present. Ảnh và dữ liệu mẫu không chứng minh ứng dụng, AI hoặc lưu dữ liệu thật đã triển khai.
+| Phân hệ | FR | BR | NFR | Use Case |
+| --- | ---: | ---: | ---: | ---: |
+| CV Builder & SeekerBot | 9 | 8 | 4 | 7 |
+| Voice Mock Interview | 9 | 5 | 4 | 5 |
+| Job Matching & Skill Gap | 12 | 6 | 4 | 4 |
+| Job Tracking | 8 | 5 | 8 | 4 |
+| **Tổng** | **38** | **24** | **20** | **20** |
 
-## Kiểm tra tự động đã thực hiện
+Con số **93 FR** trong ghi chú trước là số đếm của phiên bản trước khi gộp, không
+còn mô tả bản hiện tại. Số 26 là ảnh được tham chiếu, không phải tổng mọi file còn
+lưu trong thư mục `images/`; không xóa ảnh dư chỉ vì không được dùng trong báo cáo.
 
-- Bảng thành viên và phần phát biểu bài toán khớp nội dung Week01.
-- Hiện có 93 FR và 20 NFR sau khi tích hợp bản Job Tracking mới; mã yêu cầu, quy tắc nghiệp vụ và công thức điểm được đối chiếu sau khi rút gọn.
-- Các file nguồn và Proposal giữ nguyên nội dung.
-- Các đường dẫn ảnh và chữ ký đều trỏ đến file tồn tại.
+## Các điều chỉnh đã có trong bản tổng hợp
 
-| Nội dung | Số lượng |
-| --- | ---: |
-| FR | 93 |
-| NFR | 20 |
-| UseCase | 20 |
-| images | 26 |
+- Bài nguồn bốn phân hệ nằm ở [Team Decision](../Team%20Decision/README.md).
+  Báo cáo mới hơn đã chuẩn hóa câu chữ, gộp yêu cầu, bỏ cột Jira và dùng mã UC có
+  tiền tố phân hệ. Không dùng bản ghép nguyên văn làm bản nộp hiện tại.
+- Job Tracking tích hợp từ [PR #6 của Cao](https://github.com/DungLe939/Docs-HireUS-Tools/pull/6),
+  commit `c59a5c1d3c9e9a9ce08e2bb77c1a676235368a6d`: bản nguồn có 18 FR;
+  bản báo cáo hiện gộp thành 8 dòng FR, giữ 5 BR, 8 NFR và 4 Use Case.
+- CV Builder đã bỏ tutorial/hướng dẫn người mới và CV song ngữ khỏi phạm vi bản
+  tổng hợp. Theo Dũng xác nhận ngày 13/11/2026, giữ **cả xem trước trang in và xuất PDF**.
+  FR-CV-22 và UC-CV-09 gộp luồng xem trước/xuất; BR-CV-04/08 và NFR-CV-05 áp dụng
+  cho dữ liệu, lỗi xuất và khả năng đọc file. SCRUM-49 là preview, SCRUM-16 là xuất PDF.
+  Không khôi phục chức năng song ngữ hoặc tutorial từ các mục F04/F06 cũ.
+- Sơ đồ CV trong báo cáo dùng `images/CV_Builder_Use_Case_Current.svg`, cập nhật
+  nhãn UC-CV-09 cho preview + xuất PDF. PNG cũ được giữ làm tài nguyên lịch sử.
+- NFR-VMI-01 hiện dùng mục tiêu phản hồi **không quá 5 giây** khi mạng ổn định.
+  UC-VMI-02 hiện dẫn NFR-VMI-01, không còn giá trị 4 giây trong bản báo cáo.
+  Giá trị cũ còn ở bài nguồn không thay mục tiêu hiện tại.
+- Mục 3.1 dùng sơ đồ ngữ cảnh chung. Bảng thành viên, chữ ký và phát biểu bài toán
+  lấy từ Week01 theo xác nhận trước đó; lần rà này không tự đánh giá lại tỷ lệ đóng góp.
+- Proposal và các bài nguồn được giữ làm lịch sử; nội dung trong đó không tự bổ sung
+  lại các chức năng đã cắt ở bản mới.
 
-Báo cáo này được chuẩn bị để nhóm xem và nộp; việc tạo file không xác nhận đã nộp hoặc được giảng viên duyệt.
+## Đối chiếu prototype với đặc tả
 
-## Ghi chú biên tập
+Ảnh là minh họa từ Figma, chưa được dựng lại theo mọi lần chỉnh yêu cầu.
+**FR/BR/NFR và Use Case trong báo cáo là căn cứ triển khai**, ảnh không thay quy tắc.
 
-Ghi chú làm việc cuối bài CV Builder dưới đây được chuyển ra khỏi bản nộp để tránh câu “chưa khai % đóng góp” mâu thuẫn với bảng thành viên đã được người dùng yêu cầu lấy từ Week01. Nội dung nghiệp vụ và các file nguồn được giữ nguyên.
+| Vị trí có thể lệch | Đọc theo bản hiện tại |
+| --- | --- |
+| CV: chức năng tutorial/song ngữ còn ở bài nguồn hoặc thiết kế cũ | Phạm vi CV rút gọn trong mục 3.2, 4.2 và 5.1 |
+| CV: chưa có ảnh prototype cho thao tác xuất PDF vừa xác nhận | FR-CV-22, BR-CV-08, NFR-CV-05 và UC-CV-09; cần bổ sung ảnh theo thiết kế được nhóm chọn |
+| VMI: ảnh phòng phỏng vấn hiển thị số câu khác; ảnh báo cáo dùng tiêu chí/thang điểm cũ | BR-VMI-01 và BR-VMI-04/05: 5–8 câu; ba tiêu chí 50/30/20 trên thang 100 |
+| Job Matching: ảnh điểm và cách thể hiện mức đáp ứng có thể chưa phản ánh đủ quy tắc | FR-JM-15 và BR-JM-04/05/06: các mức bằng chứng, trọng số và giới hạn khi thiếu yêu cầu bắt buộc |
 
-*Cần nhóm chốt SCRUM-16, mẫu CV và ánh xạ Profile; thử Present. Bảng đánh giá thành viên thuộc báo cáo chung, chưa khai % đóng góp.*
+Liên kết Figma nằm trong mục 5 của báo cáo. Chưa kiểm tra Figma Present trong lần
+đồng bộ này; ảnh mẫu không chứng minh AI, API hoặc lưu dữ liệu đã hoạt động.
+
+## Điểm nghiệp vụ còn cần chốt
+
+- **CV Builder:** mẫu CV triển khai và ánh xạ các trường Profile cần được xác nhận
+  khi triển khai. Phạm vi preview và xuất PDF đã được Dũng chốt ngày 13/11/2026;
+  không đánh dấu đã triển khai chỉ vì yêu cầu đã được bổ sung.
+- **UI chung:** Hoàng được giao `ui_context`/nhánh UI trong
+  [họp 09/11](../../Meetings/Meeting_05.md). Lần rà tài liệu này chưa xác minh artifact
+  đã hoàn thành hoặc thiết kế Figma nào được chọn làm chuẩn cuối.
+
+Phân công và deadline hiện tại nằm tại [bối cảnh](../../PROJECT_CONTEXT.md) và
+[timeline](../../WEEKLY_TIMELINE.md), không lấy phân công dự kiến trong Proposal
+để thay xác nhận mới của nhóm.
+
+## Kiểm tra khi sửa
+
+- Đối chiếu dòng bảng, mã dẫn chiếu, ảnh và nội dung giữa Markdown/HTML.
+- Nếu đổi yêu cầu, cập nhật số đếm và ghi chú phạm vi ở trang này.
+- Nếu có `index.html` local, đồng bộ từ HTML; không biên tập thành một bản thứ ba.
+- Chạy từ repo tài liệu: `python3 .agents/scripts/check_docs.py`.

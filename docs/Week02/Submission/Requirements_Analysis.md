@@ -3,8 +3,8 @@ title: "Phân tích yêu cầu: Nền tảng HireUS Tools"
 group: "Nhóm 02"
 course: "Nhập môn Công nghệ Phần mềm (Introduction to Software Engineering)"
 institution: "Khoa Công nghệ Thông tin - Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM"
-date: "07/11/2026"
-version: "1.0"
+date: "13/11/2026"
+version: "1.1"
 ---
 
 # NHẬP MÔN CÔNG NGHỆ PHẦN MỀM
@@ -17,6 +17,7 @@ version: "1.0"
 > **Giảng viên lý thuyết (GVLT):** Thầy Phạm Minh Tuấn  
 > **Nhóm thực hiện:** Nhóm 02  
 > **Đợt báo cáo:** Week02 — Phân tích yêu cầu
+> **Phiên bản:** 1.1 — Cập nhật 13/11/2026
 
 ## MỤC LỤC
 
@@ -125,7 +126,7 @@ Quy ước mã:
 | **FR-CV-09** | Là sinh viên, tôi muốn kiểm tra gợi ý AI để chủ động cập nhật CV. | Duyệt và áp dụng gợi ý AI. | Hiển thị gợi ý cạnh bản gốc; người dùng được sửa, duyệt hoặc bỏ qua, chỉ áp dụng phần đã duyệt. AI không phản hồi thì thông báo và giữ nguyên CV, cho tiếp tục chỉnh sửa, lưu. |
 | **FR-CV-13** | Là sinh viên, tôi muốn quản lý và tái sử dụng thành tựu để viết CV thuận tiện. | Quản lý và tái sử dụng thành tựu cá nhân. | Cho tạo, xem, sửa, xóa thành tựu có quyền truy cập và sao chép mục đã chọn vào CV. Bản sao được chỉnh sửa độc lập; sửa thư viện không tự cập nhật nội dung CV đã có. |
 | **FR-CV-15** | Là sinh viên, tôi muốn nhập dự án GitHub để bổ sung thông tin đúng đóng góp của mình. | Nhập và xác nhận dữ liệu GitHub. | Nhận đường dẫn kho công khai, lấy mô tả và README trong phạm vi truy cập hỗ trợ; cho xem, sửa và xác nhận đóng góp cá nhân trước khi thêm vào CV. Dữ liệu kho không tự chứng minh đóng góp. Đường dẫn sai, kho riêng tư, không tồn tại hoặc không truy xuất được thì báo lỗi, không báo lấy dữ liệu thành công. |
-| **FR-CV-22** | Là sinh viên, tôi muốn xem bố cục trang in để kiểm tra CV trước khi in. | Xem trước bố cục trang in. | Hiển thị nội dung, mẫu và phân trang theo CV hiện tại; cho quay lại trình chỉnh sửa khi cần thay đổi. Bước này không dùng AI kiểm lỗi hoặc yêu cầu bổ sung nội dung. |
+| **FR-CV-22** | Là sinh viên, tôi muốn xem bố cục và xuất CV thành PDF để sử dụng khi ứng tuyển. | Xem trước bố cục trang in và xuất PDF. | Hiển thị nội dung, mẫu và phân trang theo CV hiện tại; cho quay lại trình chỉnh sửa khi cần thay đổi. Cho xuất CV hiện tại thành file PDF để tải về; nếu xuất lỗi thì thông báo, giữ nguyên CV và cho thử lại. Xem trước và xuất PDF không dùng AI kiểm lỗi hoặc yêu cầu bổ sung nội dung. |
 
 ###### Các quy tắc nghiệp vụ áp dụng
 
@@ -134,10 +135,10 @@ Quy ước mã:
 | **BR-CV-01** | Quyền sở hữu CV và thành tựu | Người dùng chỉ được xem, sửa, xóa CV và thành tựu thuộc quyền truy cập của mình. |
 | **BR-CV-02** | AI chỉ đưa ra gợi ý | Mọi gợi ý SeekerBot/STAR/JD cần được duyệt trước khi áp dụng; không tạo dự án, vai trò, số liệu, chứng chỉ hoặc kinh nghiệm thiếu căn cứ. |
 | **BR-CV-03** | Phạm vi điều chỉnh theo JD | Điều chỉnh theo JD chỉ dùng **thông tin CV đã có** để cải thiện cách diễn đạt; không chấm điểm hoặc phân tích Skill Gap. |
-| **BR-CV-04** | Dữ liệu CV dùng chung | Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp và bản xem trước khi in dùng chung dữ liệu. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu. |
+| **BR-CV-04** | Dữ liệu CV dùng chung | Trình chỉnh sửa, mẫu CV, bản xem trước trực tiếp, bản xem trước khi in và file PDF xuất ra dùng cùng nội dung CV hiện tại. Đổi mẫu giữ nội dung; lưu/mở lại giữ cả nội dung và mẫu. |
 | **BR-CV-05** | Tái sử dụng thành tựu | Thành tựu được sao chép tại thời điểm chọn; sửa thư viện không cập nhật CV đã có. |
 | **BR-CV-06** | Nhập nội dung GitHub | Chỉ lấy kho mã nguồn công khai; thông tin mô tả và tệp README không chứng minh đóng góp cá nhân. Người dùng kiểm tra, sửa và xác nhận trước khi thêm vào CV. |
-| **BR-CV-08** | Phạm vi xem trước khi in | Bản xem trước khi in hiển thị nội dung, mẫu và phân trang của CV hiện tại; không thực hiện kiểm lỗi bằng AI. |
+| **BR-CV-08** | Phạm vi xem trước và xuất PDF | Bản xem trước khi in và file PDF hiển thị nội dung, mẫu và phân trang của CV hiện tại; không thực hiện kiểm lỗi bằng AI. Người dùng chủ động chọn xuất PDF; lỗi xuất không được làm mất CV. |
 | **BR-CV-09** | Dữ liệu hồ sơ cá nhân và CV | Chỉ tự điền ô cơ bản còn trống khi tạo/mở CV từ **hồ sơ cá nhân tài khoản đang đăng nhập**; người dùng được sửa. Thay đổi hồ sơ cá nhân không ghi đè CV đã lưu. Ánh xạ trường chờ đối chiếu cấu trúc dữ liệu hồ sơ cá nhân. |
 
 ##### b. Voice Mock Interview
@@ -226,7 +227,7 @@ Quy ước mã:
 | <a id="nfr-cv-01"></a>**NFR-CV-01** | Là sinh viên, tôi muốn thao tác dễ hiểu để chỉnh sửa CV thuận tiện. | **Dễ sử dụng:** Hỗ trợ chỉnh sửa CV rõ ràng. | Chỉ rõ mục đang chỉnh sửa, hiển thị bản xem trước dễ đọc và hướng dẫn sửa lỗi tại trường liên quan. |
 | <a id="nfr-cv-02"></a>**NFR-CV-02** | Là sinh viên, tôi muốn được bảo vệ dữ liệu để yên tâm sử dụng CV và thành tựu. | **Bảo mật:** Bảo vệ CV và thành tựu. | Chỉ người có quyền được truy cập CV và thành tựu; khóa dịch vụ AI, GitHub được giữ ở máy chủ. |
 | <a id="nfr-cv-03"></a>**NFR-CV-03** | Là sinh viên, tôi muốn tiếp tục làm việc để không mất CV khi dịch vụ ngoài lỗi. | **Tin cậy:** Duy trì dữ liệu khi dịch vụ ngoài lỗi. | Lỗi AI hoặc GitHub không làm mất CV hay gián đoạn chỉnh sửa, lưu; gợi ý chỉ được áp dụng sau khi người dùng duyệt. |
-| <a id="nfr-cv-05"></a>**NFR-CV-05** | Là sinh viên, tôi muốn đọc được trang in để kiểm tra CV đầy đủ. | **Khả năng đọc:** Bảo đảm bố cục trang in rõ ràng. | Với các mẫu được hỗ trợ, nội dung quan trọng không bị cắt hoặc chồng lấn trong bản xem trước khi in. |
+| <a id="nfr-cv-05"></a>**NFR-CV-05** | Là sinh viên, tôi muốn đọc được trang in và PDF để sử dụng CV đầy đủ. | **Khả năng đọc:** Bảo đảm bố cục trang in và PDF rõ ràng. | Với các mẫu được hỗ trợ, nội dung quan trọng không bị cắt hoặc chồng lấn trong bản xem trước khi in và file PDF xuất ra; hiển thị đúng tiếng Việt. |
 
 ##### b. Voice Mock Interview
 
@@ -271,7 +272,7 @@ Quy ước mã:
 
 #### a. CV Builder & SeekerBot
 
-![Sơ đồ Use Case của CV Builder & SeekerBot](./images/CV_Builder_Use_Case.png)
+![Sơ đồ Use Case của CV Builder & SeekerBot](./images/CV_Builder_Use_Case_Current.svg)
 
 #### b. Voice Mock Interview
 
@@ -375,18 +376,18 @@ Quy ước mã:
 | **Kịch bản phụ** | • Đường dẫn sai, kho riêng tư hoặc không tồn tại: báo lỗi.<br>• Thiếu README: dùng thông tin mô tả khả dụng.<br>• API lỗi: cho thử lại hoặc nhập tay. |
 | **Ràng buộc phi chức năng** | [NFR-CV-02](#nfr-cv-02), [NFR-CV-03](#nfr-cv-03). |
 
-##### Xem trước bố cục trang in
+##### Xem trước bố cục trang in và xuất PDF
 
 | Thành phần | Đặc tả |
 | --- | --- |
 | **Use Case ID** | <a id="uc-cv-09"></a>UC-CV-09 |
-| **Tên Use Case** | Xem trước bố cục trang in |
-| **Tóm tắt** | Kiểm tra bố cục CV theo trang in. |
+| **Tên Use Case** | Xem trước bố cục trang in và xuất PDF |
+| **Tóm tắt** | Kiểm tra bố cục CV theo trang in và tải file PDF. |
 | **Tác nhân** | Sinh viên/người tìm việc. |
 | **Điều kiện tiên quyết** | Có CV đang mở trong trình chỉnh sửa. |
-| **Kết quả** | Hiển thị bố cục theo nội dung và mẫu hiện tại. |
-| **Kịch bản chính** | 1. Người dùng chọn xem trước khi in.<br>2. Hệ thống hiển thị nội dung và phân trang.<br>3. Người dùng rà soát, quay lại chỉnh sửa nếu cần. |
-| **Kịch bản phụ** | • CV trống: hướng dẫn quay lại chỉnh sửa.<br>• Dựng trang lỗi: thông báo, cho thử lại và giữ nguyên CV. |
+| **Kết quả** | Hiển thị bố cục theo nội dung và mẫu hiện tại; tải được file PDF khi chọn xuất thành công. |
+| **Kịch bản chính** | 1. Người dùng chọn xem trước khi in.<br>2. Hệ thống hiển thị nội dung và phân trang.<br>3. Người dùng rà soát, quay lại chỉnh sửa nếu cần.<br>4. Người dùng chọn xuất PDF; hệ thống tạo file theo CV hiện tại và cho tải về. |
+| **Kịch bản phụ** | • CV trống: hướng dẫn quay lại chỉnh sửa.<br>• Dựng trang hoặc xuất PDF lỗi: thông báo, cho thử lại và giữ nguyên CV; không báo xuất thành công khi chưa tạo được file. |
 | **Ràng buộc phi chức năng** | [NFR-CV-01](#nfr-cv-01), [NFR-CV-05](#nfr-cv-05); hiển thị trung thực định dạng in ấn chuẩn trang A4. |
 
 #### b. Voice Mock Interview
@@ -589,6 +590,8 @@ Quy ước mã:
 
 *Lưu ý: Đây chỉ là các bản mẫu prototype nhằm minh họa các chức năng, giao diện có thể thay đổi trong tương lai.*
 
+**Căn cứ triển khai:** Khi ảnh khác nội dung đã cập nhật, dùng FR/BR/NFR và Use Case trong báo cáo. Chỉ số, thang điểm hoặc chức năng còn trên ảnh cũ không tự bổ sung vào phạm vi; xem [ghi chú đối chiếu prototype](./README.md#đối-chiếu-prototype-với-đặc-tả).
+
 ### 5.1. CV Builder & SeekerBot
 
 | Mã màn hình | Tên màn hình | Mô tả chức năng |
@@ -619,6 +622,8 @@ Người dùng kiểm tra và duyệt gợi ý trước khi áp dụng vào CV.
 ![F05 — Thành tựu và nhập dự án GitHub](./images/F05_Achievement_GitHub.png)
 
 Dữ liệu GitHub được tạo thành bản nháp để người dùng kiểm tra trước khi thêm vào CV.
+
+Phạm vi hiện tại có cả xem trước trang in và xuất PDF theo FR-CV-22, BR-CV-08 và UC-CV-09. Ảnh prototype chưa bổ sung minh họa thao tác xuất PDF; không khôi phục chức năng CV song ngữ từ ảnh F06 cũ.
 
 ### 5.2. Voice Mock Interview
 

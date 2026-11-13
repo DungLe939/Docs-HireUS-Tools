@@ -2,25 +2,36 @@
 
 Đồ án môn Nhập môn Công nghệ Phần mềm, Nhóm 02, Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM.
 
-## Nguồn chuẩn
+## Đọc từ đâu
 
-[Project Proposal](./docs/Week01/Submission/Project_Proposal.md) và [bản HTML](./docs/Week01/Submission/Project_Proposal.html) đã được người dùng kiểm tra. Tài liệu tổng quan và kế hoạch phải bám theo hai bản này. Các bản ghi do AI tạo trước đây cần được đối chiếu trước khi dùng làm căn cứ.
+| Cần biết | Tài liệu |
+| --- | --- |
+| Tổng quan, công nghệ và phân công hiện tại | [Bối cảnh dự án](./docs/PROJECT_CONTEXT.md) |
+| Hành vi và tiêu chí của bốn phân hệ | [Phân tích yêu cầu Week02](./docs/Week02/Submission/Requirements_Analysis.md), [HTML](./docs/Week02/Submission/Requirements_Analysis.html) và [ghi chú phạm vi](./docs/Week02/Submission/README.md) |
+| Quyết định họp và PDF gốc | [Hồ sơ họp](./docs/Meetings/README.md) |
+| Mốc công việc và trạng thái có nguồn | [Timeline](./docs/WEEKLY_TIMELINE.md) |
+| Ý tưởng, dự toán và kế hoạch ban đầu | [Proposal](./docs/Week01/Submission/Project_Proposal.md), [HTML](./docs/Week01/Submission/Project_Proposal.html) và [hướng dẫn đóng gói](./docs/Week01/Submission/README.md) |
+| Kế hoạch đã đối chiếu các quyết định mới | [Kế hoạch triển khai](./docs/Week01/Team_Decision/Material/HireUS_Implementation_Plan.md), [HTML](./docs/Week01/Team_Decision/Material/HireUS_Implementation_Plan.html) |
+| Công cụ và hướng dẫn AI dùng chung | [AGENTS.md](./AGENTS.md) và [.agents](./.agents/README.md) |
 
-HireUS Tools có 4 phân hệ: tạo CV và SeekerBot, phỏng vấn giọng nói, Job Matching & Skill Gap, Job Tracking. Kế hoạch sử dụng Next.js, NestJS, PostgreSQL/Prisma và dịch vụ AI FastAPI trên Kaggle kết hợp DeepSeek, Hugging Face. Thời lượng dự kiến 8 tuần, 4 sprint.
+HireUS Tools gồm CV Builder & SeekerBot, Voice Mock Interview, Job Matching & Skill Gap,
+Job Tracking. Theo xác nhận ngày 13/11/2026, Khoa, Hoàng, Dũng và Cao lần lượt phụ trách
+bốn epic này. Chi tiết và phần phối hợp chung được giữ tại trang bối cảnh.
 
-## Điều hướng
+## Nguồn và cách cập nhật
 
-- [Bối cảnh và nguồn thông tin](./docs/PROJECT_CONTEXT.md).
-- [Tiến độ và kế hoạch](./docs/WEEKLY_TIMELINE.md).
-- [Hướng dẫn chuẩn bị hồ sơ Proposal](./docs/Week01/Submission/README.md).
-- [Kế hoạch triển khai](./docs/Week01/Team_Decision/Material/HireUS_Implementation_Plan.md) và [HTML](./docs/Week01/Team_Decision/Material/HireUS_Implementation_Plan.html).
-- [Thông báo môn học](./docs/Week01/Material/Thông_báo_1.md) và [template PDF](./docs/Week01/Material/Template%230-ProjectProposal-2022.pdf).
-- [Công cụ và kỹ năng hỗ trợ](./.agents/README.md).
+Khi cùng nội dung mâu thuẫn, dùng phiên bản nội dung mới nhất theo
+[quy tắc nguồn](./.agents/rules/source-of-truth.md), không theo ngày copy file.
+Week02 sở hữu yêu cầu hiện tại; Proposal giữ bối cảnh và kế hoạch ban đầu;
+biên bản ghi quyết định và giao việc. Kế hoạch hoặc ảnh prototype không xác nhận code đã chạy.
 
-## Tổ chức tài liệu
+- `docs/Week01/`: thông báo/template, bài mẫu, Proposal và các bản ghi đầu dự án.
+- `docs/Week02/Submission/`: báo cáo đã chuẩn hóa; `Team Decision/` giữ bài nguồn thành viên.
+- `docs/Meetings/`: mục lục họp, biên bản bổ sung và PDF gốc; hai biên bản đầu vẫn ở Week01.
+- `.agents/`: skills và script dùng chung, được giữ trong Git.
 
-`docs/Week01/` chứa tài liệu giảng viên trong `Material/`, bài toán mẫu trong `Problem_example/`, biên bản và kế hoạch trong `Team_Decision/`, hồ sơ Proposal trong `Submission/`.
+Sửa nội dung báo cáo phải đồng bộ Markdown/HTML và giữ tài nguyên được tham chiếu.
+Không sửa bài nguồn lịch sử cho giống bản mới hoặc ghi khóa kết nối vào tài liệu.
+Không tự sync Git/Drive, commit/push hay cập nhật trạng thái nộp/duyệt chỉ vì sửa tài liệu.
 
-`.agents/` chứa hướng dẫn và script hỗ trợ. Các hướng dẫn này không phải bằng chứng xác nhận dữ kiện của dự án. Khi có mâu thuẫn, đối chiếu nguồn chuẩn và thông tin người dùng cung cấp.
-
-Dùng đường dẫn tương đối trong tài liệu. Khi cập nhật nội dung, đồng bộ bản Markdown/HTML tương ứng và ghi nhận tiến độ có căn cứ. Chỉ đồng bộ Git/Drive khi thực sự cần lấy tài liệu mới, sau đó đối chiếu trước khi thay thế bản đã kiểm tra.
+Kiểm tra từ repo tài liệu: `python3 .agents/scripts/check_docs.py`.

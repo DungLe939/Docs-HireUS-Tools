@@ -1,72 +1,75 @@
 # Kế hoạch triển khai HireUS Tools
 
-> Cập nhật ngày 20/10/2026 theo [Proposal đã được người dùng kiểm tra](../../Submission/Project_Proposal.md) và [bản HTML](../../Submission/Project_Proposal.html).
-> Tài liệu này tổng hợp kế hoạch từ Proposal, không phải biên bản phê duyệt hay báo cáo tính năng đã hoàn thành.
+> Cập nhật 13/11/2026 theo đặc tả Week02, hồ sơ họp và xác nhận của Dũng.
+> Kế hoạch ban đầu vẫn được giữ trong Proposal; các mục dưới đây tách kế hoạch khỏi kết quả.
 
-## 1. Phạm vi
+## 1. Nguồn và phạm vi hiện tại
 
-HireUS Tools phục vụ sinh viên IT tìm việc Intern/Fresher, gồm 4 phân hệ:
+- [Phân tích yêu cầu Week02](../../../Week02/Submission/Requirements_Analysis.md) và [HTML](../../../Week02/Submission/Requirements_Analysis.html): hành vi, FR/BR/NFR và Use Case.
+- [Hồ sơ họp](../../../Meetings/README.md): quyết định giao việc, lịch và xác nhận bổ sung.
+- [Bối cảnh dự án](../../../PROJECT_CONTEXT.md): phân công epic và phần phối hợp chung hiện tại.
+- [Proposal](../../Submission/Project_Proposal.md) và [HTML](../../Submission/Project_Proposal.html): bối cảnh, dự toán và kế hoạch 8 tuần ban đầu.
 
-| Phân hệ | Nội dung |
-| :--- | :--- |
-| 1. CV Builder & SeekerBot | Tạo, chỉnh sửa CV, gợi ý nội dung theo STAR và xuất PDF. |
-| 2. Voice Mock Interview | Luyện phỏng vấn kỹ thuật bằng giọng nói Việt/Anh, hỏi đáp theo ngữ cảnh và nhận báo cáo đánh giá. |
-| 3. Job Matching & Skill Gap | Đối chiếu CV với JD, tính điểm tương thích và gợi ý kỹ năng cần bổ sung. |
-| 4. Job Tracking | Theo dõi tin từ Fanpage/LinkedIn, lọc tin bằng AI và thông báo đợt tuyển Intern/Fresher. |
+Khi cùng nội dung khác nhau, dùng nội dung mới nhất. Phân công theo công nghệ trong
+Proposal đã được thay bằng mỗi thành viên phụ trách một epic; không dùng bảng cũ
+để giới hạn người làm FE/BE cho tính năng của họ.
 
-## 2. Công nghệ dự kiến
+| Phân hệ | Phạm vi cần bám |
+| --- | --- |
+| CV Builder & SeekerBot | Tạo/sửa/lưu CV theo mẫu; duyệt gợi ý AI; thành tựu và GitHub; preview và xuất PDF đã được Dũng chốt 13/11. Tutorial và CV song ngữ đã cắt. |
+| Voice Mock Interview | Thiết lập và kiểm tra thiết bị; hội thoại giọng nói; báo cáo, lịch sử và khôi phục khi lỗi theo FR/BR/NFR mới nhất. |
+| Job Matching & Skill Gap | CV hiện có + JD; xác nhận dữ liệu bóc tách; tính điểm từ bằng chứng; hướng cải thiện và lịch sử snapshot. |
+| Job Tracking | Theo dõi nguồn, thu thập và sàng lọc tin; xem/lưu/xóa cá nhân; thời hạn và thông báo. Không tự ứng tuyển hoặc tính điểm CV–JD. |
 
-| Thành phần | Công nghệ theo Proposal |
-| :--- | :--- |
-| Frontend | Next.js, Web Audio API |
-| Backend | NestJS, TypeScript, Task Scheduling |
-| Cơ sở dữ liệu | PostgreSQL, Prisma ORM |
-| Dịch vụ AI | FastAPI trên Kaggle, DeepSeek API, mô hình âm thanh Hugging Face |
-| Đóng gói | Docker Compose chạy cục bộ |
-| Quản lý | Scrum trên Jira, mã nguồn trên GitHub |
+Không chép công thức/số liệu từ ảnh prototype. Điểm cần chốt còn lại nằm trong
+[ghi chú Week02](../../../Week02/Submission/README.md).
 
-Chi tiết cấu hình và dự toán dịch vụ xem mục 3.3 và 5.3 của Proposal. Đây là thông tin kế hoạch, chưa phải kết quả vận hành thực tế.
+## 2. Giao việc gần nhất
 
-## 3. Kế hoạch 8 tuần
+| Nguồn | Đầu việc | Mốc ghi trong nguồn |
+| --- | --- | --- |
+| Họp 01/11, bản ghi 04 | Mỗi người phân tích, vẽ diagram và prototype epic; Khoa tìm style Figma/MCP cho nhóm | Deadline chung 19:00 ngày 06/11; hẹn họp 21:00 cùng ngày |
+| Họp 09/11, bản ghi 05 | Mỗi người triển khai epic theo PA02; Hoàng tạo `ui_context` và nhánh UI; Cao tạo database và chia sẻ thông tin kết nối | Deadline triển khai 23:59 ngày 15/11; hẹn họp 21:00 ngày 16/11 |
+| Xác nhận 13/11 | Khoa phụ trách CV; Hoàng phụ trách VMI; Dũng phụ trách Job Matching; Cao phụ trách Job Tracking. CV có preview và xuất PDF. | Áp dụng cho công việc hiện tại |
 
-Dự án triển khai trong 8 tuần theo mô hình **Scrum** trên **Jira**, chia thành 4 chu kỳ Sprint (2 tuần/Sprint):
+Xem [timeline](../../../WEEKLY_TIMELINE.md) để phân biệt lịch hẹn với cuộc họp đã có
+biên bản. Không suy hoàn thành prototype, UI chung, database hoặc epic từ việc đã giao.
 
-| Chu kỳ Sprint | Tuần | Công việc trọng tâm | Thành phẩm cụ thể đầu ra |
-| :---: | :---: | :--- | :--- |
-| **Sprint 1** | **Tuần 01** | Khảo sát nhu cầu, thống nhất ý tưởng, lập Jira Backlog và hoàn thiện hồ sơ đề xuất đồ án. | - Hồ sơ Project Proposal hoàn chỉnh.<br>- Biên bản làm việc nhóm & phân công. |
-| | **Tuần 02** | Tiếp nhận góp ý từ GV, tinh chỉnh Backlog, dựng khung mã nguồn mẫu Next.js & NestJS. | - Bảng Scrum Backlog trên Jira.<br>- Khung mã nguồn dự án trên GitHub. |
-| **Sprint 2** | **Tuần 03** | Lập Use Case chi tiết, vẽ Activity & Sequence Diagram cho 4 phân hệ. | - Hồ sơ đặc tả yêu cầu phần mềm. |
-| | **Tuần 04** | Thiết kế Wireframe 4 màn hình, thiết kế lược đồ cơ sở dữ liệu PostgreSQL (ERD) và danh mục REST API. | - Hồ sơ thiết kế kiến trúc phần mềm.<br>- Bản vẽ Wireframe & kịch bản tạo CSDL. |
-| **Sprint 3** | **Tuần 05** | Cài đặt Auth JWT, lập trình Phân hệ 1 (Tạo CV ATS & Trợ lý SeekerBot AI trên Kaggle). | - Module đăng ký/đăng nhập hoàn tất.<br>- Chức năng tạo CV ATS chạy thực nghiệm. |
-| | **Tuần 06** | Lập trình Phân hệ 2 (Phỏng vấn giọng nói AI hai chiều) và Phân hệ 3 (Đối soát Job & Skill Gap). | - Bản chạy thực nghiệm phỏng vấn giọng nói.<br>- Bản chạy thực nghiệm so khớp hồ sơ và JD. |
-| **Sprint 4** | **Tuần 07** | Lập trình Phân hệ 4 (Săn tin tuyển dụng mạng xã hội), tối ưu API và viết Jest Unit Tests. | - Bản chạy hệ thống quét tin tuyển dụng.<br>- Bộ kiểm thử tự động Jest (Coverage $\ge 70\%$). |
-| | **Tuần 08** | Đóng gói Docker Compose chạy cục bộ, kiểm thử tích hợp, quay video demo và slide báo cáo. | - Sản phẩm Web hoàn chỉnh chạy qua Docker.<br>- Video demo, slide báo cáo & tài liệu cài đặt. |
+## 3. Công nghệ và hạ tầng
 
-## 4. Phân công
+| Thành phần | Căn cứ và trạng thái lựa chọn |
+| --- | --- |
+| Frontend / Backend / Database | Next.js / NestJS / PostgreSQL, thống nhất trong họp 12/10 |
+| Persistence và tác vụ nền | Prisma ORM và Task Scheduling là lựa chọn trong Proposal |
+| Âm thanh và AI | Web Audio API, FastAPI trên Kaggle, DeepSeek API và mô hình Hugging Face là phương án trong Proposal |
+| Đóng gói | Docker Compose chạy cục bộ là kế hoạch trong Proposal |
+| Quản lý | Scrum trên Jira; mã nguồn GitHub, repo cha kèm FE/BE/Docs |
 
-Do dự án gồm 4 thành viên, mỗi thành viên đều có thế mạnh khác nhau nên các nhiệm vụ được phân công theo thế mạnh chuyên môn của từng thành viên.
+Bảng này không xác nhận package, service hoặc database đã được cài/vận hành.
+Cấu hình AI, giao thức âm thanh và schema thực tế phải đối chiếu code/contract khi triển khai.
 
-| STT | Thành viên | Vai trò dự án | Nhiệm vụ kỹ thuật trọng tâm | Phân hệ phụ trách |
-| :---: | :--- | :--- | :--- | :--- |
-| **1** | **Lê Tấn Dũng** | Trưởng nhóm / PM & Kỹ sư AI | Quản trị dự án trên Jira, viết code dịch vụ FastAPI trên Kaggle và mở cổng API kết nối hệ thống | Phân hệ 2 (AI phỏng vấn) & Phân hệ 4 (Săn tin tuyển dụng) |
-| **2** | **Võ Nguyễn Việt Hoàng** | Kỹ sư AI & Dữ liệu | Tích hợp DeepSeek API, thuật toán so khớp Job Match và mô hình phân loại tin | Phân hệ 2 (AI phỏng vấn), Phân hệ 3 (Đối soát Job) & Phân hệ 4 |
-| **3** | **Võ Minh Khoa** | Lập trình viên Fullstack | Phát triển giao diện Next.js, xây dựng hệ thống API máy chủ NestJS | Phân hệ 1 (Tạo CV chuẩn ATS) & Phân hệ 3 (Đối soát Job) |
-| **4** | **Đỗ Chí Cao** | Kỹ sư CSDL & Kiểm thử (QA) | Thiết kế cơ sở dữ liệu PostgreSQL và kiểm thử chất lượng hệ thống | Quản trị cơ sở dữ liệu & Kiểm thử toàn diện |
+## 4. Kế hoạch và dự toán ban đầu
 
-## 5. Công số dự kiến
+[Proposal, mục 4–5](../../Submission/Project_Proposal.md) giữ bảng kế hoạch và chi phí
+gốc. Không chép lại thành một lịch sprint thứ hai trong tài liệu này.
 
-Nhằm đảm bảo đúng tiến độ, nhóm đề xuất định mức **8 giờ / người / tuần**. Tổng công số toàn nhóm trong 8 tuần là **256 người-giờ** (64 giờ / thành viên):
-| Chu kỳ Sprint | Nội dung trọng tâm | Lê Tấn Dũng | Võ Nguyễn Việt Hoàng | Võ Minh Khoa | Đỗ Chí Cao | Tổng Sprint |
-| :---: | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Sprint 1** *(Tuần 1 - 2)* | Khởi động, chọn đề tài & hoàn thiện proposal | 16h | 16h | 16h | 16h | **64h** |
-| **Sprint 2** *(Tuần 3 - 4)* | Đặc tả yêu cầu chi tiết & thiết kế kiến trúc/CSDL | 16h | 16h | 16h | 16h | **64h** |
-| **Sprint 3** *(Tuần 5 - 6)* | Cài đặt CV ATS, trợ lý SeekerBot & AI phỏng vấn | 16h | 16h | 16h | 16h | **64h** |
-| **Sprint 4** *(Tuần 7 - 8)* | Cài đặt săn tin mạng xã hội, kiểm thử & đóng gói Docker | 16h | 16h | 16h | 16h | **64h** |
-| **TỔNG CỘNG** | **Toàn bộ 8 tuần (4 Sprint)** | **64h** | **64h** | **64h** | **64h** | **256h** |
+- Thời lượng dự kiến: 8 tuần, 4 sprint, 2 tuần/sprint.
+- Công số dự kiến: 8 giờ/người/tuần; 64 giờ/thành viên, tổng 256 người-giờ.
+- Coverage Jest từ 70% là mục tiêu kế hoạch, chưa phải kết quả kiểm thử.
+- Chi phí khoảng 20.000 VNĐ là dự toán; không coi là khoản chi đã đối soát.
 
-## 6. Giới hạn của bản kế hoạch
+Các mốc tháng 11 chưa được ánh xạ thành sprint Jira trong lần rà này.
+Không tự coi thứ tự thư mục Week01/Week02 là tuần lịch hoặc trạng thái hoàn thành.
 
-- Chức năng tự động gửi hồ sơ qua email trong bản cũ không nằm trong phạm vi Proposal hiện tại.
-- Các chỉ tiêu độ trễ dưới 1,5 giây, độ chính xác phân loại 90% và trích xuất PDF 100% trong bản cũ không được dùng làm cam kết vì chưa có trong nguồn chuẩn.
-- Lược đồ dữ liệu, giao thức truyền âm thanh, mô hình AI cụ thể và bộ tiêu chí chấm phỏng vấn cần được xác định ở giai đoạn phân tích, thiết kế. Các mô tả cũ không được coi là quyết định đã chốt.
-- Mục tiêu Jest coverage từ 70% là kế hoạch trong Proposal, chưa phải kết quả kiểm thử.
+## 5. Phối hợp và kiểm tra
+
+1. Đọc đặc tả của epic, phần dùng chung và ghi chú chưa chốt; giữ phạm vi mới nhất.
+2. Thống nhất dữ liệu/API giữa các phần liên quan; backend sở hữu contract, FE bám contract.
+3. Dùng chuẩn UI được nhóm thống nhất; việc giao Hoàng tạo `ui_context` chưa tự xác nhận artifact đã có.
+4. Kiểm tra luồng chính, quyền dữ liệu và lỗi dịch vụ; chỉ báo đã đạt khi có kết quả thực tế.
+5. Cập nhật yêu cầu trong Week02, quyết định trong hồ sơ họp và các mốc trong timeline;
+   đồng bộ Markdown/HTML khi thay nội dung chung.
+
+Không đưa keys vào tài liệu. Không khôi phục tự gửi hồ sơ, tutorial, CV song ngữ
+hoặc chỉ tiêu không có trong đặc tả mới. Công nghệ dự kiến và prototype không
+chứng minh đã tích hợp; trạng thái nộp/duyệt phải có xác nhận riêng.

@@ -1,26 +1,27 @@
 ---
 name: se-proposal-writer
-description: Soạn hoặc chỉnh Project Proposal theo nguồn đã xác nhận và template thực tế của môn học.
+description: Soạn hoặc chỉnh Project Proposal HireUS theo template giảng viên và dữ kiện có nguồn; dùng cho bài nộp đề xuất Week01.
 ---
 
-# Soạn Project Proposal
+# Viết Project Proposal
 
-Đọc [quy tắc nguồn dữ liệu](../../rules/source-of-truth.md). Bản hiện tại là [Proposal Markdown](../../../docs/Week01/Submission/Project_Proposal.md) và [HTML](../../../docs/Week01/Submission/Project_Proposal.html), đã được người dùng kiểm tra.
+Đọc [quy tắc nguồn](../../rules/source-of-truth.md), yêu cầu người dùng,
+[Proposal hiện có](../../../docs/Week01/Submission/Project_Proposal.md) và
+[template gốc](../../../docs/Week01/Material/Template%230-ProjectProposal-2022.pdf).
+Đọc [thông báo môn học](../../../docs/Week01/Material/Thông_báo_1.md) nếu viện dẫn quy định nộp.
 
-## Chọn phạm vi
+Template là căn cứ cấu trúc bài nộp; ví dụ công nghệ/số liệu trong mẫu không phải
+quyết định HireUS. Mô tả bài toán ở mức sơ lược, giải pháp, chức năng, kiến trúc,
+kế hoạch, nhân sự và chi phí theo phạm vi được giao.
 
-- Chỉnh bản hiện tại: giữ cấu trúc và quyết định đã duyệt, chỉ sửa phần được yêu cầu.
-- Soạn mới hoặc kiểm tra đúng mẫu: đọc [template PDF](../../../docs/Week01/Material/Template%230-ProjectProposal-2022.pdf) và phần thông báo gốc liên quan. Không gọi một yêu cầu là bắt buộc nếu chưa có nguồn.
-- Cấu trúc hiện tại gồm bảng đánh giá thành viên, bài toán, giải pháp, kế hoạch phát triển, nhân sự và chi phí. Đây là cấu trúc của bản đã duyệt, không tự chứng minh mọi chi tiết đều do template yêu cầu.
+- Dùng dữ kiện thật cho thành viên, phân công, chữ ký và đóng góp.
+  Không suy ra phần trăm đóng góp từ công số dự kiến.
+- Nếu được yêu cầu cập nhật phạm vi hiện tại, đối chiếu đặc tả mới hơn và ghi
+  thay đổi có nguồn. Không âm thầm sửa bản lịch sử chỉ vì đang làm bài nộp khác.
+- Phân biệt dự toán, mục tiêu và kết quả đo; không đưa thông số ví dụ thành cam kết.
+- Giữ bối cảnh 4 phân hệ; không tự mở rộng chức năng hoặc bổ sung báo cáo khác.
 
-## Nội dung
-
-- Không mặc định tỷ lệ đóng góp, chữ ký, vai trò, công số hoặc chi phí. Dùng dữ kiện đã chốt, hỏi phần thiếu có ảnh hưởng đến bài làm.
-- Phạm vi và công nghệ lấy từ Proposal hoặc quyết định mới của người dùng. Không thêm tính năng hay đổi nền tảng theo ví dụ trong skill.
-- Bảng chức năng diễn đạt nhu cầu và yêu cầu đủ hiểu. Không bắt thêm acceptance criteria, Mermaid, RACI hoặc đặc tả chi tiết nếu đầu việc chưa cần.
-- Phân biệt mục tiêu kiểm thử, dự toán và số liệu đã đo. Công số không tự quy đổi thành tỷ lệ đóng góp.
-- Độ dài theo yêu cầu có nguồn. Viết sơ lược ở mức Proposal, chưa tự mở rộng thành hồ sơ phân tích hoặc thiết kế.
-
-## Kiểm tra
-
-Đối chiếu tên người, giảng viên, phạm vi, lịch, tổng công số và dự toán giữa các phần. Dùng [anti-ai-fluff](../anti-ai-fluff/SKILL.md) cho văn phong và [project-utility](../project-utility/SKILL.md) cho liên kết, ảnh, Markdown/HTML. Báo phần còn thiếu bằng chứng, không tự gắn nhãn “đã nộp” hay “được duyệt”.
+Đồng bộ nội dung Markdown/HTML trong phạm vi sửa.
+Dùng [anti-ai-fluff](../anti-ai-fluff/SKILL.md) để biên tập và
+[project-utility](../project-utility/SKILL.md) để kiểm tra link/ảnh và đóng gói.
+Báo nội dung đã thay đổi, nguồn dùng và điểm thiếu; không tự xác nhận đã nộp/được duyệt.

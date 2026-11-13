@@ -1,60 +1,55 @@
 ---
-title: "Biên bản Họp nhóm Số 02 (Meeting Minutes 02)"
+title: "Biên bản họp nhóm số 02"
 project: "Đồ án Nhập môn Công nghệ Phần mềm"
 date: "14/10/2026"
 time: "20:30 – 22:00"
 location: "Google Meet"
-status: "Đã hoàn thành"
 ---
 
-# BIÊN BẢN HỌP NHÓM SỐ 02
+# Biên bản họp nhóm số 02
 
-> Ghi chú rà soát 20/10/2026: Đây là bản ghi hiện có, chưa được xác minh lại từ ghi chép gốc. Giữ nguyên nội dung lịch sử để đối chiếu, không dùng các trạng thái hoặc quyết định trong bản này làm căn cứ cho tiến độ hiện tại. Phạm vi và kế hoạch hiện tại theo [Proposal đã được người dùng kiểm tra](../Submission/Project_Proposal.md). Bản ghi đồng thời ghi “đang trong giai đoạn chỉnh sửa ý tưởng” và “đã chốt ý tưởng”, nên thời điểm chốt cần xác minh.
+> Đối chiếu ngày 13/11/2026 với [PDF gốc](../../Meetings/Material/Meeting_Minutes_2026-11-13.pdf),
+> trang 3. Giữ nội dung về ngày chọn ý tưởng như nguồn; Dũng không yêu cầu truy lại
+> ngày chốt chính xác. Xem [ghi chú nguồn](../../Meetings/README.md).
 
 ## 1. Thông tin chung
 
-| Thông tin | Chi tiết |
-| :--- | :--- |
-| **Đơn vị thực hiện** | Nhóm 02 |
-| **Thời gian** | 20:30 – 22:00, ngày 14/10/2026 |
-| **Địa điểm / Hình thức** | Google Meet |
-| **Mục đích cuộc họp** | Thống nhất ý tưởng đồ án |
-
----
+| Nội dung | Theo nguồn |
+| --- | --- |
+| Thời gian | 20:30–22:00, ngày 14/10/2026 |
+| Hình thức | Google Meet |
+| Mục đích | Thống nhất ý tưởng đồ án |
 
 ## 2. Thành phần tham dự
 
-| STT | Họ và tên | Trạng thái |
-| :---: | :--- | :---: |
-| 1 | Lê Tấn Dũng | Có mặt |
-| 2 | Võ Nguyễn Việt Hoàng | Có mặt |
-| 3 | Võ Minh Khoa | Có mặt |
-| 4 | Đỗ Chí Cao | Có mặt |
+| Thành viên | Có mặt theo PDF |
+| --- | --- |
+| Lê Tấn Dũng | Có |
+| Võ Nguyễn Việt Hoàng | Có |
+| Võ Minh Khoa | Có |
+| Đỗ Chí Cao | Có |
 
----
+## 3. Ý tưởng được thảo luận
 
-## 3. Nội dung thảo luận
+| Người đề xuất | Ý tưởng |
+| --- | --- |
+| Hoàng | WebApp hỗ trợ người nuôi thú cưng |
+| Khoa | WebApp tổng hợp, tạo đề thi và đáp án các môn THPT |
+| Cao | WebApp hỗ trợ tìm đồ thất lạc tại trường Đại học |
+| Dũng | WebApp tối ưu hồ sơ và mô phỏng phỏng vấn kỹ thuật |
 
-### Các ý tưởng đồ án được đề xuất:
-- **Hoàng:** WebApp hỗ trợ người nuôi thú cưng.
-- **Khoa:** WebApp tổng hợp, tạo đề thi, tạo đáp án cho các môn chương trình THPT.
-- **Cao:** WebApp hỗ trợ tìm kiếm đồ thất lạc tại trường Đại học.
-- **Dũng:** WebApp tối ưu hồ sơ & mô phỏng phỏng vấn kỹ thuật.
+## 4. Kết luận theo nguồn
 
----
+- Bản gốc ghi đang chỉnh sửa ý tưởng; hạn nộp ý tưởng là **20:00 ngày 15/10/2026**,
+  hạn chọn là **22:00 ngày 15/10/2026**.
+- Đồng thời, bản gốc ghi **“Đã chốt ý tưởng của Dũng”**, kèm
+  [thư mục Google Drive](https://drive.google.com/drive/folders/12e0__KnGQOQayRmNEWwYPrq-0ErlqGph).
 
-## 4. Kết luận / Quyết định
+Hai dòng được giữ để phản ánh đúng bản ghi; không tự xác định lại ngày chốt.
+[Kế hoạch triển khai trong repo](./Material/HireUS_Implementation_Plan.md) là tài liệu
+tổng hợp về sau, không phải nội dung được chứng minh đã trình bày tại buổi họp này.
 
-- **Thống nhất ý tưởng đồ án:** Đang trong giai đoạn chỉnh sửa ý tưởng.  
-  - Hạn chót nộp ý tưởng: **20:00 ngày 15/10/2026**.  
-  - Hạn chót chọn ý tưởng cho từng người: **22:00 ngày 15/10/2026**.
-- **Đã chốt ý tưởng của Dũng:**
-  - Link Google Drive gốc: [https://drive.google.com/drive/folders/12e0__KnGQOQayRmNEWwYPrq-0ErlqGph](https://drive.google.com/drive/folders/12e0__KnGQOQayRmNEWwYPrq-0ErlqGph)
-  - Tài liệu chi tiết trong repo: [HireUS_Implementation_Plan.md](./Material/HireUS_Implementation_Plan.md)
+## 5. Kết thúc
 
----
-
-## 5. Xác nhận
-
-- Cuộc họp kết thúc lúc 22:00 cùng ngày.
-- Các thành viên tham dự đã thống nhất toàn bộ nội dung trên.
+Cuộc họp kết thúc lúc 22:00 cùng ngày; bản gốc ghi các thành viên tham dự thống nhất
+nội dung. Phân công hiện tại và các buổi tiếp theo nằm trong [hồ sơ họp](../../Meetings/README.md).

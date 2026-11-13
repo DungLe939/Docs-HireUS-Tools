@@ -14,4 +14,10 @@
 
 Tóm tắt thay đổi có nguồn trong chat, không tự tạo báo cáo. File tải về không tự trở thành nguồn chuẩn. Không suy ra sự kiện họp từ tên file hay lịch dự kiến. Chỉ dẫn link Drive gốc khi thực sự có ID của nguồn, không sao chép ID ví dụ.
 
+Nếu tác vụ gồm đồng bộ tài liệu làm việc, tiếp tục theo
+[docs-maintenance](../skills/docs-maintenance/SKILL.md): đối chiếu nguồn mới với tài
+liệu hiện hành, sửa phần sai và cập nhật callers/bản tổng hợp bị tác động.
+Trước push, xác nhận phần nào đã cập nhật và phần nào còn chờ đối chiếu; tải file
+thành công không tự chứng minh mọi tài liệu đã khớp.
+
 Cache và bản tải chờ đối chiếu nằm trong `.agents/scripts/`, được Git bỏ qua. Không đưa chúng vào hồ sơ nộp.
