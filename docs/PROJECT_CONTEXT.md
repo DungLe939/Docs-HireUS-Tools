@@ -61,16 +61,27 @@ Chưa xác nhận đã nộp bài, được giảng viên duyệt, database ho�
 NFR-VMI-01 theo quyết định người dùng: Khi mạng ổn định, mỗi lần chờ không quá 10 giây: (a) từ lúc gửi audio đến lúc nhận văn bản STT, với clip trả lời thông thường đến khoảng 30 giây; (b) từ lúc nộp POST /answers đến khi có audio câu hỏi tiếp theo, gồm AI sinh câu hỏi và TTS. Không tính thời gian người dùng xác nhận/chỉnh sửa văn bản giữa hai bước.
 Nguồn hiện hành: [NFR-VMI-01](./Week02/Submission/Requirements_Analysis.md#nfr-vmi-01).
 
+**Cấu hình STT hiện hành 14/11/2026:** chỉ dùng `small` cho CPU/CUDA/auto; CPU
+int8, CUDA float16. Theo số đo do người dùng cung cấp ở re-review, small đáp ứng
+phần chờ STT 10s trên CPU ở các độ dài đã thử tới 180s (max khoảng 7,6s); lượt
+sửa này không đo lại dữ liệu đó. Chưa xác minh giọng người thật/thuật ngữ IT;
+`medium` là hướng dự phòng chưa đo độ trễ. Giữ override model bằng env, không tự
+chọn large-v3-turbo và không còn khuyến nghị model đó. Deadline STT 60s, độc lập
+NFR 10s. Phần chờ AI + TTS chưa có số đo để xác nhận đạt.
+
+
 | Phần việc | Bằng chứng hiện có | Phần còn thiếu |
 | --- | --- | --- |
 | Task 7/8 | Backend có TTS Zonos, draft STT tách `/answers`, ownership và lỗi sạch | Zonos chưa chạy thật; chưa có số đo AI + TTS |
 | Sửa chuẩn hóa số | `9fb9d7a`, số theo vi/en; giữ URL/semver/ngày/IP | Chuỗi số nhóm nghìn trùng semver cần nhãn phiên bản |
-| Cấu hình CPU + đo | `74698e6`, small/int8, auto tối đa 4 thread; 5/15/30/60s ×3 cho small và large | Audio espeak lặp có WER cao; cần giọng người thật |
+| Cấu hình CPU + đo | `74698e6`, small/int8, auto tối đa 4 thread; 5/15/30/60s ×3; bảng small/large là dữ liệu lịch sử | Audio espeak lặp có WER cao; cần giọng người thật |
+| Re-review 14/11 | `9f135b2`, `7798094`, `5917532`, `55e5238`: regression IPv4, NFR, deadline 60s, small mọi thiết bị | Chưa đo lại 180s/195s hoặc GPU; thiếu giọng thật |
 | Shutdown + NFR | `34515aa`, teardown model/worker/cache; smoke SIGTERM cả hai model không còn cảnh báo semaphore | Chưa kiểm thử tải hoặc GPU |
 
-Kiểm tra hiện tại: build pass; **285 unit / 8 suites**, **160 e2e / 7 suites**;
-**19 test service Python** và **3 test script đo**. Baseline trước sửa review là
-252 unit, 160 e2e, 9 Python; test local có sẵn được giữ nguyên. Số đo/bảng WER và
+Kiểm tra hiện tại: build pass; **305 unit / 8 suites**, **160 e2e / 7 suites**;
+**20 test service Python** và **3 test script đo**. Baseline thực tế của re-review 14/11 là 289 unit (yêu cầu ghi 288), 160 e2e,
+19 Python; hiện tại 305/160/20, test script vẫn 3. Backend không có test local
+chưa commit ở đầu lượt; các ca reviewer đã được commit và giữ nguyên. Số đo/bảng WER và
 điều kiện smoke Zonos: `backend/docs/vmi/tts-stt-integration-notes.md` trong workspace.
 Small mặc định có max dưới 1,7s ở 5/15/30s trong mẫu tổng hợp này; large/fast có
 max dưới 6s ở cùng mốc. Đây chỉ là kết quả latency mẫu; không chứng minh chất

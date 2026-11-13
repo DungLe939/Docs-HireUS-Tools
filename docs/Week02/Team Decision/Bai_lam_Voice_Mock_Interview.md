@@ -132,6 +132,8 @@ Mỗi tiêu chí được chấm trên thang 100 dựa trên toàn bộ câu tr�
 | NFR-VMI-03 | Bảo mật | Âm thanh, transcript và báo cáo chỉ được truy cập bởi tài khoản sở hữu; API key của dịch vụ AI phải lưu và bảo vệ tại backend. |
 | NFR-VMI-04 | Độ tin cậy | Khi phiên bị ngắt quãng, hệ thống bảo toàn dữ liệu trao đổi và cho phép khôi phục tạo báo cáo mà không mất dữ liệu. |
 
+> **Cấu hình STT cập nhật 14/11/2026:** faster-whisper `small` cho mọi thiết bị (CPU/CUDA/auto). Theo số đo CPU người dùng cung cấp, small đạt phần chờ STT NFR-VMI-01 10s ở các độ dài đã thử đến 180s (max khoảng 7,6s); chưa xác nhận phần chờ AI + TTS. Chất lượng tiếng Việt và thuật ngữ IT chưa kiểm chứng bằng giọng người thật. `medium` là hướng dự phòng chưa đo độ trễ; không còn khuyến nghị large-v3-turbo. Timeout HTTP mặc định 60s, audio cap 195s; giữ khả năng override env, không đổi định nghĩa NFR.
+
 # 5. Đặc tả yêu cầu
 
 ## 5.1 Sơ đồ Use Case

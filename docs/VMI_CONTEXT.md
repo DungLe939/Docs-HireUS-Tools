@@ -3,7 +3,7 @@
 > **Dự án:** HireUS Tools — Đồ án môn Nhập môn Công nghệ Phần mềm (Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM)<br>
 > **Nhóm thực hiện:** Nhóm 02 (GVLT: Thầy Phạm Minh Tuấn — GVTH: Thầy Ngô Ngọc Đăng Khoa)<br>
 > **Thành viên phụ trách VMI:** Võ Nguyễn Việt Hoàng (MSSV: 24120249)<br>
-> **Cập nhật:** 13/11/2026 (OpenAPI v0.8.0: Task 7–8 có code/test; đã đo STT CPU, TTS CPU còn thiếu toolchain)<br>
+> **Cập nhật:** 14/11/2026 (OpenAPI v0.8.0: Task 7–8 có code/test; đã đo STT CPU, TTS CPU còn thiếu toolchain)<br>
 > **Tài liệu nguồn chuẩn:** [Requirements_Analysis.md](Week02/Submission/Requirements_Analysis.md), [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md), `backend/contracts/vmi.openapi.yaml`
 
 ---
@@ -50,7 +50,7 @@ Hệ thống đóng vai trò như một Nhà tuyển dụng Kỹ thuật (Techni
 | **FR-VMI-09** | Hướng dẫn xử lý lỗi Microphone | Hiển thị hướng dẫn khắc phục khi mic không có tín hiệu hoặc bị từ chối quyền. | Frontend | Thuộc Frontend |
 | **FR-VMI-10** | Cổng xác nhận sẵn sàng | Chỉ cho phép bắt đầu phiên (`/start`) khi có xác nhận `deviceReady: true`. | Backend | Đã xong (Task 2) |
 | **FR-VMI-11** | Phát âm câu hỏi (TTS) | Đọc câu hỏi phỏng vấn bằng giọng nói tự nhiên theo ngôn ngữ phiên. | Backend (TtsProvider) | Có code/test Task 7: ZONOS3-Mini; chưa đo CPU thực tế |
-| **FR-VMI-12** | Nhận diện câu trả lời (STT) | Chuyển đổi giọng nói câu trả lời của ứng viên thành văn bản. | Backend (SttProvider) | Có code/test Task 8: faster-whisper large-v3-turbo CPU |
+| **FR-VMI-12** | Nhận diện câu trả lời (STT) | Chuyển đổi giọng nói câu trả lời của ứng viên thành văn bản. | Backend (SttProvider) | Có code/test Task 8: faster-whisper small trên mọi thiết bị |
 | **FR-VMI-13** | Xác nhận văn bản câu trả lời | Cho phép ứng viên kiểm tra text nhận diện, chỉnh sửa hoặc nói lại trước khi nộp. | Frontend & Backend | Task 3 + Task 8: draft STT tách khỏi /answers |
 | **FR-VMI-14** | Giới hạn thời gian trả lời | Đồng hồ đếm ngược 180s/câu; quá giờ đánh dấu `timedOut: true` nhưng vẫn ghi nhận. | Backend & Frontend | Đã xong (Task 3) |
 | **FR-VMI-15** | Đào sâu kỹ thuật (Follow-up) | AI phân tích câu trả lời vừa xong để đặt câu hỏi đào sâu hoặc xoáy vào lỗ hổng. | Backend (AiProvider) | Đã xong (Task 3) |
@@ -266,7 +266,7 @@ Hệ thống sử dụng model `gemini-3.1-flash-lite` với chỉ thị đánh 
 ## 6. Tích hợp âm thanh: quyết định ngày 13/11/2026
 
 Thay khảo sát Google/PhoWhisper trước đó bằng quyết định mới của người dùng:
-TTS dùng **Zyphra/ZONOS3-Mini** tự host; STT dùng **Whisper large-v3-turbo**
+TTS dùng **Zyphra/ZONOS3-Mini** tự host; STT hiện dùng **Whisper small trên mọi thiết bị** (quyết định 14/11/2026)
 qua faster-whisper. Không dùng các con số RAM/độ trễ ước đoán của khảo sát cũ làm
 kết quả đo thực tế.
 
@@ -277,7 +277,7 @@ ID `default_34370fd91e3484ef`. Chưa xác nhận chất lượng đọc tiếng 
 
 Xem `backend/docs/vmi/tts-stt-integration-notes.md`
 cho API, build CPU, giấy phép, giới hạn chuẩn hóa và số đo thực sự có được.
-Task 7–8 có build, **285 unit/8 suites**, **160 e2e/7 suites**, **19 Python test** và **3 test script đo**
+Task 7–8 có build, **305 unit/8 suites**, **160 e2e/7 suites**, **20 Python test** và **3 test script đo**
 pass. Đã đo STT CPU int8, 2 thread: **8735.207 / 7501.165 / 7148.860 ms** cho
 WAV Việt tự tạo; đây là số đo lịch sử clip ngắn trước review. NFR hiện áp dụng 10s riêng cho STT và AI+TTS. TTS chưa đo vì
 thiếu CMake/compiler C++/Rust; AI chưa đo vì môi trường shell không có key.
@@ -288,18 +288,36 @@ giới hạn 15 MiB/195 giây mặc định; 422 khi quá thời lượng hoặc
 
 ### 6.3. Sau review: CPU và vòng đời tài nguyên
 
-Mặc định CPU small/int8, số thread auto tối đa 4 theo core visible/quota; CUDA giữ
-large-v3-turbo/float16. Có cấu hình model, thread, compute type và beam; mặc định
+Mặc định **small cho CPU/CUDA/auto**: CPU int8, CUDA float16; số thread auto tối
+đa 4 theo core visible/quota. Có cấu hình model, thread, compute type và beam; mặc định
 beam5/VAD false/conditioning true vì profile nhanh làm WER synthetic small xấu hơn.
-HTTP deadline mặc định 600s độc lập NFR 10s; alias mới `VMI_STT_TIMEOUT_MS` ưu tiên
+HTTP deadline mặc định 60s độc lập NFR 10s; alias mới `VMI_STT_TIMEOUT_MS` ưu tiên
 khi không rỗng, biến cũ `WHISPER_STT_TIMEOUT_MS` vẫn được hỗ trợ.
 
-Đã đo 5/15/30/60s, ba lần/mốc cho small mặc định và large/fast. Small max ở
+Bảng đo lịch sử 5/15/30/60s, ba lần/mốc cho small và large/fast được giữ tham khảo. Small max ở
 5/15/30s: 1.527/1.418/1.679s; large/fast: 5.940/5.488/5.151s. Cả hai đều dưới
 10s trong mẫu nhưng WER cao, không suy ra chất lượng trên giọng người thật.
 Teardown đóng worker pool, unload CTranslate2 và clear VAD cache. Khóa tqdm dùng
 thread lock cho service không multiprocessing; smoke model thật xong SIGTERM
 không còn cảnh báo semaphore. Chi tiết và nguồn API nằm trong notes backend.
+
+### 6.4. Re-review 14/11/2026
+
+Chỉ dùng small làm mặc định cho mọi thiết bị. Số đo do người dùng cung cấp tới
+180s: CPU small tối đa khoảng 7,6s, đáp ứng phần chờ STT của NFR 10s trong các
+mẫu đó; chưa đo lại ở lượt sửa này, chưa xác nhận phần chờ AI + TTS. Tiếng Việt
+và thuật ngữ IT chưa kiểm chứng bằng giọng người thật; medium là hướng dự phòng
+chưa đo độ trễ. Dữ liệu large-v3-turbo chỉ là lịch sử, không còn khuyến nghị;
+phép đo large 180s trong re-review bị nhiễu do chạy song song tác vụ khác.
+
+Giữ override env để tương thích nhưng không tự chọn model lớn. Nest/smoke và
+benchmark request deadline mặc định 60s; hai phase ffprobe/ffmpeg 10s là timeout
+xử lý, không phải thời lượng audio. Giữ cap audio 195s và budget startup 600s
+ngoài lần chờ request. Nếu chủ động chọn model lớn trên CPU phải tăng timeout.
+
+Baseline re-review thực tế: 289 unit/160 e2e/19 Python; sau sửa: 305/160/20,
+script Python giữ 3 test. Không có thay đổi test local chưa commit ở đầu lượt;
+regex IPv4 đã được reviewer sửa trong `098c979`, chỉ bổ sung regression và đo chuỗi dài.
 
 ## 7. Bảng tổng hợp Tiến độ Triển khai (Tasks Status)
 
@@ -315,10 +333,11 @@ không còn cảnh báo semaphore. Chi tiết và nguồn API nằm trong notes 
 | **Task 5** | API Lịch sử phiên (`GET /sessions`), chi tiết lịch sử (`GET /sessions/:id`), phân trang canonical | `134112b` | **Hoàn thành** |
 | **Merge Main** | Đồng bộ tích hợp nhánh `hoang/voice-mock-interview` với `origin/main` mới nhất | `526a138` | **Hoàn thành** |
 | **Task 7** | TTS ZONOS3-Mini tự host, Wyatt cho vi/en | `3e01bd9` | Code/test pass; chưa chạy runtime CPU |
-| **Task 8** | Whisper large-v3-turbo qua FastAPI/faster-whisper CPU int8 | `b93e591` | Code/test pass; STT CPU đo được 7.15–8.74s |
+| **Task 8** | Whisper qua FastAPI/faster-whisper; hiện dùng small mọi thiết bị | `b93e591` | Code/test pass; STT CPU đo được 7.15–8.74s |
 | **Review số** | Chuẩn hóa số vi/en, giữ URL/semver/ngày/IP | `9fb9d7a` | Build/unit pass |
 | **Review CPU** | Cấu hình Whisper + ma trận HTTP hai model | `74698e6` | Có số đo thật; synthetic WER cao |
 | **Review shutdown/NFR** | Đóng worker/model/cache; NFR 10s cho mỗi lần chờ | `34515aa` | Hai model thật SIGTERM không còn warning |
+| **Re-review 14/11** | IPv4 regression, NFR hiện hành, STT 60s, small CPU/CUDA/auto | `9f135b2`, `7798094`, `5917532`, `55e5238` | Build + 305 unit/160 e2e/20 Python + 3 script pass |
 | **Task 9** | Tích hợp PostgreSQL/Prisma DB thật, JWT Auth thật và CV SeekerBot thật | — | *Chờ module từ các thành viên khác* |
 
 ---
@@ -349,7 +368,7 @@ Từ thư mục `backend/`:
 # 1. Biên dịch TypeScript
 npm run build
 
-# 2. Chạy toàn bộ 285 Unit Tests (8 suites)
+# 2. Chạy toàn bộ 305 Unit Tests (8 suites)
 npm test -- --runInBand
 
 # 3. Chạy toàn bộ 160 End-to-End Tests (7 suites)
