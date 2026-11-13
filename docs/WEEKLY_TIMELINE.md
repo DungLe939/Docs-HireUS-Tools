@@ -15,7 +15,7 @@
 | 06/11/2026 | Deadline prototype 19:00; lịch họp 21:00. | Lịch được giao trong họp 04, chưa có biên bản xác nhận cuộc họp 06/11 diễn ra |
 | 07–08/11/2026 | Báo cáo Week02 bản 1.0 ban đầu đề ngày 07/11; lịch sử Git có lần chỉnh nội dung ngày 08/11 (`5777fba`). | Artifact lịch sử; không xác nhận thời điểm nộp/duyệt |
 | 09/11/2026, 21:00–23:00 | Chuyển sang thực hiện epic theo PA02; Hoàng làm `ui_context`/nhánh UI, Cao tạo database. | Giao việc trong [họp 05](./Meetings/Meeting_05.md) |
-| 13/11/2026 | Dũng cung cấp PDF biên bản, xác nhận phân công bốn epic và phạm vi CV gồm preview + xuất PDF; cập nhật bản làm việc Week02 1.1. | Xác nhận bổ sung tại [hồ sơ họp](./Meetings/README.md); chưa commit/push |
+| 13/11/2026 | Dũng cung cấp PDF biên bản, xác nhận phân công bốn epic và phạm vi CV gồm preview + xuất PDF; cập nhật bản làm việc Week02 1.1. | Xác nhận bổ sung tại [hồ sơ họp](./Meetings/README.md) |
 | 15/11/2026, 23:59 | Hạn thực hiện tính năng theo epic riêng. | Deadline được giao trong họp 05; chưa xác nhận hoàn thành |
 | 16/11/2026, 21:00 | Họp tiếp theo. | Lịch hẹn trong họp 05; chưa có biên bản |
 
