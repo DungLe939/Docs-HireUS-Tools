@@ -30,9 +30,12 @@ Không cập nhật tiến độ hoặc trạng thái nộp/duyệt chỉ vì đ
 
 ## Cập nhật nhánh và rà tài liệu trước công bố
 
-Khi bắt đầu việc có sửa, kiểm tra nhánh/upstream và trạng thái local; nhắc cập nhật
-nếu chưa làm cho đầu việc, không lặp lại mỗi lượt trao đổi. Khi được yêu cầu cập
-nhật/push, fetch remote liên quan; giữ thay đổi local và nhánh thành viên.
+Khi bắt đầu việc có sửa tài liệu chung, tự fetch và tích hợp `origin/main` vào nhánh
+hiện tại một lần cho đầu việc; chỉ dẫn đích khác được ưu tiên. Main là nguồn nền,
+upstream cá nhân là đích công bố riêng. Trong workspace có thể chạy từ repo này
+`python3 ../.agents/scripts/sync_main.py --repo .`. Giữ việc local: tree bẩn cần tích
+hợp thì báo phần chưa cập nhật, không stash/reset/ghi đè; merge conflict cần xử lý thêm.
+Chỉ đọc/review/plan riêng hoặc chỉ dẫn offline/không sync thì không tự tích hợp.
 Trong workspace, đọc `../.agents/skills/team-sync/SKILL.md` để phối hợp nhiều repo;
 clone riêng dùng [quy trình Git trong repo](.agents/rules/pre-commit-workflow.md).
 
@@ -60,7 +63,8 @@ python3 -m unittest discover -s .agents/scripts/tests -v
 
 Sync theo [.agents/skills/drive-sync/SKILL.md](.agents/skills/drive-sync/SKILL.md);
 commit theo [.agents/rules/pre-commit-workflow.md](.agents/rules/pre-commit-workflow.md)
-khi được yêu cầu. Skills và scripts là tài nguyên nhóm, giữ trong Git;
+khi được yêu cầu, ngoại lệ là merge commit tích hợp main an toàn ở đầu việc.
+Skills và scripts là tài nguyên nhóm, giữ trong Git;
 cache sync và bản incoming vẫn được bỏ qua.
 
 Tác vụ tài liệu không tự cho phép sửa FE/BE. Với yêu cầu phối hợp nhiều repo,

@@ -19,9 +19,11 @@ file/shell/connector theo môi trường thực tế của thành viên.
 
 ## Quy trình
 
-Đọc yêu cầu → kiểm tra nhánh và nhắc cập nhật khi cần → xác định nguồn → sửa đúng
+Đọc yêu cầu → tự cập nhật main cho việc sửa tài liệu chung → xác định nguồn → sửa đúng
 phạm vi → rà tài liệu liên quan → kiểm tra nội dung/hiển thị → tổng hợp kết quả →
-commit/push theo yêu cầu. Pull/Drive sync chỉ chạy khi đã được yêu cầu cho phần đó.
+commit công việc/push theo yêu cầu. Merge commit tích hợp main an toàn được phép tự
+tạo ở đầu việc; Drive sync vẫn chỉ chạy khi được yêu cầu. Chỉ đọc/review, plan riêng
+hoặc chỉ dẫn offline/không sync không kích hoạt tích hợp Git tự động.
 
 - [Nguồn dữ liệu](./rules/source-of-truth.md): phân biệt nguồn chuẩn, ghi chép gốc, kế hoạch và kết quả thực tế.
 - [Đồng bộ Drive](./rules/drive-sync-workflow.md): bảo vệ bản local, xử lý xung đột, dừng khi pull lỗi.
