@@ -28,6 +28,28 @@ Với thay đổi nội dung tài liệu có cả Markdown/HTML, đồng bộ ha
 Không cập nhật tiến độ hoặc trạng thái nộp/duyệt chỉ vì đã tạo file.
 Đọc local không tự sync Drive, pull Git, commit hoặc push.
 
+## Bắt buộc comment và giải thích bằng tiếng Việt
+
+- Với mọi tác vụ tạo mới hoặc chỉnh sửa code, **bắt buộc viết comment bằng tiếng
+  Việt ngay trong file**. Áp dụng cho code ứng dụng, test, script, SQL/migration,
+  cấu hình có hỗ trợ comment và ví dụ kỹ thuật trong tài liệu.
+- Mỗi hàm, component, class hoặc khối logic được tạo/sửa phải có comment tiếng
+  Việt đặt ngay phía trên hoặc bên trong phần xử lý liên quan. Khi sửa phần code
+  cũ chưa có comment tiếng Việt, bổ sung comment cho phần đó trong cùng thay đổi.
+- Comment giải thích mục đích, luồng xử lý, quy tắc nghiệp vụ, lý do lựa chọn và
+  điều kiện đặc biệt để thành viên khác dễ review. Viết ngắn, rõ, đúng hành vi;
+  không cần chú thích từng dòng. Khi logic đổi, sửa comment tương ứng.
+- Giữ nguyên tên biến, API, kiểu dữ liệu, tên thư viện và thuật ngữ kỹ thuật khi
+  cần chính xác; phần giải thích phải bằng tiếng Việt có dấu.
+- Với định dạng không hỗ trợ comment như JSON, ghi giải thích tiếng Việt trong
+  README hoặc tài liệu liên quan và chỉ rõ file/phần cấu hình được giải thích.
+  Không chèn comment làm hỏng định dạng.
+- Khi lập kế hoạch, review, viết tài liệu hoặc bàn giao, các nhận xét và giải thích
+  cũng phải bằng tiếng Việt. Mô tả trong phản hồi/PR không thay thế comment trong code.
+- Trước bàn giao hoặc chuẩn bị commit/push, tự rà diff để bảo đảm mọi phần code
+  tạo/sửa đã có comment tiếng Việt phù hợp; bổ sung phần còn thiếu trước khi báo
+  hoàn tất. Quy tắc này áp dụng cho mọi agent; không tự sửa code ngoài phạm vi tác vụ.
+
 ## Cập nhật nhánh và rà tài liệu trước công bố
 
 Khi bắt đầu việc có sửa tài liệu chung, tự fetch và tích hợp `origin/main` vào nhánh
