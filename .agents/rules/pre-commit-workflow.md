@@ -7,14 +7,19 @@ phối hợp repo con và gitlink cha. Clone riêng vẫn dùng được quy tr�
 ## Khi bắt đầu việc có sửa
 
 Xem nhánh/upstream, staged/unstaged/untracked và ghi HEAD làm mốc đầu việc.
-Nhắc cập nhật nguồn nếu chưa thực hiện cho đầu việc; không lặp lại mỗi lượt chat.
+Tự fetch và tích hợp `origin/main` trước việc sửa tài liệu chung theo quyền thường
+trực của nhóm; chỉ dẫn đích khác được ưu tiên. Thực hiện một lần cho đầu việc.
 Đọc/review local không tự cho phép pull hoặc lấy Drive.
 
-Yêu cầu cập nhật/push cho phép fetch remote liên quan. Sau fetch, xem ahead/behind
-và diff với đúng ref đích; không mặc định lấy `main` hoặc nhánh có timestamp mới nhất.
-Working tree sạch và chỉ behind thì fast-forward bằng `git pull --ff-only`
-theo upstream đã xác minh. Working tree bẩn thì bảo vệ thay đổi; không tự stash/reset
-hoặc stage phần ngoài phạm vi. Không gọi nguồn đã cache là mới nhất khi fetch lỗi.
+Trong workspace dùng `python3 ../.agents/scripts/sync_main.py --repo .` từ repo này.
+Clone độc lập: fetch main và xem ahead/behind/diff; giữ nhánh. Nếu đích đã nằm trong
+HEAD thì tiếp tục; tree sạch thì fast-forward hoặc merge bảo toàn lịch sử với
+`--no-autostash --no-overwrite-ignore`. Merge commit tích hợp được phép tự tạo, không
+gồm feature commit hoặc push. Nếu conflict, abort lượt merge vừa bắt đầu từ tree
+sạch và báo điểm cần xử lý; không abort thao tác Git dở có sẵn.
+Working tree bẩn cần tích hợp thì giữ file/index, không stash/reset hay stage phần
+ngoài phạm vi. Detached HEAD/thao tác Git dở/mạng lỗi cần báo, không gọi cache là mới nhất.
+Plan riêng và chỉ dẫn offline/không sync không kích hoạt cập nhật tự động.
 
 ## Rà tài liệu và tổng hợp công việc
 
@@ -68,4 +73,5 @@ Nếu một repo chưa push thành công, báo phần đã công bố và phần
 repo cha trỏ tới commit con chưa công bố, không tự rollback lịch sử đã push.
 
 Không gửi keys/cache/incoming vào Git và không tự đăng Jira/Drive hay cài hook
-global từ yêu cầu push. Kết thúc chỉnh sửa tài liệu không tự cấp quyền commit/push.
+global từ yêu cầu push. Kết thúc chỉnh sửa tài liệu không tự cấp quyền commit công
+việc/push; quyền tạo merge commit tích hợp main ở đầu việc đã được nêu riêng ở trên.
